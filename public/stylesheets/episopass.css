@@ -1,0 +1,91 @@
+body {
+  /* 
+  background-color:#fff;
+  background-image: url("http://gyazo.com/829dc70475247cda199d6ad15764eb1b.png")
+  background-image: url("http://gyazo.com/51a65c8cc400f3095c86a78069b96ea4.png")
+  background-image: url("http://gyazo.com/747004d417125563a67c4420f037b6b7.png")
+  background-image: url("http://subtlepatterns.com/patterns/exclusive_paper.gif")
+  */
+  background-image: url("/images/exclusive_paper.gif")
+}
+
+div {
+  font-family: sans-serif
+}
+span {
+  font-family: sans-serif
+}
+li {
+  font-family: sans-serif
+}
+
+a:link { color: #0000f0 ; }
+a:visited { color: #0000f0 ; }
+a {
+  text-decoration: none;
+}
+
+/*
+  アーカイブ名
+*/
+div.title {
+  background-color: #ddd;
+  padding: 5pt;
+  margin: 5pt;
+}
+
+div.title2 {
+  background-color: #fff;
+  padding: 4pt 4pt 4pt 7pt;
+  margin: 0pt;
+}
+
+span.title {
+  font-size:24;
+  font-weight:bold;
+}
+
+/*
+  
+*/
+div.menu {
+  float:right;
+}
+div.menu a {
+  color: #777;
+}
+
+/*
+  メッセージリスト
+*/
+div.list {
+  background-color: #ddd;
+  /* background-image: url("http://subtlepatterns.com/patterns/paper_1.gif") */
+  /* background-image: url("http://gyazo.com/829dc70475247cda199d6ad15764eb1b.png") */
+  padding: 6pt;
+  margin: 5pt;
+}
+
+table {
+  border-collapse: collapse;  /* <td> の間のスキマをなくす */
+  border-spacing: 0;
+  width:100%;
+}
+
+tr.even {
+  background:#eee;
+}
+
+tr.odd {
+  background:#fff;
+}
+
+td.subject {
+  font-weight:bold;
+}
+
+td.date {
+  padding: 0 5 0 3;
+  width: 140;
+}
+

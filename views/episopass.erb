@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="/stylesheets/episopass.css" type="text/css">
+    <script language="JavaScript" src='/javascripts/jquery.js'></script>
+<style type="text/css">
+<!--
+div.question {
+  background-color:white;
+  font-size:10pt;
+  font-family:sans-serif;
+  border:solid;
+  border-width:1px;
+  padding:2;
+  margin: 0 0 2 2;
+  vertical-aign:middle;
+}
+img.answerlist {
+  float:left;
+  vertical-align:top;
+  padding:10;
+}
+div.answerlist {
+  float:left;
+  vertical-align:top;
+}
+span.answerlist {
+  padding:20;
+}
+-->
+</style>
+    <title><%= @name %></title>
+  </head>
+  <body>
+  <h1>EpisoPass - <%= @name %></h1>
+
+  <table>
+    <tr><td>Seed: <input type="text" value="<%= @seed %>" width=100></td></tr>
+    <tr><td>Pass: <input type="text" width=100></td></tr>
+  </table>
+
+  <div id="main">
+<!--
+    <div>
+      <div class="query">What is my name?</div>
+      <div>
+         <img src="http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png" class="answerlist">
+	 <div class="answerlist">
+           <input type="text"><br>
+           <span class="answerlist">bbbbbbbbbb</span><br>
+           <span class="answerlist">cc cc</span><br>
+           <span class="answerlist">ddddd</span><br>
+ 	 </div>
+      </div>
+    </div>
+  <div>
+-->
+
+<script>
+var data = JSON.parse('<%= @json %>');
+var questions = data['questions'];
+var seed = data['seed'];
+
+for(i=0;i<questions.length;i++){
+  var div = $("<div>");
+
+  var qdiv = $("<div>");
+  qdiv.attr('id','imageurl' + String(i));
+  //qdiv.css('background-color','white');
+  //qdiv.css('font-size','9pt');
+  //qdiv.css('font-family','sans-serif');
+  //qdiv.css('border','solid');
+  //qdiv.css('border-width','1px');
+  //qdiv.css('padding','1');
+  //qdiv.css('margin','0 0 2 2');
+  //qdiv.css('vertical-align','middle');
+  qdiv.text(questions[i][0]);
+  qdiv.addClass('question');
+  div.append(qdiv);
+
+  var img = $("<img>");
+  img.attr('src',"http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png");
+  img.css('height','100');
+  img.css('float','left');
+  img.css('padding',"2");
+  img.attr('id',"image" + String(i));
+  div.append(img);
+
+  var div2 = $("<div>");
+  div2.css('float','left');
+  div2.css('padding','0');
+  div2.attr('id','ansdiv' + String(i));
+  var answers = questions[i][1];
+  for(j=0;j<answers.length-1;j++){
+    // function answerspan(i,j){
+    var adiv = $("<div>");
+    adiv.attr('id','a' + String(i) + String(j));
+    adiv.css('font-size','9pt');
+    adiv.css('font-family','sans-serif');
+    adiv.css('width','400');
+    adiv.css('border','solid');
+    adiv.css('border-width','1px');
+    adiv.css('padding','1');
+    adiv.css('margin','0 0 2 2');
+    adiv.css('vertical-align','middle');
+    adiv.text(answers[j]);
+    div2.append(adiv);
+  }
+  div.append(div2);
+
+  var br = $('<br>');
+  br.attr('clear','all');
+  div.append(br);
+
+  $("#main").append(div);
+}
+
+//e.text('aaaaa');
+//$("#main").append(e);
+</script>
+
+  </body>
+</html>
