@@ -34,10 +34,11 @@ var qas = data['qas'];
 var seed = data['seed'];
 
 var answer = [];
-
 for(i=0;i<qas.length;i++){
   answer[i] = 0;
 }
+
+var answerelements = [];
 
 $('#seed').keyup(function(e){
   if(e.keyCode == 13){
@@ -50,6 +51,71 @@ $('#pass').keyup(function(e){
     calcseed();
   }
 });
+
+function aline(i,j){
+  var adiv = $('<div>');
+  adiv.css('border','none');
+  adiv.css('borderWidth','0');
+  adiv.css('padding','0');
+  adiv.css('margin',0);
+  adiv.attr('id','adiv'+i+'_'+j);
+  var input = $('<input>');
+  if(! answerelements[i]) answerelements[i] = [];
+  answerelements[i][j] = input;
+  input.attr('type','text');
+  input.attr('autocomplete','off');
+  input.attr('size','80');
+  input.attr('id','input'+i+'_'+j);
+  input.attr('qnumber',i);
+  input.attr('anumber',j);
+  input.val(answers[j]);
+  input.css('border','solid');
+  input.css('border-width','1px');
+  input.css('padding','1');
+  input.css('margin','0 0 2 2');
+  input.css('vertical-aign','middle');
+  input.css('background-color','#ffffff');
+  if(j == 0) input.css('background-color','#ccf');
+  input.css('font-size','9pt');
+  input.css('font-family','sans-serif');
+  input.on('click',function(){
+    //alert($(this).attr('qnumber'));
+    //alert($(this).attr('anumber'));
+    //var id = $(this).attr('id');
+    //var m = id.match(/input(\d+)_(\d+)/);
+    //var q = Number(m[1]);
+    //var a = Number(m[2]);
+    var q = Number($(this).attr('qnumber'));
+    var a = Number($(this).attr('anumber'));
+    answer[q] = a;
+    for(var i=0;i<qas[q]['answers'].length;i++){
+      //var e = $('#input'+String(q)+'_'+String(i));
+      var e = answerelements[q][i];
+      if(i == a){
+        e.css('background-color','#ccf');
+      }
+      else {
+        e.css('background-color','#fff');
+      }
+    }
+    calcpass();
+  });
+  input.on('blur',function(){ // フォーカスがはずれたとき
+    // $(this).css('background','#fff');
+  });
+  input.on('keyup',function(){
+    var id = $(this).attr('id');
+    var m = id.match(/input(\d+)_(\d+)/);
+    var q = Number(m[1]);
+    var a = Number(m[2]);
+    answers = qas[q]['answers'];
+    answers[a] = $(this).val();
+    //alert(qas[q]['answers']);
+    calcpass();
+  });
+  adiv.append(input);
+  return adiv;
+}
 
 for(i=0;i<qas.length;i++){
   var question = qas[i]['question'];
@@ -104,68 +170,50 @@ for(i=0;i<qas.length;i++){
   //http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png
   div.append(img);
 
-  var divans = $("<div>");
-  divans.attr('id','ansdiv' + String(i));
-  divans.css('float','left');
-  divans.css('padding','0');
-  for(j=0;j<answers.length;j++){
-    var adiv = $('<div>');
-    adiv.css('border','none');
-    adiv.css('borderWidth','0');
-    adiv.css('padding','0');
-    adiv.css('margin',0);
-    adiv.attr('id','adiv'+i+'_'+j);
-    var input = $('<input>');
-    input.attr('type','text');
-    input.attr('autocomplete','off');
-    input.attr('size','80');
-    input.attr('id','input'+i+'_'+j);
-    input.val(answers[j]);
-    input.css('border','solid');
-    input.css('border-width','1px');
-    input.css('padding','1');
-    input.css('margin','0 0 2 2');
-    input.css('vertical-aign','middle');
-    input.css('background-color','#ffffff');
-    if(j == 0) input.css('background-color','#ccf');
-    input.css('font-size','9pt');
-    input.css('font-family','sans-serif');
-    input.on('click',function(){
-      var id = $(this).attr('id');
-      var m = id.match(/input(\d+)_(\d+)/);
-      var q = Number(m[1]);
-      var a = Number(m[2]);
-      answer[q] = a;
-      for(var i=0;i<answers.length;i++){
-        var e = $('#input'+String(q)+'_'+String(i));
-        if(i == a){
-          e.css('background-color','#ccf');
-        }
-        else {
-          e.css('background-color','#fff');
-        }
-      }
-      calcpass();
-    });
-    input.on('blur',function(){ // フォーカスがはずれたとき
-      // $(this).css('background','#fff');
-    });
-    input.on('keyup',function(){
-      var id = $(this).attr('id');
-      var m = id.match(/input(\d+)_(\d+)/);
-      var q = Number(m[1]);
-      var a = Number(m[2]);
-      answers = qas[q]['answers'];
-      answers[a] = $(this).val();
-      //alert(qas[q]['answers']);
-      calcpass();
-    });
-
-    adiv.append(input);
-
-    divans.append(adiv);
+  var ansdiv = $("<div>");
+  ansdiv.attr('id','ansdiv' + String(i));
+  ansdiv.css('float','left');
+  ansdiv.css('padding','0');
+  for(var j=0;j<answers.length;j++){
+    ansdiv.append(aline(i,j));
   }
-  div.append(divans);
+
+  var plus = $('<span>');
+  plus.text('＋');
+  plus.attr('id','aplus' + String(i));
+  plus.css('background-color','#ffffff');
+  plus.css('margin','2');
+  plus.css('padding','1');
+  plus.css('border-width','2');
+  plus.css('border-style','outset');
+  plus.css('border-color','black');
+  plus.css('text-decoration','none');
+  plus.css('text-color','black');
+  plus.css('vertical-align','middle');
+  plus.css('width','20');
+  plus.css('text-align','center');
+  plus.css('float','left');
+  plus.click(function(event){
+    alert(event);
+  });
+//    var m = eventid(event).match(/aplus(.*)$/);
+//    var n = Number(m[1]);
+//    data[n].push('新しい回答例');
+//    var e = document.getElementById('ansdiv'+n);
+//    var minus = e.lastChild;
+//    e.removeChild(minus);
+//    var plus = e.lastChild;
+//    e.removeChild(plus);
+//    e.appendChild(answerspan(n,data[n].length-1-1));
+//    e.appendChild(plus);
+//    e.appendChild(minus);
+//    display();
+//    greasemonkey();
+//  }
+  ansdiv.append(plus);
+
+  div.append(ansdiv);
+
 
   var br = $('<br>');
   br.attr('clear','all');
