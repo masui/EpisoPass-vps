@@ -3,10 +3,16 @@
 def defaultdata
   {
     :seed => 'defaultseed',
-    :questions => [
-                   ["私の名前は?", ["masui", "toshiyuki", "madoka"]],
-                   ["私の年齢は?", ["10", "20", "30"]],
-               ]
+    :qas => [
+             {
+               :question => "私の名前は?",
+               :answers => ["masui", "toshiyuki", "madoka"],
+             },
+             {
+               :question => "私の年齢は?",
+               :answers => ["10", "20", "30", "40"],
+             },
+            ],
   }
 end
 

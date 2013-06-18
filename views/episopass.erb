@@ -5,33 +5,10 @@
     <script language="JavaScript" src='/javascripts/jquery.js'></script>
 <style type="text/css">
 <!--
-div.question {
-  background-color:white;
-  font-size:10pt;
-  font-family:sans-serif;
-  border:solid;
-  border-width:1px;
-  padding:2;
-  margin: 0 0 2 2;
-  vertical-aign:middle;
-}
 
-
-div.answer {
-  font-size:9pt;
-  font-family:sans-serif;
-  width:400;
-  border:solid;
-  border-width:1px;
-  padding:1;
-  margin:0 0 2 2;
-  vertical-align:middle;
-}
-span.answerlist {
-  padding:20;
-}
 -->
 </style>
+
     <title><%= @name %></title>
   </head>
   <body>
@@ -44,34 +21,22 @@ span.answerlist {
   <p>
 
   <div id="main">
-<!--
-    <div>
-      <div class="query">What is my name?</div>
-      <div>
-         <img src="http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png" class="answerlist">
-	 <div class="answerlist">
-           <input type="text"><br>
-           <span class="answerlist">bbbbbbbbbb</span><br>
-           <span class="answerlist">cc cc</span><br>
-           <span class="answerlist">ddddd</span><br>
- 	 </div>
-      </div>
-    </div>
-  <div>
--->
 
 <script>
 var data = JSON.parse('<%= @json %>');
-var questions = data['questions'];
+var qas = data['qas'];
 var seed = data['seed'];
 
 var answer = [];
 
-for(i=0;i<questions.length;i++){
+for(i=0;i<qas.length;i++){
   answer[i] = 0;
 }
 
-for(i=0;i<questions.length;i++){
+for(i=0;i<qas.length;i++){
+  var question = qas[i]['question'];
+  var answers = qas[i]['answers'];
+
   var div = $("<div>");
   div.css('background-color','#cee');
   div.css('padding','2');
@@ -88,11 +53,10 @@ for(i=0;i<questions.length;i++){
   var qinput = $('<input>');
   qinput.attr('type','text');
   qinput.attr('autocomplete','off');
-  //qinput.attr('width','100%');
   qinput.css('width','100%');
 
   qinput.attr('id','imageurl' + String(i));
-  qinput.val(questions[i][0]);
+  qinput.val(question);
   qinput.css('background-color','white');
   qinput.css('font-size','10pt');
   qinput.css('font-family','sans-serif');
@@ -119,23 +83,7 @@ for(i=0;i<questions.length;i++){
   divans.attr('id','ansdiv' + String(i));
   divans.css('float','left');
   divans.css('padding','0');
-  var answers = questions[i][1];
-  for(j=0;j<answers.length-1;j++){
-/*
-    var adiv = $("<div>");
-    adiv.addClass('answer');
-    adiv.attr('id','ans'+i+'_'+j);
-    adiv.text(answers[j]);
-    adiv.on('click',function(){
-      var id = $(this).attr('id');
-      var m = id.match(/ans(\d+)_(\d+)/);
-      var q = Number(m[1]);
-      var a = Number(m[2]);
-      answer[q] = a;
-      //seteditline(event);
-      //display();
-    });
-*/
+  for(j=0;j<answers.length;j++){
     var adiv = $('<div>');
     adiv.css('border','none');
     adiv.css('borderWidth','0');
@@ -161,7 +109,7 @@ for(i=0;i<questions.length;i++){
       var m = id.match(/input(\d+)_(\d+)/);
       var q = Number(m[1]);
       var a = Number(m[2]);
-      for(var i=0;i<questions[q].length;i++){
+      for(var i=0;i<answers.length;i++){
         var e = $('#input'+String(q)+'_'+String(i));
         if(i == a){
           e.css('background-color','#ccf');
@@ -175,7 +123,15 @@ for(i=0;i<questions.length;i++){
       // $(this).css('background','#fff');
     });
     input.on('keyup',function(){
-      $('#pass').val($(this).val());
+      var id = $(this).attr('id');
+      var m = id.match(/input(\d+)_(\d+)/);
+      var q = Number(m[1]);
+      var a = Number(m[2]);
+      answers = qas[q]['answers'];
+      answers[a] = $(this).val();
+      alert(qas[q]['answers']);
+
+      //$('#pass').val($(this).val());
     });
 
     adiv.append(input);
