@@ -7,6 +7,20 @@
     <script language="JavaScript" src='/javascripts/crypt.js'></script>
 <style type="text/css">
 <!--
+.floatbutton {
+  background-color:#ffffff;
+  margin:2;
+  padding:1;
+  border-width:2;
+  border-style:outset;
+  border-color:black;
+  text-decoration:none;
+  text-color:black;
+  vertical-align:middle;
+  width:20;
+  text-align:center;
+  float:left;
+}
 -->
 </style>
 
@@ -52,23 +66,21 @@ $('#pass').keyup(function(e){
   }
 });
 
-function aline(i,j){
+function answerline(i,j){
   var adiv = $('<div>');
   adiv.css('border','none');
   adiv.css('borderWidth','0');
   adiv.css('padding','0');
   adiv.css('margin',0);
-  adiv.attr('id','adiv'+i+'_'+j);
   var input = $('<input>');
   if(! answerelements[i]) answerelements[i] = [];
   answerelements[i][j] = input;
   input.attr('type','text');
   input.attr('autocomplete','off');
   input.attr('size','80');
-  input.attr('id','input'+i+'_'+j);
   input.attr('qnumber',i);
   input.attr('anumber',j);
-  input.val(answers[j]);
+  input.val(qas[i]['answers'][j]);
   input.css('border','solid');
   input.css('border-width','1px');
   input.css('padding','1');
@@ -79,17 +91,10 @@ function aline(i,j){
   input.css('font-size','9pt');
   input.css('font-family','sans-serif');
   input.on('click',function(){
-    //alert($(this).attr('qnumber'));
-    //alert($(this).attr('anumber'));
-    //var id = $(this).attr('id');
-    //var m = id.match(/input(\d+)_(\d+)/);
-    //var q = Number(m[1]);
-    //var a = Number(m[2]);
     var q = Number($(this).attr('qnumber'));
     var a = Number($(this).attr('anumber'));
     answer[q] = a;
     for(var i=0;i<qas[q]['answers'].length;i++){
-      //var e = $('#input'+String(q)+'_'+String(i));
       var e = answerelements[q][i];
       if(i == a){
         e.css('background-color','#ccf');
@@ -104,23 +109,16 @@ function aline(i,j){
     // $(this).css('background','#fff');
   });
   input.on('keyup',function(){
-    var id = $(this).attr('id');
-    var m = id.match(/input(\d+)_(\d+)/);
-    var q = Number(m[1]);
-    var a = Number(m[2]);
-    answers = qas[q]['answers'];
-    answers[a] = $(this).val();
-    //alert(qas[q]['answers']);
+    var q = Number($(this).attr('qnumber'));
+    var a = Number($(this).attr('anumber'));
+    qas[q]['answers'][a] = $(this).val();
     calcpass();
   });
   adiv.append(input);
   return adiv;
 }
 
-for(i=0;i<qas.length;i++){
-  var question = qas[i]['question'];
-  var answers = qas[i]['answers'];
-
+function qadiv(i){
   var div = $("<div>");
   div.css('background-color','#cee');
   div.css('padding','2');
@@ -139,8 +137,9 @@ for(i=0;i<qas.length;i++){
   qinput.attr('autocomplete','off');
   qinput.css('width','100%');
 
-  qinput.attr('id','question' + String(i));
-  qinput.val(question);
+  //qinput.attr('id','question' + String(i));
+  qinput.attr('qnumber',i);
+  qinput.val(qas[i]['question']);
   qinput.css('background-color','white');
   qinput.css('font-size','10pt');
   qinput.css('font-family','sans-serif');
@@ -150,9 +149,7 @@ for(i=0;i<qas.length;i++){
   qinput.css('margin','0 0 2 2');
   qinput.css('vertical-aign','middle');
   qinput.on('keyup',function(){
-    var id = $(this).attr('id');
-    var m = id.match(/question(\d+)/);
-    var q = Number(m[1]);
+    var q = Number($(this).attr('qnumber'));
     qas[q]['question'] = $(this).val();
     calcpass();
   });
@@ -166,51 +163,44 @@ for(i=0;i<qas.length;i++){
   img.css('height','100');
   img.css('padding','2');
 
-  img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
-  //http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png
+  img.attr('src','http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png');
+  //"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
   div.append(img);
 
   var ansdiv = $("<div>");
   ansdiv.attr('id','ansdiv' + String(i));
   ansdiv.css('float','left');
   ansdiv.css('padding','0');
-  for(var j=0;j<answers.length;j++){
-    ansdiv.append(aline(i,j));
+  for(var j=0;j<qas[i]['answers'].length;j++){
+    ansdiv.append(answerline(i,j));
   }
 
   var plus = $('<span>');
   plus.text('＋');
-  plus.attr('id','aplus' + String(i));
-  plus.css('background-color','#ffffff');
-  plus.css('margin','2');
-  plus.css('padding','1');
-  plus.css('border-width','2');
-  plus.css('border-style','outset');
-  plus.css('border-color','black');
-  plus.css('text-decoration','none');
-  plus.css('text-color','black');
-  plus.css('vertical-align','middle');
-  plus.css('width','20');
-  plus.css('text-align','center');
-  plus.css('float','left');
+  plus.addClass('floatbutton');
+  plus.attr('qnumber',i);
   plus.click(function(event){
-    alert(event);
+    var q = Number($(this).attr('qnumber'));
+    var nelements = answerelements[q].length;
+    var lastelement = answerelements[q][nelements-1];
+    qas[q]['answers'].push('新しい回答例');
+    lastelement.after(answerline(q,nelements));
   });
-//    var m = eventid(event).match(/aplus(.*)$/);
-//    var n = Number(m[1]);
-//    data[n].push('新しい回答例');
-//    var e = document.getElementById('ansdiv'+n);
-//    var minus = e.lastChild;
-//    e.removeChild(minus);
-//    var plus = e.lastChild;
-//    e.removeChild(plus);
-//    e.appendChild(answerspan(n,data[n].length-1-1));
-//    e.appendChild(plus);
-//    e.appendChild(minus);
-//    display();
-//    greasemonkey();
-//  }
   ansdiv.append(plus);
+
+  var minus = $('<span>');
+  minus.text('-');
+  minus.addClass('floatbutton');
+  minus.attr('qnumber',i);
+  minus.click(function(event){
+    var q = Number($(this).attr('qnumber'));
+    var nelements = answerelements[q].length;
+    var lastelement = answerelements[q][nelements-1];
+    qas[q]['answers'].pop();
+    answerelements[q].pop();
+    lastelement.remove();
+  });
+  ansdiv.append(minus);
 
   div.append(ansdiv);
 
@@ -219,7 +209,11 @@ for(i=0;i<qas.length;i++){
   br.attr('clear','all');
   div.append(br);
 
-  $("#main").append(div);
+  return div;
+}
+
+for(i=0;i<qas.length;i++){
+  $("#main").append(qadiv(i));
 }
 
 function secretstr(){
