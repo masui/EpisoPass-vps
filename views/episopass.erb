@@ -7,12 +7,12 @@
     <script language="JavaScript" src='/javascripts/crypt.js'></script>
 <style type="text/css">
 <!--
-
 -->
 </style>
 
-    <title><%= @name %></title>
+  <title><%= @name %></title>
   </head>
+
   <body>
   <h1>EpisoPass - <%= @name %></h1>
 
@@ -23,9 +23,13 @@
   <p>
 
   <div id="main">
+  </div>
+
+  <input type="button" value="save" id="save">
 
 <script>
-var data = JSON.parse('<%= @json %>');
+var name = '<%= @name %>';
+var data = JSON.parse(<%= @json %>);
 var qas = data['qas'];
 var seed = data['seed'];
 
@@ -123,6 +127,7 @@ for(i=0;i<qas.length;i++){
     input.css('margin','0 0 2 2');
     input.css('vertical-aign','middle');
     input.css('background-color','#ffffff');
+    if(j == 0) input.css('background-color','#ccf');
     input.css('font-size','9pt');
     input.css('font-family','sans-serif');
     input.on('click',function(){
@@ -180,14 +185,26 @@ function secretstr(){
 
 function calcpass(){
   $('#pass').val(crypt($('#seed').val(),secretstr()));
+  // alert(JSON.stringify(data));
 }
 
 function calcseed(){
   $('#seed').val(crypt($('#pass').val(),secretstr()));
 }
 
-//e.text('aaaaa');
-//$("#main").append(e);
+
+$("#save").click(function(){
+  //alert(JSON.stringify(data));
+  $.ajax({
+    type: "POST",
+    async: true,
+    url: "/" + name + "/__write",
+    data: "data=" + JSON.stringify(data)
+  });
+});
+
+calcpass();
+
 </script>
 
   </body>

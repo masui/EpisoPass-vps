@@ -17,7 +17,8 @@ def readdata(name)
   file = datafile(name)
   result = nil
   if File.exist?(file) then
-    result = JSON.parse(File.read(file))
+    # result = JSON.parse(File.read(file))
+    result = File.read(file)
   end
   result
 end
@@ -25,7 +26,8 @@ end
 def writedata(name,data)
   file = datafile(name)
   File.open(file,"w"){ |f|
-    f.print data.to_json
+    # f.print data.to_json
+    f.print data
   }
 end
 
@@ -46,16 +48,16 @@ if defined?($test) && $test
     def test_2
       name = ".testdata"
       data = [1,2,3,4]
-      writedata(name,data)
-      d = readdata(name)
+      writedata(name,data.to_json)
+      d = JSON.parse(readdata(name))
       assert d.length == 4
     end
 
     def test_3
       name = ".testdata"
       data = ["abc", "def", "ghi"]
-      writedata(name,data)
-      d = readdata(name)
+      writedata(name,data.to_json)
+      d = JSON.parse(readdata(name))
       assert d[1] == "def"
     end
 
