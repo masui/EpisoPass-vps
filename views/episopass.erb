@@ -16,9 +16,6 @@ div.question {
   vertical-aign:middle;
 }
 
-div.entry {
-  background-color:#cee;
-}
 
 div.answer {
   font-size:9pt;
@@ -76,12 +73,36 @@ for(i=0;i<questions.length;i++){
 
 for(i=0;i<questions.length;i++){
   var div = $("<div>");
-  div.addClass('entry');
+  div.css('background-color','#cee');
+  div.css('padding','2');
+  div.css('width','100%');
 
-  var qdiv = $("<div>");
-  qdiv.attr('id','imageurl' + String(i));
-  qdiv.text(questions[i][0]);
-  qdiv.addClass('question');
+  var qdiv = $('<div>');
+  qdiv.attr('width','100%');
+  qdiv.css('width','100%');
+  qdiv.css('border','none');
+  qdiv.css('border-width','0');
+  qdiv.css('padding','0');
+  qdiv.css('margin',0);
+
+  var qinput = $('<input>');
+  qinput.attr('type','text');
+  qinput.attr('autocomplete','off');
+  //qinput.attr('width','100%');
+  qinput.css('width','100%');
+
+  qinput.attr('id','imageurl' + String(i));
+  qinput.val(questions[i][0]);
+  qinput.css('background-color','white');
+  qinput.css('font-size','10pt');
+  qinput.css('font-family','sans-serif');
+  qinput.css('border','solid');
+  qinput.css('border-width','1px');
+  qinput.css('padding','2');
+  qinput.css('margin','0 0 2 2');
+  qinput.css('vertical-aign','middle');
+
+  qdiv.append(qinput);
   div.append(qdiv);
 
   var img = $("<img>");
@@ -120,24 +141,38 @@ for(i=0;i<questions.length;i++){
     adiv.css('borderWidth','0');
     adiv.css('padding','0');
     adiv.css('margin',0);
+    adiv.attr('id','adiv'+i+'_'+j);
     var input = $('<input>');
     input.attr('type','text');
     input.attr('autocomplete','off');
     input.attr('size','80');
+    input.attr('id','input'+i+'_'+j);
     input.val(answers[j]);
     input.css('border','solid');
-    input.css('borderWidth','1px');
+    input.css('border-width','1px');
     input.css('padding','1');
     input.css('margin','0 0 2 2');
-    input.css('verticalAlign','middle');
-    input.css('backgroundColor','#ffffff');
-    input.css('fontSize','9pt');
-    input.css('fontFamily','sans-serif');
+    input.css('vertical-aign','middle');
+    input.css('background-color','#ffffff');
+    input.css('font-size','9pt');
+    input.css('font-family','sans-serif');
     input.on('click',function(){
-      $(this).css('background','yellow');
+      var id = $(this).attr('id');
+      var m = id.match(/input(\d+)_(\d+)/);
+      var q = Number(m[1]);
+      var a = Number(m[2]);
+      for(var i=0;i<questions[q].length;i++){
+        var e = $('#input'+String(q)+'_'+String(i));
+        if(i == a){
+          e.css('background-color','#ccf');
+        }
+        else {
+          e.css('background-color','#fff');
+        }
+      }
     });
     input.on('blur',function(){ // フォーカスがはずれたとき
-      $(this).css('background','blue');
+      // $(this).css('background','#fff');
     });
     input.on('keyup',function(){
       $('#pass').val($(this).val());
