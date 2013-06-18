@@ -154,7 +154,11 @@ function qadiv(i){
   qinput.css('vertical-aign','middle');
   qinput.on('keyup',function(){
     var q = Number($(this).attr('qnumber'));
-    qas[q]['question'] = $(this).val();
+    var qstr = $(this).val();
+    qas[q]['question'] = qstr;
+    if(qstr.match(/\.(png|jpeg|jpg|gif)$/i)){
+      images[q].attr('src',qstr);
+    }
     calcpass();
   });
 
@@ -162,12 +166,19 @@ function qadiv(i){
   div.append(qdiv);
 
   var img = $("<img>");
+  images[i] = img;
   img.attr('id',"image" + String(i));
   img.css('float','left');
   img.css('height','100');
   img.css('padding','2');
 
-  img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
+  if(qas[i]['question'].match(/\.(gif|jpeg|jpg|png)/i)){
+    img.attr('src',qas[i]['question']);
+  } 
+  else {
+    img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
+  }
+
   div.append(img);
 
   var ansdiv = $("<div>");
@@ -216,6 +227,7 @@ function qadiv(i){
 }
 
 var qadivs = [];
+var images = [];
 for(i=0;i<qas.length;i++){
   div = qadiv(i);
   qadivs[i] = div;
@@ -261,12 +273,14 @@ function secretstr(){
 }
 
 function calcpass(){
-  $('#pass').val(crypt($('#seed').val(),secretstr()));
-  // alert(JSON.stringify(data));
+  var newpass = crypt($('#seed').val(),secretstr());
+  $('#pass').val(newpass);
 }
 
 function calcseed(){
-  $('#seed').val(crypt($('#pass').val(),secretstr()));
+  var newseed = crypt($('#pass').val(),secretstr());
+  $('#seed').val(newseed);
+  data['seed'] = newseed;
 }
 
 
