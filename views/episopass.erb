@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/stylesheets/episopass.css" type="text/css">
     <script language="JavaScript" src='/javascripts/jquery.js'></script>
+    <script language="JavaScript" src='/javascripts/md5.js'></script>
+    <script language="JavaScript" src='/javascripts/crypt.js'></script>
 <style type="text/css">
 <!--
 
@@ -15,7 +17,7 @@
   <h1>EpisoPass - <%= @name %></h1>
 
   <table>
-    <tr><td>Seed: <input type="text" value="<%= @seed %>" width=100></td></tr>
+    <tr><td>Seed: <input type="text" id="seed" value="<%= @seed %>" width=100></td></tr>
     <tr><td>Pass: <input type="text" id="pass" width=100></td></tr>
   </table>
   <p>
@@ -32,6 +34,18 @@ var answer = [];
 for(i=0;i<qas.length;i++){
   answer[i] = 0;
 }
+
+$('#seed').keyup(function(e){
+  if(e.keyCode == 13){
+    calcpass();
+  }
+});
+
+$('#pass').keyup(function(e){
+  if(e.keyCode == 13){
+    calcseed();
+  }
+});
 
 for(i=0;i<qas.length;i++){
   var question = qas[i]['question'];
@@ -55,7 +69,7 @@ for(i=0;i<qas.length;i++){
   qinput.attr('autocomplete','off');
   qinput.css('width','100%');
 
-  qinput.attr('id','imageurl' + String(i));
+  qinput.attr('id','question' + String(i));
   qinput.val(question);
   qinput.css('background-color','white');
   qinput.css('font-size','10pt');
@@ -65,6 +79,13 @@ for(i=0;i<qas.length;i++){
   qinput.css('padding','2');
   qinput.css('margin','0 0 2 2');
   qinput.css('vertical-aign','middle');
+  qinput.on('keyup',function(){
+    var id = $(this).attr('id');
+    var m = id.match(/question(\d+)/);
+    var q = Number(m[1]);
+    qas[q]['question'] = $(this).val();
+    calcpass();
+  });
 
   qdiv.append(qinput);
   div.append(qdiv);
@@ -109,6 +130,7 @@ for(i=0;i<qas.length;i++){
       var m = id.match(/input(\d+)_(\d+)/);
       var q = Number(m[1]);
       var a = Number(m[2]);
+      answer[q] = a;
       for(var i=0;i<answers.length;i++){
         var e = $('#input'+String(q)+'_'+String(i));
         if(i == a){
@@ -118,6 +140,7 @@ for(i=0;i<qas.length;i++){
           e.css('background-color','#fff');
         }
       }
+      calcpass();
     });
     input.on('blur',function(){ // フォーカスがはずれたとき
       // $(this).css('background','#fff');
@@ -129,9 +152,8 @@ for(i=0;i<qas.length;i++){
       var a = Number(m[2]);
       answers = qas[q]['answers'];
       answers[a] = $(this).val();
-      alert(qas[q]['answers']);
-
-      //$('#pass').val($(this).val());
+      //alert(qas[q]['answers']);
+      calcpass();
     });
 
     adiv.append(input);
@@ -145,6 +167,23 @@ for(i=0;i<qas.length;i++){
   div.append(br);
 
   $("#main").append(div);
+}
+
+function secretstr(){
+  var secret = "";
+  for(var i=0;i<qas.length;i++){
+    secret += qas[i]['question'];
+    secret += qas[i]['answers'][answer[i]];
+  }
+  return secret;
+}
+
+function calcpass(){
+  $('#pass').val(crypt($('#seed').val(),secretstr()));
+}
+
+function calcseed(){
+  $('#seed').val(crypt($('#pass').val(),secretstr()));
 }
 
 //e.text('aaaaa');
