@@ -18,9 +18,14 @@ end
 
 get '/:name' do |name|
   @name = name
-  @data = readdata(name)
-  @data = defaultdata if @data.nil?
+  @json = readdata(name)
+  if @json.nil? then
+    data = defaultdata
+    @json = defaultdata.to_json
+  else
+    data = JSON.parse(@json)
+  end
   @seed = params[:seed]
-  @json = @data.to_json
+  @seed = data['seed'] if @seed.to_s == ''
   erb :episopass
 end

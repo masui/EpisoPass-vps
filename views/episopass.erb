@@ -39,23 +39,25 @@
   <div id="main">
   </div>
 
+  <br clear="all">
   <input type="button" value="save" id="save">
 
 <script>
 var name = '<%= @name %>';
-var data = JSON.parse(<%= @json %>);
+var data = JSON.parse('<%= @json %>');
 var qas = data['qas'];
 var seed = data['seed'];
 
 var answer = [];
-for(i=0;i<qas.length;i++){
-  answer[i] = 0;
-}
+//for(i=0;i<qas.length;i++){
+//  answer[i] = 0;
+//}
 
 var answerelements = [];
 
 $('#seed').keyup(function(e){
   if(e.keyCode == 13){
+    data['seed'] = $('#seed').val();
     calcpass();
   }
 });
@@ -119,6 +121,8 @@ function answerline(i,j){
 }
 
 function qadiv(i){
+  answer[i] = 0;
+
   var div = $("<div>");
   div.css('background-color','#cee');
   div.css('padding','2');
@@ -163,8 +167,7 @@ function qadiv(i){
   img.css('height','100');
   img.css('padding','2');
 
-  img.attr('src','http://gyazo.com/91046da67ab2e43cc4e6456e93c09cd1.png');
-  //"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
+  img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
   div.append(img);
 
   var ansdiv = $("<div>");
@@ -212,9 +215,41 @@ function qadiv(i){
   return div;
 }
 
+var qadivs = [];
 for(i=0;i<qas.length;i++){
-  $("#main").append(qadiv(i));
+  div = qadiv(i);
+  qadivs[i] = div;
+  $("#main").append(div);
 }
+
+var dummy = {
+  "question":"新しい質問",
+  "answers":["回答11","回答22","回答33"]
+};
+
+var plus = $('<span>');
+plus.text('＋');
+plus.addClass('floatbutton');
+plus.click(function(event){
+  var nelements = qas.length;
+  var lastelement = qadivs[nelements-1];
+  qas.push(dummy);
+  lastelement.after(qadiv(nelements));
+  calcpass();
+});
+$("#main").append(plus);
+
+var minus = $('<span>');
+minus.text('-');
+minus.addClass('floatbutton');
+minus.click(function(event){
+  var nelements = qas.length;
+  var lastelement = qadivs[nelements-1];
+  qas.pop();
+  lastelement.remove();
+  calcpass();
+});
+$("#main").append(minus);
 
 function secretstr(){
   var secret = "";
