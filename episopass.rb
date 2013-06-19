@@ -25,7 +25,7 @@ get '/:name' do |name|
   else
     data = JSON.parse(@json)
   end
-  @seed = params[:seed]
-  @seed = data['seed'] if @seed.to_s == ''
+  @seed = params[:seed].to_s
+  @seed = data['seed'] if @seed == ''
   erb :episopass
 end

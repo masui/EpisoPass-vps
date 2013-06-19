@@ -9,17 +9,17 @@
 <!--
 .floatbutton {
   background-color:#ffffff;
-  margin:2;
-  padding:1;
+  margin:3;
+  padding:2;
   border-width:2;
   border-style:outset;
   border-color:black;
   text-decoration:none;
   text-color:black;
   vertical-align:middle;
-  width:20;
+  width:20pt;
   text-align:center;
-  float:left;
+  /* float:left; */
 }
 -->
 </style>
@@ -37,12 +37,12 @@
     </div>
 
 <p>
-<div style="font-size:20;">
-Seed: <input type="text" id="seed" value="<%= @seed %>" width=100 style="height:24pt;font-size:14pt;">
+<div style="font-size:18;">
+Seed: <input type="text" id="seed" value="<%= @seed %>" width=100 style="height:20pt;font-size:12pt;">
 ⇔
-Password: <input type="text" id="pass" width=100 style="height:24pt;font-size:14pt;">
+Password: <input type="text" id="pass" width=100 style="height:20pt;font-size:12pt;">
 
-<input type="button" value="save" id="save" style="height:28pt;width:60pt;font-size:18pt;">
+<input type="button" value="save" id="save" style="height:28pt;width:60pt;font-size:16pt;">
 </div>
 <p>
 
@@ -53,7 +53,7 @@ Password: <input type="text" id="pass" width=100 style="height:24pt;font-size:14
 var name = '<%= @name %>';
 var data = JSON.parse('<%= @json %>');
 var qas = data['qas'];
-var seed = data['seed'];
+var seed = '<%= @seed %>';
 
 var answer = [];
 
@@ -73,7 +73,7 @@ $('#pass').keyup(function(e){
 });
 
 function answerline(i,j){
-  var adiv = $('<div>');
+  var adiv = $('<span>');
   adiv.css('border','none');
   adiv.css('borderWidth','0');
   adiv.css('padding','0');
@@ -83,16 +83,19 @@ function answerline(i,j){
   answerelements[i][j] = input;
   input.attr('type','text');
   input.attr('autocomplete','off');
-  input.attr('size','80');
+  //input.attr('size','10');
   input.attr('qnumber',i);
   input.attr('anumber',j);
   input.val(qas[i]['answers'][j]);
-  input.css('border','solid');
+  //input.css('border','solid');
+  input.css('border','dotted');
+  //input.css('border','dashed');
   input.css('border-width','1px');
   input.css('padding','1');
   input.css('margin','0 0 2 2');
   input.css('vertical-aign','middle');
   input.css('background-color','#ffffff');
+  input.css('width','120');
   if(j == 0) input.css('background-color','#ccf');
   input.css('font-size','9pt');
   input.css('font-family','sans-serif');
@@ -110,9 +113,6 @@ function answerline(i,j){
       }
     }
     calcpass();
-  });
-  input.on('blur',function(){ // フォーカスがはずれたとき
-    // $(this).css('background','#fff');
   });
   input.on('keyup',function(){
     var q = Number($(this).attr('qnumber'));
@@ -148,11 +148,13 @@ function qadiv(i){
   //qinput.attr('id','question' + String(i));
   qinput.attr('qnumber',i);
   qinput.val(qas[i]['question']);
-  qinput.css('background-color','white');
+  qinput.css('background-color','#ffd');
   qinput.css('font-size','10pt');
   qinput.css('font-family','sans-serif');
+  qinput.css('font-weight','bold');
   qinput.css('border','solid');
   qinput.css('border-width','1px');
+  qinput.css('border-color','#888');
   qinput.css('padding','2');
   qinput.css('margin','0 0 2 2');
   qinput.css('vertical-aign','middle');
@@ -173,19 +175,18 @@ function qadiv(i){
   images[i] = img;
   img.attr('id',"image" + String(i));
   img.css('float','left');
-  img.css('height','100');
   img.css('padding','2');
 
   if(qas[i]['question'].match(/\.(gif|jpeg|jpg|png)/i)){
     img.attr('src',qas[i]['question']);
+    img.css('height','100');
+    div.append(img);
   } 
   else {
     //img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
-    img.attr('src',"transparent.png");
-    img.attr('width',"40");
+    //img.attr('src',"transparent.png");
+    //img.css('height','100');
   }
-
-  div.append(img);
 
   var ansdiv = $("<div>");
   ansdiv.attr('id','ansdiv' + String(i));
@@ -195,9 +196,34 @@ function qadiv(i){
     ansdiv.append(answerline(i,j));
   }
 
-  var plus = $('<span>');
-  plus.text('＋');
-  plus.addClass('floatbutton');
+  //var brr = $('<br>');
+  //brr.attr('clear','all');
+  //ansdiv.append(brr);
+
+  ansdiv.append($('<span>  </span>'));
+
+  //var minus = $('<span>');
+  //minus.text('最後の選択肢を削除');
+  //minus.addClass('floatbutton');
+  var minus = $('<input>');
+  minus.attr('type','button');
+  minus.val(' - ');
+  minus.attr('qnumber',i);
+  minus.click(function(event){
+    var q = Number($(this).attr('qnumber'));
+    qas[q]['answers'].pop();
+    answerelements[q].pop().remove();
+  });
+  ansdiv.append(minus);
+
+  ansdiv.append($('<span>  </span>'));
+
+  //var plus = $('<span>');
+  //plus.text('選択肢を追加');
+  //plus.addClass('floatbutton');
+  var plus = $('<input>');
+  plus.attr('type','button');
+  plus.val(' + ')
   plus.attr('qnumber',i);
   plus.click(function(event){
     var q = Number($(this).attr('qnumber'));
@@ -207,17 +233,6 @@ function qadiv(i){
     lastelement.after(answerline(q,nelements));
   });
   ansdiv.append(plus);
-
-  var minus = $('<span>');
-  minus.text('-');
-  minus.addClass('floatbutton');
-  minus.attr('qnumber',i);
-  minus.click(function(event){
-    var q = Number($(this).attr('qnumber'));
-    qas[q]['answers'].pop();
-    answerelements[q].pop().remove();
-  });
-  ansdiv.append(minus);
 
   div.append(ansdiv);
 
@@ -242,9 +257,33 @@ var dummy = {
   "answers":["回答11","回答22","回答33"]
 };
 
-var plus = $('<span>');
-plus.text('＋');
-plus.addClass('floatbutton');
+//var minus = $('<span>');
+//minus.text('-');
+//minus.addClass('floatbutton');
+
+var minus = $('<input>');
+minus.attr('type','button');
+minus.val(' - ');
+minus.attr('qnumber',i);
+minus.click(function(event){
+  qas.pop();
+  qadivs.pop().remove();
+  calcpass();
+});
+$("#main").append(minus);
+
+
+$("#main").append($('<span>  </span>'));
+
+//var plus = $('<span>');
+//plus.text('＋');
+//plus.addClass('floatbutton');
+
+var plus = $('<input>');
+plus.attr('type','button');
+plus.val(' + ');
+plus.attr('qnumber',i);
+
 plus.click(function(event){
   var nelements = qadivs.length;
   var lastelement = qadivs[nelements-1];
@@ -258,17 +297,6 @@ plus.click(function(event){
   calcpass();
 });
 $("#main").append(plus);
-
-var minus = $('<span>');
-minus.text('-');
-minus.addClass('floatbutton');
-minus.click(function(event){
-  qas.pop();
-  qadivs.pop().remove();
-  calcpass();
-});
-$("#main").append(minus);
-
 function secretstr(){
   var secret = "";
   for(var i=0;i<qas.length;i++){
