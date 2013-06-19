@@ -28,20 +28,23 @@
   </head>
 
   <body>
-  <h1>EpisoPass - <%= @name %></h1>
 
-<!--
-  <table>
-    <tr><td>Seed: <input type="text" id="seed" value="<%= @seed %>" width=100></td></tr>
-    <tr><td>Pass: <input type="text" id="pass" width=100></td></tr>
-  </table>
--->
-Seed: <input type="text" id="seed" value="<%= @seed %>" width=100>
+
+    <div class="title">
+      <div class="title2">
+         <span class="title">EpisoPass - <%= @name %></span>
+      </div>
+    </div>
+
+<p>
+<div style="font-size:20;">
+Seed: <input type="text" id="seed" value="<%= @seed %>" width=100 style="height:24pt;font-size:14pt;">
 ⇔
-Password: <input type="text" id="pass" width=100>
-  <p>
-  <input type="button" value="save" id="save">
-  <p>
+Password: <input type="text" id="pass" width=100 style="height:24pt;font-size:14pt;">
+
+<input type="button" value="save" id="save" style="height:28pt;width:60pt;font-size:18pt;">
+</div>
+<p>
 
   <div id="main">
   </div>
@@ -180,7 +183,9 @@ function qadiv(i){
     img.attr('src',qas[i]['question']);
   } 
   else {
-    img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
+    //img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
+    img.attr('src',"transparent.png");
+    img.attr('width',"40");
   }
 
   div.append(img);

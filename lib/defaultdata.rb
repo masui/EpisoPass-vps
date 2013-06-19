@@ -5,8 +5,8 @@ def defaultdata
     :seed => 'defaultseed',
     :qas => [
              {
-               :question => "私の名前は?",
-               :answers => ["masui", "toshiyuki", "madoka"],
+               :question => "小学生のとき好きだったのは?",
+               :answers => ["masa", "toshi", "yuu"],
              },
              {
                :question => "私の年齢は?",
