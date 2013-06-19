@@ -30,17 +30,21 @@
   <body>
   <h1>EpisoPass - <%= @name %></h1>
 
+<!--
   <table>
     <tr><td>Seed: <input type="text" id="seed" value="<%= @seed %>" width=100></td></tr>
     <tr><td>Pass: <input type="text" id="pass" width=100></td></tr>
   </table>
+-->
+Seed: <input type="text" id="seed" value="<%= @seed %>" width=100>
+⇔
+Password: <input type="text" id="pass" width=100>
+  <p>
+  <input type="button" value="save" id="save">
   <p>
 
   <div id="main">
   </div>
-
-  <br clear="all">
-  <input type="button" value="save" id="save">
 
 <script>
 var name = '<%= @name %>';
@@ -56,16 +60,16 @@ var answer = [];
 var answerelements = [];
 
 $('#seed').keyup(function(e){
-  if(e.keyCode == 13){
+  //if(e.keyCode == 13){
     data['seed'] = $('#seed').val();
     calcpass();
-  }
+  //}
 });
 
 $('#pass').keyup(function(e){
-  if(e.keyCode == 13){
+  //if(e.keyCode == 13){
     calcseed();
-  }
+  //}
 });
 
 function answerline(i,j){
