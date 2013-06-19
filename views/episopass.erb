@@ -214,11 +214,8 @@ function qadiv(i){
   minus.attr('qnumber',i);
   minus.click(function(event){
     var q = Number($(this).attr('qnumber'));
-    var nelements = answerelements[q].length;
-    var lastelement = answerelements[q][nelements-1];
     qas[q]['answers'].pop();
-    answerelements[q].pop();
-    lastelement.remove();
+    answerelements[q].pop().remove();
   });
   ansdiv.append(minus);
 
@@ -249,10 +246,15 @@ var plus = $('<span>');
 plus.text('＋');
 plus.addClass('floatbutton');
 plus.click(function(event){
-  var nelements = qas.length;
+  var nelements = qadivs.length;
   var lastelement = qadivs[nelements-1];
+  var dummy = {};
+  dummy.question = "新しい質問";
+  dummy.answers = ["回答11","回答22","回答33"];
   qas.push(dummy);
-  lastelement.after(qadiv(nelements));
+  var newqadiv = qadiv(nelements);
+  qadivs.push(newqadiv);
+  lastelement.after(newqadiv);
   calcpass();
 });
 $("#main").append(plus);
@@ -261,10 +263,8 @@ var minus = $('<span>');
 minus.text('-');
 minus.addClass('floatbutton');
 minus.click(function(event){
-  var nelements = qas.length;
-  var lastelement = qadivs[nelements-1];
   qas.pop();
-  lastelement.remove();
+  qadivs.pop().remove();
   calcpass();
 });
 $("#main").append(minus);
