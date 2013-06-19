@@ -2,15 +2,15 @@
 
 def defaultdata
   {
-    :seed => 'defaultseed',
+    :seed => 'seed12345',
     :qas => [
              {
                :question => "小学生のとき好きだったのは?",
-               :answers => ["masa", "toshi", "yuu"],
+               :answers => ["まさこちゃん", "のりこちゃん", "みどりちゃん", "こづえちゃん"],
              },
              {
-               :question => "私の年齢は?",
-               :answers => ["10", "20", "30", "40"],
+               :question => "http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg",
+               :answers => ["物理", "体育", "音楽", "英語", "書道"],
              },
             ],
   }
