@@ -164,6 +164,10 @@ function qadiv(i){
     qas[q]['question'] = qstr;
     if(qstr.match(/\.(png|jpeg|jpg|gif)$/i)){
       images[q].attr('src',qstr);
+      images[q].css('display','block');
+    }
+    else {
+      images[q].css('display','none');
     }
     calcpass();
   });
@@ -180,12 +184,15 @@ function qadiv(i){
   if(qas[i]['question'].match(/\.(gif|jpeg|jpg|png)/i)){
     img.attr('src',qas[i]['question']);
     img.css('height','100');
+    img.css('display','block');
     div.append(img);
   } 
   else {
     //img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
     //img.attr('src',"transparent.png");
     //img.css('height','100');
+    img.css('display','none');
+    div.append(img);
   }
 
   var ansdiv = $("<div>");
@@ -265,6 +272,7 @@ var minus = $('<input>');
 minus.attr('type','button');
 minus.val(' - ');
 minus.attr('qnumber',i);
+minus.css('width','50');
 minus.click(function(event){
   qas.pop();
   qadivs.pop().remove();
@@ -283,7 +291,7 @@ var plus = $('<input>');
 plus.attr('type','button');
 plus.val(' + ');
 plus.attr('qnumber',i);
-
+plus.css('width','50');
 plus.click(function(event){
   var nelements = qadivs.length;
   var lastelement = qadivs[nelements-1];
@@ -297,6 +305,7 @@ plus.click(function(event){
   calcpass();
 });
 $("#main").append(plus);
+
 function secretstr(){
   var secret = "";
   for(var i=0;i<qas.length;i++){
