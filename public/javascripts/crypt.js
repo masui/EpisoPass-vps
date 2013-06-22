@@ -1,3 +1,11 @@
+//
+// crypt.js - EpisoPassでの文字置換
+//
+// Toshiyuki Masui @ Pitecan.com
+// Last Modified: 2013/06/23 08:21:32
+//
+
+//  文字種ごとに置換を行なうためのテーブル
 var charset = [
 	       'abcdefghijklmnopqrstuvwxyz',
                'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
@@ -13,7 +21,7 @@ function charkind(c){
     return null;
 }
 
-// crypt_char(crypt_char(c,n),n) == c になる
+// crypt_char(crypt_char(c,n),n) == c になるような文字置換関数
 function crypt_char(c,n){
     var kind = charkind(c);
     var chars = charset[kind];
@@ -23,26 +31,8 @@ function crypt_char(c,n){
     return chars[ind];
 }
 
-function utf2bytearray(text) {
-    var result = [];
-    if (text == null)
-        return result;
-    for (var i = 0; i < text.length; i++) {
-        var c = text.charCodeAt(i);
-        if (c <= 0x7f) {
-            result.push(c);
-        } else if (c <= 0x07ff) {
-            result.push(((c >> 6) & 0x1F) | 0xC0);
-            result.push((c & 0x3F) | 0x80);
-        } else {
-            result.push(((c >> 12) & 0x0F) | 0xE0);
-            result.push(((c >> 6) & 0x3F) | 0x80);
-            result.push((c & 0x3F) | 0x80);
-        }
-    }
-    return result;
-}
-
+// UTF8文字列をバイト文字列(?)に変換
+// (MD5_hexhashがUTF8データをうまく扱えないため)
 function utf2bytestr(text) {
     var result = "";
     if (text == null)
@@ -65,6 +55,8 @@ function utf2bytestr(text) {
 
 // crypt(crypt(s,data),data) == s になる
 function crypt(str,seeddata){
+    // seeddataのMD5の32バイト値の一部を取り出して数値化し、
+    // その値にもとづいて文字置換を行なう
     var hash = MD5_hexhash(utf2bytestr(seeddata));
     var res = "";
     for(i=0;i<str.length;i++){
@@ -75,6 +67,5 @@ function crypt(str,seeddata){
     }
     return res;
 }
-
 
 
