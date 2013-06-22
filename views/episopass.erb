@@ -134,7 +134,6 @@ function qadiv(i){
   qinput.attr('autocomplete','off');
   qinput.css('width','100%');
 
-  //qinput.attr('id','question' + String(i));
   qinput.attr('qnumber',i);
   qinput.val(qas[i]['question']);
   qinput.css('background-color','#ffd');
@@ -166,7 +165,6 @@ function qadiv(i){
 
   var img = $("<img>");
   images[i] = img;
-  img.attr('id',"image" + String(i));
   img.css('float','left');
   img.css('padding','2');
 
@@ -177,15 +175,11 @@ function qadiv(i){
     div.append(img);
   } 
   else {
-    //img.attr('src',"http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg");
-    //img.attr('src',"transparent.png");
-    //img.css('height','100');
     img.css('display','none');
     div.append(img);
   }
 
   var ansdiv = $("<div>");
-  ansdiv.attr('id','ansdiv' + String(i));
   ansdiv.css('float','left');
   ansdiv.css('padding','0');
   for(var j=0;j<qas[i]['answers'].length;j++){
