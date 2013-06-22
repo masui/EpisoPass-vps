@@ -35,14 +35,32 @@ div.title {
   vertical-align: middle;
 }
 
+span.title {
+  font-size:24;
+  font-weight:bold;
+}
+
 div.title2 {
   background-color: #fff;
   padding: 4pt 4pt 4pt 7pt;
   margin: 0pt;
 }
 
-span.title {
-  font-size:24;
+div.section {
+  background-color: #ddd;
+  padding: 2pt;
+  margin: 5pt;
+  vertical-align: middle;
+}
+
+div.section2 {
+  background-color: #fff;
+  padding: 2pt 2pt 2pt 5pt;
+  margin: 0pt;
+}
+
+span.section {
+  font-size:18;
   font-weight:bold;
 }
 
