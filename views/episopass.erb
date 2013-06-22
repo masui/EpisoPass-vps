@@ -1,10 +1,29 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--
+    ネットが無い環境でも動くようにしておく 
+    -->
+    <style type="text/css">
+    <!--
+    <%= File.read("#{ROOT}/public/stylesheets/episopass.css") %>
+    -->
+    </style>
+    <script language="JavaScript">
+    <%= File.read("#{ROOT}/public/javascripts/jquery.js") %>
+    </script>
+    <script language="JavaScript">
+    <%= File.read("#{ROOT}/public/javascripts/md5.js") %>
+    </script>
+    <script language="JavaScript">
+    <%= File.read("#{ROOT}/public/javascripts/crypt.js") %>
+    </script>
+    <!--
     <link rel="stylesheet" href="/stylesheets/episopass.css" type="text/css">
     <script language="JavaScript" src='/javascripts/jquery.js'></script>
     <script language="JavaScript" src='/javascripts/md5.js'></script>
     <script language="JavaScript" src='/javascripts/crypt.js'></script>
+    -->
 <style type="text/css">
 <!--
 .floatbutton {
@@ -32,7 +51,7 @@
 
     <div class="title">
       <div class="title2">
-         <span class="title">EpisoPass - <%= @name %></span>
+         <span class="title"><a href="index.html">EpisoPass</a> - <%= @name %></span>
       </div>
     </div>
 
@@ -46,12 +65,13 @@ Password: <input type="text" id="pass" width=100 style="height:20pt;font-size:12
 </div>
 <p>
 
-  <div id="main">
-  </div>
+<div id="main">
+</div>
 
 <script>
+var json = '<%= @json %>';
 var name = '<%= @name %>';
-var data = JSON.parse('<%= @json %>');
+var data = JSON.parse(json);
 var qas = data['qas'];
 var seed = '<%= @seed %>';
 
@@ -250,6 +270,10 @@ function qadiv(i){
 
   return div;
 }
+
+// ブラウザから「別名で保存」すると #main に入れたデータが全部格納されて
+// しまうので、最初に全部消しておく
+$("#main").children().remove();
 
 var qadivs = [];
 var images = [];
