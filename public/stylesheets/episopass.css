@@ -32,6 +32,7 @@ div.title {
   background-color: #ddd;
   padding: 5pt;
   margin: 5pt;
+  vertical-align: middle;
 }
 
 div.title2 {
