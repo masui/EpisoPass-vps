@@ -25,6 +25,15 @@ get '/:name/:seed' do |name,seed|
   erb :episopass
 end
 
+get '/:name/' do |name|
+  @name = name
+  @json = readdata(name)
+  @json = defaultdata.to_json if @json.nil?
+  @seed = params[:seed].to_s
+  @seed = JSON.parse(@json)['seed'] if @seed == ''
+  erb :episopass
+end
+
 get '/:name' do |name|
   @name = name
   @json = readdata(name)
