@@ -18,7 +18,7 @@ post '/:name/__write' do |name|
   writedata(name,params[:data])
 end
 
-get '/:name/__json' do |name|
+get '/:name/__json/:filename' do |name,filename|
   content_type 'application/json'
   readdata(name)
 end
