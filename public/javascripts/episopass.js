@@ -227,7 +227,7 @@ function secretstr(){
     return secret;
 }
 
-var Crypt = Crypt();
+var Crypt = new Crypt();
 
 function calcpass(){
     var newpass = Crypt.crypt($('#seed').val(),secretstr());

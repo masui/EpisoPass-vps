@@ -70,6 +70,4 @@ var Crypt = function(){
 	}
 	return res;
     }
-
-    return this;
 };
