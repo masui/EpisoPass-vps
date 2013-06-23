@@ -31,6 +31,16 @@ def writedata(name,data)
   }
 end
 
+def log(name,data)
+  logfile = "#{FILEROOT}/log"
+  File.open(logfile,"a"){ |f|
+    f.puts "----------"
+    f.puts name
+    f.puts Time.now
+    f.puts data
+  }
+end
+
 if $0 == __FILE__
   require 'test/unit'
   $test = true

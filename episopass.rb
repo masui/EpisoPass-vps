@@ -13,6 +13,8 @@ get '/' do
 end
 
 post '/:name/__write' do |name|
+  data = params[:data]
+  log(name,data)
   writedata(name,params[:data])
 end
 
