@@ -1,5 +1,7 @@
 //
-//
+//  var json = '<%= @json %>';
+//  var name = '<%= @name %>';
+//  var seed = '<%= @seed %>';
 //
 var data = JSON.parse(json);
 var qas = data['qas'];
@@ -7,14 +9,10 @@ var qas = data['qas'];
 var answer = [];
 var answerelements = [];
 
-$('#seed').keyup(function(e){
-	data['seed'] = $('#seed').val();
-	calcpass();
-    });
+var qadivs = [];
+var images = [];
 
-$('#pass').keyup(function(e){
-	calcseed();
-});
+var Crypt = new Crypt();
 
 function answerline(i,j){
     var adiv = $('<span>');
@@ -173,50 +171,50 @@ function qadiv(i){
     return div;
 }
 
-// ブラウザから「別名で保存」すると #main に入れたデータが全部格納されて
-// しまうので、最初に全部消しておく
-$("#main").children().remove();
+function maindiv(){
+    // ブラウザから「別名で保存」すると #main に入れたデータが全部格納されて
+    // しまうので、最初に全部消しておく
+    $("#main").children().remove();
 
-var qadivs = [];
-var images = [];
-for(i=0;i<qas.length;i++){
-    div = qadiv(i);
-    qadivs[i] = div;
-    $("#main").append(div);
+    for(i=0;i<qas.length;i++){
+	div = qadiv(i);
+	qadivs[i] = div;
+	$("#main").append(div);
+    }
+    
+    var minus = $('<input>');
+    minus.attr('type','button');
+    minus.val(' - ');
+    minus.attr('qnumber',i);
+    minus.css('width','50');
+    minus.click(function(event){
+	    qas.pop();
+	    qadivs.pop().remove();
+	    calcpass();
+	});
+    $("#main").append(minus);
+    
+    $("#main").append($('<span>  </span>'));
+    
+    var plus = $('<input>');
+    plus.attr('type','button');
+    plus.val(' + ');
+    plus.attr('qnumber',i);
+    plus.css('width','50');
+    plus.click(function(event){
+	    var nelements = qadivs.length;
+	    var lastelement = qadivs[nelements-1];
+	    var dummy = {};
+	    dummy.question = "新しい質問";
+	    dummy.answers = ["回答11","回答22","回答33"];
+	    qas.push(dummy);
+	    var newqadiv = qadiv(nelements);
+	    qadivs.push(newqadiv);
+	    lastelement.after(newqadiv);
+	    calcpass();
+	});
+    $("#main").append(plus);
 }
-
-var minus = $('<input>');
-minus.attr('type','button');
-minus.val(' - ');
-minus.attr('qnumber',i);
-minus.css('width','50');
-minus.click(function(event){
-	qas.pop();
-	qadivs.pop().remove();
-	calcpass();
-    });
-$("#main").append(minus);
-
-$("#main").append($('<span>  </span>'));
-
-var plus = $('<input>');
-plus.attr('type','button');
-plus.val(' + ');
-plus.attr('qnumber',i);
-plus.css('width','50');
-plus.click(function(event){
-	var nelements = qadivs.length;
-	var lastelement = qadivs[nelements-1];
-	var dummy = {};
-	dummy.question = "新しい質問";
-	dummy.answers = ["回答11","回答22","回答33"];
-	qas.push(dummy);
-	var newqadiv = qadiv(nelements);
-	qadivs.push(newqadiv);
-	lastelement.after(newqadiv);
-	calcpass();
-    });
-$("#main").append(plus);
 
 function secretstr(){
     var secret = "";
@@ -226,8 +224,6 @@ function secretstr(){
     }
     return secret;
 }
-
-var Crypt = new Crypt();
 
 function calcpass(){
     var newpass = Crypt.crypt($('#seed').val(),secretstr());
@@ -240,15 +236,29 @@ function calcseed(){
     data['seed'] = newseed;
 }
 
+function init(){
+    $('#seed').keyup(function(e){
+	    data['seed'] = $('#seed').val();
+	    calcpass();
+	});
+    
+    $('#pass').keyup(function(e){
+	    calcseed();
+	});
+    
+    $("#save").click(function(){
+	    $.ajax({
+		    type: "POST",
+			async: true,
+			url: "/" + name + "/__write",
+			data: "data=" + JSON.stringify(data)
+			});
+	});
+    
+    $('#seed').val(seed);
+    
+    maindiv();
+    calcpass();
+}
 
-$("#save").click(function(){
-	$.ajax({
-		type: "POST",
-		    async: true,
-		    url: "/" + name + "/__write",
-		    data: "data=" + JSON.stringify(data)
-		    });
-    });
-
-$('#seed').val(seed);
-calcpass();
+init();
