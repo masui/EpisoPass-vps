@@ -12,6 +12,9 @@ var answerelements = [];
 var qadivs = [];
 var images = [];
 
+var qa_minusbutton;
+var ans_minusbuttons = [];
+
 var Crypt = new Crypt();
 
 function answerline(i,j){
@@ -146,6 +149,7 @@ function qadiv(i){
 	    answerelements[q].pop().remove();
 	});
     ansdiv.append(minus);
+    ans_minusbuttons[i] = minus;
     
     ansdiv.append($('<span>  </span>'));
     
@@ -156,9 +160,8 @@ function qadiv(i){
     plus.click(function(event){
 	    var q = Number($(this).attr('qnumber'));
 	    var nelements = answerelements[q].length;
-	    var lastelement = answerelements[q][nelements-1];
 	    qas[q]['answers'].push('新しい回答例');
-	    lastelement.after(answerline(q,nelements));
+	    ans_minusbuttons[q].before(answerline(q,nelements));
 	});
     ansdiv.append(plus);
     
@@ -183,6 +186,7 @@ function maindiv(){
     }
     
     var minus = $('<input>');
+    qa_minusbutton = minus;
     minus.attr('type','button');
     minus.val(' - ');
     minus.attr('qnumber',i);
@@ -202,15 +206,13 @@ function maindiv(){
     plus.attr('qnumber',i);
     plus.css('width','50');
     plus.click(function(event){
-	    var nelements = qadivs.length;
-	    var lastelement = qadivs[nelements-1];
 	    var dummy = {};
 	    dummy.question = "新しい質問";
 	    dummy.answers = ["回答11","回答22","回答33"];
 	    qas.push(dummy);
-	    var newqadiv = qadiv(nelements);
+	    var newqadiv = qadiv(qadivs.length);
 	    qadivs.push(newqadiv);
-	    lastelement.after(newqadiv);
+	    qa_minusbutton.before(newqadiv);
 	    calcpass();
 	});
     $("#main").append(plus);
