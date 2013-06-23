@@ -14,7 +14,8 @@ var Crypt = function(){
 		   'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 		   '0123456789',
 		   '-',
-		   '~!@#$%^&*()_=+[{]}|;:.,/?'
+		   '~!@#$%^&*()_=+[{]}|;:.,/?',
+		   ' '
 		   ];
     
     var charkind = function(c){
