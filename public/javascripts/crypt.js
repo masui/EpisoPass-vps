@@ -4,7 +4,7 @@
 // Toshiyuki Masui @ Pitecan.com
 // Last Modified: 2013/06/23 11:21:21
 //
-// var Crypt = Crypt();
+// var Crypt = new Crypt();
 // Crypt.crypt(str,seed)
 
 var Crypt = function(){
