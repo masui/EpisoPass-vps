@@ -238,6 +238,45 @@ function calcseed(){
     data['seed'] = newseed;
 }
 
+function sendfile(files){
+    var file = files[0];
+
+    // ファイルの内容は FileReader で読み込みます.
+    var fileReader = new FileReader();
+    fileReader.onload = function(event) {
+	// event.target.result に読み込んだファイルの内容が入っています.
+	// ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
+	json = event.target.result;
+
+	$.ajax({
+		url: "/" + name + "/__upload",
+		    type: "POST",
+		    data: fd,
+		    processData: false,
+		    contentType: false,
+		    dataType: 'text',
+		    error: function(XMLHttpRequest, textStatus, errorThrown) {
+		    // 通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、
+		    // 単純に通信に失敗した際の処理を記述します。
+		    alert('upload fail');
+		    this; // thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
+		},
+		    success: function(d) {
+		    $("#main").children().remove();
+		    data = JSON.parse(json);
+		    qas = data['qas'];
+		    maindiv();
+		    calcpass();
+		}
+	    });
+    }
+    fileReader.readAsText(file);
+
+    var fd = new FormData;
+    fd.append('uploadfile', file);
+    return false;
+}
+
 function init(){
     $('#seed').keyup(function(e){
 	    data['seed'] = $('#seed').val();
@@ -258,7 +297,23 @@ function init(){
 	});
     
     $('#seed').val(seed);
-    
+
+    // Drag&Drop対応
+    var b = $('body');
+    b.bind("dragover", function(e) {
+	    return false;
+    	});
+    b.bind("dragend", function(e) {
+	    return false;
+    	});
+    b.bind("drop", function(e) {
+            var files;
+            e.preventDefault(); // デフォルトは「ファイルを開く」
+            files = e.originalEvent.dataTransfer.files;
+            sendfile(files);
+            return false;
+        });
+
     maindiv();
     calcpass();
 }
