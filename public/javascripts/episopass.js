@@ -227,13 +227,15 @@ function secretstr(){
     return secret;
 }
 
+var Crypt = Crypt();
+
 function calcpass(){
-    var newpass = crypt($('#seed').val(),secretstr());
+    var newpass = Crypt.crypt($('#seed').val(),secretstr());
     $('#pass').val(newpass);
 }
 
 function calcseed(){
-    var newseed = crypt($('#pass').val(),secretstr());
+    var newseed = Crypt.crypt($('#pass').val(),secretstr());
     $('#seed').val(newseed);
     data['seed'] = newseed;
 }
