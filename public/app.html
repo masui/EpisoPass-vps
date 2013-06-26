@@ -43,6 +43,41 @@ var browserHeight = function(){
 }
 
 var display = function(){
+    window.devicePixelRatio = 1.0;
+
+    width = browserWidth();
+    height = browserHeight();
+
+    size = width;
+    if(height < size) size = height;
+
+    size = (width + height) / 2;
+
+    var orientation = 'portrait';
+
+    if(window.orientation){
+	// タブレットのブラウザではwindow.orientationという値に
+	// -90, 0, 90, 180 などの値が入る
+	if(window.orientation == '0' || window.orientation == '180'){
+	    orientation = 'portrait';
+	}
+	else {
+	    orientation = 'landscape';
+	    var tmp = width;
+	    width = height;
+	    height = width;
+	}
+    }
+    else {
+	if(width > height){
+	    orientation = 'landscape';
+	}
+	else {
+	    orientation = 'portrait';
+	}
+    }
+    ///////
+
     body.children().remove();
 
     if(state == 0){
@@ -70,6 +105,22 @@ var display = function(){
         seedinput.attr('size','10');
         seedinput.css('font-size',size * 0.08);
         center.append(seedinput);
+
+        center.append($('<p>'));
+
+        var startbutton = $('<input>');
+        startbutton.attr('type','button');
+        startbutton.attr('value','Start');
+        startbutton.css('font-size',size*0.08);
+        startbutton.css('border-radius',size*0.015);
+        startbutton.css('margin',size*0.03);
+        startbutton.css('padding',size*0.01);
+        startbutton.on('click',function(){
+            qno = 0;
+            state = 1;
+            display();
+        });
+        center.append(startbutton);
     }
     else if(state == 1){
         var questiondiv = $('<div>');
@@ -116,51 +167,16 @@ var display = function(){
     }
 }
 
-var resize = function(){
-    window.devicePixelRatio = 1.0;
-
-    width = browserWidth();
-    height = browserHeight();
-
-    size = width;
-    if(height < size) size = height;
-
-    size = (width + height) / 2;
-
-    var orientation = 'portrait';
-
-    if(window.orientation){
-	// タブレットのブラウザではwindow.orientationという値に
-	// -90, 0, 90, 180 などの値が入る
-	if(window.orientation == '0' || window.orientation == '180'){
-	    orientation = 'portrait';
-	}
-	else {
-	    orientation = 'landscape';
-	    var tmp = width;
-	    width = height;
-	    height = width;
-	}
-    }
-    else {
-	if(width > height){
-	    orientation = 'landscape';
-	}
-	else {
-	    orientation = 'portrait';
-	}
-    }
-
-    display();
-
+var resized = function(){
+    if(state == 1) display();
 }
 
 var initCallbacks = function(){
-    // $(window).on('resize',resize);
+     $(window).on('resize',resized);
 }
     
 initCallbacks();
-resize();
+display();
 
 </script>
 
