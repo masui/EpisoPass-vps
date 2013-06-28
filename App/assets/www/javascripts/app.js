@@ -1,0 +1,220 @@
+//
+//
+//
+
+if(json == '###JSON###'){
+    json = '{"qas":[{"answers":["西崎","櫛田","日下部","塩田","河野","水田","妹尾","三浦","野口","西山","岸野","堀井","板尾","今田","海老沢","米山","郷田","芳賀","中園","ふくち"],"question":"汚い乱暴者は?"},{"answers":["0798","7799","1233","9876","2525","4553","3435","2301","3678","5838","6594","9008","3904","2381","2435","6253","3238","7473"],"question":"祖母宅の昔の電話番号は?"},{"question":"かるたで負けたのは?","answers":["仲西","野口","村上","覚前","手島","西水","結城","岩田","勝谷","高田","和田","川村"]},{"question":"関学に行きたいと言ってたのは?","answers":["西崎","櫛田","日下部","塩田","河野","水田","妹尾","三浦","野口","西山","岸野","堀井","板尾","今田","海老沢","米山","郷田","芳賀","中園"]},{"question":"好きな六甲山のコースは?","answers":["保久良山","トウェンティクロス","四十八滝","杣谷","魚屋道","徳川道","紅葉谷","奥池","サンライズ"]},{"question":"BBQに連れていってもらったのは?","answers":["浜甲子園","千刈","武庫川","雨ヶ峠","箕面","北山ダム","雪彦山","逆瀬川","道場","木津川","曽爾高原","夙川"]},{"question":"トランペットを指導してたのは?","answers":["山本先生","守屋先生","水口先生","波多野先生","田結庄先生","打越先生","村上先生","鈴木先生","伊藤先生","藤原先生","若松先生","清水先生"]},{"question":"鉄条網で足を怪我したのは?","answers":["高木町","門戸西町","門戸荘","下大市","神呪町","字中谷","若松町","岡田山","上甲東園","段上","上ヶ原","新甲陽","甲東園","上大市"]},{"question":"http://gyazo.com/ac515f5ce991b516e785122dd9192dd2.png","answers":["妹尾","竹田","田村","松丸","藤崎","三浦","東海","小野田","西条","山肩"]}],"seed":"Twitter123456"}';
+}
+
+if(name == '###NAME###'){
+    name = 'masui';
+}
+
+var data = JSON.parse(json);
+
+var width, height, size;
+
+var state = 0; // 0:init 1: QA 2: result
+var qno = 0; // いくつめの問題か
+
+var body;
+var seed = "";
+var answer = [];
+
+var Crypt;
+
+var browserWidth = function(){  
+    if(window.innerWidth){ return window.innerWidth; }  
+    else if(document.body){ return document.body.clientWidth; }  
+    return 0;  
+}
+
+var browserHeight = function(){  
+    if(window.innerHeight){ return window.innerHeight; }  
+    else if(document.body){ return document.body.clientHeight; }  
+    return 0;  
+}
+
+var display = function(){
+    body  = $('body');
+
+    window.devicePixelRatio = 1.0;
+
+    width = browserWidth();
+    height = browserHeight();
+    size = (width + height) / 2;
+
+
+    body.children().remove();
+
+    if(state == 0){
+        var center = $('<center>');
+        body.append(center);
+
+	var image = $('<img>');
+	image.attr('src',"images/episopass.png");
+	image.css('vertical-align','middle');
+	center.append(image);
+
+        var namespan = $('<span>');
+        namespan.text(' ' + name);
+        namespan.css('font-size',size * 0.08);
+	namespan.css('vertical-aligh','middle');
+        center.append(namespan);
+
+        center.append($('<p>'));
+
+        //var seedspan = $('<span>');
+        //seedspan.text('Seed = ');
+        //seedspan.css('font-size',size * 0.08);
+        //center.append(seedspan);
+        var seedinput = $('<input>');
+        seedinput.attr('type','text');
+        seedinput.attr('size','12');
+	seedinput.attr('value',data['seed']);
+        seedinput.css('font-size',size * 0.08);
+
+        center.append(seedinput);
+
+        center.append($('<p>'));
+
+        var startbutton = $('<input>');
+        startbutton.attr('type','button');
+        startbutton.attr('value','Start');
+        startbutton.css('font-size',size*0.08);
+        startbutton.css('border-radius',size*0.015);
+        startbutton.css('margin',size*0.03);
+        startbutton.css('padding',size*0.01);
+        startbutton.on('click',function(event){
+		event.preventDefault();
+		seed = seedinput.val();
+            qno = 0;
+            state = 1;
+            display();
+        });
+        center.append(startbutton);
+    }
+    else if(state == 1){
+        var questiondiv = $('<div>');
+        var answersdiv = $('<div>');
+    
+	var qtext = data['qas'][qno]['question'];
+
+        var center = $('<center>');
+        body.append(center);
+    
+        center.append(questiondiv);
+        center.append($('<p>'));
+        center.append(answersdiv);
+    
+        questiondiv.text(data['qas'][qno]['question']);
+        questiondiv.css('background-color','#ccc');
+        questiondiv.css('width',width * 0.9);
+        questiondiv.css('font-size',size * 0.08);
+        questiondiv.css('margin',size*0.03);
+        questiondiv.css('padding',size*0.02);
+        questiondiv.css('margin','0 auto');
+    
+        var answers = data['qas'][qno]['answers'];
+        for(var i=0;i<answers.length;i++){
+            var input = $('<input>');
+            input.attr('type','button');
+            input.attr('value',answers[i]);
+	    input.attr('anumber',i);
+            input.css('font-size',size*0.08);
+            input.css('border-radius',size*0.015);
+            input.css('margin',size*0.01);
+            input.css('padding',size*0.005);
+	    //            input.on('click',function(event){
+	    //		    event.preventDefault();
+	    //                var a = Number($(this).attr('anumber'));
+	    //                answer[qno] = a;
+	    //                if(qno < data['qas'].length - 1){
+	    //                  qno += 1;
+	    //                }
+	    //                else {
+	    //                  state = 2;
+	    //                }
+	    //                display();
+	    //            });
+            input.click(function(event){
+		    event.preventDefault();
+
+		    //window.history.pushState(obj, null, location.pathname + "?" + "q=" + Number(qno+1));
+		    //window.history.pushState(null, null, location.pathname + "?" + "state=1&q=" + qno);
+
+                var a = Number($(this).attr('anumber'));
+                answer[qno] = a;
+                if(qno < data['qas'].length - 1){
+                  qno += 1;
+		    obj = {};
+		    obj.qno = qno;
+		    window.history.pushState(obj, null, location.href);
+
+                }
+                else {
+                  state = 2;
+                }
+                display();
+            });
+            answersdiv.append(input);
+        }
+    }
+    else if(state == 2){
+        var newpass = Crypt.crypt(seed,secretstr());
+        var center = $('<center>');
+        body.append(center);
+        var passspan = $('<span>');
+        passspan.text(newpass);
+        passspan.css('font-size',size * 0.08);
+        center.append(passspan);
+    }
+}
+
+    window.addEventListener('popstate', function(event) {
+	    // alert(event.state.qno);
+	    // location.href= location.pathname + "?q=" + event.state.qno;
+	    qno = event.state.qno;
+	    display();
+	},false );
+
+var resized = function(){
+    if(state == 1) display();
+}
+
+var initCallbacks = function(){
+     $(window).on('resize',resized);
+}
+
+function secretstr(){
+    var secret = "";
+    var qas = data['qas'];
+    for(var i=0;i<qas.length;i++){
+	secret += qas[i]['question'];
+	secret += qas[i]['answers'][answer[i]];
+    }
+    return secret;
+}
+
+var init = function(){
+    var pair=location.search.substring(1).split('&');
+    for(var i=0;pair[i];i++) {
+	var kv = pair[i].split('=');
+	key = kv[0];
+	val = kv[1];
+	if(key == 'q'){
+	    state = 1;
+	    qno = Number(val);
+	}
+	if(key == 'state'){
+	    state = Number(val);
+	    qno = 0;
+	}
+    }
+
+    initCallbacks();
+    display();
+
+    Crypt = new Crypt();
+}
+

@@ -1,0 +1,59 @@
+body {
+  background-image: url("/images/exclusive_paper.gif")
+}
+
+div {
+  font-family: sans-serif
+}
+span {
+  font-family: sans-serif
+}
+li {
+  font-family: sans-serif
+}
+
+a:link { color: #0000f0 ; }
+a:visited { color: #0000f0 ; }
+a {
+  text-decoration: none;
+}
+
+/*
+*/
+div.title {
+  background-color: #ddd;
+  padding: 5pt;
+  margin: 5pt;
+  vertical-align: middle;
+}
+
+span.title {
+  font-size:24;
+  font-weight:bold;
+}
+
+div.title2 {
+  background-color: #fff;
+  padding: 4pt 4pt 4pt 7pt;
+  margin: 0pt;
+}
+
+div.section {
+  background-color: #ddd;
+  padding: 2pt;
+  margin: 5pt;
+  vertical-align: middle;
+}
+
+div.section2 {
+  background-color: #fff;
+  padding: 2pt 2pt 2pt 5pt;
+  margin: 0pt;
+}
+
+span.section {
+  font-size:18;
+  font-weight:bold;
+}
+
+
