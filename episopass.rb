@@ -43,6 +43,13 @@ get '/:name.apk' do |name|
   apkdata
 end
 
+get '/:name.html' do |name|
+  @name = name
+  @json = readdata(name)
+  @json = defaultdata.to_json if @json.nil?
+  erb :app
+end
+
 get '/:name/:seed' do |name,seed|
   @name = name
   @json = readdata(name)
