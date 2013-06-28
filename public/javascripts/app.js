@@ -80,7 +80,7 @@ var display = function(){
 
         var startbutton = $('<input>');
         startbutton.attr('type','button');
-        startbutton.attr('value','Start');
+        startbutton.attr('value','開始');
         startbutton.css('font-size',size*0.08);
         startbutton.css('border-radius',size*0.015);
         startbutton.css('margin',size*0.03);
@@ -96,11 +96,18 @@ var display = function(){
     }
     else if(state == 1){
 	var qtext = data['qas'][qno]['question'];
+	var localimage = data['qas'][qno]['localimage'];
 
         var center = $('<center>');
         body.append(center);
 
-	if(qtext.match(/\.(gif|png|jpg|jpeg)$/i)){
+	if(localimage){
+	    var imagediv = $('<img>');
+	    imagediv.attr('src',localimage);
+	    imagediv.css('width',width*0.4);
+	    center.append(imagediv);
+	}
+	else if(qtext.match(/\.(gif|png|jpg|jpeg)$/i)){
 	    var imagediv = $('<img>');
 	    imagediv.attr('src',qtext);
 	    imagediv.css('width',width*0.4);
@@ -165,6 +172,21 @@ var display = function(){
             });
             answersdiv.append(input);
         }
+
+	center.append($('<p>'));
+
+	var input = $('<input>');
+	input.attr('type','button');
+	input.attr('value','リセット');
+	input.css('font-size',size*0.05);
+	input.css('border-radius',size*0.015);
+	input.css('margin',size*0.01);
+	input.css('padding',size*0.005);
+	input.click(function(event){
+		state = 0;
+                display();
+            });
+	center.append(input);
     }
     else if(state == 2){
         var newpass = Crypt.crypt(seed,secretstr());
@@ -174,6 +196,21 @@ var display = function(){
         passspan.text(newpass);
         passspan.css('font-size',size * 0.08);
         center.append(passspan);
+
+        center.append($('<p>'));
+
+	var input = $('<input>');
+	input.attr('type','button');
+	input.attr('value','リセット');
+	input.css('font-size',size*0.05);
+	input.css('border-radius',size*0.015);
+	input.css('margin',size*0.01);
+	input.css('padding',size*0.005);
+	input.click(function(event){
+		state = 0;
+                display();
+            });
+	center.append(input);
     }
 }
 
