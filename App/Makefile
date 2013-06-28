@@ -13,6 +13,7 @@ files: assets/www/javascripts/app.js \
 	assets/www/javascripts/jquery.js \
 	assets/www/javascripts/md5.js \
 	assets/www/javascripts/data.js \
+	assets/www/stylesheets/episopass.css \
 	assets/www/index.html
 
 assets/www/index.html: ../public/app.html
@@ -33,4 +34,7 @@ assets/www/javascripts/md5.js: ../public/javascripts/md5.js
 assets/www/javascripts/data.js: ../public/javascripts/data.js
 	cp -f ../public/javascripts/data.js assets/www/javascripts/data.js
 	chmod 444 assets/www/javascripts/data.js
+assets/www/stylesheets/episopass.css: ../public/stylesheets/episopass.css
+	cp -f ../public/stylesheets/episopass.css assets/www/stylesheets/episopass.css
+	chmod 444 assets/www/stylesheets/episopass.css
 
