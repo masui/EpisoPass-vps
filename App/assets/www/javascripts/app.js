@@ -95,25 +95,31 @@ var display = function(){
         center.append(startbutton);
     }
     else if(state == 1){
-        var questiondiv = $('<div>');
-        var answersdiv = $('<div>');
-    
 	var qtext = data['qas'][qno]['question'];
 
         var center = $('<center>');
         body.append(center);
-    
-        center.append(questiondiv);
+
+	if(qtext.match(/\.(gif|png|jpg|jpeg)$/i)){
+	    var imagediv = $('<img>');
+	    imagediv.attr('src',qtext);
+	    imagediv.css('width',width*0.4);
+	    center.append(imagediv);
+	}
+	else {
+	    var questiondiv = $('<div>');
+	    questiondiv.text(qtext);
+	    questiondiv.css('background-color','#ccc');
+	    questiondiv.css('width',width * 0.9);
+	    questiondiv.css('font-size',size * 0.08);
+	    questiondiv.css('margin',size*0.03);
+	    questiondiv.css('padding',size*0.02);
+	    questiondiv.css('margin','0 auto');
+	    center.append(questiondiv);
+	}
         center.append($('<p>'));
+        var answersdiv = $('<div>');
         center.append(answersdiv);
-    
-        questiondiv.text(data['qas'][qno]['question']);
-        questiondiv.css('background-color','#ccc');
-        questiondiv.css('width',width * 0.9);
-        questiondiv.css('font-size',size * 0.08);
-        questiondiv.css('margin',size*0.03);
-        questiondiv.css('padding',size*0.02);
-        questiondiv.css('margin','0 auto');
     
         var answers = data['qas'][qno]['answers'];
         for(var i=0;i<answers.length;i++){
