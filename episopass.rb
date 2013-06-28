@@ -7,6 +7,7 @@ require 'rubygems'
 require 'sinatra'
 require 'data'
 require 'defaultdata'
+require 'app'
 
 get '/' do
   redirect "/index.html"
@@ -34,6 +35,12 @@ post '/:name/__upload' do |name|
 
     writedata(name,file_contents)
   end
+end
+
+get '/:name.apk' do |name|
+  apkdata = apk(name)
+  content_type 'application/vnd.android.package-archive'
+  apkdata
 end
 
 get '/:name/:seed' do |name,seed|
