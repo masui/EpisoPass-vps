@@ -6,7 +6,7 @@ clean:
 	ant clean
 
 apkcopy:
-	cp bin/EpisoPass-debug.apk ../EpisoPass/public/junk.apk
+	cp bin/EpisoPass-debug.apk ../public/junk.apk
 
 files: assets/www/javascripts/app.js \
 	assets/www/javascripts/crypt.js \
