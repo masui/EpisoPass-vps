@@ -3,11 +3,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="stylesheets/episopass.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/jquery-ui.css" type="text/css">
     <script language="JavaScript" src="javascripts/jquery.js"></script>
     <script language="JavaScript" src="javascripts/md5.js"></script>
     <script language="JavaScript" src="javascripts/crypt.js"></script>
     <script language="JavaScript" src="javascripts/data.js"></script>
     <script language="JavaScript" src="javascripts/app.js"></script>
+    <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
     <script language="JavaScript">
     $(function(){
         json = '<%= @json %>';
@@ -16,7 +18,7 @@
         init();
     });
     </script>
-    <title>App</title>
+    <title>EpisoPass - <%= @name %></title>
   </head>
   <body>
   </body>
