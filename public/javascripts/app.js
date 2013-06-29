@@ -234,21 +234,6 @@ var display = function(){
     }
 }
 
-    window.addEventListener('popstate', function(event) {
-	    // alert(event.state.qno);
-	    // location.href= location.pathname + "?q=" + event.state.qno;
-	    qno = event.state.qno;
-	    display();
-	},false );
-
-var resized = function(){
-    if(state == 1) display();
-}
-
-var initCallbacks = function(){
-     $(window).on('resize',resized);
-}
-
 function secretstr(){
     var secret = "";
     var qas = data['qas'];
@@ -260,22 +245,15 @@ function secretstr(){
 }
 
 var init = function(){
-    var pair=location.search.substring(1).split('&');
-    for(var i=0;pair[i];i++) {
-	var kv = pair[i].split('=');
-	key = kv[0];
-	val = kv[1];
-	if(key == 'q'){
-	    state = 1;
-	    qno = Number(val);
-	}
-	if(key == 'state'){
-	    state = Number(val);
-	    qno = 0;
-	}
-    }
+    window.addEventListener('popstate', function(event) {
+	    qno = event.state.qno;
+	    display();
+	},false );
 
-    initCallbacks();
+    $(window).on('resize',function(){
+	    if(state == 1) display();
+	});
+
     display();
 
     Crypt = new Crypt();
