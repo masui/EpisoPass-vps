@@ -66,7 +66,7 @@ var display = function(){
         center.append($('<p>'));
 
 	seed = data['seed'];
-	if(!firsttime && window.localStorage.length > 0){
+	if(!firsttime && window.localStorage.length > 1){
 	    seed = "";
 	}
 	firsttime = false;

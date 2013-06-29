@@ -18,8 +18,9 @@ var state = 0; // 0:init 1: QA 2: result
 var qno = 0; // いくつめの問題か
 
 var body;
-var seed = "";
 var answer = [];
+var seed;
+var firsttime = true;
 
 var Crypt;
 
@@ -64,6 +65,12 @@ var display = function(){
 
         center.append($('<p>'));
 
+	seed = data['seed'];
+	if(!firsttime && window.localStorage.length > 1){
+	    seed = "";
+	}
+	firsttime = false;
+
         //var seedspan = $('<span>');
         //seedspan.text('Seed = ');
         //seedspan.css('font-size',size * 0.08);
@@ -71,7 +78,7 @@ var display = function(){
         var seedinput = $('<input>');
         seedinput.attr('type','text');
         seedinput.attr('size','12');
-	seedinput.attr('value',data['seed']);
+	seedinput.attr('value',seed);
         seedinput.css('font-size',size * 0.08);
 
 	var candidates = [];

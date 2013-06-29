@@ -36,6 +36,7 @@ def apk(name)
       system "wget #{s} -O #{tmpfile}"
       hash = Digest::MD5.new.hexdigest(File.read(tmpfile)).to_s
       system "cp #{tmpfile} #{tmpdir}/assets/www/images/#{hash}.#{ext}"
+      system "/bin/rm #{tmpfile}"
       qa['localimage'] = "images/#{hash}.#{ext}"
     end
   }
