@@ -74,6 +74,14 @@ var display = function(){
 	seedinput.attr('value',data['seed']);
         seedinput.css('font-size',size * 0.08);
 
+	var candidates = [];
+	for(var i=0;i<window.localStorage.length;i++){
+	    candidates.push(window.localStorage.key(i));
+	}
+	seedinput.autocomplete({
+		source: candidates
+	    });
+
         center.append(seedinput);
 
         center.append($('<p>'));
@@ -90,6 +98,9 @@ var display = function(){
 		seed = seedinput.val();
             qno = 0;
             state = 1;
+
+	    window.localStorage.setItem(seed,"seed");
+	    
             display();
         });
         center.append(startbutton);
