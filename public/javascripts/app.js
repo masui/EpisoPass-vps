@@ -154,7 +154,7 @@ var display = function(){
             input.attr('type','button');
             input.attr('value',answers[i]);
 	    input.attr('anumber',i);
-            input.css('font-size',size*0.08);
+            input.css('font-size',size*0.07);
             input.css('border-radius',size*0.015);
             input.css('margin',size*0.01);
             input.css('padding',size*0.005);
