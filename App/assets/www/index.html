@@ -12,7 +12,10 @@
     <script language="JavaScript" src="javascripts/app.js"></script>
     <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
 
+
     <script type="text/javascript" src="cordova.js"></script>
+
+
 <!--
     <script language="JavaScript" src="javascripts/index.js"></script>
 -->
@@ -25,13 +28,24 @@
       をAndroidManifest.xmlに指定しなければならなくなってしまった。
       こういうのナシでファイル読む方法を考えるべき
       */
-    $(function(){
+
+      document.addEventListener("deviceready", onDeviceReady, false);
+
+//    $(function(){
             //app.initialize();
 
-	    document.addEventListener("deviceready", onDeviceReady, false);
+//	    document.addEventListener("deviceready", onDeviceReady, false);
+
+//function onBodyLoad(){
+//  alert(device);
+//  if(typeof device === 'undefined'){
+//          document.addEventListener("deviceready", onDeviceReady, false);
+//  } else {
+//          onDeviceReady();
+//  }
+//}
 
 	    function onDeviceReady() {
-	        console.log("Device Ready---------------");
                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 	    }
 
@@ -41,7 +55,6 @@
 	    }
 
 	    var onGetDirectoryWin = function(parent) {
-	       console.log("onGetDirectoryWin");
 	       parent.getFile("qa.json", {create: true, exclusive: false}, gotFileEntry, fail);
 	    }
 	    var onGetDirectoryFail = function() {
@@ -55,9 +68,7 @@
 	    function gotFile(file){
                 var reader = new FileReader();
                 reader.onloadend = function(evt) {
-                   console.log("Read as text");
                    console.log(evt.target.result);
-                   //alert(evt.target.result);
 
 	         json = evt.target.result;
 
@@ -69,18 +80,21 @@
             function fail(error) {
                console.log(error.code);
             }
-    })
+//    })
     </script>
 
     <title>EpisoPass</title>
   </head>
   <body>
+
+<!--
          <div class="app">
             <div id="deviceready" class="blink">
                 <p class="event listening"></p>
                 <p class="event received"></p>
             </div>
         </div>
+-->
 
   </body>
 </html>
