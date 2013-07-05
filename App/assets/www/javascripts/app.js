@@ -103,14 +103,16 @@ var display = function(){
         startbutton.css('margin',size*0.03);
         startbutton.css('padding',size*0.01);
         startbutton.on('click',function(event){
+		alert(100);
 		event.preventDefault();
 		seed = seedinput.val();
             qno = 0;
             state = 1;
 
 	    window.localStorage.setItem(seed,"seed");
-	    
-            display();
+
+	    location.href = "http://pitecan.com/";
+            //display();
         });
         center.append(startbutton);
     }
@@ -234,21 +236,6 @@ var display = function(){
     }
 }
 
-    window.addEventListener('popstate', function(event) {
-	    // alert(event.state.qno);
-	    // location.href= location.pathname + "?q=" + event.state.qno;
-	    qno = event.state.qno;
-	    display();
-	},false );
-
-var resized = function(){
-    if(state == 1) display();
-}
-
-var initCallbacks = function(){
-     $(window).on('resize',resized);
-}
-
 function secretstr(){
     var secret = "";
     var qas = data['qas'];
@@ -262,22 +249,15 @@ function secretstr(){
 var init = function(){
     data = JSON.parse(json);
 
-    var pair=location.search.substring(1).split('&');
-    for(var i=0;pair[i];i++) {
-	var kv = pair[i].split('=');
-	key = kv[0];
-	val = kv[1];
-	if(key == 'q'){
-	    state = 1;
-	    qno = Number(val);
-	}
-	if(key == 'state'){
-	    state = Number(val);
-	    qno = 0;
-	}
-    }
+    window.addEventListener('popstate', function(event) {
+	    qno = event.state.qno;
+	    display();
+	},false );
 
-    initCallbacks();
+    $(window).on('resize',function(){
+	    if(state == 1) display();
+	});
+
     display();
 
     Crypt = new Crypt();
