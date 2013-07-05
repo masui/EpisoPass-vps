@@ -12,18 +12,12 @@
     <script language="JavaScript" src="javascripts/app.js"></script>
     <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
 
-
     <script type="text/javascript" src="cordova.js"></script>
-
-
-<!--
-    <script language="JavaScript" src="javascripts/index.js"></script>
--->
 
     <script language="JavaScript">
       /*
       JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
-      使おうとしたら index.js, cordova.js のプラグインとかが必要になってしまい、
+      使おうとしたら cordova.js のプラグインかが必要になってしまい、
       android.permission.ACCESS_NETWORK_STATE
       をAndroidManifest.xmlに指定しなければならなくなってしまった。
       こういうのナシでファイル読む方法を考えるべき
@@ -31,41 +25,28 @@
 
       document.addEventListener("deviceready", onDeviceReady, false);
 
-//    $(function(){
-            //app.initialize();
+      function onDeviceReady() {
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+      }
 
-//	    document.addEventListener("deviceready", onDeviceReady, false);
+      function gotFS(fileSystem) {
+            //fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+         fileSystem.root.getDirectory("EpisoPass", {create: false, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
+      }
 
-//function onBodyLoad(){
-//  alert(device);
-//  if(typeof device === 'undefined'){
-//          document.addEventListener("deviceready", onDeviceReady, false);
-//  } else {
-//          onDeviceReady();
-//  }
-//}
+      var onGetDirectoryWin = function(parent) {
+         parent.getFile("qa.json", {create: true, exclusive: false}, gotFileEntry, fail);
+      }
 
-	    function onDeviceReady() {
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-	    }
+      var onGetDirectoryFail = function() {
+          console.log("error getting dir")
+      }
 
-	    function gotFS(fileSystem) {
-                //fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-	        fileSystem.root.getDirectory("EpisoPass", {create: false, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
-	    }
+      function gotFileEntry(fileEntry) {
+           fileEntry.file(gotFile, fail);
+      }
 
-	    var onGetDirectoryWin = function(parent) {
-	       parent.getFile("qa.json", {create: true, exclusive: false}, gotFileEntry, fail);
-	    }
-	    var onGetDirectoryFail = function() {
-	       console.log("error getting dir")
-	    }
-
-	    function gotFileEntry(fileEntry) {
-               fileEntry.file(gotFile, fail);
-	    }
-
-	    function gotFile(file){
+      function gotFile(file){
                 var reader = new FileReader();
                 reader.onloadend = function(evt) {
                    console.log(evt.target.result);
@@ -75,27 +56,16 @@
 	           init();
                 };
                 reader.readAsText(file);
-	    }
+       }
 
-            function fail(error) {
-               console.log(error.code);
-            }
-//    })
+      function fail(error) {
+          console.log(error.code);
+      }
     </script>
 
     <title>EpisoPass</title>
   </head>
   <body>
-
-<!--
-         <div class="app">
-            <div id="deviceready" class="blink">
-                <p class="event listening"></p>
-                <p class="event received"></p>
-            </div>
-        </div>
--->
-
   </body>
 </html>
 
