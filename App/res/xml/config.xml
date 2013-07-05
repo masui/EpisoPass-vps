@@ -103,5 +103,7 @@
     </feature>
     <!-- Deprecated plugins element. Remove in 3.0 -->
     <plugins>
+       <plugin name="File" value="org.apache.cordova.FileUtils" />
+       <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
     </plugins>
 </widget>

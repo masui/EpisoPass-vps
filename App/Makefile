@@ -1,3 +1,7 @@
+test:
+	ant debug
+	adb install -r bin/EpisoPass-debug.apk
+
 debug: files build apkcopy
 
 build: files
@@ -18,9 +22,6 @@ files: assets/www/javascripts/app.js \
 	assets/www/stylesheets/jquery-ui.css \
 	assets/www/index.html
 
-assets/www/index.html: ../public/app.html
-	cp -f ../public/app.html assets/www/index.html
-	chmod 444 assets/www/index.html
 assets/www/javascripts/app.js: ../public/javascripts/app.js
 	cp -f ../public/javascripts/app.js assets/www/javascripts/app.js
 	chmod 444 assets/www/javascripts/app.js

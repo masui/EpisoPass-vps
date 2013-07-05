@@ -10,7 +10,7 @@ if(name == '###NAME###'){
     name = 'masui';
 }
 
-var data = JSON.parse(json);
+var data;
 
 var width, height, size;
 
@@ -260,6 +260,8 @@ function secretstr(){
 }
 
 var init = function(){
+    data = JSON.parse(json);
+
     var pair=location.search.substring(1).split('&');
     for(var i=0;pair[i];i++) {
 	var kv = pair[i].split('=');
