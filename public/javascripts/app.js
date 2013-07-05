@@ -107,9 +107,7 @@ var display = function(){
 		seed = seedinput.val();
             qno = 0;
             state = 1;
-
 	    window.localStorage.setItem(seed,"seed");
-	    
             display();
         });
         center.append(startbutton);
