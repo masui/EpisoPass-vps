@@ -103,7 +103,6 @@ var display = function(){
         startbutton.css('margin',size*0.03);
         startbutton.css('padding',size*0.01);
         startbutton.on('click',function(event){
-		alert(100);
 		event.preventDefault();
 		seed = seedinput.val();
             qno = 0;
@@ -111,8 +110,7 @@ var display = function(){
 
 	    window.localStorage.setItem(seed,"seed");
 
-	    location.href = "http://pitecan.com/";
-            //display();
+            display();
         });
         center.append(startbutton);
     }
