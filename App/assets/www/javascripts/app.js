@@ -67,7 +67,7 @@ var display = function(){
 
 	seed = data['seed'];
 	if(!firsttime && window.localStorage.length > 1){
-	    seed = "";
+	    // seed = "";
 	}
 	firsttime = false;
 
@@ -204,6 +204,7 @@ var display = function(){
 	input.css('padding',size*0.005);
 	input.click(function(event){
 		state = 0;
+		onDeviceReady();
                 display();
             });
 	center.append(input);

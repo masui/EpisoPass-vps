@@ -1,16 +1,11 @@
-test:
-	ant debug
+test: build
 	adb install -r bin/EpisoPass-debug.apk
 
-debug: files build apkcopy
-
 build: files
+	android update project --path .
 	ant debug
 clean:
 	ant clean
-
-apkcopy:
-	cp bin/EpisoPass-debug.apk ../public/junk.apk
 
 files: assets/www/javascripts/app.js \
 	assets/www/javascripts/crypt.js \
