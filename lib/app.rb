@@ -21,6 +21,7 @@ end
 def apk(name)
   tmpdir = "/tmp/episopass#{Time.now.to_i}"
   system("/bin/cp -r /home/masui/EpisoPass/App #{tmpdir}")
+  # system("/bin/cp -r /home/masui/EpisoPass/App/AndroidManifest.xml.nopermission #{tmpdir}/AndroidManifest.xml")
   system("/bin/rm -f #{tmpdir}/bin")
 
   jsonstr = readdata(name)
@@ -46,6 +47,7 @@ def apk(name)
   replace("#{tmpdir}/assets/www/javascripts/data.js",/###JSON###/,jsonstr)
   replace("#{tmpdir}/assets/www/javascripts/data.js",/###NAME###/,name)
 
+  system("cd #{tmpdir}; android update project --path .")
   system("cd #{tmpdir}; ANT_HOME=/usr/local/ant ant debug")
 
   apkdata = File.read("#{tmpdir}/bin/EpisoPass-debug.apk")
