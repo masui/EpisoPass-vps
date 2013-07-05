@@ -13,23 +13,31 @@
     <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
 
     <script type="text/javascript" src="cordova.js"></script>
+<!--
     <script language="JavaScript" src="javascripts/index.js"></script>
+-->
 
     <script language="JavaScript">
+      /*
+      JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
+      使おうとしたら index.js, cordova.js のプラグインとかが必要になってしまい、
+      android.permission.ACCESS_NETWORK_STATE
+      をAndroidManifest.xmlに指定しなければならなくなってしまった。
+      こういうのナシでファイル読む方法を考えるべき
+      */
     $(function(){
-            app.initialize();
+            //app.initialize();
 
 	    document.addEventListener("deviceready", onDeviceReady, false);
 
 	    function onDeviceReady() {
-	        //alert("DeviceReady");
 	        console.log("Device Ready---------------");
                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 	    }
 
 	    function gotFS(fileSystem) {
                 //fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-	        fileSystem.root.getDirectory("EpisoPass", {create: true, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
+	        fileSystem.root.getDirectory("EpisoPass", {create: false, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
 	    }
 
 	    var onGetDirectoryWin = function(parent) {
