@@ -185,38 +185,26 @@ var display = function(){
             input.css('border-radius',size*0.015);
             input.css('margin',size*0.01);
             input.css('padding',size*0.005);
-	    //            input.on('click',function(event){
-	    //		    event.preventDefault();
-	    //                var a = Number($(this).attr('anumber'));
-	    //                answer[qno] = a;
-	    //                if(qno < data['qas'].length - 1){
-	    //                  qno += 1;
-	    //                }
-	    //                else {
-	    //                  state = 2;
-	    //                }
-	    //                display();
-	    //            });
             input.click(function(event){
 		    event.preventDefault();
 
 		    //window.history.pushState(obj, null, location.pathname + "?" + "q=" + Number(qno+1));
 		    //window.history.pushState(null, null, location.pathname + "?" + "state=1&q=" + qno);
 
-                var a = Number($(this).attr('anumber'));
-                answer[qno] = a;
-                if(qno < data['qas'].length - 1){
-                  qno += 1;
-		    obj = {};
-		    obj.qno = qno;
-		    window.history.pushState(obj, null, location.href);
-
-                }
-                else {
-                  state = 2;
-                }
-                display();
-            });
+		    var a = Number($(this).attr('anumber'));
+		    answer[qno] = a;
+		    if(qno < data['qas'].length - 1){
+			qno += 1;
+			obj = {};
+			obj.qno = qno;
+			window.history.pushState(obj, null, location.href);
+			
+		    }
+		    else {
+			state = 2;
+		    }
+		    display();
+		});
             answersdiv.append(input);
         }
 
