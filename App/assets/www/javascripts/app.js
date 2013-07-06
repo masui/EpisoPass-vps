@@ -219,7 +219,9 @@ var display = function(){
 	input.css('padding',size*0.005);
 	input.click(function(event){
 		state = 0;
-		onDeviceReady();
+		if(uselocalfile){
+		    onDeviceReady();
+		}
                 display();
             });
 	center.append(input);
