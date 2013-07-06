@@ -319,6 +319,13 @@ function init(){
             return false;
         });
 
+    //
+    // backボタンで戻ったときなど再表示する
+    //
+    $(window).on('pageshow',function(){
+	    maindiv();
+	});;
+
     maindiv();
     calcpass();
 }
