@@ -105,13 +105,13 @@ var display = function(){
         startbutton.on('click',function(event){
 		event.preventDefault();
 		seed = seedinput.val();
-            qno = 0;
-            state = 1;
-
-	    window.localStorage.setItem(seed,"seed");
-
-            display();
-        });
+		qno = 0;
+		state = 1;
+		
+		window.localStorage.setItem(seed,"seed");
+		
+		display();
+	    });
         center.append(startbutton);
     }
     else if(state == 1){
