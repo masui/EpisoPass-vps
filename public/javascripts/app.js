@@ -105,13 +105,13 @@ var display = function(){
         startbutton.on('click',function(event){
 		event.preventDefault();
 		seed = seedinput.val();
-            qno = 0;
-            state = 1;
-
-	    window.localStorage.setItem(seed,"seed");
-
-            display();
-        });
+		qno = 0;
+		state = 1;
+		
+		window.localStorage.setItem(seed,"seed");
+		
+		display();
+	    });
         center.append(startbutton);
     }
     else if(state == 1){
@@ -185,38 +185,26 @@ var display = function(){
             input.css('border-radius',size*0.015);
             input.css('margin',size*0.01);
             input.css('padding',size*0.005);
-	    //            input.on('click',function(event){
-	    //		    event.preventDefault();
-	    //                var a = Number($(this).attr('anumber'));
-	    //                answer[qno] = a;
-	    //                if(qno < data['qas'].length - 1){
-	    //                  qno += 1;
-	    //                }
-	    //                else {
-	    //                  state = 2;
-	    //                }
-	    //                display();
-	    //            });
             input.click(function(event){
 		    event.preventDefault();
 
 		    //window.history.pushState(obj, null, location.pathname + "?" + "q=" + Number(qno+1));
 		    //window.history.pushState(null, null, location.pathname + "?" + "state=1&q=" + qno);
 
-                var a = Number($(this).attr('anumber'));
-                answer[qno] = a;
-                if(qno < data['qas'].length - 1){
-                  qno += 1;
-		    obj = {};
-		    obj.qno = qno;
-		    window.history.pushState(obj, null, location.href);
-
-                }
-                else {
-                  state = 2;
-                }
-                display();
-            });
+		    var a = Number($(this).attr('anumber'));
+		    answer[qno] = a;
+		    if(qno < data['qas'].length - 1){
+			qno += 1;
+			obj = {};
+			obj.qno = qno;
+			window.history.pushState(obj, null, location.href);
+			
+		    }
+		    else {
+			state = 2;
+		    }
+		    display();
+		});
             answersdiv.append(input);
         }
 
@@ -231,7 +219,9 @@ var display = function(){
 	input.css('padding',size*0.005);
 	input.click(function(event){
 		state = 0;
-		onDeviceReady();
+		if(uselocalfile){
+		    onDeviceReady();
+		}
                 display();
             });
 	center.append(input);
