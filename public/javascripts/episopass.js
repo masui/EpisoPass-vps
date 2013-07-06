@@ -302,6 +302,7 @@ function init(){
 	    event.preventDefault();
 	    location.href = 'data:application/json;charset=utf-8,' + JSON.stringify(data);
 	});
+    $('#qa_json').attr('href','data:application/json;charset=utf-8,' + JSON.stringify(data));
 
     // Drag&Drop対応
     var b = $('body');
