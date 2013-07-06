@@ -12,7 +12,6 @@
     <script language="JavaScript" src="javascripts/app.js"></script>
     <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
 
-    <script type="text/javascript" src="cordova.js"></script>
 
     <script language="JavaScript">
       /*
@@ -22,6 +21,11 @@
       をAndroidManifest.xmlに指定しなければならなくなってしまった。
       こういうのナシでファイル読む方法を考えるべき
       */
+
+      // <script type="text/javascript" src="cordova.js"></script> のかわり
+      var script = $('<script>');
+      script.attr('src','cordova.js');
+      $('head').append(script);
 
       document.addEventListener("deviceready", onDeviceReady, false);
 
