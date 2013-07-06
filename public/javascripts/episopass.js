@@ -298,6 +298,11 @@ function init(){
     
     $('#seed').val(seed);
 
+    $('#qa_json').click(function(event){
+	    event.preventDefault();
+	    location.href = 'data:application/json;charset=utf-8,' + JSON.stringify(data);
+	});
+
     // Drag&Drop対応
     var b = $('body');
     b.bind("dragover", function(e) {
