@@ -14,6 +14,8 @@
 
 
     <script language="JavaScript">
+      var uselocalfile = true;
+      
       /*
       JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
       使おうとしたら cordova.js のプラグインかが必要になってしまい、
@@ -22,15 +24,22 @@
       こういうのナシでファイル読む方法を考えるべき
       */
 
-      // <script type="text/javascript" src="cordova.js"></script> のかわり
-      var script = $('<script>');
-      script.attr('src','cordova.js');
-      $('head').append(script);
+      if(uselocalfile){
+          // cordova.js を動的読み込み
+          var script = $('<script>');
+          script.attr('src','cordova.js');
+          $('head').append(script);
+      }
 
       document.addEventListener("deviceready", onDeviceReady, false);
 
       function onDeviceReady() {
-          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+          if(uselocalfile){
+              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+          }
+          else {
+              init();
+          }
       }
 
       function gotFS(fileSystem) {
