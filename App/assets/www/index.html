@@ -14,16 +14,18 @@
 
 
     <script language="JavaScript">
-      var uselocalfile = true;
+      var uselocalfile = true; // 共通アプリ版ではtrueだが動的生成アプリではfalseにする
       
-      /*
-      JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
-      使おうとしたら cordova.js のプラグインかが必要になってしまい、
-      android.permission.ACCESS_NETWORK_STATE
-      をAndroidManifest.xmlに指定しなければならなくなってしまった。
-      こういうのナシでファイル読む方法を考えるべき
-      */
       if(uselocalfile){
+          /*
+          JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
+          使おうとしたら cordova.js のプラグインかが必要になってしまい、
+          android.permission.ACCESS_NETWORK_STATE
+          をAndroidManifest.xmlに指定しなければならなくなってしまった。
+          こういうのナシでファイル読む方法を考えるべき。
+          動的生成アプリでは cordova.js を読み込まない。
+          */
+
           // cordova.js を動的読み込み
           var script = $('<script>');
           script.attr('src','cordova.js');
