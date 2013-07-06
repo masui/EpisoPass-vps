@@ -10,7 +10,7 @@ if(name == '###NAME###'){
     name = 'masui';
 }
 
-var data = JSON.parse(json);
+var data;
 
 var width, height, size;
 
@@ -67,7 +67,7 @@ var display = function(){
 
 	seed = data['seed'];
 	if(!firsttime && window.localStorage.length > 1){
-	    seed = "";
+	    // seed = "";
 	}
 	firsttime = false;
 
@@ -107,7 +107,9 @@ var display = function(){
 		seed = seedinput.val();
             qno = 0;
             state = 1;
+
 	    window.localStorage.setItem(seed,"seed");
+
             display();
         });
         center.append(startbutton);
@@ -119,17 +121,44 @@ var display = function(){
         var center = $('<center>');
         body.append(center);
 
-	if(localimage){
+	if(localimage){ // 動的アプリのとき
 	    var imagediv = $('<img>');
 	    imagediv.attr('src',localimage);
 	    imagediv.css('width',width*0.4);
 	    center.append(imagediv);
 	}
-	else if(qtext.match(/\.(gif|png|jpg|jpeg)$/i)){
+	else if(a = qtext.match(/\/([^\/]+\.(gif|png|jpg|jpeg))$/i)){
 	    var imagediv = $('<img>');
-	    imagediv.attr('src',qtext);
 	    imagediv.css('width',width*0.4);
 	    center.append(imagediv);
+
+	    function img_gotFS(fileSystem) {
+		fileSystem.root.getDirectory("EpisoPass", {create: true, exclusive: false}, img_onGetDirectoryWin, img_onGetDirectoryFail);
+	    }
+	    var img_onGetDirectoryWin = function(parent) {
+		parent.getFile(a[1], {create: false, exclusive: false}, img_gotFileEntry, img_fail);
+	    }
+	    var img_onGetDirectoryFail = function(){}
+	    var img_gotFileEntry = function(fileEntry){
+		fileEntry.file(img_gotFile, fail);
+	    }
+	    var img_gotFile = function(file){
+		var reader = new FileReader();
+		reader.onloadend = function(evt){
+		    imagediv.attr('src',evt.target.result);
+		};
+		reader.readAsDataURL(file);
+	    }
+	    var img_fail = function(error) {
+		console.log(error.code);
+	    }
+
+	    if(uselocalfile){ // 静的アプリのとき
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, img_gotFS, fail);
+	    }
+	    else { // Web上で動かすとき
+		imagediv.attr('src',qtext);
+	    }
 	}
 	else {
 	    var questiondiv = $('<div>');
@@ -202,6 +231,7 @@ var display = function(){
 	input.css('padding',size*0.005);
 	input.click(function(event){
 		state = 0;
+		onDeviceReady();
                 display();
             });
 	center.append(input);
@@ -243,6 +273,8 @@ function secretstr(){
 }
 
 var init = function(){
+    data = JSON.parse(json);
+
     window.addEventListener('popstate', function(event) {
 	    qno = event.state.qno;
 	    display();
