@@ -22,7 +22,8 @@ def apk(name)
   tmpdir = "/tmp/episopass#{Time.now.to_i}"
   system("/bin/cp -r /home/masui/EpisoPass/App #{tmpdir}")
   system("/bin/cp /home/masui/EpisoPass/App/AndroidManifest.xml.nopermission #{tmpdir}/AndroidManifest.xml")
-  system("/bin/cp /home/masui/EpisoPass/App/assets/www/index.html.nocordova #{tmpdir}/assets/www/index.html")
+  # system("/bin/cp /home/masui/EpisoPass/App/assets/www/index.html.nocordova #{tmpdir}/assets/www/index.html")
+  replace("#{tmpdir}/assets/www/index.html",/uselocalfile = true/,'uselocalfile = false')
   system("/bin/rm -f #{tmpdir}/bin")
 
   jsonstr = readdata(name)
