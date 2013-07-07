@@ -18,6 +18,9 @@
     <script language="JavaScript">
     <%= File.read("#{ROOT}/public/javascripts/crypt.js") %>
     </script>
+    <script language="JavaScript">
+    <%= File.read("#{ROOT}/public/javascripts/FileSaver.js") %>
+    </script>
 
     <title><%= "EpisoPass - #{@name}" %></title>
   </head>
@@ -26,9 +29,10 @@
     <div class="title">
       <div class="title2">
          <span class="title">
-	   <a href="/">EpisoPass</a> -
-	   <a href='qa.json' id="qa_json"><%= @name %></a>
+	   <a href="http://EpisoPass.com/">EpisoPass</a> - <%= @name %>
 	 </span>
+	 <input type="button" id="save" value="サーバにセーブ" style="float:right;height:35;margin:0 3 0 3;">
+	 <input type="button" id="qa_json" value="ファイルにセーブ" style="float:right;height:35;margin:0 3 0 3;">
       </div>
     </div>
     <p></p>
@@ -36,7 +40,7 @@
        Seed: <input type="text" id="seed" value="<%= @seed %>" width=100 style="height:20pt;font-size:12pt;">
        ⇔
        Password: <input type="text" id="pass" width=100 style="height:20pt;font-size:12pt;">
-       <input type="button" value="問題と選択枝をセーブ" id="save" style="height:26pt;font-size:14pt;">
+       <!-- <input type="button" value="問題と選択枝をセーブ" id="save" style="height:26pt;font-size:14pt;"> -->
     </div>
     <p></p>
 

@@ -295,14 +295,24 @@ function init(){
 			data: "data=" + JSON.stringify(data)
 			});
 	});
+    if(! location.href.match(/^http/)){
+	$('#save').css('display','none');
+    }
     
     $('#seed').val(seed);
 
+    //    $('#qa_json').click(function(event){
+    //    	    event.preventDefault();
+    //    	    location.href = 'data:application/json;charset=utf-8,' + JSON.stringify(data);
+    //    	});
+    //    $('#qa_json').attr('href','data:application/json;charset=utf-8,' + JSON.stringify(data));
+
     $('#qa_json').click(function(event){
 	    event.preventDefault();
-	    location.href = 'data:application/json;charset=utf-8,' + JSON.stringify(data);
+	    var d = JSON.stringify(data);
+	    var blob = new Blob([d] , {type: "text/plain;charset=utf-8"} );
+	    saveAs(blob, "qa.json");
 	});
-    $('#qa_json').attr('href','data:application/json;charset=utf-8,' + JSON.stringify(data));
 
     // Drag&Drop対応
     var b = $('body');
