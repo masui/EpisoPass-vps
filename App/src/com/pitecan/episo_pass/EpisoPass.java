@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.pitecan.episopass;
+package com.pitecan.episo_pass;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

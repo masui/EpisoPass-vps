@@ -18,7 +18,7 @@
        under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:windowSoftInputMode="adjustPan"
-	  package="com.pitecan.episopass"
+	  package="com.pitecan.episo_pass"
 	  android:versionCode="VERSIONCODE"
 	  android:versionName="VERSION"
 	  android:hardwareAccelerated="true">

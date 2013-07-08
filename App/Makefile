@@ -1,5 +1,5 @@
-VERSIONCODE=1
-VERSION=0.1
+VERSIONCODE=2
+VERSION=0.2
 
 all:
 	sed -e "s/VERSIONCODE/${VERSIONCODE}/" AndroidManifest.template | sed -e "s/VERSION/${VERSION}/" > AndroidManifest.xml
@@ -17,9 +17,11 @@ publish: clean
 	sed -e "s/VERSIONCODE/${VERSIONCODE}/" AndroidManifest.template | sed -e "s/VERSION/${VERSION}/" > AndroidManifest.xml
 	ant release
 	/bin/cp bin/EpisoPass-release-unsigned.apk bin/EpisoPass.apk
-	jarsigner -J-Dfile.encoding=UTF8 -keystore ~/.android/masui.keystore -verbose bin/EpisoPass.apk pitecan
+	jarsigner -J-Dfile.encoding=UTF8 -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore ~/.android/masui.keystore bin/EpisoPass.apk pitecan
 	-/bin/rm bin/EpisoPass-aligned.apk
 	zipalign -v 4 bin/EpisoPass.apk bin/EpisoPass-aligned.apk
+
+#	jarsigner -J-Dfile.encoding=UTF8 -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore ~/.android/masui.keystore bin/EpisoPass-aligned.apk pitecan
 #	scp bin/Slime.apk pitecan.com:/www/www.pitecan.com/Slime
 #	scp bin/Slime.apk pitecan.com:/www/www.pitecan.com/Slime/Slime-${VERSION}.apk
 
