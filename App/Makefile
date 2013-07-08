@@ -1,10 +1,30 @@
+VERSIONCODE=1
+VERSION=0.1
+
+all:
+	sed -e "s/VERSIONCODE/${VERSIONCODE}/" AndroidManifest.template | sed -e "s/VERSION/${VERSION}/" > AndroidManifest.xml
+	ant debug
+
 test: build
 	adb install -r bin/EpisoPass-debug.apk
 
 build: files
 	android update project --path .
 	ant debug
+
+# 署名してアップロード
+publish: clean
+	sed -e "s/VERSIONCODE/${VERSIONCODE}/" AndroidManifest.template | sed -e "s/VERSION/${VERSION}/" > AndroidManifest.xml
+	ant release
+	/bin/cp bin/EpisoPass-release-unsigned.apk bin/EpisoPass.apk
+	jarsigner -J-Dfile.encoding=UTF8 -keystore ~/.android/masui.keystore -verbose bin/EpisoPass.apk pitecan
+	-/bin/rm bin/EpisoPass-aligned.apk
+	zipalign -v 4 bin/EpisoPass.apk bin/EpisoPass-aligned.apk
+#	scp bin/Slime.apk pitecan.com:/www/www.pitecan.com/Slime
+#	scp bin/Slime.apk pitecan.com:/www/www.pitecan.com/Slime/Slime-${VERSION}.apk
+
 clean:
+	sed -e "s/VERSIONCODE/${VERSIONCODE}/" AndroidManifest.template | sed -e "s/VERSION/${VERSION}/" > AndroidManifest.xml
 	ant clean
 
 files: assets/www/javascripts/app.js \
