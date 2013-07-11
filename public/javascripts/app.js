@@ -212,7 +212,7 @@ var display = function(){
 
 	var input = $('<input>');
 	input.attr('type','button');
-	input.attr('value','リセット');
+	input.attr('value','戻る');
 	input.css('font-size',size*0.05);
 	input.css('border-radius',size*0.015);
 	input.css('margin',size*0.01);
@@ -239,7 +239,7 @@ var display = function(){
 
 	var input = $('<input>');
 	input.attr('type','button');
-	input.attr('value','リセット');
+	input.attr('value','戻る');
 	input.css('font-size',size*0.05);
 	input.css('border-radius',size*0.015);
 	input.css('margin',size*0.01);
