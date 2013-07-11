@@ -297,6 +297,7 @@ function init(){
 	});
     if(! location.href.match(/^http/)){
 	$('#save').css('display','none');
+	$('#apk').css('display','none');
     }
     
     $('#seed').val(seed);
