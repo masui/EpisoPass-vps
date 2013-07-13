@@ -27,32 +27,64 @@ EpisoPass EpisoPass EpisoPass EpisoPass EpisoPass EpisoPass
 
 \section{はじめに}
 
- 銀行20個調べて秘密の質問の弱さを指摘
-\cite{Rabkin:2008:PKQ:1408664.1408667}
+\section{秘密の質問}
 
- 秘密の質問の問題
-  自分で[[秘密の質問]]を決めるととても弱くなることが判明
-  複数の秘密の質問を使うとマシになる?
-  結構人は間違うものらしい
- applicability or repeatability の問題がある
-  Applicability: How widely applicable is the given question?
-  Memorability: How easy is it for the user to recall the answer?
-  Repeatability: How accurately can the answer be replayed, without syntactic or semantic ambiguity?
- ユーザに質問を作らせると全然駄目なことが多い
-  すぐ解けてしまうもの
-  思い出せないもの
-\cite{Just:2009:PCC:1572532.1572543}
+ユーザが設定したパスワードを忘れてしまうことは非常に多いため、
+多くのWebサービスにおいて、
+ユーザが\textbf{秘密の質問}と答を登録し、
+質問に正しく回答するとパスワードをリセットできるようになっている。
+このような秘密の質問は
+``Challenge Question''
+``Secret Question''
+などと呼ばれる。
+EpisoPassは秘密の質問を利用する点はこれと似ているが、
+パスワードを忘れたときに秘密の質問を利用するのではなく、
+パスワードの生成に秘密の質問を利用するという点が異なっている。
 
- 昔の記憶にもとづく[[秘密の質問]]はアタックされやすい
- 質問に写真を加えることにより思い出しやすくなったり
- 解決策
-  答を思い出すために画像を使う
-   動物や場所の写真から人を思い出すなど
-  必ずしも本当でない連想を使う
-  連続的に出題する
-\cite{Renaud:2010:PQE:2146303.2146318}
+秘密の質問を解くことによってパスワードをリセットできる機能があれば
+パスワードを忘れても大丈夫だという利点はあるものの、
+このような方式がシステムを脆弱にしていることが近年問題になっている\footnote{
+  ..... どこかの記者
+}。
+多くのシステムにおいて、
+「母親の旧姓は?」や「最初に飼ったペットの名前は?」のような、
+あらかじめ決まった質問のみを利用できるようになっているが、
+このような問題は他人が解くことも容易だからである\cite{Rabkin:2008:PKQ:1408664.1408667}。
+% 銀行20個調べて秘密の質問の弱さを指摘
 
-くだらない秘密の質問は駄目\cite{Schechter:2009:NSM:1607723.1608145}
+EpisoPassはシステムに用意された問題を利用せず、
+ユーザが自分で考えたなぞなぞ問題を利用できるので、
+他人には解くことが不可能でかつ自分では忘れない問題を自由に作成できる。
+これは強力なはずであるが、
+そのような問題を作成することは難しいということも
+報告されている\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}。
+%
+%  秘密の質問の問題
+%   自分で[[秘密の質問]]を決めるととても弱くなることが判明
+%   複数の秘密の質問を使うとマシになる?
+%   結構人は間違うものらしい
+%  applicability or repeatability の問題がある
+%   Applicability: How widely applicable is the given question?
+%   Memorability: How easy is it for the user to recall the answer?
+%   Repeatability: How accurately can the answer be replayed, without syntactic or semantic ambiguity?
+%  ユーザに質問を作らせると全然駄目なことが多い
+%   すぐ解けてしまうもの
+%   思い出せないもの
+%
+% 自分が作るものでくだらない秘密の質問は駄目
+%
+古い記憶にもとづいて作成した秘密の問題は
+ユーザが想像するよりも解かれやすいため、
+問題と答を連想するために画像を利用したり、
+複数の問題を連続的に利用したりする手法も提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
+
+%  昔の記憶にもとづく[[秘密の質問]]はアタックされやすい
+%  質問に写真を加えることにより思い出しやすくなったり
+%  解決策
+%   答を思い出すために画像を使う
+%    動物や場所の写真から人を思い出すなど
+%   必ずしも本当でない連想を使う
+%   連続的に出題する
 
 \bibliographystyle{jwiss}
 \bibliography{paper}
