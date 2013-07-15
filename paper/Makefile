@@ -6,4 +6,7 @@ all:
 	dvipdfmx paper
 	open paper.pdf
 
+push:
+	cd ..; make push
+
 #	~/bin/makebib paper > paper.bib
