@@ -3,6 +3,7 @@
 %\usepackage{ascmac}
 
 \usepackage{graphicx}
+\usepackage{here} % [H]とするとその場所に配置されるらしい
 
 \long\def\EP{EpisoPass}
 \long\def\PW{パスワード}
@@ -114,6 +115,8 @@ Flor\^{e}ncioの...における調査では...\cite{Florencio:2007:LSW:1242572.1
 すべてに正しく回答したとき生成される文字列を{\PW}として利用する。
 \end{enumerate}
 
+\subsection{{\EP}利用例}
+
 以下に{\EP}の利用例を示す。
 
 \paragraph{ブラウザでの利用}
@@ -125,15 +128,16 @@ Flor\^{e}ncioの...における調査では...\cite{Florencio:2007:LSW:1242572.1
 {\SS}として「\textsf{Twitter123456}」という文字列を指定しており、
 4個の秘密の質問に対する回答選択に応じて
 「\textsf{Mfveabn574923}」のような{\PW}候補が生成される。
-{\PW}候補は{\SS}の文字種に対応して生成される。
-最初の秘密の質問は筆者の小学生の同級生に関するもので、
+{\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
+{\SS}の文字種に対応した{\PW}候補が生成される。
+最初の秘密の質問は筆者の小学校の同級生に関するもので、
 最後の質問は数年前の写真に関するものである。
 これらの質問は古い{\EM}にもとづいており、
 筆者が将来答を忘れることはほとんど考えられないが、
 本人以外がこのような質問に答えることは難しいので
 他人が正しい{\PW}を得ることできない。
 
-\begin{figure}
+\begin{figure}[H]
 \centerline{\includegraphics[width=80mm,bb=0 0 718 796]{figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
 \caption{ブラウザ上での{\EP}でTwitterの{\PW}を計算.}
 \label{web1}
@@ -141,31 +145,61 @@ Flor\^{e}ncioの...における調査では...\cite{Florencio:2007:LSW:1242572.1
 
 秘密の質問と答はブラウザで編集でき、
 「サーバにセーブ」ボタンを押すことにより{\SS}、秘密の問題と答がサーバにセーブされる。
-ユーザはどれが正答かを指定しないので
+ユーザはどれが正答かを指定しないので{\PW}がサーバに漏れる心配は無い。
 
 {\SS}を「\textsf{Facebook123456}」に変更すると図\ref{web2}のように{\PW}が変化する。
-このように、サービスごとに異なる{\SS}を利用することによって
+このように、サービスごとに異なる{\SS}を利用することによって異なる{\PW}を簡単に生成できる。
 
-\begin{figure}
+\begin{figure}[H]
 \centerline{\includegraphics[width=80mm,bb=0 0 718 265]{figures/36c371a13a8250c60fb9c03174382443.png}}
 \caption{FaceBookの{\PW}を計算.}
 \label{web2}
 \end{figure}
 
-\paragraph{利用例2}
+\paragraph{回答によりパスワードを変化}
+
+サービスごとに{\SS}を変えるのではなく、
+図\ref{web3}のように
+サービス名に応じて回答を変えることによって異なる{\PW}を作成することも可能である。
+{\PW}としての長さや文字種に特種な制約が無いサービスに関してはこの方法が便利である。
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=80mm,bb=0 0 718 428]{figures/a9167a6ec6af9c70dd1617e3fc25ec30.png}}
+\centerline{\includegraphics[width=80mm,bb=0 0 718 428]{figures/5b887fabeb8e3319623901fe4a6c56f2.png}}
+\caption{サービス名に対応する回答で異なる{\PW}を生成.}
+\label{web3}
+\end{figure}
+
+\paragraph{既存{\PW}の利用}
+
+現在利用している{\PW}(e.g. ``\textsf{Masui1234}'')を利用したい場合、
+図\ref{web4}のように{\PW}欄に現在の{\PW}を入力すれば
+それを生成する{\SS}が自動生成されるので、
+生成された{\SS}を記録しておけばよい。
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=80mm,bb=0 0 718 479]{figures/fab9c55242e1d52c89ff1b46d77b3168.png}}
+\caption{既存の{\PW}を利用.}
+\label{web4}
+\end{figure}
+
+\paragraph{文字種利用}
+
+jitensha-6712
+
 \paragraph{利用例2}
 \paragraph{利用例2}
 \paragraph{利用例2}
 
 \subsection{{\PW}の計算方法}
 
+\section{考察}
+
 \subsection{画像の利用}
 
 画像認証がイイと言ってる人も多い
 
 画像も使えるよ
-
-\section{考察}
 
 \subsection{他者が答を知っているときの危険}
 
