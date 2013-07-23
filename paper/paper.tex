@@ -54,7 +54,7 @@
 
 個人認証のために{\PW}が現在広く利用されている。
 {\PW}認証には多くの問題があることが知られているが\cite{増井_ユニマガ}、
-今後も長期にわたって利用され続けることが予想されるため、
+今後も長期にわたって利用され続けることが予想されるため\cite{Herley:2009:PSS:1601990.1602010}、
 問題点を認識しつつ
 適切に運用するための工夫が必要になっている。
 
@@ -583,26 +583,27 @@ AとBのカテゴリが近いことを判断している。
 \subsection{画像認証の利用}
 
 忘れにくい{\EM}を利用する認証手法として
-様々な画像認証システム\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
+様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
 複数の画像の中から正答を選択するもの(Cognometric方式)、
 ひとつの画像の中の特定の場所を指定するもの(Locimetric方式)、
 画像の上で描画操作を行なうもの(Drawmetric方式)
-が広く利用されているが\cite{GraphicalPasswords}\cite{Guideline}、
-{\EP}では図\ref{web1}のように
-{\SQ}として文字列のかわりに画像URLを利用できるようになっている。
+が広く利用されているが\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{Guideline}、
+{\EP}は図\ref{web1}のように
+文字列のかわりに画像URLを{\SQ}として利用する点が異なっている。
 %
-Cognometric方式は{\EM}を効果的に利用できるが
-多数の偽答画像が必要だという問題があり、
-Locimetric方式やDrawmetric方式は
+Cognometric方式は{\EM}を効果的に利用できるが、
+多数の偽答画像が必要だという問題がある。
+Locimetric方式は
 {\EM}を効果的に利用できないことに加え、
-単一画像では充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}が、
-画像を{\SQ}として利用する場合、
-偽答の扱いなどは通常の{\SQ}の場合と同じで良いことに加え、
+クリックしやすい「ホットスポット」は限られているため
+充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}。
+またDrawmetric方式も{\EM}を効果的に利用できないし、
+ユーザは似た傾向のストロークを選びがちであるため
+充分なエントロピーを確保しにくいことが知られている\cite{Nali}。
+%
+{\EP}のように画像を{\SQ}として利用する場合、
+通常の{\SQ}の場合と同様に偽答を増やすことが容易であることに加え、
 画像に関連した{\EM}を有効に利用できるという利点がある\cite{増井:CSS}。
-
-% 画像認証には，複数の囮画像の中に紛れたパス画像を選択する
-% Cognometric方式[2,3]と，1枚の画像の中の特定箇所（パスポイ
-% ント）を選択するLocimetric方式[4,5]に大別される
 
 図\ref{leiko}は
 本棚.org\cite{hondana}\cite{hondanaorg}
@@ -610,10 +611,11 @@ Locimetric方式やDrawmetric方式は
   \textsf{http://hondana.org/Leiko}
 }が利用している画像認証問題である。
 このユーザ以外には正答は見当もつかないが、
-忘れることがない{\EM}と結びついた画像だということであった。
+本人にとっては忘れることがない{\EM}と結びついた画像だということであった。
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=40mm,bb=0 0 221 426]{figures/5a26c3b31834ddeb04edf4593b891647.png}}
+% \centerline{\includegraphics[width=40mm,bb=0 0 221 426]{figures/5a26c3b31834ddeb04edf4593b891647.png}}
+\centerline{\includegraphics[width=75mm,bb=0 0 335 213]{figures/4084ac59b42d183d7124481477e84999.png}}
 \caption{{\EM}と深く結びついた画像.}
 \label{leiko}
 \end{figure}
