@@ -9,4 +9,7 @@ all:
 push:
 	cd ..; make push
 
+upload:
+	scp paper.pdf pitecan.com:/www/www.pitecan.com/episopass.pdf
+
 #	~/bin/makebib paper > paper.bib
