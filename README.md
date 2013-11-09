@@ -1,3 +1,3 @@
 # EpisoPass - エピソード記憶からパスワード生成
 
-![](http://gyazo.com/acb3f01e33ef3c390d657abdea50d19c.png) 
+!(http://gyazo.com/29778b272a486d44d9dc3188a46f80ab.png)
