@@ -14,9 +14,6 @@
     <%= File.read("#{ROOT}/public/javascripts/jquery.js") %>
     </script>
     <script language="JavaScript">
-    <%= File.read("#{ROOT}/public/javascripts/jquery-ui.js") %>
-    </script>
-    <script language="JavaScript">
     <%= File.read("#{ROOT}/public/javascripts/md5.js") %>
     </script>
     <script language="JavaScript">
@@ -25,27 +22,7 @@
     <script language="JavaScript">
     <%= File.read("#{ROOT}/public/javascripts/FileSaver.js") %>
     </script>
-    <script>
-    $(function() {
-        // enable Sortable
-        $("#main").sortable();
-        $("#main").disableSelection();
 
-        // arrange qas array order by new order
-        $("#main").on("sortupdate", function(event, ui) {
-            var newQas = [];
-            $("#main li").each(function(index) {
-                var q = $(this).find('input').first().val();
-                var o = $(qas).filter(function(){
-                    return (this.question === q);
-                });
-                newQas.push(o[0]);
-            });
-            qas = newQas;
-            data['qas'] = qas;
-        });
-    });
-    </script>
     <title>EpisoPass</title>
   </head>
 
@@ -70,8 +47,8 @@
     </div>
     <p></p>
 
-    <ul id="main">
-    </ul>
+    <div id="main">
+    </div>
 
     <script language="JavaScript">
     var json = '<%= @json %>';

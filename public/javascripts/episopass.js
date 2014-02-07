@@ -67,7 +67,7 @@ function answerline(i,j){
 function qadiv(i){
     answer[i] = 0;
     
-    var div = $("<li>");
+    var div = $("<div>");
     div.css('background-color','#cee');
     div.css('padding','2');
     div.css('width','100%');
