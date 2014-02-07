@@ -25,10 +25,28 @@
     <script language="JavaScript">
     <%= File.read("#{ROOT}/public/javascripts/FileSaver.js") %>
     </script>
+    <style>
+        .showSortingHandle {
+            list-style-type: square;
+        }
+        .hideSortingHandle {
+            list-style-type: none;
+        }
+    </style>
     <script>
+    function sorting() {
+        var isDisabled = $("#main").sortable("option", "disabled");
+        if (isDisabled) {
+            $("#main").sortable('enable');
+            $("#main").removeClass('hideSortingHandle').addClass('showSortingHandle');
+        } else {
+            $("#main").sortable('disable');
+            $("#main").removeClass('showSortingHandle').addClass('hideSortingHandle');
+        }
+    }
     $(function() {
         // enable Sortable
-        $("#main").sortable();
+        $("#main").sortable({disabled: true});
         $("#main").disableSelection();
 
         // arrange qas array order by new order
@@ -70,7 +88,8 @@
     </div>
     <p></p>
 
-    <ul id="main">
+    <input type='button' value='並び替え' onclick='sorting();'>
+    <ul id="main" class='hideSortingHandle'>
     </ul>
 
     <script language="JavaScript">
