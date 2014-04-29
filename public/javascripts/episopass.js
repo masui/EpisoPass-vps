@@ -248,6 +248,34 @@ function sendfile(files){
 	// ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
 	json = event.target.result;
 
+	$("#main").children().remove();
+	data = JSON.parse(json);
+	qas = data['qas'];
+	maindiv();
+	calcpass();
+
+	$.ajax({
+		type: "POST",
+		    async: true,
+		    url: "/" + name + "/__write",
+		    data: "data=" + JSON.stringify(data)
+		    });
+    }
+    fileReader.readAsText(file);
+
+    return false;
+}
+
+function __sendfile(files){
+    var file = files[0];
+
+    // ファイルの内容は FileReader で読み込みます.
+    var fileReader = new FileReader();
+    fileReader.onload = function(event) {
+	// event.target.result に読み込んだファイルの内容が入っています.
+	// ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
+	json = event.target.result;
+
 	$.ajax({
 		url: "/" + name + "/__upload",
 		    type: "POST",

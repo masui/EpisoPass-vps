@@ -19,19 +19,6 @@ post '/:name/__write' do |name|
   writedata(name,params[:data])
 end
 
-post '/:name/__upload' do |name|
-  param = params[:uploadfile]
-  if param
-    # アップロードされたファイルはTempfileクラスになる
-    tempfile = param[:tempfile]
-    file_contents = tempfile.read
-    file_ext = File.extname(param[:filename]).to_s
-    tempfile.close # 消してしまう
-
-    writedata(name,file_contents)
-  end
-end
-
 get '/:name.apk' do |name|
   apkdata = apk(name)
   content_type 'application/vnd.android.package-archive'
