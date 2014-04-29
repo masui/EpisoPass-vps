@@ -254,12 +254,12 @@ function sendfile(files){
 	maindiv();
 	calcpass();
 
-	$.ajax({
-		type: "POST",
-		    async: true,
-		    url: "/" + name + "/__write",
-		    data: "data=" + JSON.stringify(data)
-		    });
+	//$.ajax({
+	//	type: "POST",
+	//	    async: true,
+	//	    url: "/" + name + "/__write",
+	//	    data: "data=" + JSON.stringify(data)
+	//	    });
     }
     fileReader.readAsText(file);
 
