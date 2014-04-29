@@ -53,3 +53,7 @@ def apk(name)
 
   apkdata = File.read("#{tmpdir}/bin/EpisoPass-debug.apk")
 end
+
+if $0 == __FILE__
+  #require 'test/unit'
+end
