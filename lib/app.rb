@@ -48,7 +48,7 @@ def apk(name)
   replace("#{tmpdir}/assets/www/javascripts/data.js",/###JSON###/,jsonstr)
   replace("#{tmpdir}/assets/www/javascripts/data.js",/###NAME###/,name)
 
-  system("cd #{tmpdir}; android update project --path .")
+  system("cd #{tmpdir}; /usr/local/android-sdk-linux/tools/android update project --path .")
   system("cd #{tmpdir}; ANT_HOME=/usr/local/ant ant debug")
 
   apkdata = File.read("#{tmpdir}/bin/EpisoPass-debug.apk")
@@ -56,4 +56,5 @@ end
 
 if $0 == __FILE__
   #require 'test/unit'
+  apk('masui')
 end
