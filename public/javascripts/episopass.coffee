@@ -26,7 +26,7 @@ editfunc = (q,a) -> # 選択肢編集時の関数
 timeout = null
 hover_in_func = (q,a) ->
   ->
-    timeout = setTimeout selfunc(q,a), 600
+    timeout = setTimeout selfunc(q,a), 400
 hover_out_func =  ->
   ->
     clearTimeout timeout

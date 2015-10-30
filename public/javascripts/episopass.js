@@ -35,7 +35,7 @@ timeout = null;
 
 hover_in_func = function(q, a) {
   return function() {
-    return timeout = setTimeout(selfunc(q, a), 600);
+    return timeout = setTimeout(selfunc(q, a), 400);
   };
 };
 
