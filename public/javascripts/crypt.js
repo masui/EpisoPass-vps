@@ -23,7 +23,7 @@ var Crypt = function(){
 	    if(charset[i].indexOf(c) >= 0) return i;
 	}
 	return null;
-    }
+    };
     
     // crypt_char(crypt_char(c,n),n) == c になるような文字置換関数
     var crypt_char = function(c,n){
@@ -33,7 +33,7 @@ var Crypt = function(){
 	var len = chars.length;
 	var ind = (n - cind + len) % len;
 	return chars[ind];
-    }
+    };
     
     // UTF8文字列をバイト文字列(?)に変換
     // (MD5_hexhashがUTF8データをうまく扱えないため)
@@ -55,7 +55,7 @@ var Crypt = function(){
 	    }
 	}
 	return result;
-    }
+    };
     
     // crypt(crypt(s,data),data) == s になる
     this.crypt = function(str,seeddata){
@@ -70,5 +70,5 @@ var Crypt = function(){
 	    res += crypt_char(str[i],n+i);
 	}
 	return res;
-    }
+    };
 };
