@@ -4,7 +4,7 @@
 
 # Development
 
-## Run EpisoPass for develop
+## Run EpisoPass for develop env
 
 ### OS X
 
