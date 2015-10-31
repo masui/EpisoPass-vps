@@ -9,7 +9,8 @@ qas = data['qas']
 
 answer = []             # answer[q] = a ... q番目の質問の答がa番目である
 
-Crypt = new Crypt()
+# Crypt = new Crypt()
+crypt = if typeof require == 'undefined' then exports else require('./crypt.js')
 
 selfunc = (q,a) -> # 選択肢クリック時の関数
   ->
@@ -136,11 +137,13 @@ secretstr = ->
   .join ''
 
 calcpass = ->
-  newpass = Crypt.crypt $('#seed').val(), secretstr()
+  # newpass = Crypt.crypt $('#seed').val(), secretstr()
+  newpass = crypt.crypt $('#seed').val(), secretstr()
   $('#pass').val newpass
 
 calcseed = ->
-  newseed = Crypt.crypt $('#pass').val(), secretstr()
+  # newseed = Crypt.crypt $('#pass').val(), secretstr()
+  newseed = crypt.crypt $('#pass').val(), secretstr()
   $('#seed').val newseed
   data['seed'] = newseed
 

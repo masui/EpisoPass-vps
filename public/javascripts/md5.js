@@ -184,7 +184,7 @@ function MD5_hash(data) {
 	 MD5_pack(state[3]);
 }
 
-function MD5_hexhash(data) {
+exports.MD5_hexhash = function(data) {
     var i, out, c;
     var bit128;
 
@@ -196,4 +196,4 @@ function MD5_hexhash(data) {
 	out += "0123456789abcdef".charAt(c & 0xf);
     }
     return out;
-}
+};
