@@ -97,7 +97,7 @@
     qinput = $('<input type="text" autocomplete="off" class="qinput">').attr('id', "question" + q).val(qstr).on('keyup', qeditfunc(q));
     qdiv.append(qinput);
     div.append(qdiv);
-    img = $("<img>").attr('id', "image" + q);
+    img = $("<img class='qimg'>").attr('id', "image" + q);
     div.append(img);
     showimage(qstr, img);
     ansdiv = $("<div class='ansdiv'>");

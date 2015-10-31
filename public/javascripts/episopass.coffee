@@ -82,7 +82,7 @@ qadiv = (q) -> # q番目の質問+選択肢のdiv
   qdiv.append qinput
   div.append qdiv
     
-  img = $("<img>")
+  img = $("<img class='qimg'>")
     .attr 'id', "image#{q}"
   div.append img
   showimage qstr, img

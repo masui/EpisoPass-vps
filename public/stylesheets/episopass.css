@@ -108,7 +108,7 @@ input.qinput {
     vertical-aign: middle;
 }
 
-img {
+img.qimg {
     height: 100;
     float: left;
     padding: 2;
