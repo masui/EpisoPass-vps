@@ -1,4 +1,9 @@
 #
+#  episopass.coffee - EpisoPass本体
+# 
+#  Toshiyuki Masui @ Pitecan.com
+#  Last Modified: 2015/10/31 19:12:53
+# 
 #  var json = '<%= @json %>';
 #  var name = '<%= @name %>';
 #  var seed = '<%= @seed %>';
@@ -12,14 +17,14 @@ answer = []             # answer[q] = a ... q番目の質問の答がa番目で�
 # Crypt = new Crypt()
 crypt = if typeof require == 'undefined' then exports else require('./crypt.js')
 
-selfunc = (q,a) -> # 選択肢クリック時の関数
+selfunc = (q,a) -> # q番目の質問のa番目の選択肢をクリックしたとき呼ばれる関数
   ->
     answer[q] = a
     [0...qas[q]['answers'].length].forEach (i) ->
       $("#answer#{q}-#{i}").css 'background-color', if i == a then '#ccf' else '#fff'
     calcpass()
 
-editfunc = (q,a) -> # 選択肢編集時の関数
+editfunc = (q,a) -> # q番目の質問のa番目の選択肢を編集したとき呼ばれる関数
   ->
     qas[q]['answers'][a] = $("#answer#{q}-#{a}").val()
     calcpass()
@@ -32,7 +37,7 @@ hover_out_func =  ->
   ->
     clearTimeout timeout
 
-answerspan = (q,a) -> # q番目の質問のa番目の選択枝のspan
+answerspan = (q,a) -> # q番目の質問のa番目の選択肢のspan
   aspan = $('<span class="answer">')
   input = $('<input type="text" autocomplete="off" class="answer">')
     .val qas[q]['answers'][a]
@@ -50,7 +55,7 @@ showimage = (str,img) ->
   else
     img.css 'display','none'
 
-qeditfunc = (q) -> # 問題編集時の関数
+qeditfunc = (q) -> # q番目の問題を編集したとき呼ばれる関数
   ->
     str = $("#question#{q}").val()
     qas[q]['question'] = str
@@ -58,12 +63,12 @@ qeditfunc = (q) -> # 問題編集時の関数
     showimage(str,img)
     calcpass()
 
-minusfunc = (q) ->
+minusfunc = (q) -> # q番目の問題の「-」ボタンを押したとき呼ばれる関数
   ->
     qas[q]['answers'].pop()
     $("#answer#{q}-#{qas[q]['answers'].length}").remove()
 
-plusfunc = (q) ->
+plusfunc = (q) -> # q番目の問題の「+」ボタンを押したとき呼ばれる関数
   ->
     nelements = qas[q]['answers'].length
     qas[q]['answers'].push '新しい回答例'
@@ -106,15 +111,13 @@ qadiv = (q) -> # q番目の質問+選択肢のdiv
     .append $('<br clear="all">')
 
 maindiv = ->
-  # ブラウザから「別名で保存」すると #main に入れたデータが全部格納されて
-  # しまうので、最初に全部消しておく
-  $("#main").children().remove()
+  $("#main").children().remove()  # ブラウザから「別名で保存」すると #main に入れたデータが全部格納されてしまうので、最初に全部消しておく
 
   [0...qas.length].forEach (i) ->
     $("#main").append qadiv(i)
 
   minus = $('<input type="button" value=" - " id="qa_minus" class="qabutton">')
-    .click (event) ->
+    .click (event) -> # 質問の数を減らす「-」ボタンをクリックしたとき呼ばれる関数
       qas.pop()
       $("#qadiv#{qas.length}").remove()
       calcpass()
@@ -123,7 +126,7 @@ maindiv = ->
   $("#main").append $('<span>  </span>')
     
   plus = $('<input type="button" value=" + " class="qabutton">')
-    .click (event) ->
+    .click (event) -> # 質問の数を増やす「-」ボタンをクリックしたとき呼ばれる関数
       qas.push
         question: "新しい質問"
         answers:  ["回答11","回答22","回答33"]
@@ -131,18 +134,16 @@ maindiv = ->
       calcpass()
   $("#main").append plus
 
-secretstr = ->
+secretstr = -> # 質問文字列と選択された文字列をすべて接続した文字列
   [0...qas.length].map (i) ->
     qas[i]['question'] + qas[i]['answers'][answer[i]]
   .join ''
 
-calcpass = ->
-  # newpass = Crypt.crypt $('#seed').val(), secretstr()
+calcpass = -> # シード文字列からパスワード文字列を生成
   newpass = crypt.crypt $('#seed').val(), secretstr()
   $('#pass').val newpass
 
-calcseed = ->
-  # newseed = Crypt.crypt $('#pass').val(), secretstr()
+calcseed = -> # パスワード文字列からシード文字列を生成
   newseed = crypt.crypt $('#pass').val(), secretstr()
   $('#seed').val newseed
   data['seed'] = newseed
@@ -151,9 +152,7 @@ sendfile = (files) ->
   file = files[0]
   fileReader = new FileReader()
   fileReader.onload = (event) ->
-    # event.target.result に読み込んだファイルの内容が入っています.
-    # ドラッグ＆ドロップでファイルアップロードする場合は result の内容を Ajax でサーバに送信しましょう!
-    json = event.target.result
+    json = event.target.result # 読んだファイルの内容
     $("#main").children().remove()
     data = JSON.parse json
     qas = data['qas']
@@ -207,4 +206,3 @@ $ ->
     
   maindiv()
   calcpass()
-
