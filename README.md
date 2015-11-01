@@ -40,7 +40,7 @@ Facebook password.
 A seed string ("Facebook123") and
 two questions are provided by the user,
 along with many answer candidates.
-A password is generated based on your candidate selections.
+A password is generated based on the candidate selections.
 If the correct answers are "Palo Alto" and "Atami"
 and you select them on the page, you get "Oegvcvzt489",
 and you can use it as the password for your Facebook account.
