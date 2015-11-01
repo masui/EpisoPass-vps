@@ -41,18 +41,28 @@ along with many answer candidates.
 A password is generated based on your candidate selections.
 If the correct answers are "Palo Alto" and "Atami"
 and you select them on the page, you get "Oegvcvzt489",
-and you can use it as the password for Facebook.
+and you can use it as the password for your Facebook account.
 This is a fairly strong cryptic password string,
 and nobody can get this string as long as he does not
-know the correct answers to the question.
+know the seed string and the correct answers to the question.
 
 If you provide many Q-A pairs and a long seed string,
 you can generate a long strong password based only on
 the seed string and your episodic memories.
-If your memories are not know to anybody else,
-there's little chance for attackers to get your password,
-but you can easily generate it at 
+If your memories are not know to anybody else and
+the number of Q-A pairs are large enough,
+there's little chance for attackers to get your password
+even when the seed string is open to the public.
+Nevertheless, you can easily generate calculate it at
 [EpisoPass.com](http://EpisoPass.com/Example/Facebook123)
+by selecting correct answers for the questions.
+
+Unlike conventional password management systems,
+users don't have to remember any secial keyword
+for managing their passwords.
+All the passwords are calculated only by the users'
+secret episodic memories, and all the information
+for the calculation can be 
 
 ## Install
 
