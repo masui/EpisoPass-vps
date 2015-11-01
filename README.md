@@ -10,8 +10,8 @@ personal episodic memories?
 
 EpisoPass lets you generate passwords based on
 your secret memories. 
-If you can't forget your secret memories,
-you'll never lose your password generated from them.
+If you cannot forget your secret memories,
+you can never lose your password generated from them.
 
 ## Installation
 
