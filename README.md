@@ -61,7 +61,7 @@ Nevertheless, you can easily calculate it at
 by just selecting correct answers for the questions.
 
 Unlike conventional password management systems,
-users don't have to remember any secret keyword
+**users don't have to remember any secret keyword**
 (e.g. a master keyword)
 for managing their passwords.
 All the passwords are calculated only by the users'
@@ -76,3 +76,6 @@ for the calculation can be open to the public.
 - Modify ```ROOT``` and ```FILEROOT``` variables
 in ```lib/config.rd```
 - % ```ruby episopass.rb```
+
+## FAQs
+
