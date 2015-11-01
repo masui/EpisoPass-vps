@@ -36,6 +36,7 @@ hover_out_func =  ->
   ->
     clearTimeout timeout
 
+# f4ba35ab6069e8bcf9ef62bf73d12fd1.png のような表示
 answerspan = (q,a) -> # q番目の質問のa番目の選択肢のspan
   aspan = $('<span class="answer">')
   input = $('<input type="text" autocomplete="off" class="answer">')
