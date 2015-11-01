@@ -3,7 +3,7 @@
 ![](https://gyazo.com/e5e677f6c0175d82b11a6718a145ebd2.png)
 
 While nobody can remember long strong passwords,
-everybody has many secret episodic memories
+everybody has plenty of secret episodic memories
 which he can never forget.
 Then why not generating passwords from such
 personal episodic memories?
@@ -32,6 +32,8 @@ for various services.
 
 ## Example
 
+![](https://gyazo.com/eb49539fb30d689f739e5e24204b3bbd.png)
+
 [This](http://EpisoPass.com/Example/Facebook123)
 is an example page of EpisoPass for generating a
 Facebook password.
@@ -52,17 +54,19 @@ the seed string and your episodic memories.
 If your memories are not know to anybody else and
 the number of Q-A pairs are large enough,
 there's little chance for attackers to get your password
-even when the seed string is open to the public.
-Nevertheless, you can easily generate calculate it at
+even when the seed string and the Q-A pairs are
+open to the public.
+Nevertheless, you can easily calculate it at
 [EpisoPass.com](http://EpisoPass.com/Example/Facebook123)
-by selecting correct answers for the questions.
+by just selecting correct answers for the questions.
 
 Unlike conventional password management systems,
-users don't have to remember any secial keyword
+users don't have to remember any secret keyword
+(e.g. a master keyword)
 for managing their passwords.
 All the passwords are calculated only by the users'
 secret episodic memories, and all the information
-for the calculation can be 
+for the calculation can be open to the public.
 
 ## Install
 
