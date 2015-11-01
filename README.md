@@ -51,7 +51,7 @@ know the seed string and the correct answers to the question.
 If you provide many Q-A pairs and a long seed string,
 you can generate a long strong password based only on
 the seed string and your episodic memories.
-If your memories are not know to anybody else and
+If your memories are not known to anybody else and
 the number of Q-A pairs are large enough,
 there's little chance for attackers to get your password
 even when the seed string and the Q-A pairs are
