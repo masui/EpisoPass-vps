@@ -1,13 +1,11 @@
-# EpisoPass - エピソード記憶からパスワード生成
+# EpisoPass - Generating passwords from episodic memories
 
-![](http://gyazo.com/29778b272a486d44d9dc3188a46f80ab.png)
+![](https://gyazo.com/e5e677f6c0175d82b11a6718a145ebd2.png)
 
-# Development
-
-## Run EpisoPass for develop env
+## Installation
 
 ### OS X
 
-- $ sudo gem install sinatra
-- Modify ROOT,FILEROOT value in lib/config.rd
-- $ ruby episopass.rb
+- % ```sudo gem install sinatra```
+- Modify ROOT and FILEROOT in lib/config.rd
+- % ```ruby episopass.rb```
