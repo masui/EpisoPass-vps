@@ -9,15 +9,18 @@ Then why not generating passwords from such
 personal episodic memories?
 
 [EpisoPass](http://EpisoPass.com) lets you
-generate passwords based on your secret
+generate **very strong** passwords based on your secret
 episodic memories. 
 If you cannot forget your secret memories,
-you can never lose your passwords generated from them!
+you have no chance losing your passwords generated from them!
 
-## Installation
+## Install
 
 ### OS X
 
+- % ```git clone git@github.com:masui/EpisoPass.git```
 - % ```sudo gem install sinatra```
-- Modify ROOT and FILEROOT in lib/config.rd
+- % ```cd EpisoPass```
+- Modify ```ROOT``` and ```FILEROOT``` variables
+in ```lib/config.rd```
 - % ```ruby episopass.rb```
