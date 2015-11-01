@@ -38,7 +38,7 @@ for various services.
 is an example page of EpisoPass for generating a
 Facebook password.
 A seed string ("Facebook123") and
-two questions are provided,
+two questions are provided by the user,
 along with many answer candidates.
 A password is generated based on your candidate selections.
 If the correct answers are "Palo Alto" and "Atami"
