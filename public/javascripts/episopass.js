@@ -21,7 +21,7 @@
       }).apply(this).forEach(function(i) {
         return $("#answer" + q + "-" + i).css('background-color', i === a ? '#ccf' : '#fff');
       });
-      return calcpass();
+      return calcpass(true);
     };
   };
 
@@ -157,10 +157,14 @@
     }).join('');
   };
 
-  calcpass = function() {
+  calcpass = function(copy) {
     var newpass;
     newpass = crypt.crypt($('#seed').val(), secretstr());
-    return $('#pass').val(newpass);
+    $('#pass').val(newpass);
+    if (copy) {
+      $('#pass').select();
+      return document.execCommand('copy');
+    }
   };
 
   calcseed = function() {

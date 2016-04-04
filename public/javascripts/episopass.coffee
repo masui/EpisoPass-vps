@@ -21,7 +21,7 @@ selfunc = (q,a) -> # q番目の質問のa番目の選択肢をクリックした
     answer[q] = a
     [0...qas[q]['answers'].length].forEach (i) ->
       $("#answer#{q}-#{i}").css 'background-color', if i == a then '#ccf' else '#fff'
-    calcpass()
+    calcpass true
 
 editfunc = (q,a) -> # q番目の質問のa番目の選択肢を編集したとき呼ばれる関数
   ->
@@ -139,9 +139,12 @@ secretstr = -> # 質問文字列と選択された文字列をすべて接続し
     qas[i]['question'] + qas[i]['answers'][answer[i]]
   .join ''
 
-calcpass = -> # シード文字列からパスワード文字列を生成
+calcpass = (copy) -> # シード文字列からパスワード文字列を生成
   newpass = crypt.crypt $('#seed').val(), secretstr()
   $('#pass').val newpass
+  if copy
+    $('#pass').select()
+    document.execCommand 'copy' # コピーバッファにコピー
 
 calcseed = -> # パスワード文字列からシード文字列を生成
   newseed = crypt.crypt $('#pass').val(), secretstr()
