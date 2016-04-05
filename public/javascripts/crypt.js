@@ -4,7 +4,7 @@
 
   md5 = typeof require === 'undefined' ? exports : require('./md5.js');
 
-  charset = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '0123456789', '-', '~!@#$%^&*()_=+[{]}|;:.,#?', ' '];
+  charset = ['abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '0123456789', '-', '~!@#$%^&*()_=+[{]}|;:.,#?', ' ', "\"'/<>\\`"];
 
   charkind = function(c) {
     var ind, k, ref, results;
