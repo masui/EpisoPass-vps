@@ -11,6 +11,8 @@
 
 data = JSON.parse json
 qas = data['qas']
+curq = 0
+cura = 0
 
 answer = []             # answer[q] = a ... q番目の質問の答がa番目である
 
@@ -25,6 +27,8 @@ selfunc = (q,a) -> # q番目の質問のa番目の選択肢をクリックした
 
 editfunc = (q,a) -> # q番目の質問のa番目の選択肢を編集したとき呼ばれる関数
   ->
+    curq = q
+    cura = a
     qas[q]['answers'][a] = $("#answer#{q}-#{a}").val()
     calcpass()
 
@@ -142,9 +146,11 @@ secretstr = -> # 質問文字列と選択された文字列をすべて接続し
 calcpass = (copy) -> # シード文字列からパスワード文字列を生成
   newpass = crypt.crypt $('#seed').val(), secretstr()
   $('#pass').val newpass
-  if copy
-    $('#pass').select()
-    document.execCommand 'copy' # コピーバッファにコピー
+  #if copy
+  #  $('#pass').select()
+  #  document.execCommand 'copy' # コピーバッファにコピー
+  #  $('#pass').blur()
+  #  $("#answer#{curq}-#{cura}").select()
 
 calcseed = -> # パスワード文字列からシード文字列を生成
   newseed = crypt.crypt $('#pass').val(), secretstr()
