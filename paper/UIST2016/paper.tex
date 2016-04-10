@@ -1,0 +1,271 @@
+%
+% password manager?
+%
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{uist}
+\usepackage{graphicx}
+\usepackage{here} % [H]とするとその場所に配置されるらしい
+
+\long\def\EP{\textsf{EpisoPass}}
+\long\def\PW{password}
+\long\def\SS{seed string}
+\long\def\EM{episodic memory}
+\long\def\SQ{secret question}
+
+\begin{document}
+
+% Copyright notice ---
+\conferenceinfo{UIST'16}{Tokyo}
+\CopyrightYear{2016}
+\crdata{x-xxxxx-xxx-x/xx/xxxx}
+
+\title{EpisoPass: Password Management based on Episodic Memories}
+
+\author{
+\parbox[t]{9cm}{\centering
+	     {\em Author Name removed for blind review}\\
+	     Affiliation removed for blind review\\
+	     Address removed for blind review\\
+	     Email removed for blind review}
+\parbox[t]{9cm}{\centering
+	     {\em Author Name removed for blind review}\\
+	     Affiliation removed for blind review\\
+	     Address removed for blind review\\
+	     Email removed for blind review}
+}
+
+\maketitle
+
+\abstract
+abst abst abst abst abst abst abst abst abst abst abst abst abst abst 
+abst abst abst abst abst abst abst abst abst abst abst abst abst abst 
+abst abst abst abst abst abst abst abst abst abst abst abst abst abst 
+abst abst abst abst abst abst abst abst abst abst abst abst abst abst 
+abst abst abst abst abst abst abst abst abst abst abst abst abst abst 
+
+\classification{H5.2 [Information interfaces and presentation]:
+User Interfaces. - Graphical user interfaces.}
+
+\terms{Design, Human Factors}
+
+\keywords{Passwords, authentication}
+
+\tolerance=400 
+  % makes some lines with lots of white space, but 	
+  % tends to prevent words from sticking out in the margin
+
+\section{INTRODUCTION}
+
+% Passwordは使われている
+% 
+% Passwordが辛いのは一般的事実である[?]
+%   基本的に強くするには長くしなければならない
+%   忘れる
+%   覚えられない
+%   サービスごとにパスワードは変えるべきである[?] でも無理
+%   定期的に更新させられる
+% 強いパスワードを頭で覚えて管理するのは不可能
+%       特に弱者には
+%   パスワード作成アルゴリズムを自力で使っている人もいるがそれは難しい
+
+Passwords have been used for various Web services and applications
+for a long time, and currently the most popular authentication method
+on the Internet.
+Since short passwords are easy to crack and
+using a single password for different services is unsafe,
+different long passwords should be used for different services,
+but remembering many long passwords is almost impossible for
+most of the users.
+
+% もっと別の認証もいろいろ提案されている
+%   画像認証[MALASYM][その他いろいろ]
+%   
+%   特殊ハードのような持ち物を使う方法など[Pico][YubiKey][RSA]
+%   生体認証 指紋認証
+%   行動からの認証[]
+%   位置ベースの認証[SOUPS]
+%  完全置き換えはしばらくは不可能だろう
+
+Since passwords are so difficult to handle,
+various other authentication methods have been proposed.
+For example,
+image-based authentication methods\cite{xxx},
+bio-based methods\cite{},
+behavior-based methods\cite{},
+
+% というのもパスワードには利点があるから[Bonneau]
+%   すでに普及
+%   KB以外の特殊ハードが要らない
+%   アタック方法はいろいろあるし[] 流出もしばしばだが
+%     うまく実装したシステム上でうまく使えば安全
+%     ハッシュ、ソルト
+%     実装が比較的簡単
+% なのでパスワードが近い将来死滅するとは考えられない
+
+In spite of these attempts,
+password-based authentication is still the most
+convenient and strong method\cite{Bonneau}
+and it will not be extinct in a short time.
+
+%   
+% % なのでパスワードと生きる方法が工夫されている
+% %   強いパスワードを考える方法[]
+% %     覚える方法が提案されてたり[Bonneau]
+% %       万人むけはむり
+
+% パスワードが死滅しないならパスワードと生きる方法が必要である
+%   たとえば様々なパスワード管理システム[][][][]の利用がすすめられている
+%   しかしマスターパスワードがいったり特殊ハードがいったりする
+%   特殊システムがいる場合がある
+%   特殊ハードやソフトは利用がどうしても難しい
+
+If we have to use password-based authentication systems,
+we have to devise a way to handle many passwords.
+For handling many strong passwords,
+various password management systems (PMSs) have been proposed\cite{xxx}\cite{yyy}.
+PMSs remember users' passwords and help them use passwords for different services.
+Althought PMSs are useful, users should remember a 'master password' for
+keeping the secret data, and
+some PMSs are not available on all environment.
+
+% このように、実際のパスワード運用はとても大変であるが、
+%   * パスワードを使わなければならないのは確かだし、
+%   * 漏洩や紛失の危険がないのは脳内情報ぐらいである
+%      鍵デバイスや生体情報などはダメ
+
+% 読みとることができない脳内情報を利用するという基本手法は良いのだが覚えられないのが問題である
+%   だとすると...パスワードを記憶するかわりに、****脳が既に覚えている秘密の記憶からパスワードを生成すればよいはずである***
+%   確かな脳内情報を使ってパスワードを利用する必要があるが、
+%     沢山の強力なパスワードそのものを覚えることは不可能に近い
+%   だとすると、確かな脳内秘密情報からパスワードをGenerateするしかない
+%   そこでエピソード記憶を使う
+%   秘密の知識からGenerateするとよい
+%   
+
+We believe that a PMS should have the following features.
+(1) It should be available on any platform including PCs, smartphones, and the Web.
+(2) Users should not have secret information (e.g. master password) or special device.
+(3) Rely only on the information in the user's brain.
+
+We propose a PMS called \textit{EpisoPass}, that generates strong passwords
+based on the user's secret episodic memories that
+the user can never forget.
+
+\section{EpisoPass}
+
+EpisoPass is a password management system that supports generating
+strong passwords based on users' secret episodic memories.
+A user provides a seed string and many question-answer pairs to EpisoPass,
+and candidate passwords are generated based on the user's selections.
+
+(figure)
+
+Episodic memory is ....
+
+Figure XXX shows the password generation interface of EpisoPass.
+Several questions are shown to the user,
+many candidate answers are shown for each question.
+When a user selects one of the answers for each question,
+the seed string is converted to a random-looking string
+based on the selections.
+If the q-a is based on the user's episodic memories and
+nobody knows the correct answer,
+only the user can select the set of right answers and
+use the converted string as the password.
+
+(figure)
+
+EpisoPass is just a string-conversion system and it does not
+have any information on which candidate is the correct answer.
+Also, it does not save any password information and
+it is almost impossible to get the right password 
+without having the episodic memory.
+
+
+% あらたに記憶するのではなく、忘れないエピソード記憶からパスワードを生成する
+% 
+% エピソード記憶とは
+% 
+% EpisoPass.com
+%   インプリかく
+%
+
+\subsection{EpisoPass}
+
+% 利点
+%   絶対忘れない
+%     30年忘れなかったものは40年忘れないだろう
+%   老人など、頭が弱くても対応できる
+%   変えるのが簡単
+%     問題に「2016」とか「April」とか書いておけばいい
+%   全情報を公開して大丈夫
+%     マスターパスワードが要らない
+%     秘密裏などは誤って流出する可能性があるが...
+%   強度を自由に設定できる
+%   画像を使える
+%   実装が簡単
+%
+
+\subsection{EpisoPass}
+% ■ 安全性
+
+
+% 答を書くわけではないから安全
+% 心配ならオフラインでやれば大丈夫
+% 
+% 弱いパスワードを強くすることも簡単
+% 
+% そのためにAndroidアプリも用意した
+% 
+% Bookmarkletも用意した
+%   拡張機能も用意したい
+%
+
+\section{Related Work}
+
+% ■ Related work
+% 
+% 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは無い
+% 
+% パスワード管理システム
+%   沢山ある
+% 
+% 強いパスワードを作るシステム
+%   ランダムに生成するサイトが沢山ある
+% 
+% 強いパスワードを覚えるための工夫
+%   Bonneau
+% 
+% 画像を使う
+% 
+% パスワードに関する全情報を公開してどこかに置いておける
+%   ググれるかもしれない
+%   紛失する可能性が少ない
+%
+
+\section{Experiences}
+% ■ 運用実績
+
+\section{Limitations}
+
+% ■ 問題点
+% 
+% なぞなぞ問題を考えるのが難しい
+%   自分だけ知ってる秘密など思いつかない人が多い
+%   しかしインタビューを行なうとそういうのは出てくる
+%     子供のときの怪我、ケンカ、失敗など
+%     特に、自慢にならないものが良い
+% 
+% 強度が直感的でない
+%   誰でも簡単にとけるのじゃないかと思う
+%   safe感覚が足りない
+
+{\scriptsize
+\bibliographystyle{acm-sigchi}
+\bibliography{paper}
+}
+
+\end{document}
+
