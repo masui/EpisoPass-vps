@@ -4,4 +4,9 @@
 App/gen/
 App/bin/
 App/local.properties
+*.dvi
+*.blg
+*.log
+*.aux
+*.bbl
 
