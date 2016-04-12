@@ -264,12 +264,6 @@ or implicit memory.[5]
 
 \subsection{Using EpisoPass on a browser}
 
-\begin{figure}[H]
-\centerline{\includegraphics[width=83mm,bb=0 0 718 796]{../WISS/figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
-\caption{ブラウザ上でTwitterの{\PW}を生成.}
-\label{web1}
-\end{figure}
-
 Figure \ref{web1} shows how to generate a password
 on EpisoPass running on a browser.
 Many questions related to episodic memories are shown to the user
@@ -282,14 +276,35 @@ nobody knows the correct answer,
 only the user can select the set of right answers and
 use the converted string as the password.
 
-(figure)
+\begin{figure}[H]
+\centerline{\includegraphics[width=83mm,bb=0 0 718 796]{../WISS/figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
+\caption{Generating a Twitter password with EpisoPass.}
+\label{web1}
+\end{figure}
 
-Here, ``\textsf{Twitter123456}'' is set as the seed string,
+Here, ``\textsf{Twitter123456}'' is provided as the seed string,
 and according to the selection to four questions,
 the seed string is converted to strings like
-``\textsf{Mfveabn574923}'', which can be used as the password
-for Twitter.
-The string changes when the user selects different candidates.
+``\textsf{Mfveabn574923}'', which can be used as the password for Twitter.
+
+When the user clicks another candidate,
+the seed string is converted to another trings like
+``\textsf{Xfveabn123456}''.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=83mm,bb=0 0 718 796]{../WISS/figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
+\caption{Generating a Twitter password with EpisoPass.}
+\label{web11}
+\end{figure}
+
+In this way, different selections yields different password strings, and
+the password string generated after selecting all correct answers can be
+used as the password for the service. (Twitter in this case.)
+
+Capital letters in the seed strings are substituted to capital letters in the password,
+and digits in the seed string are substituted to digits,
+so that the generated passwords conforms to password character restrictions
+sometimes required by the service.
 
 % {\SS}として「\textsf{Twitter123456}」という文字列を指定しており、
 % 4個の{\SQ}に対する回答選択に応じて
@@ -298,10 +313,10 @@ The string changes when the user selects different candidates.
 % {\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
 % {\SS}の文字種に対応した{\PW}候補が生成される。
 
-The first secret question is based on the author's episodic memory
-at elementary scholl,
-and the last secret questionois related to a event which the author
-can never forget.
+The first secret question in Figure \ref{web1}
+is based on the author's episodic memory at elementary scholl,
+and the last secret questionois related to a recent event which the author
+thinks he can never forget.
 All the questions are related to the author's episodic memory
 that he never forgets, and nobody else knows which one of the
 candidate answers is the right answer.
@@ -368,34 +383,50 @@ different services just by changing the seed string.
 
 \subsubsection{Android application}
 
-Webサービスを利用する場合、ブラウザとサーバとの間の通信を
-記録されたり盗み見されたりされる心配を完全に払拭することはできない。
-% 危険を完全になくすことはできない。
-前述の例において、
-{\PW}はブラウザ内部でJavaScriptにより生成されるので、
-一度ページを表示した後は
-ネットワークを遮断しても{\PW}計算を行なえるようになっているが、
-最初から全く通信を行なわずに{\PW}を作成できる方がより安心であろう。
-このため、通信を全く行なわずにマシン単体で{\PW}計算を行なうための
-Androidアプリを用意した。
-ページの右上の「Androidアプリ」ボタンを押すと、
-現在表示している秘密の問題と答を内蔵したAndroidアプリが
-サーバ上でビルドされてダウンロードされる。
+% Webサービスを利用する場合、ブラウザとサーバとの間の通信を
+% 記録されたり盗み見されたりされる心配を完全に払拭することはできない。
+% % 危険を完全になくすことはできない。
+% 前述の例において、
+% {\PW}はブラウザ内部でJavaScriptにより生成されるので、
+% 一度ページを表示した後は
+% ネットワークを遮断しても{\PW}計算を行なえるようになっているが、
+% 最初から全く通信を行なわずに{\PW}を作成できる方がより安心であろう。
+% このため、通信を全く行なわずにマシン単体で{\PW}計算を行なうための
+% Androidアプリを用意した。
+% ページの右上の「Androidアプリ」ボタンを押すと、
+% 現在表示している秘密の問題と答を内蔵したAndroidアプリが
+% サーバ上でビルドされてダウンロードされる。
 
-Android端末でアプリを実行すると図\ref{android1}のような画面が表示される。
-{\SS}を設定して「開始」ボタンを押すと図\ref{android2}のように質問がひとつずつ表示され、
-ボタンを押してすべて回答すると{\PW}が計算され図\ref{android3}のように表示される。
+If a user doesn't like to use EpisoPass service on the net,
+he can use an EpisoPass application on Android
+which does not use any network connection.
+After registering questions and answers on the EpisoPass service,
+the user can download an Android application from the server
+which contain all the information required for generating passwords.
+(The application is compiled and built on the server.)
 
-回答入力と{\PW}計算はAndroid端末で実行されるため、
-端末を「機内モード」に設定するなどの方法で
-ネットワーク接続を遮断した状態でも{\PW}を計算することができる。
-{\EP}をインストールしたAndroid端末を持っていれば常に各種の{\PW}を計算できるので、
-他人のマシンや公共の場所に設置されたパソコンなどでも
-容易にtwitterなどのネットサービスを利用することができる。
+% Android端末でアプリを実行すると図\ref{android1}のような画面が表示される。
+% {\SS}を設定して「開始」ボタンを押すと図\ref{android2}のように質問がひとつずつ表示され、
+% ボタンを押してすべて回答すると{\PW}が計算され図\ref{android3}のように表示される。
 
-前述の方法で{\EP}アプリをサーバからダウンロードする場合は、
-ブラウザ上で秘密の問題をサーバに登録する必要があるが、
-秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
+When the user runs the application and selects the right answer
+to each question, he can eventually get the password and copy it to the password entry.
+(Figure \ref{android1})
+
+% 回答入力と{\PW}計算はAndroid端末で実行されるため、
+% 端末を「機内モード」に設定するなどの方法で
+% ネットワーク接続を遮断した状態でも{\PW}を計算することができる。
+% {\EP}をインストールしたAndroid端末を持っていれば常に各種の{\PW}を計算できるので、
+% 他人のマシンや公共の場所に設置されたパソコンなどでも
+% 容易にtwitterなどのネットサービスを利用することができる。
+
+The calculation is performed on Android without network connection,
+and the user can safely use ...
+without feeling the fear of ...
+
+% 前述の方法で{\EP}アプリをサーバからダウンロードする場合は、
+% ブラウザ上で秘密の問題をサーバに登録する必要があるが、
+% 秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
 
 \subsection{Algorithm for calculating password from selections}
 
