@@ -1,20 +1,65 @@
 %
 % password manager? password management system?
 %
-\documentclass{article}
+% \documentclass{article}
+\documentclass{sigchi}
 
-\usepackage{times}
-\usepackage{uist}
-\usepackage{graphicx}
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage{times}    % comment if you want LaTeX's default font
+\usepackage{url}      % llt: nicely formatted URLs
+
+% \usepackage{times}
+% \usepackage{uist}
+% \usepackage{graphicx}
+
 \usepackage{here} % [H]とするとその場所に配置されるらしい
+
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, 
+% to give it a fighting chance of not being over-written, 
+% since its job is to redefine many LaTeX commands.
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+pdftitle={SIGCHI Conference Proceedings Format},
+pdfauthor={LaTeX},
+pdfkeywords={SIGCHI, proceedings, archival format},
+bookmarksnumbered,
+pdfstartview={FitH},
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+breaklinks=true,
+}
+
+% create a shortcut to typeset table headings
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
+\begin{document}
 
 \long\def\EP{\textsf{EpisoPass}}
 \long\def\PW{password}
 \long\def\SS{seed string}
 \long\def\EM{episodic memory}
 \long\def\SQ{secret question}
-
-\begin{document}
 
 % Copyright notice ---
 \conferenceinfo{UIST'16}{Tokyo}
@@ -23,22 +68,28 @@
 
 \title{EpisoPass: Password Management based on \\ Episodic Memories}
 
+\numberofauthors{3}
 \author{
-\parbox[t]{9cm}{\centering
-	     {\em Author Name removed for blind review}\\
-	     Affiliation removed for blind review\\
-	     Address removed for blind review\\
-	     Email removed for blind review}
-\parbox[t]{9cm}{\centering
-	     {\em Author Name removed for blind review}\\
-	     Affiliation removed for blind review\\
-	     Address removed for blind review\\
-	     Email removed for blind review}
+  \alignauthor 1st Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}
+  \alignauthor 2nd Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}    
+  \alignauthor 3rd Author Name\\
+    \affaddr{Affiliation}\\
+    \affaddr{Address}\\
+    \email{e-mail address}\\
+    \affaddr{Optional phone number}
 }
 
 \maketitle
 
-\abstract
+\begin{abstract}
 % 忘れることがない{\EM}にもとづく{\SQ}を使って強力な{\PW}を生成/管理するシステム「\textsf{\EP}」を提案する。
 % {\EP}は、ユーザが作成した{\SQ}への回答にもとづいて{\SS}を換字することによって{\PW}を生成する。
 % {\SS}や回答のバリエーションにより異なる{\PW}が生成されるので様々なサービスに対して異なる{\PW}を生成できることに加え、
@@ -77,13 +128,17 @@ various strong passwords can be easily managed
 without using master passwords or secret devices that are
 usually required on conventional password managers.
 %
+\end{abstract}
 
-\classification{H5.2 [Information interfaces and presentation]:
-User Interfaces. - Graphical user interfaces.}
+\keywords{
+  Passwords; password managers; episodic memories; EpisoPass;
+%	keywords should be separated by a semi-colon. \newline
+%	\textcolor{red}{Optional section to be included in your final version, 
+%  but strongly encouraged.}
+}
 
-\terms{Design, Human Factors}
-
-\keywords{Passwords, authentication}
+\category{H.5.2.}{Information Interfaces and Presentation (e.g. HCI)}{User Interfaces}
+\category{K.6.5.}{Management of Computing and Information Systems}{Security and Protection}
 
 \tolerance=400 
   % makes some lines with lots of white space, but 	
@@ -138,9 +193,12 @@ people use 6.5 passwords on 25 Web services on average, and
 Since passwords are difficult to handle,
 various other authentication methods have been proposed.
 For example,
-image-based authentication\cite{Biddle:2012:GPL:2333112.2333114}\cite{小池英樹:2006-05-15}\cite{GraphicalPasswords}, 
-bio-based methods\cite{},
-behavior-based methods\cite{},
+image-based authentication\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}, 
+biometrics authentication\footnote{
+  % \textsf{https:{\slash}{\slash}en.wikipedia.org{\slash}wiki{\slash}Biometrics}
+  \url{https://en.wikipedia.org/wiki/Biometrics}
+},
+behavior-based authentication\cite{Dandapat:2015:AYD:2702123.2702457}, 
 and many other authentication methods have been proposed.
 
 % というのもパスワードには利点があるから[Bonneau]
@@ -195,7 +253,7 @@ asks users to remember a single ``master password'' to access the database
 %
 Password managers remember users' passwords and help them enter
 passwords on various services.
-Althought password managers are useful,
+Although password managers are useful,
 users are usually forced to remember a ``master password''
 or a special hardware device
 for safely handle password managers, and
@@ -317,7 +375,8 @@ the right password is calculated and shown at the top.
 % use the converted string as the password.
 
 \begin{figure}[t]
-\includegraphics[width=110mm,bb=-30 0 803 662]{figures/c1bd6e7f67698c70978f528ccd2339d9.png}
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
 \caption{Generating a Twitter password with EpisoPass.}
 \label{web1}
 \end{figure}
@@ -330,13 +389,14 @@ the seed string is converted to a string
 which can be used as the password for Twitter.
 
 When the user clicks another candidate,
-the seed string is converted to another trings like
+the seed string is converted to another strings like
 ``\textsf{Bhtuyna904127}'' (Figure \ref{web11}).
 
 \begin{figure}[H]
-\includegraphics[width=110mm,bb=-30 0 803 660]{figures/01e5507d090eb494a20bcbc47c86b1d2.png}
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/01e5507d090eb494a20bcbc47c86b1d2}
 \caption{Selecting a different answer.}
-\label{web11}
+\label{web1}
 \end{figure}
 
 In this way, different selections yields different password strings and
@@ -356,7 +416,7 @@ sometimes required by the service.
 % {\SS}の文字種に対応した{\PW}候補が生成される。
 
 The second question in Figure \ref{web1}
-is based on the author's episodic memory at elementary scholl,
+is based on the author's episodic memory at elementary school,
 and the last secret question is related to a more recent event
 which the author thinks he can never forget.
 All the questions are related to the author's episodic memories
@@ -383,7 +443,8 @@ In this way, we can generate different passwords for
 different services just by changing the seed string.
 
 \begin{figure}[H]
-\includegraphics[width=110mm,bb=-30 0 800 285]{figures/0e2820c279afc70520482e0fc53b6ed9.png}
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/0e2820c279afc70520482e0fc53b6ed9}
 \caption{Generating the password for FaceBook.}
 \label{web2}
 \end{figure}
@@ -400,7 +461,7 @@ calculated from concatinating all the selected answers.
 For example, if the user selects ``\texttt{Ebisawa}'' to the question ``\texttt{Who's the bully?}'',
 a hash value calculated from  ``\texttt{Who's the bully:Ebisawa}''
 is used for the substitution.
-Details of the algorithm is showin in the Appedix.
+Details of the algorithm is shown in the Appendix.
 
 % 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
 % {\PW}を生成している。
@@ -461,13 +522,15 @@ to each question, he can eventually get the password and copy it to the password
 (Figure \ref{android1},\ref{android2})
 
 \begin{figure}[H]
-\includegraphics[width=80mm,bb=-30 0 399 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
+\centering
+\includegraphics[width=0.7\columnwidth]{figures/429eec261024dc6c85351f51c12f09b4}
 \caption{Running EpisoPass on Android.}
 \label{android1}
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[width=80mm,bb=-30 0 400 106]{figures/ba8f5aeaa935ad63437969f4d746746b.png}
+\centering
+\includegraphics[width=0.7\columnwidth]{figures/ba8f5aeaa935ad63437969f4d746746b}
 \caption{After finishing selections.}
 \label{android2}
 \end{figure}
@@ -509,7 +572,7 @@ remembers the episode now, it is unlikely that he forgets the episode 10 years l
 \subsection{Security strength of EpisoPass}
 
 The strength of the generated password depends on the number of
-questions and the secretness of the questions.
+questions and the secret level of the questions.
 %
 There have been many studies on the strength of passwords
 \cite{Hayashi:2011:DSP:1978942.1979326}%
@@ -537,7 +600,7 @@ and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (M
 It is almost the same entropy as using random 8-character English alphabets
 as a password, in which case the entropy is 45.6 bits.
 This level is considered to be strong enough for Web services,
-where online blute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
+where online brute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
 
 \subsection{Selecting good questions}
 
@@ -577,7 +640,7 @@ but a bad experience like this is not forgettable.
 Questions like ``Which one do you like best?'' should be avoided,
 since some of the friends might know the user's taste.
 Questions related to a episode which the user is proud of should also be
-avoided, since the user might talk aboutu the episode to somebody else.
+avoided, since the user might talk about the episode to somebody else.
 
 We usually don't tell our bad trivial experiences to other people,
 but we might boast of good experiences or even write a blog about it.
@@ -640,8 +703,8 @@ Various methods have been proposed for collecting words in the
 same category, mainly for information retrieval purposes
 \cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
 \cite{BooWa}% Boo!Wa!というサイトをやっている
-\cite{Wang:2007:LSE:1441428.1442086}% BooWa
-\cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
+\cite{Wang:2007:LSE:1441428.1442086}.% BooWa
+%\cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
 We can use such techniques for getting similar names.
 
 \subsection{Universality}
@@ -664,13 +727,13 @@ used for the authentication.
 \subsection{Periodic password update}
 
 On many services, users are requested to change passwords periodically
-to strenghen security.
+to strengthen security.
 %
 % A user can generate a new strong password by using a randam character generator
 % on a password manager, but he might want to old passwords in case some trouble happens.
 %
 Using EpisoPass, users can just provide a date-related question
-like the first question showin in Figure \ref{web1},
+like the first question shown in Figure \ref{web1},
 and generate different strong passwords based on the answer.
 Using this technique, people can easily manage old and new passwords.
 
@@ -702,7 +765,7 @@ and using simple challenge-responce is not considered to be safe enough
 \cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}.
 %
 Also, in this case,
-the user should register the answer to the system in additon to the question.
+the user should register the answer to the system in addition to the question.
 Telling secret facts to service providers is like
 registering raw password string on the server,
 and it is not safe unless the strings are properly hashed and salted on the server.
@@ -718,30 +781,28 @@ and it is not safe unless the strings are properly hashed and salted on the serv
 %問題と答を連想するために画像を利用する方法、
 %複数の問題を連続的に利用する手法などが提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
 
-{\EP}では、
-他人には解くことが難しく自分では忘れないような{\SQ}を自由にいくつでも利用できるようになっている。
-問題作成に慣れていないユーザには有効な{\SQ}を作成することは難しいかもしれないが、
-次節で述べるように、適切な質問を選ぶことによりこの問題を解決できるはずである。
+% {\EP}では、
+% 他人には解くことが難しく自分では忘れないような{\SQ}を自由にいくつでも利用できるようになっている。
+% 問題作成に慣れていないユーザには有効な{\SQ}を作成することは難しいかもしれないが、
+% 次節で述べるように、適切な質問を選ぶことによりこの問題を解決できるはずである。
 
-\subsection{All information can be put public}
+\subsection{Care for handling secret information}
 
-Questions and answers can be put on a public place
+Users don't have to be very careful about handling questions and answers.
+They can even be put on a public place
 if enough amount of questions and fake answers are provided.
 %
-Keeping the secret of something is always a pain for many people including
+Keeping secret is always a pain for many people including
 the authors, but if the whole questions and answers used on EpisoPass
 can be put on a public place,
 handling it becomes very easy.
 Usually we have to be very careful about handling
 secret information like passwords, secret key for SSH, etc.
-so that they are not copied or saved to unsafe places.
+because they should not be copied or saved at unsafe places.
 On the other hand,
 we can save the EpisoPass data as a plain text file and put it at
 any place without great care, since malicious person cannot calculate
 passwords without having the owner's episodic memories.
-
-%   全情報を公開して大丈夫
-%     マスターパスワードが要らない
 
 \subsection{Risk of password leak}
 
@@ -767,84 +828,93 @@ even when he is forced to tell the password.
 \subsection{Simple implementation}
 %   実装が簡単
 
-The algorithm of generating a password (Appendix)
+The algorithm of generating a password (shown in Appendix)
 is fairly simple and
 it can be implemented on any browser JavaScripts or
 applications on smartphones and small devices.
 
-\subsection{{\PW}漏洩時の問題}
+\subsection{Risk of password leak at the service side}
 
 If, one of the passwords generated by EpisoPass is revealed
-for some reason,... フルートフォースでとかれる可能性はある
-
-To prevent such troble, it is safer to keep all the q-a pairs secret.
-
-問題を時々変えるのが安全だろう
-
-問題自体が秘密であればひとつ漏れても大丈夫
-
-{\SQ}を公開している場合、
-{\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
-総当たり計算でチェックすることにより、
-すべて{\SQ}の正答が判明してしまう。
-{\SQ}の正答を知っていれば
-{\SS}から{\PW}を計算することができるので、
-漏洩した{\SQ}は利用不可能になってしまう。
+for some reason, other passwords based on the same questions
+might also be revealed.
 %
-\ref{pattern1}や
-\ref{pattern2}のような運用をしている場合は
-{\PW}がひとつ漏洩しても他の{\PW}は安全だが、
-\ref{pattern3}のような運用をしている場合は
-ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
+For example, if Twitter is attacked by a cracker and
+the password for Twitter (``\textsf{Lbasnln542202}'' in Figure \ref{web1})
+is revealed to the attacker,
+the attacker can try all the answer combinations and find out
+the answers to all the questions,
+if questions and answers are also known by the attacker.
+Once all the answers to the questions are known,
+the attacker can freely generate all the passwords
+generated by EpisoPass.
+
+To prevent such troble, it is safer to keep all the questions and answers
+in a secret place or
+use many number of questions so that brute-force does not work.
+
+% 問題自体が秘密であればひとつ漏れても大丈夫
+% 
+% {\SQ}を公開している場合、
+% {\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
+% 総当たり計算でチェックすることにより、
+% すべて{\SQ}の正答が判明してしまう。
+% {\SQ}の正答を知っていれば
+% {\SS}から{\PW}を計算することができるので、
+% 漏洩した{\SQ}は利用不可能になってしまう。
+%
+% \ref{pattern1}や
+% \ref{pattern2}のような運用をしている場合は
+% {\PW}がひとつ漏洩しても他の{\PW}は安全だが、
+% \ref{pattern3}のような運用をしている場合は
+% ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
 
 \subsection{Using images}
-%   画像を使える
 
-Old pictures can be used as the questions of EpisoPass.
+Old pictures can be used as the questions of EpisoPass,
+just like the 5th question shown in Figure \ref{web1}.
 Even when people cannot create good secret questions,
 people can fairly easily select a secret image from their photo collections
 and use it as the question.
-For example, if you have a n old picture of your friend,
+For example, if you have an old picture of your friend,
 you can use it as the question
 and use his real name and other similar names as candidate answers.
-
-例をここでいろいろ出す
 
 % 画像検索とかされないようにする必要はある
 
 Of course, the photo should not have information related to the
-person's real name, since image search is fiarly easy on the Web these days.
+person's real name, since image search is fairly easy on the Web these days.
 
-忘れにくい{\EM}を利用する認証手法として
-様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
-複数の画像の中から正答を選択するもの(Cognometric方式)、
-ひとつの画像の中の特定の場所を指定するもの(Locimetric方式)、
-画像の上で描画操作を行なうもの(Drawmetric方式)
-が広く利用されているが\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{Guideline}、
-{\EP}は図\ref{web1}のように
-文字列のかわりに画像URLを{\SQ}として利用する点が異なっている。
-%
-Cognometric方式は{\EM}を効果的に利用できるが、
-多数の偽答画像が必要だという問題がある。
-Locimetric方式は
-{\EM}を効果的に利用できないことに加え、
-クリックしやすい「ホットスポット」は限られているため
-充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}。
-またDrawmetric方式も{\EM}を効果的に利用できないし、
-ユーザは似た傾向のストロークを選びがちであるため
-充分なエントロピーを確保しにくいことが知られている\cite{Nali}。
-%
-{\EP}のように画像を{\SQ}として利用する場合、
-通常の{\SQ}の場合と同様に偽答を増やすことが容易であることに加え、
-画像に関連した{\EM}を有効に利用できるという利点がある\cite{増井:CSS}。
+% 忘れにくい{\EM}を利用する認証手法として
+% 様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
+% 複数の画像の中から正答を選択するもの(Cognometric方式)、
+% ひとつの画像の中の特定の場所を指定するもの(Locimetric方式)、
+% 画像の上で描画操作を行なうもの(Drawmetric方式)
+% が広く利用されているが\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{Guideline}、
+% {\EP}は図\ref{web1}のように
+% 文字列のかわりに画像URLを{\SQ}として利用する点が異なっている。
+% %
+% Cognometric方式は{\EM}を効果的に利用できるが、
+% 多数の偽答画像が必要だという問題がある。
+% Locimetric方式は
+% {\EM}を効果的に利用できないことに加え、
+% クリックしやすい「ホットスポット」は限られているため
+% 充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}。
+% またDrawmetric方式も{\EM}を効果的に利用できないし、
+% ユーザは似た傾向のストロークを選びがちであるため
+% 充分なエントロピーを確保しにくいことが知られている\cite{Nali}。
+% %
+% {\EP}のように画像を{\SQ}として利用する場合、
+% 通常の{\SQ}の場合と同様に偽答を増やすことが容易であることに加え、
+% 画像に関連した{\EM}を有効に利用できるという利点がある\cite{増井:CSS}。
 
-図\ref{leiko}は
-本棚.org\cite{hondana}\cite{hondanaorg}
-のユーザのひとり\footnote{
-  \textsf{http://hondana.org/Leiko}
-}が利用している画像認証問題である。
-このユーザ以外には正答は見当もつかないが、
-本人にとっては忘れることがない{\EM}と結びついた画像だということであった。
+% 図\ref{leiko}は
+% 本棚.org\cite{hondana}\cite{hondanaorg}
+% のユーザのひとり\footnote{
+%   \textsf{http://hondana.org/Leiko}
+% }が利用している画像認証問題である。
+% このユーザ以外には正答は見当もつかないが、
+% 本人にとっては忘れることがない{\EM}と結びついた画像だということであった。
 
 % 答を書くわけではないから安全
 % 心配ならオフラインでやれば大丈夫
@@ -856,15 +926,47 @@ Locimetric方式は
 %   拡張機能も用意したい
 %
 
-\section{Related Work}
+\section{RELATED WORK}
 
-認証手法は本当に沢山あり、パスワードを置き換えようとするものも多いが
-まだ成功はしていない
+As shown in previous sections,
+there are many attemps for replacing password-based authentication systems,
+none of which has succeeded so far.
 
-パスワード管理システムは充分広く使われている
+Various types of image-based authentication systems have been proposed recently,
+in the hope that images are easier to remember than text
+because images are usually more directly linked to episodic memories.
+However, on many systems,
+users have to remember new information related to the images
+used in the authentication process, or
+perform special operation on the image, and
+it is not much easier than using passwords.
+%
+Image-based authentication based on episodic memories might work
+if anyone can prepare many images 
+which are tightly linked to his episodic memories.
+However, finding such images is usually not easy, and
+image-only authentication systems would not take off
+unless simple and effective technique is invented.
+% [Malasym]
 
-% A Password Manager that Doesn’t Remember
-\cite{Stobert:2014:PMD:2683467.2683471} % Visipass 画像のヒントからパスワード生成
+Even when a new ideal authentication method is invented,
+replacing all the password-based systems should take very long, and
+various password managers should be used until the ideal method
+prevails in the whole world.
+In the age of password-based authentication,
+using password managers seems to be the only way to tackle
+the problem of passwords.
+%
+While most of the password manager only remember passwords given by the user,
+generating passwords with a password manager is a new approach for
+handling password-based systems.
+Just like EpisoPass generates passwords,
+Versipass\cite{Stobert:2014:PMD:2683467.2683471}% Versipass 画像のヒントからパスワード生成 % A Password Manager that Doesn’t Remember
+helps the user to generate password strings
+using ``visual cues'' on an arbitrary image.
+Instead of directly using images for authentication,
+users use the system to generate a password text with the help of
+the image shown to the user.
 
 % 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは無い
 % 
@@ -884,16 +986,48 @@ Locimetric方式は
 %   紛失する可能性が少ない
 %
 
-\section{Experiences}
-% ■ 運用実績
+\section{EXPERIENCES}
 
-% 強度が直感的でない
-%   誰でも簡単にとけるのじゃないかと思う
-%   safe感覚が足りない
+EpisoPass has been used by the authors for more than three years, and
+the authors are using it for various services including
+Twitter, Facebook, Amazon, Skype, etc.
+Since passwords for these services are remembered on the browser,
+EpisoPass is used only once in one week at most.
+%
+Before using EpisoPass, taking care of many passwords was really
+a problem for the authors, but
+currently all the information for generating passswords is put on the Net
+and no trouble has been found during the period.
+
+Unfortunately EpisoPass is currently not used by many people.
+One big reason is that most people cannot fully understand the
+idea of EpisoPass and also cannot fully trust it
+because it is not operated by a big IT company nor supported by
+famous computer users.
+Another reason might be that users cannot estimate the strength
+of EpisoPass.
+Since all the questions and answers are
+quite obvious to the users,
+they might feel that everyone else also know the episode
+and easily solve all the questions.
+These kinds of psychological issues are quite important for
+an authentication system for everybody,
+and we hope to remove such obstacles in the future.
 
 \section{CONCLUSION}
 
-We have developed a 
+We introduced a password management system EpisoPass
+that converts a seed string into a password using the user's
+episodic memories represented as a set of questions and answers
+which can be solved only by the user.
+%
+Using EpisoPass with well-defined questions and answers,
+a user can always retrieve various passwords without worrying about
+remembering secret information.
+%
+We'll try to integrate the system with existing password-based
+services, and finally hope to remove all the problems
+derived from password-based authentication.
 
 % {\EM}に結びついた{\SQ}を利用して{\PW}を生成/管理できるシステム{\EP}を提案した。
 % {\EP}は単純な原理にもとづいており柔軟な利用形態が可能であり、
@@ -932,7 +1066,7 @@ We have developed a
 The password string is generated by
 substituting the characters in the seed string
 based on the user's selections of candidate answers.
-Character substitution is performed based on the chracter types.
+Character substitution is performed based on the character types.
 For example, if the first character of the seed string is a digit,
 the first character of the generated password string is also a digit.
 
@@ -953,7 +1087,7 @@ character substitution function $f_N()$.
 Here, $N$ is a number calculated from the user's selection of
 candidate answers.
 If the value of $N$ if $5$, $f_5(x) = (15-x) \bmod 10$, and
-$x$と$f_5(x)$の対応は以下のようになる。
+the $f_5(x)$ value for each $x$ is calculated like below:
 
 \[ f_5(0) = 5 \]
 \[ f_5(1) = 4 \]
@@ -976,7 +1110,7 @@ $N$ is calculated by the following algorithm in EpisoPass.
  
 \begin{enumerate}
   % \item 問題文字列と選択した答の文字列の組を連結して長い文字列$S$を生成
-  \item Generate a string $S$ by concatinating all the question strings and selected candidate answers.
+  \item Generate a string $S$ by concatenating all the question strings and selected candidate answers.
 
   % \item $S$のMD5ハッシュ値$M$(16進32桁の文字列)を計算
   \item Calculate the MD5 value of $S$ and generate 32-byte hexadecimal string $M$.
@@ -984,13 +1118,13 @@ $N$ is calculated by the following algorithm in EpisoPass.
   %\item {\SS}の$k$桁目の文字に対し、
   %  $M$の$k \times 4$文字目から$k \times 4 + 3$文字目までの部分文字列(16進4桁)を取得し、
   %  それを$N$とする
-  \item For each $k$th chracter of {\SS},
+  \item For each $k$-th character of {\SS},
     get the 4-character substring of $M$ beginning at $k \times 4$, and use it as the value of $N$
 
     %たとえばハッシュ値$M$が$12345678...$だったとき、1桁目を計算する$f()$についてはN=0x1234となる。
     If the hash value $M$ is $12345678...$,
     $f_{\texttt{\scriptsize 0x1234}}$ is used as the substitution function for the first character,
-    $f_{\texttt{\scriptsize 0x5678}}$ is used as the substitution function for the secound character, etc.
+    $f_{\texttt{\scriptsize 0x5678}}$ is used as the substitution function for the second character, etc.
 \end{enumerate}
 
 \end{document}
@@ -1010,15 +1144,6 @@ $N$ is calculated by the following algorithm in EpisoPass.
 => パスワード入力のたびに使うわけではありませんし、問題に答えるのにそれほど
 時間はかかりません。新しくスマホを買ったら使うぐらいです。
 問題を作るのは確かにめんどくさいかもしれません。
-
-* クイズにできるエピソードがない人はどうすればいいんでしょう
-
-=> そういう話はよく聞くのですがエピソードが無い人なんているのでしょうかね?
-小学校のときちょっとしたケガ体験とかエピソードとか覚えてませんか?
-
-* URLがseed込みなので、ブックマークつくっておけば辿りつける、という主張だったかと
-
-=> これは誤解です。URLは計算には関係ありません。
 
 * Q:(1)seedはどうやって作るのか？(2)質問はどうやって作るのか？
 

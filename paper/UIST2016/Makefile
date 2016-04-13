@@ -1,6 +1,11 @@
 all: paper.tex
-	platex paper
+	pdflatex paper
 	bibtex paper
-	dvipdfm paper
+	pdflatex paper
+	pdflatex paper
 	open paper.pdf
+#	platex paper
+#	bibtex paper
+#	dvipdfm paper
+#	open paper.pdf
 
