@@ -106,7 +106,7 @@ User Interfaces. - Graphical user interfaces.}
 Passwords have been used for various Web services and applications
 for a long time, and currently the most popular authentication method on the Internet.
 %
-Since short passwords are easily guessed by atackers, and
+Since short passwords are easily guessed by attackers, and
 using the same password for different services is unsafe,
 different long passwords should be used for different services.
 However,
@@ -154,7 +154,7 @@ and many other authentication methods have been proposed.
 
 In spite of such attempts,
 password-based authentication is still the most
-convenient and strong method\cite{Bonneau},
+convenient and strong method\cite{Bonnearu:ReplacePasswords},
 and it is not supposed to get extinct
 in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
 
@@ -214,18 +214,18 @@ If we don't want to carry any special device for authentication,
 all the information required for the authentication should be
 kept in the brain.
 %
-However, we believe that the biggest problem of brain-based authentication is that
-users cannot keep memories like long passwords or master password.
+However, the biggest problem of brain-based authentication is that
+users cannot safely keep memories like long passwords or master password.
 For this reason, we believe that
 it is far better to ``generate'' something for the authentication,
 based on users' episodic memories which they can never forget.
-
+%
 % We believe that a password manager should have the following features.
 % (1) It should be available on any platform including PCs, smartphones, and the Web.
 % (2) Users should not have secret information (e.g. master password) or special device.
 % (3) Rely only on the information in the user's brain.
-
-We propose a password manager \textit{EpisoPass}, that generates strong passwords
+%
+We propose a password manager \textit{EpisoPass} that generates strong passwords
 based only on the user's secret episodic memories that the user can never forget.
 
 \section{EpisoPass}
@@ -237,53 +237,66 @@ strong passwords based on users' secret episodic memories.
 % a user provides a seed string and many question-answer pairs to EpisoPass,
 % and a password is generated based on the user's selections.
 %
+Memories in human brain is not uniform.
+Some memories are very short-lived, and others are unforgettable.
+When we have a very impressive experience,
+that memory will stay in the brain for a long time and
+cannot easily disappear.
+On the other hand, when we study math and try to remember a formula,
+it is usually hard to memorize it unless we practice a lot,
+since the knowledge about the formula is not related to
+any personal experiences.
+The former type of memory is called the episodic memory and
+people cannot easily forget it.
+Memories of passwords belong to the latter type and
+people cannot easily remember them, just like people cannot
+remember math formulas easily.
+%
 
-According to Wikipedia, ...
-
-\begin{quote}
-Episodic memory is the memory of autobiographical events (times,
-places, associated emotions, and other contextual who, what, when,
-where, why knowledge) that can be explicitly stated. It is the
-collection of past personal experiences that occurred at a particular
-time and place. For example, if one remembers the party on his or her
-6th birthday, this is an episodic memory. They allow an individual to
-figuratively travel back in time to remember the event that took place
-at that particular time and place.[1]
-
-Semantic memory is one of the two types of declarative or explicit
-memory (our memory of facts or events that is explicitly stored and
-retrieved).[1] Semantic memory refers to general world knowledge that
-we have accumulated throughout our lives.[2] This general knowledge
-(facts, ideas, meaning and concepts) is intertwined in experience and
-dependent on culture. Semantic memory is distinct from episodic
-memory, which is our memory of experiences and specific events that
-occur during our lives, from which we can recreate at any given
-point.[3] For instance, semantic memory might contain information
-about what a cat is, whereas episodic memory might contain a specific
-memory of petting a particular cat. We can learn about new concepts by
-applying our knowledge learned from things in the past.[4] The
-counterpart to declarative, or explicit memory, is procedural memory,
-or implicit memory.[5]
-\end{quote}
-
+% \begin{quote}
+% Episodic memory is the memory of autobiographical events (times,
+% places, associated emotions, and other contextual who, what, when,
+% where, why knowledge) that can be explicitly stated. It is the
+% collection of past personal experiences that occurred at a particular
+% time and place. For example, if one remembers the party on his or her
+% 6th birthday, this is an episodic memory. They allow an individual to
+% figuratively travel back in time to remember the event that took place
+% at that particular time and place.[1]
+% 
+% Semantic memory is one of the two types of declarative or explicit
+% memory (our memory of facts or events that is explicitly stored and
+% retrieved).[1] Semantic memory refers to general world knowledge that
+% we have accumulated throughout our lives.[2] This general knowledge
+% (facts, ideas, meaning and concepts) is intertwined in experience and
+% dependent on culture. Semantic memory is distinct from episodic
+% memory, which is our memory of experiences and specific events that
+% occur during our lives, from which we can recreate at any given
+% point.[3] For instance, semantic memory might contain information
+% about what a cat is, whereas episodic memory might contain a specific
+% memory of petting a particular cat. We can learn about new concepts by
+% applying our knowledge learned from things in the past.[4] The
+% counterpart to declarative, or explicit memory, is procedural memory,
+% or implicit memory.[5]
+% \end{quote}
 
 Password generation on EpisoPass is performed through the following procedures:
 
 \begin{enumerate}
-\item A user registers many question texts based on the user's personal
+\item A user registers many question texts related to the user's personal
 secret episodic memories that the user never forgets,
-and provide a correct answer and many fake answers.
+and provide a correct answer and fake answers.
 
 \item The user provides a long ``seed string'' for each service that requires
 a password.
 
-\item EpisoPass shows the registered data to the user so that
+\item EpisoPass shows the data to the user so that
 the user can select an answer for each question.
 Based on the user's selection,
-EpisoPass substitute characters in the seed string and generate different
-strings for different selections.
-The user copies the string calculated when correct answers are selected,
-and use it as the password for the service.
+EpisoPass substitutes characters in the seed string and generate
+random-looking password candidate strings.
+After selecting all right answers,
+the user copies the calculated string
+and register it as the password for the service.
 \end{enumerate}
 
 \subsection{Using EpisoPass on a browser}
@@ -293,7 +306,7 @@ on EpisoPass running on a browser.
 Many questions related to the user's episodic memories are shown to the user,
 and many candidate answers are also shown for each question.
 When a user clicks and selects one of the answers for each question,
-the seed string is converted to a random-looking string
+the seed string shown at the top-left is converted to a random-looking string
 based on the selections.
 When the user selects the right answer to all the questions,
 the right password is calculated and shown at the top.
@@ -303,7 +316,7 @@ the right password is calculated and shown at the top.
 % only the user can select the set of right answers and
 % use the converted string as the password.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \includegraphics[width=110mm,bb=-30 0 803 662]{figures/c1bd6e7f67698c70978f528ccd2339d9.png}
 \caption{Generating a Twitter password with EpisoPass.}
 \label{web1}
@@ -312,27 +325,27 @@ the right password is calculated and shown at the top.
 In Figure \ref{web1},
 ``\textsf{Twitter123456}'' is provided as the seed string,
 and according to the selections to the four questions,
-the seed string is converted to a string like
+the seed string is converted to a string
 ``\textsf{Lbasnln542202}'',
 which can be used as the password for Twitter.
 
 When the user clicks another candidate,
 the seed string is converted to another trings like
-``\textsf{Bhtuyna904127}''.
+``\textsf{Bhtuyna904127}'' (Figure \ref{web11}).
 
 \begin{figure}[H]
 \includegraphics[width=110mm,bb=-30 0 803 660]{figures/01e5507d090eb494a20bcbc47c86b1d2.png}
-\caption{Generating a Twitter password with EpisoPass.}
+\caption{Selecting a different answer.}
 \label{web11}
 \end{figure}
 
 In this way, different selections yields different password strings and
 the password string generated after selecting correct answers can be
-used as the password for the service. (Twitter in this case.)
+used as the password for the service.
 
-Capital letters in the seed strings are substituted to capital letters in the password,
+Capital letters in the seed string are substituted to capital letters in the password,
 and digits in the seed string are substituted to digits,
-so that the generated passwords conforms to password character restrictions
+so that generated passwords conforms to password character restrictions
 sometimes required by the service.
 
 % {\SS}として「\textsf{Twitter123456}」という文字列を指定しており、
@@ -342,7 +355,7 @@ sometimes required by the service.
 % {\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
 % {\SS}の文字種に対応した{\PW}候補が生成される。
 
-The first secret question in Figure \ref{web1}
+The second question in Figure \ref{web1}
 is based on the author's episodic memory at elementary scholl,
 and the last secret question is related to a more recent event
 which the author thinks he can never forget.
@@ -350,8 +363,8 @@ All the questions are related to the author's episodic memories
 that he thinks he never forgets, and nobody else knows which one of the
 candidate answers is the right one.
 
-Questions and answers can be edited directly on a browser, and they can be
-saved on the server by clicking the ``save on server'' button.
+Questions and answers can be edited directly on the browser, and they can be
+saved on the server by clicking the ``save to server'' button.
 The Q-A data sets are saved on the server,
 but no information about the correct answer or the
 generated password is saved on the server.
@@ -364,13 +377,13 @@ generated password is saved on the server.
 % 問題データを見てもユーザの{\PW}はわからない。
 
 When we change the secret string to ``\textsf{Facebook123456}'',
-the generated password changes to ``\textsf{Xxxxxxx123456}'',
+the generated password changes to ``\textsf{Zxghfbqu533131}'',
 as shown in Figure \ref{web2}.
 In this way, we can generate different passwords for
 different services just by changing the seed string.
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=83mm,bb=0 0 718 265]{../figures/36c371a13a8250c60fb9c03174382443.png}}
+\includegraphics[width=110mm,bb=-30 0 800 285]{figures/0e2820c279afc70520482e0fc53b6ed9.png}
 \caption{Generating the password for FaceBook.}
 \label{web2}
 \end{figure}
@@ -383,11 +396,11 @@ different services just by changing the seed string.
 %アルゴリズムはここ? Algorithm
 
 Character substitution is performed based on the hash value
-calculated from putting all the selected answers.
-For example, if the user selects ``answer1-3'' to the question ``question1'',
-a hash value calculated from  ``\texttt{question1:answer1-3}''
+calculated from concatinating all the selected answers.
+For example, if the user selects ``\texttt{Ebisawa}'' to the question ``\texttt{Who's the bully?}'',
+a hash value calculated from  ``\texttt{Who's the bully:Ebisawa}''
 is used for the substitution.
-Details of the algorithm is showin in Appedix.
+Details of the algorithm is showin in the Appedix.
 
 % 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
 % {\PW}を生成している。
@@ -430,12 +443,13 @@ Details of the algorithm is showin in Appedix.
 % 現在表示している秘密の問題と答を内蔵したAndroidアプリが
 % サーバ上でビルドされてダウンロードされる。
 
-If a user doesn't like to use EpisoPass service on the browser,
+If a user doesn't like to use EpisoPass service on the Net,
 he can use an EpisoPass application on Android
-which does not use any network connection.
+which does not require network connection.
 After registering questions and answers on the EpisoPass service,
 the user can download an Android application from the server
-which contain all the information required for generating passwords.
+by clicking the ``Android app'' button.
+The application contains all the information required for generating passwords.
 (The application is compiled and built on the server.)
 
 % Android端末でアプリを実行すると図\ref{android1}のような画面が表示される。
@@ -444,8 +458,7 @@ which contain all the information required for generating passwords.
 
 When the user runs the application and selects the right answer
 to each question, he can eventually get the password and copy it to the password entry.
-(Figure \ref{android1})
-
+(Figure \ref{android1},\ref{android2})
 
 \begin{figure}[H]
 \includegraphics[width=80mm,bb=-30 0 399 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
@@ -455,7 +468,7 @@ to each question, he can eventually get the password and copy it to the password
 
 \begin{figure}[H]
 \includegraphics[width=80mm,bb=-30 0 400 106]{figures/ba8f5aeaa935ad63437969f4d746746b.png}
-\caption{Running EpisoPass on Android.}
+\caption{After finishing selections.}
 \label{android2}
 \end{figure}
 
@@ -466,9 +479,9 @@ to each question, he can eventually get the password and copy it to the password
 % 他人のマシンや公共の場所に設置されたパソコンなどでも
 % 容易にtwitterなどのネットサービスを利用することができる。
 
-The calculation is performed on Android without network connection,
-and the user can safely use ...
-without feeling the fear of ...
+% The calculation is performed on Android without network connection,
+% and the user can safely generate passwords 
+% without feeling the fear of ...
 
 % 前述の方法で{\EP}アプリをサーバからダウンロードする場合は、
 % ブラウザ上で秘密の問題をサーバに登録する必要があるが、
@@ -485,12 +498,46 @@ The biggest advantage of using EpisoPass is that
 users don't have to remember passwords of any kind and
 they can stop worrying about password-related troubles.
 %
-Users of EpisoPass can save the seed string and question-answers
-at any place, and easily generate passwords by answering questions.
+Users of EpisoPass can save the seed string and question-answer data
+at any place, and easily generate passwords by running
+EpisoPass and answering questions.
 If the question is based on old unforgettable episodic memories,
 there is little chance of losing passwords.
 If the user's memory is related to an episode of 20 years ago and the user clearly
-remembers it now, it is unlikely that he forgets the episode 10 years later.
+remembers the episode now, it is unlikely that he forgets the episode 10 years later.
+
+\subsection{Security strength of EpisoPass}
+
+The strength of the generated password depends on the number of
+questions and the secretness of the questions.
+%
+There have been many studies on the strength of passwords
+\cite{Hayashi:2011:DSP:1978942.1979326}%
+\cite{Komanduri:2011:PPM:1978942.1979321}, % どういうパスワードが強いか
+but the strength of secret questions has not been studied enough.
+%
+% {\EP}で選択枝が10個の{\SQ}を8個使用する場合、
+% 総当たりで{\PW}を生成するには
+% 1億($10^8$)通りの試行が必要であり、
+% % エントロピーは26.6 ($ = 8 \times \log_2 10$) ビット
+% エントロピーは26.6ビットとなる。
+%
+When we use 10 secret questions with 20 answers and
+there's no clue for the answer,
+1 billion ($20^8$) trials should be performed to check
+all the combinations of the answers,
+and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
+%
+% 英字からランダムに8文字を並べて作成した{\PW}のエントロピーは37.6ビットになるが、
+% ``\textsf{pmvixuzq}''のように全く意味のない{\PW}を記憶して利用することは少ないため、
+% 実際に利用される{\PW}のエントロピーは20ビット程度と考えられているので\cite{NIST}、
+% {\SQ}と選択枝の数を10個程度用意すれば
+% 通常の{\PW}と同程度の強度が期待できることになる。
+%
+It is almost the same entropy as using random 8-character English alphabets
+as a password, in which case the entropy is 45.6 bits.
+This level is considered to be strong enough for Web services,
+where online blute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
 
 \subsection{Selecting good questions}
 
@@ -498,13 +545,11 @@ remembers it now, it is unlikely that he forgets the episode 10 years later.
 % 他人が推測することが難しく、自分が決して忘れないような{\EM}を{\SQ}として利用すべきであり、
 % 以下のような性質をもつ記憶は{\SQ}として利用すべきではない。
 
-The strength of the generated password depends on the number of
-questions and the 'secretness' of the questions.
-If the episodic memory is shared by someone else,
-that personn can easily answer the question and generate the
-password just like the user.
-
 The quality of secret questions is the key to using EpisoPass.
+If the episodic memory is shared by someone else,
+that person can easily answer the question and generate the
+password just like the user.
+%
 The episode related to each question should not be known to other people,
 and the episode should be unforgettable.
 %
@@ -513,15 +558,15 @@ when we try to remember experiences of old days,
 we can recall many trivial episodes which are unforgettable but
 not important to other people.
 %
-Old experienceslike the following are good candidates for
-questions used in EpisoPass.
+Old experiences like the following are candidates for
+good questions used in EpisoPass.
 
 \begin{itemize}
 \item Memory of small injury. (Nobody cares it but you.)
 
 \item Memories of bad experience like blunders or defeat.
 
-\item Experience of finding a small special item.
+\item Experience of finding a small special item which only you are interested in.
 \end{itemize}
 
 For example, a question like
@@ -529,12 +574,12 @@ For example, a question like
 is about a trivial experience that people do not mention,
 but a bad experience like this is not forgettable.
 
-Questions like "Which one is your favorite?" should be avoided,
+Questions like ``Which one do you like best?'' should be avoided,
 since some of the friends might know the user's taste.
 Questions related to a episode which the user is proud of should also be
 avoided, since the user might talk aboutu the episode to somebody else.
 
-We usually don't tell our bad experiences to other people,
+We usually don't tell our bad trivial experiences to other people,
 but we might boast of good experiences or even write a blog about it.
 Also, our tastes (e.g. favorite food) might change in the long run.
 Using such episodes for questions should be avoided.
@@ -561,21 +606,21 @@ Using such episodes for questions should be avoided.
 % 図\ref{atmega}は電子工作に関する{\SQ}の例であるが、
 % 正答と区別がつかない偽答を充分リストすることは難しい。
 
-It is sometimes difficult to provid fake answers to a secret question like
+It is difficult to provide enough number of fake answers to a question like
 ``what was your favorite sport?''
 because possible answers are limited.
-
+%
 % \begin{figure}[H]
 % \centerline{\includegraphics[width=83mm,bb=0 0 512 113]{../figures/2f63ceb9ab6faf8d81393953f2f95a8c.png}}
 % \caption{偽答の生成が難しい例.}
 % \label{atmega}
 % \end{figure}
-
+%
 % 一方、正答として人名や地名を利用する場合、
 % 正答に似た人名や地名をリストすることは難しくない。
 % 「世田谷」が正答であるとき、
 % 「目黒」「杉並」のような偽答を用意するのは簡単である。
-
+%
 On the other hand, if the right answer to the question is a name of a place or a person,
 generating similar answers is easy.
 For example, if the answer to the question is ``Colorado'',
@@ -591,69 +636,45 @@ category as the right answer.
 % ひとつの単語もしくは単語の集合と同じカテゴリに属する単語を検索する手法は
 % 「同位語検索」と呼ばれ、
 % Webのデータを利用した様々な同位語検索システムが提案されている%
-For information retrieval purposes,
-various methods have been proposed for collecting words in the
-same category.
+Various methods have been proposed for collecting words in the
+same category, mainly for information retrieval purposes
 \cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
 \cite{BooWa}% Boo!Wa!というサイトをやっている
 \cite{Wang:2007:LSE:1441428.1442086}% BooWa
 \cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
-We can use such systems for getting similar names.
+We can use such techniques for getting similar names.
 
-\subsection{Usable for everyone}
+\subsection{Universality}
 
 Although everyone has to use authentication systems on the Net these days,
 not everyone is familiar with handling passwords.
 Even experienced computer users have trouble with passwords,
-since choosing a good password is difficult and people forget passwords frequently.
-Using EpisoPass, people who cannot create and remember strong passwords
-can easily generate strong passwords just by providing secret episodic
-questions and answers.
+since choosing a good password is not intuitive and
+people forget passwords frequently.
+%
+Using EpisoPass, people can use password-based systems without knowing
+techniques for creating and remembering strong passwords.
+They only have to provide
+questions and answers based on secret episodic memories.
+%
 By integrating EpisoPass into existing password-based services,
 people can even use services without noticing that passwords are
 used for the authentication.
 
-\subsection{Easy to change passwords}
+\subsection{Periodic password update}
 
 On many services, users are requested to change passwords periodically
 to strenghen security.
-A user can generate a new strong password by using a randam character generator
-on a password manager, but he might want to old passwords in case some trouble happens.
-Using EpisoPass, user can just provide a date-related question-answer pairs,
+%
+% A user can generate a new strong password by using a randam character generator
+% on a password manager, but he might want to old passwords in case some trouble happens.
+%
+Using EpisoPass, users can just provide a date-related question
+like the first question showin in Figure \ref{web1},
 and generate different strong passwords based on the answer.
+Using this technique, people can easily manage old and new passwords.
 
-(Figure xxx) 最初の例に入れておく
-
-\subsection{Security strength of EpisoPass}
-
-There have been many studies on the strength of passwords
-\cite{Hayashi:2011:DSP:1978942.1979326}%
-\cite{Komanduri:2011:PPM:1978942.1979321}, % どういうパスワードが強いか
-but the strength of secret questions has not been studied enough.
-%
-% {\EP}で選択枝が10個の{\SQ}を8個使用する場合、
-% 総当たりで{\PW}を生成するには
-% 1億($10^8$)通りの試行が必要であり、
-% % エントロピーは26.6 ($ = 8 \times \log_2 10$) ビット
-% エントロピーは26.6ビットとなる。
-%
-When we use 10 secret questions with 20 answers,
-1 billion ($20^8$) trials should be performed to check
-all the combinations of the answers,
-and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
-%
-% 英字からランダムに8文字を並べて作成した{\PW}のエントロピーは37.6ビットになるが、
-% ``\textsf{pmvixuzq}''のように全く意味のない{\PW}を記憶して利用することは少ないため、
-% 実際に利用される{\PW}のエントロピーは20ビット程度と考えられているので\cite{NIST}、
-% {\SQ}と選択枝の数を10個程度用意すれば
-% 通常の{\PW}と同程度の強度が期待できることになる。
-%
-It is almost the same entropy as using random 8-character English alphabets
-as a password, in which case the entropy is 45.6 bits.
-This level is considered to be strong enough for using Web services,
-where online blute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
-
-\subsection{Comparison with challenge-response authentication systems}
+\subsection{Comparison with challenge-response authentication}
 
 % 一方、{\SQ}を利用する認証の脆弱性を利用した攻撃が近年問題になっている。
 % {\PW}を忘れたときのために、
@@ -664,13 +685,14 @@ where online blute-force attack is impossible\cite{Florencio:2007:SWP:1361419.13
 % {\SQ}の数は一般的に少なく、
 % {\PW}よりも脆弱だといえる\cite{Rabkin:2008:PKQ:1408664.1408667}。% 銀行20個調べて{\SQ}の弱さを指摘
 
-In many services, users are forced to define answers to secret questions like
+In many services, users are adviced to define answers to secret questions like
 ``what is your mother's maiden name''
-so that he can log in to the service even when he forgets the password.
+so that he can log into the service even when he forgets the password.
 This kind of authentication is far less secure than simple password systems,
-since it is fairly easy for atackers to get the right answer.
+since it is fairly easy for attackers to get to the right answer.
 The variation of system-provided questions are usually small, and
-such challenge-response systems are considered to be insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
+such challenge-response systems are considered to be
+insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
 
 It would be better if the user can register his own secret questions
 based on his episodic memory.
@@ -967,8 +989,8 @@ $N$ is calculated by the following algorithm in EpisoPass.
 
     %たとえばハッシュ値$M$が$12345678...$だったとき、1桁目を計算する$f()$についてはN=0x1234となる。
     If the hash value $M$ is $12345678...$,
-    $f_0x1234$ is used as the substitution function for the first character,
-    $f_0x5678$ is used as the substitution function for the secound character, etc.
+    $f_{\texttt{\scriptsize 0x1234}}$ is used as the substitution function for the first character,
+    $f_{\texttt{\scriptsize 0x5678}}$ is used as the substitution function for the secound character, etc.
 \end{enumerate}
 
 \end{document}
