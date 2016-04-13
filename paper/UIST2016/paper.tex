@@ -174,21 +174,25 @@ we have to devise some ways to handle many passwords, and
 various ``password managers'' have been proposed
 for handling many strong passwords.
 %
-{\PW}管理システムは
-ひとつの「マスター{\PW}」を利用して他のすべての{\PW}を管理するもので、
-暗号化されたデータベースに{\PW}を格納するもの%
+%{\PW}管理システムは
+%ひとつの「マスター{\PW}」を利用して他のすべての{\PW}を管理するもので、
+%暗号化されたデータベースに{\PW}を格納するもの%
+%
+Most password managers remembers various passwords and
+asks users to remember a single ``master password'' to access the database
 \cite{OnePassword}%
 \cite{Dashlane}%
 \cite{ミルパス}%
 \cite{LastPass}%
 \cite{KeyPass}%
 \cite{NortonIDSafe}%
-\cite{IDManager}%
-が多いが、サービス名をもとにマスター{\PW}を変換することによって
-複数の{\PW}を生成するシステム\cite{SuperGenPass}もある。
-両者ともにマスター{\PW}の記憶は必須であり、
-マスター{\PW}を盗まれたり忘れたりする危険がある。
-
+\cite{IDManager}.
+%
+%が多いが、サービス名をもとにマスター{\PW}を変換することによって
+%複数の{\PW}を生成するシステム\cite{SuperGenPass}もある。
+%両者ともにマスター{\PW}の記憶は必須であり、
+%マスター{\PW}を盗まれたり忘れたりする危険がある。
+%
 Password managers remember users' passwords and help them enter
 passwords on various services.
 Althought password managers are useful,
@@ -196,11 +200,6 @@ users are usually forced to remember a ``master password''
 or a special hardware device
 for safely handle password managers, and
 password managers usually run on limited devices.
-
-% このように、実際のパスワード運用はとても大変であるが、
-%   * パスワードを使わなければならないのは確かだし、
-%   * 漏洩や紛失の危険がないのは脳内情報ぐらいである
-%      鍵デバイスや生体情報などはダメ
 
 % 読みとることができない脳内情報を利用するという基本手法は良いのだが覚えられないのが問題である
 %   だとすると...パスワードを記憶するかわりに、****脳が既に覚えている秘密の記憶からパスワードを生成すればよいはずである***
@@ -305,7 +304,7 @@ the right password is calculated and shown at the top.
 % use the converted string as the password.
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=83mm,bb=0 0 718 796]{../WISS/figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
+\includegraphics[width=110mm,bb=-30 0 803 662]{figures/c1bd6e7f67698c70978f528ccd2339d9.png}
 \caption{Generating a Twitter password with EpisoPass.}
 \label{web1}
 \end{figure}
@@ -314,15 +313,15 @@ In Figure \ref{web1},
 ``\textsf{Twitter123456}'' is provided as the seed string,
 and according to the selections to the four questions,
 the seed string is converted to a string like
-``\textsf{Mfveabn574923}'',
+``\textsf{Lbasnln542202}'',
 which can be used as the password for Twitter.
 
 When the user clicks another candidate,
 the seed string is converted to another trings like
-``\textsf{Xfveabn123456}''.
+``\textsf{Bhtuyna904127}''.
 
 \begin{figure}[H]
-\centerline{\includegraphics[width=83mm,bb=0 0 718 796]{../WISS/figures/785ff09b4233804d2ec89c3af71ee5d0.png}}
+\includegraphics[width=110mm,bb=-30 0 803 660]{figures/01e5507d090eb494a20bcbc47c86b1d2.png}
 \caption{Generating a Twitter password with EpisoPass.}
 \label{web11}
 \end{figure}
@@ -390,7 +389,6 @@ a hash value calculated from  ``\texttt{question1:answer1-3}''
 is used for the substitution.
 Details of the algorithm is showin in Appedix.
 
-
 % 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
 % {\PW}を生成している。
 % {\PW}文字列の計算方法は附録に示す。
@@ -416,6 +414,7 @@ Details of the algorithm is showin in Appedix.
 % 時期を選択することによって簡単に{\PW}を変更することができるので便利である。
 
 \subsection{Android application}
+
 
 % Webサービスを利用する場合、ブラウザとサーバとの間の通信を
 % 記録されたり盗み見されたりされる心配を完全に払拭することはできない。
@@ -447,7 +446,18 @@ When the user runs the application and selects the right answer
 to each question, he can eventually get the password and copy it to the password entry.
 (Figure \ref{android1})
 
-(Figure of Android app)
+
+\begin{figure}[H]
+\includegraphics[width=80mm,bb=-30 0 399 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
+\caption{Running EpisoPass on Android.}
+\label{android1}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=80mm,bb=-30 0 400 106]{figures/ba8f5aeaa935ad63437969f4d746746b.png}
+\caption{Running EpisoPass on Android.}
+\label{android2}
+\end{figure}
 
 % 回答入力と{\PW}計算はAndroid端末で実行されるため、
 % 端末を「機内モード」に設定するなどの方法で
@@ -861,12 +871,14 @@ Locimetric方式は
 
 \section{CONCLUSION}
 
-{\EM}に結びついた{\SQ}を利用して{\PW}を生成/管理できるシステム{\EP}を提案した。
-{\EP}は単純な原理にもとづいており柔軟な利用形態が可能であり、
-強力な{\SQ}を用意することにより
-秘密情報を全く覚えることなく安全な認証を行なうことができる。
-%
-強力な{\SQ}を作成して安全に運用が可能かどうかを長期的に評価したいと考えている。
+We have developed a 
+
+% {\EM}に結びついた{\SQ}を利用して{\PW}を生成/管理できるシステム{\EP}を提案した。
+% {\EP}は単純な原理にもとづいており柔軟な利用形態が可能であり、
+% 強力な{\SQ}を用意することにより
+% 秘密情報を全く覚えることなく安全な認証を行なうことができる。
+% %
+% 強力な{\SQ}を作成して安全に運用が可能かどうかを長期的に評価したいと考えている。
 %
 %欠点:
 %なぞなぞを考えるのがめんどくさい
@@ -874,10 +886,10 @@ Locimetric方式は
 %  ネットなしで運用したりとか
 %運用を間違うと思わぬところで回答がバレる可能性がある
 %
-{\EP}は\textsf{http://Episopass.com/}で運用しており、
-ソースはGitHubで公開している\footnote{
-  \textsf{http://GitHub.com/masui/EpisoPass}
-}。
+% {\EP}は\textsf{http://Episopass.com/}で運用しており、
+% ソースはGitHubで公開している\footnote{
+%   \textsf{http://GitHub.com/masui/EpisoPass}
+% }。
 
 {% \scriptsize
 \bibliographystyle{acm-sigchi}
