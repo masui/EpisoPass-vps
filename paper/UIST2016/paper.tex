@@ -475,12 +475,12 @@ The biggest advantage of using EpisoPass is that
 users don't have to remember passwords of any kind and
 they can stop worrying about password-related troubles.
 %
-Users of EpisoPass can save the seed string and question-answer
-pairs at any place, and easily generate passwords by answering questions.
+Users of EpisoPass can save the seed string and question-answers
+at any place, and easily generate passwords by answering questions.
 If the question is based on old unforgettable episodic memories,
 there is little chance of losing passwords.
 If the user's memory is related to an episode of 20 years ago and the user clearly
-remembers it now, it is unlikely that he forgets the episode after 10 years.
+remembers it now, it is unlikely that he forgets the episode 10 years later.
 
 \subsection{Selecting good questions}
 
@@ -488,80 +488,78 @@ remembers it now, it is unlikely that he forgets the episode after 10 years.
 % 他人が推測することが難しく、自分が決して忘れないような{\EM}を{\SQ}として利用すべきであり、
 % 以下のような性質をもつ記憶は{\SQ}として利用すべきではない。
 
+The strength of the generated password depends on the number of
+questions and the 'secretness' of the questions.
+If the episodic memory is shared by someone else,
+that personn can easily answer the question and generate the
+password just like the user.
+
 The quality of secret questions is the key to using EpisoPass.
-The episode related to the question should not be known to other people,
+The episode related to each question should not be known to other people,
 and the episode should be unforgettable.
 %
 Finding such episodes seems difficult at first, but
 when we try to remember experiences of old days,
-we can recall many trivial episodes which are not
-important for other people.
+we can recall many trivial episodes which are unforgettable but
+not important to other people.
 %
-Questions like the following are good candidates for
+Old experienceslike the following are good candidates for
 questions used in EpisoPass.
 
 \begin{itemize}
-% \item 昔のちょっとした怪我の場所や種類
-\item Memory of small injury
+\item Memory of small injury. (Nobody cares it but you.)
 
-\vspace{-1mm}
-% \item 昔のちょっと悔しい思い出
-\item Memories of bad experience like blunders or defeat
+\item Memories of bad experience like blunders or defeat.
 
-\vspace{-1mm}
-% \item 昔何かを見つけた場所
-\item Experience of finding a small item
+\item Experience of finding a small special item.
 \end{itemize}
 
-% たとえば図\ref{kega}のような{\SQ}は他人に話したことが無いが、
-% 痛い思いをしたことは忘れないし、
-% 偽答を作成するのも簡単なので、
-% 認証のための{\SQ}として適切であると考えられる。
+For example, a question like
+``who hit you when you were 6 years old?''
+is about a trivial experience that people do not mention,
+but a bad experience like this is not forgettable.
 
+Questions like "Which one is your favorite?" should be avoided,
+since some of the friends might know the user's taste.
+Questions related to a episode which the user is proud of should also be
+avoided, since the user might talk aboutu the episode to somebody else.
 
+We usually don't tell our bad experiences to other people,
+but we might boast of good experiences or even write a blog about it.
+Also, our tastes (e.g. favorite food) might change in the long run.
+Using such episodes for questions should be avoided.
 
-\begin{itemize}
-\item \textsf{自慢になるもの
-(何かの機会にうっかり他人に話してしまう可能性がある)}
+% \begin{itemize}
+% \item \textsf{自慢になるもの
+% (何かの機会にうっかり他人に話してしまう可能性がある)}
+% 
+% \vspace{-1mm}
+% \item \textsf{ネット上に記録が残っているもの}
+% 
+% \vspace{-1mm}
+% \item \textsf{他人と情報を共有しているもの}
+% 
+% \vspace{-1mm}
+% \item \textsf{趣味や嗜好に関連するもの
+% (他人に推測されやすいうえに嗜好が変化する可能性がある)}
+% 
+% \end{itemize}
 
-\vspace{-1mm}
-\item \textsf{ネット上に記録が残っているもの}
-
-\vspace{-1mm}
-\item \textsf{他人と情報を共有しているもの}
-
-\vspace{-1mm}
-\item \textsf{趣味や嗜好に関連するもの
-(他人に推測されやすいうえに嗜好が変化する可能性がある)}
-
-\end{itemize}
-
-\noindent
-% このようなものではなく、
-% 「わざわざ人に話すことはないが自分の記憶に強く残っているような無難な{\EM}」を
-% {\SQ}として利用するのが良いであろう。
-% 具体例としては以下のようなものがある。
-Instead, more subtle and
-
-
-For example, a question like xxxx is about a trivial experience
-that people do not mention, but an experience like this is
-not forgettable because it was a very bad experiance.
-
-% \subsection{偽答の作成方法}
 \subsection{Creating fake answers}
 
 % {\SQ}の種類によっては偽答の生成が難しい場合がある。
 % 図\ref{atmega}は電子工作に関する{\SQ}の例であるが、
 % 正答と区別がつかない偽答を充分リストすることは難しい。
 
-It is sometimes difficult to provid fake answers to a secret question.
+It is sometimes difficult to provid fake answers to a secret question like
+``what was your favorite sport?''
+because possible answers are limited.
 
-\begin{figure}[H]
-\centerline{\includegraphics[width=83mm,bb=0 0 512 113]{../figures/2f63ceb9ab6faf8d81393953f2f95a8c.png}}
-\caption{偽答の生成が難しい例.}
-\label{atmega}
-\end{figure}
+% \begin{figure}[H]
+% \centerline{\includegraphics[width=83mm,bb=0 0 512 113]{../figures/2f63ceb9ab6faf8d81393953f2f95a8c.png}}
+% \caption{偽答の生成が難しい例.}
+% \label{atmega}
+% \end{figure}
 
 % 一方、正答として人名や地名を利用する場合、
 % 正答に似た人名や地名をリストすることは難しくない。
@@ -569,12 +567,11 @@ It is sometimes difficult to provid fake answers to a secret question.
 % 「目黒」「杉並」のような偽答を用意するのは簡単である。
 
 On the other hand, if the right answer to the question is a name of a place or a person,
-generating similar answers is farly easy.
+generating similar answers is easy.
 For example, if the answer to the question is ``Colorado'',
-providing fake answers like ``California'', ``Utah'', etc.
-is easy because getting a list of similar items is very easy.
+we can easily provide fake answers like ``California'', ``Utah'', etc.
+because we can use the list of states in the U.S.
 
-%
 % 正答と同じカテゴリに属する単語を自動的にリストすることができれば
 % 正答をもとにして簡単に偽答のリストを生成することができる。
 In this way, fake answers can be easily listed
@@ -584,50 +581,29 @@ category as the right answer.
 % ひとつの単語もしくは単語の集合と同じカテゴリに属する単語を検索する手法は
 % 「同位語検索」と呼ばれ、
 % Webのデータを利用した様々な同位語検索システムが提案されている%
-Various methods have been proposed for collecting such words.
+For information retrieval purposes,
+various methods have been proposed for collecting words in the
+same category.
 \cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
 \cite{BooWa}% Boo!Wa!というサイトをやっている
 \cite{Wang:2007:LSE:1441428.1442086}% BooWa
 \cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
-
-% たとえば「ライバルサーチ『やーやら』」\cite{大島裕明:2006-12-15}は、
-% Web上の「AやBが」のような表現を抽出することによって
-% AとBのカテゴリが近いことを判断している。
-
-% 人名や地名の偽答を作成したい場合は
-% 人名や地名のデータベースを利用して偽答を生成することができる。
-% 市町村の人口ランキングや位置関係のデータなどを利用すれば
-% 似た地名を偽答としてリストすることが可能であるし、
-% 人名ランキングを利用すれば
-% 似た苗字を偽答とすることができる。
-% たとえば日本の名字ランキングの40位近辺に
-% 「長谷川」「近藤」「石井」「斉藤」「坂本」「遠藤」「藤井」
-% などの名字があるので、
-% 「石井」が正答のときこれらの名字を偽答にすればよい。
-% しかし、
-% 「小学生のとき〜だった同級生は誰?」という{\SQ}の正答が「石井」であるとき
-% この方法で偽答を生成すると、
-% 「長谷川」「近藤」などの同級生の存在を確認することにより
-% 正答が「石井」であることが判明してしまう可能性があるので注意が必要である。
-
+We can use such systems for getting similar names.
 
 \subsection{Usable for everyone}
-  
-Not everyone is familiar with handling passwords.
+
+Although everyone has to use authentication systems on the Net these days,
+not everyone is familiar with handling passwords.
 Even experienced computer users have trouble with passwords,
 since choosing a good password is difficult and people forget passwords frequently.
 Using EpisoPass, people who cannot create and remember strong passwords
-can easily generate strong passwords just by providing secret
+can easily generate strong passwords just by providing secret episodic
 questions and answers.
 By integrating EpisoPass into existing password-based services,
-people can even use such services without noticing the problem of passwords.
-
-% 強いパスワードの作成と記憶が同時にできる
+people can even use services without noticing that passwords are
+used for the authentication.
 
 \subsection{Easy to change passwords}
-
-%   変えるのが簡単
-%     問題に「2016」とか「April」とか書いておけばいい
 
 On many services, users are requested to change passwords periodically
 to strenghen security.
@@ -636,14 +612,14 @@ on a password manager, but he might want to old passwords in case some trouble h
 Using EpisoPass, user can just provide a date-related question-answer pairs,
 and generate different strong passwords based on the answer.
 
-(Figure xxx)
+(Figure xxx) 最初の例に入れておく
 
 \subsection{Security strength of EpisoPass}
 
 There have been many studies on the strength of passwords
 \cite{Hayashi:2011:DSP:1978942.1979326}%
-\cite{Komanduri:2011:PPM:1978942.1979321},% どういうパスワードが強いか
-but the strength of secret questions has not been studied.
+\cite{Komanduri:2011:PPM:1978942.1979321}, % どういうパスワードが強いか
+but the strength of secret questions has not been studied enough.
 %
 % {\EP}で選択枝が10個の{\SQ}を8個使用する場合、
 % 総当たりで{\PW}を生成するには
@@ -654,7 +630,7 @@ but the strength of secret questions has not been studied.
 When we use 10 secret questions with 20 answers,
 1 billion ($20^8$) trials should be performed to check
 all the combinations of the answers,
-and the entropy of the system is 43.2 ($ = 10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
+and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
 %
 % 英字からランダムに8文字を並べて作成した{\PW}のエントロピーは37.6ビットになるが、
 % ``\textsf{pmvixuzq}''のように全く意味のない{\PW}を記憶して利用することは少ないため、
@@ -662,17 +638,12 @@ and the entropy of the system is 43.2 ($ = 10 \times \log_2 20$) bits.  % 10.0 *
 % {\SQ}と選択枝の数を10個程度用意すれば
 % 通常の{\PW}と同程度の強度が期待できることになる。
 %
-It is almost the same entropy as using random 8-character English letters
-as a password, in which case the entropy is 45.6 bits, 
-and this level of strength is considered to be enough for most Web services,
+It is almost the same entropy as using random 8-character English alphabets
+as a password, in which case the entropy is 45.6 bits.
+This level is considered to be strong enough for using Web services,
 where online blute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
 
-% 総当たり攻撃が可能なオフライン運用ではエントロピーの大きさは重要であるが、
-% オンラインサービスでは
-% {\PW}入力を何度か間違えるとサービスがブロックされるのが普通なので、
-% それほど長い{\PW}を用意する必要は無いと考えられている\cite{Florencio:2007:SWP:1361419.1361429}。
-
-\subsection{Issues on EpisoPass questions}
+\subsection{Comparison with challenge-response authentication systems}
 
 % 一方、{\SQ}を利用する認証の脆弱性を利用した攻撃が近年問題になっている。
 % {\PW}を忘れたときのために、
@@ -687,37 +658,38 @@ In many services, users are forced to define answers to secret questions like
 ``what is your mother's maiden name''
 so that he can log in to the service even when he forgets the password.
 This kind of authentication is far less secure than simple password systems,
-since it is fairly easy to answer the question by atackers.
+since it is fairly easy for atackers to get the right answer.
 The variation of system-provided questions are usually small, and
-such a method is considered to be insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
+such challenge-response systems are considered to be insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
 
-if the user can create his own secret questions,
-
-ユーザが作成した{\SQ}を使えばこのような問題はなくなるはずであるが、
-他人に解かれにくい問題をユーザが作成することは難しく、
-またユーザ自身が答を忘れてしまうことも多いと考えられている\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}。
+It would be better if the user can register his own secret questions
+based on his episodic memory.
+However, answers to user-generated challenge questions are more easily
+forgotten or cracked,
+and using simple challenge-responce is not considered to be safe enough
+\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}.
 %
-また、古い記憶にもとづいて作成した秘密の問題は
-ユーザが想像するよりも解かれやすいという実験結果にもとづき、
-忘れない{\SQ}を複数利用する方法、
-問題と答を連想するために画像を利用する方法、
-複数の問題を連続的に利用する手法などが提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
+Also, in this case,
+the user should register the answer to the system in additon to the question.
+Telling secret facts to service providers is like
+registering raw password string on the server,
+and it is not safe unless the strings are properly hashed and salted on the server.
+
+%
+%ユーザが作成した{\SQ}を使えばこのような問題はなくなるはずであるが、
+%他人に解かれにくい問題をユーザが作成することは難しく、
+%またユーザ自身が答を忘れてしまうことも多いと考えられている\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}。
+%
+%また、古い記憶にもとづいて作成した秘密の問題は
+%ユーザが想像するよりも解かれやすいという実験結果にもとづき、
+%忘れない{\SQ}を複数利用する方法、
+%問題と答を連想するために画像を利用する方法、
+%複数の問題を連続的に利用する手法などが提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
 
 {\EP}では、
 他人には解くことが難しく自分では忘れないような{\SQ}を自由にいくつでも利用できるようになっている。
 問題作成に慣れていないユーザには有効な{\SQ}を作成することは難しいかもしれないが、
 次節で述べるように、適切な質問を選ぶことによりこの問題を解決できるはずである。
-
-The strength of the generated password depends on the number of
-questions and the 'secretness' of the questions.
-If the episodic memory is shared by someone else,
-that personn can easily answer the question and generate the
-password just like the user.
-
-Questions like "Which one is your favorite?" should be avoided,
-since some of the friends might know the user's taste.
-Questions related to a episode which the user is proud of should also be
-avoided, since the user might talk aboutu the episode to somebody else.
 
 \subsection{All information can be put public}
 
@@ -757,10 +729,41 @@ The user doesn't have to remember the string and
 there is no chance he will reveal it to somebody
 even when he is forced to tell the password.
 
-% そのためにAndroidアプリも用意した
-
 % \subsection{Strong passwords can be generated}
 %   強度を自由に設定できる
+
+\subsection{Simple implementation}
+%   実装が簡単
+
+The algorithm of generating a password (Appendix)
+is fairly simple and
+it can be implemented on any browser JavaScripts or
+applications on smartphones and small devices.
+
+\subsection{{\PW}漏洩時の問題}
+
+If, one of the passwords generated by EpisoPass is revealed
+for some reason,... フルートフォースでとかれる可能性はある
+
+To prevent such troble, it is safer to keep all the q-a pairs secret.
+
+問題を時々変えるのが安全だろう
+
+問題自体が秘密であればひとつ漏れても大丈夫
+
+{\SQ}を公開している場合、
+{\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
+総当たり計算でチェックすることにより、
+すべて{\SQ}の正答が判明してしまう。
+{\SQ}の正答を知っていれば
+{\SS}から{\PW}を計算することができるので、
+漏洩した{\SQ}は利用不可能になってしまう。
+%
+\ref{pattern1}や
+\ref{pattern2}のような運用をしている場合は
+{\PW}がひとつ漏洩しても他の{\PW}は安全だが、
+\ref{pattern3}のような運用をしている場合は
+ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
 
 \subsection{Using images}
 %   画像を使える
@@ -779,41 +782,6 @@ and use his real name and other similar names as candidate answers.
 
 Of course, the photo should not have information related to the
 person's real name, since image search is fiarly easy on the Web these days.
-
-\subsection{Simple implementation}
-%   実装が簡単
-
-The algorithm of generating a password is quite simple and
-it can be implemented on any browser JavaScripts or
-applications on smartphones and small devices.
-
-
-If, one of the passwords generated by EpisoPass is revealed
-for some reason,... フルートフォースでとかれる可能性はある
-
-To prevent such troble, it is safer to keep all the q-a pairs secret.
-
-問題を時々変えるのが安全だろう
-
-問題自体が秘密であればひとつ漏れても大丈夫
-
-\subsection{{\PW}漏洩時の問題}
-
-{\SQ}を公開している場合、
-{\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
-総当たり計算でチェックすることにより、
-すべて{\SQ}の正答が判明してしまう。
-{\SQ}の正答を知っていれば
-{\SS}から{\PW}を計算することができるので、
-漏洩した{\SQ}は利用不可能になってしまう。
-%
-\ref{pattern1}や
-\ref{pattern2}のような運用をしている場合は
-{\PW}がひとつ漏洩しても他の{\PW}は安全だが、
-\ref{pattern3}のような運用をしている場合は
-ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
-
-\subsection{画像認証の利用}
 
 忘れにくい{\EM}を利用する認証手法として
 様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
@@ -887,14 +855,6 @@ Locimetric方式は
 \section{Experiences}
 % ■ 運用実績
 
-\section{Limitations}
-
-% なぞなぞ問題を考えるのが難しい
-%   自分だけ知ってる秘密など思いつかない人が多い
-%   しかしインタビューを行なうとそういうのは出てくる
-%     子供のときの怪我、ケンカ、失敗など
-%     特に、自慢にならないものが良い
-% 
 % 強度が直感的でない
 %   誰でも簡単にとけるのじゃないかと思う
 %   safe感覚が足りない
@@ -984,11 +944,9 @@ $N$ is calculated by the following algorithm in EpisoPass.
   % \item 問題文字列と選択した答の文字列の組を連結して長い文字列$S$を生成
   \item Generate a string $S$ by concatinating all the question strings and selected candidate answers.
 
-    \vspace{-1mm}
   % \item $S$のMD5ハッシュ値$M$(16進32桁の文字列)を計算
   \item Calculate the MD5 value of $S$ and generate 32-byte hexadecimal string $M$.
 
-    \vspace{-1mm}
   %\item {\SS}の$k$桁目の文字に対し、
   %  $M$の$k \times 4$文字目から$k \times 4 + 3$文字目までの部分文字列(16進4桁)を取得し、
   %  それを$N$とする
