@@ -1,21 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<<<<<<< HEAD
 <widget id="episopass.com.pitecan" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>EpisoPass</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-=======
-<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>EpisoPass</name>
-    <description>
-       Password generator
+       Password manager/generator
     </description>
     <author email="masui@pitecan.com" href="http://pitecan.com">
         Toshiyuki Masui
->>>>>>> 3f987b4cf2122fa2e1829aa5d5783ece31abba16
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
