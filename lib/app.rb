@@ -18,7 +18,7 @@ def replace(file,from,to) # fileのfromパタンをtoに置き換え
   }
 end
 
-def apk(name)
+def apk_old(name)
   tmpdir = "/tmp/episopass#{Time.now.to_i}"
   system("/bin/cp -r /home/masui/EpisoPass/App #{tmpdir}")
   system("/bin/cp /home/masui/EpisoPass/App/AndroidManifest.xml.nopermission #{tmpdir}/AndroidManifest.xml")
@@ -54,7 +54,20 @@ def apk(name)
   apkdata = File.read("#{tmpdir}/bin/EpisoPass-debug.apk")
 end
 
+def apk(name)
+  tmpdir = "/tmp/episopass#{Time.now.to_i}"
+  system("/bin/cp -r /home/masui/EpisoPass/Cordova #{tmpdir}")
+  File.open("#{tmpdir}/www/qa.json","w"){ |f|
+    jsonstr = readdata(name)
+    f.print jsonstr
+  }
+  system("cd #{tmpdir}; ANDROID_HOME=/usr/local/android-sdk-linux JAVA_HOME=/usr/java/default cordova build android")
+  apkdata = File.read("#{tmpdir}/platforms/android/build/outputs/apk/android-debug.apk")
+  # system("/bin/rm -r -f #{tmpdir}")
+  apkdata
+end
+
 if $0 == __FILE__
   #require 'test/unit'
-  apk('masui')
+  puts apk('masui').length
 end

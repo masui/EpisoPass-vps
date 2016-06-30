@@ -170,6 +170,14 @@ sendfile = (files) ->
   fileReader.readAsText file
   false
 
+save = () ->
+  data['seed'] = $('#seed').val()
+  $.ajax
+    type: "POST"
+    async: true
+    url: "/#{name}/__write"
+    data: "data=#{JSON.stringify(data)}"
+
 $ ->
   $('#seed').keyup (e) ->
     data['seed'] = $('#seed').val()
@@ -177,11 +185,10 @@ $ ->
   $('#pass').keyup (e) ->
     calcseed()
   $("#save").click ->
-    $.ajax
-	    type: "POST"
-	    async: true
-	    url: "/#{name}/__write"
-	    data: "data=#{JSON.stringify(data)}"
+    save()
+  $("#apk").click ->
+    save()
+    location.href = "/#{name}.apk"
 
   if ! location.href.match(/^http/)
     $('#save').css 'display', 'none'
