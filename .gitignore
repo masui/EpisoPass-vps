@@ -1,6 +1,7 @@
 #*
 *~
 .D
+.DS_Store
 App/gen/
 App/bin/
 App/local.properties
