@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="stylesheets/episopass.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/jquery-ui.css" type="text/css">
+
+    <script language="JavaScript" src="javascripts/jquery.js"></script>
+    <script language="JavaScript" src="javascripts/md5.js"></script>
+    <script language="JavaScript" src="javascripts/crypt.js"></script>
+    <script language="JavaScript" src="javascripts/data.js"></script>
+    <script language="JavaScript" src="javascripts/app.js"></script>
+    <script language="JavaScript" src="javascripts/jquery-ui.js"></script>
+
+
+    <script language="JavaScript">
+      var uselocalfile = true; // 共通アプリ版ではtrueだが動的生成アプリではfalseにする
+      
+      if(uselocalfile){
+          /*
+          JSONを格納する /EpisoPass/qa.json というファイルを読むのにFileReader()というのを
+          使おうとしたら cordova.js のプラグインかが必要になってしまい、
+          android.permission.ACCESS_NETWORK_STATE
+          をAndroidManifest.xmlに指定しなければならなくなってしまった。
+          こういうのナシでファイル読む方法を考えるべき。
+          動的生成アプリでは cordova.js を読み込まない。
+          */
+
+          // cordova.js を動的読み込み
+          var script = $('<script>');
+          script.attr('src','cordova.js');
+          $('head').append(script);
+
+          document.addEventListener("deviceready", onDeviceReady, false);
+    
+          function onDeviceReady() {
+              window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+          }
+    
+          function gotFS(fileSystem) {
+                //fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+             fileSystem.root.getDirectory("EpisoPass", {create: true, exclusive: false}, onGetDirectoryWin, onGetDirectoryFail);
+          }
+    
+          var onGetDirectoryWin = function(parent) {
+             parent.getFile("qa.json", {create: false, exclusive: false}, gotFileEntry, fail_init);
+          }
+    
+          var onGetDirectoryFail = function() {
+              console.log("error getting dir")
+          }
+    
+          function gotFileEntry(fileEntry) {
+               fileEntry.file(gotFile, fail);
+          }
+    
+          function gotFile(file){
+                    var reader = new FileReader();
+                    reader.onloadend = function(evt) {
+                       console.log(evt.target.result);
+    
+    	         json = evt.target.result;
+                     name = '';
+    
+    	           init();
+                    };
+                    reader.readAsText(file);
+           }
+    
+          function fail(error) {
+              console.log(error.code);
+          }
+          function fail_init(error) {
+              console.log(error.code);
+              init();
+          }
+     }
+     else {
+        $(function(){
+            init();
+        });
+     }
+    </script>
+
+    <title>EpisoPass</title>
+  </head>
+  <body>
+  </body>
+</html>
+
