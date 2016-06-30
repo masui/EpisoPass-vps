@@ -63,7 +63,7 @@ def apk(name)
   }
   system("cd #{tmpdir}; ANDROID_HOME=/usr/local/android-sdk-linux JAVA_HOME=/usr/java/default cordova build android")
   apkdata = File.read("#{tmpdir}/platforms/android/build/outputs/apk/android-debug.apk")
-  # system("/bin/rm -r -f #{tmpdir}")
+  system("/bin/rm -r -f #{tmpdir}")
   apkdata
 end
 
