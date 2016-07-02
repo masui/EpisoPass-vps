@@ -68,6 +68,7 @@ def apk_build(name)
 end
 
 def apk(name)
+  redirect "/try.html" if Dir.glob("/tmp/episopass*").length > 0
   tmpdir = "/tmp/episopass#{Time.now.to_i}"
   system "mkdir #{tmpdir}"
   system "mkdir #{tmpdir}/tmp"
@@ -86,13 +87,13 @@ def apk(name)
   system "cd #{tmpdir}; jarsigner -verbose -digestalg SHA1 -keystore /home/masui/EpisoPass/Cordova/platforms/android/debug.keystore -storepass android -keypass android -tsa http://timestamp.digicert.com episopass.apk androiddebugkey"
   apkdata = File.read "#{tmpdir}/episopass.apk"
   # 
-  #system("/bin/rm -r -f #{tmpdir}")
+  system("/bin/rm -r -f #{tmpdir}")
   apkdata
 end
 
 if $0 == __FILE__
   #require 'test/unit'
   File.open("/tmp/aho.apk","w"){ |f|
-    f.print apk('masui')
+    f.print apk('masui2015')
   }
 end
