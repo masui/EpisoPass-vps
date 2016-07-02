@@ -20,9 +20,9 @@ post '/:name/__write' do |name|
 end
 
 get '/:name.apk' do |name|
-  apkdata = apk(name)
+  # return "- Service Temporarily Unavailable -"
   content_type 'application/vnd.android.package-archive'
-  apkdata
+  apk(name)
 end
 
 get '/:name.html' do |name|
