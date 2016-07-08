@@ -5,9 +5,13 @@ $:.unshift File.expand_path 'lib', File.dirname(__FILE__)
 
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'data'
 require 'defaultdata'
 require 'app'
+require 'config'
+
+enable :cross_origin
 
 get '/' do
   redirect "/index.html"
@@ -30,6 +34,13 @@ get '/:name.html' do |name|
   @json = readdata(name)
   @json = defaultdata.to_json if @json.nil?
   erb :app
+end
+
+get '/:name.json' do |name|
+  cross_origin
+  json = readdata(name)
+  json = defaultdata.to_json if json.nil?
+  json
 end
 
 get '/:name/:seed' do |name,seed|
