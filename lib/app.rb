@@ -54,7 +54,7 @@ def apk_old(name)
   apkdata = File.read("#{tmpdir}/bin/EpisoPass-debug.apk")
 end
 
-def apk(name)
+def apk_build(name)
   tmpdir = "/tmp/episopass#{Time.now.to_i}"
   system("/bin/cp -r /home/masui/EpisoPass/Cordova #{tmpdir}")
   File.open("#{tmpdir}/www/qa.json","w"){ |f|
@@ -67,7 +67,33 @@ def apk(name)
   apkdata
 end
 
+def apk(name)
+  redirect "/try.html" if Dir.glob("/tmp/episopass*").length > 0
+  tmpdir = "/tmp/episopass#{Time.now.to_i}"
+  system "mkdir #{tmpdir}"
+  system "mkdir #{tmpdir}/tmp"
+  system "cd #{tmpdir}/tmp; unzip /home/masui/EpisoPass/Cordova/platforms/android/build/outputs/apk/android-debug.apk"
+  File.open("#{tmpdir}/tmp/assets/www/qa.json","w"){ |f|
+    jsonstr = readdata(name)
+    f.print jsonstr
+  }
+  system "cd #{tmpdir}; perl /home/masui/EpisoPass/Cordova/platforms/android/make-manifest.pl tmp > tmp/META-INF/MANIFEST.MF"
+  system "cd #{tmpdir}; perl /home/masui/EpisoPass/Cordova/platforms/android/make-cert-sf.pl tmp/META-INF/MANIFEST.MF > tmp/META-INF/CERT.SF"
+  system "cd #{tmpdir}; openssl smime -sign -inkey /home/masui/EpisoPass/Cordova/platforms/android/testkey.pem -signer /home/masui/EpisoPass/Cordova/platforms/android/testkey.x509.pem -in tmp/META-INF/CERT.SF -outform DER -noattr > tmp/META-INF/CERT.RSA"
+  system "cd #{tmpdir}; /bin/rm -f episopass.apk"
+  system "cd #{tmpdir}/tmp; zip ../episopass.apk `find .`"
+  #system "cd #{tmpdir}; /bin/rm -f debug.keystore"
+  #system "cd #{tmpdir}; keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
+  system "cd #{tmpdir}; jarsigner -verbose -digestalg SHA1 -keystore /home/masui/EpisoPass/Cordova/platforms/android/debug.keystore -storepass android -keypass android -tsa http://timestamp.digicert.com episopass.apk androiddebugkey"
+  apkdata = File.read "#{tmpdir}/episopass.apk"
+  # 
+  system("/bin/rm -r -f #{tmpdir}")
+  apkdata
+end
+
 if $0 == __FILE__
   #require 'test/unit'
-  puts apk('masui').length
+  File.open("/tmp/aho.apk","w"){ |f|
+    f.print apk('masui2015')
+  }
 end

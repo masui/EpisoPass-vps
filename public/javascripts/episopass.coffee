@@ -146,6 +146,7 @@ secretstr = -> # 質問文字列と選択された文字列をすべて接続し
 calcpass = (copy) -> # シード文字列からパスワード文字列を生成
   newpass = crypt.crypt $('#seed').val(), secretstr()
   $('#pass').val newpass
+
   #if copy
   #  $('#pass').select()
   #  document.execCommand 'copy' # コピーバッファにコピー

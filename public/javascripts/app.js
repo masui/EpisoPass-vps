@@ -227,7 +227,8 @@ var display = function(){
 	center.append(input);
     }
     else if(state == 2){
-        var newpass = Crypt.crypt(seed,secretstr());
+        //var newpass = Crypt.crypt(seed,secretstr());
+        var newpass = exports.crypt(seed,secretstr());
         var center = $('<center>');
         body.append(center);
         var passspan = $('<span>');
@@ -276,6 +277,6 @@ var init = function(){
 
     display();
 
-    Crypt = new Crypt();
+    //Crypt = new Crypt();
 }
 

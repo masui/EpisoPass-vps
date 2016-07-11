@@ -9,7 +9,8 @@ def defaultdata
                :answers => ["まさこちゃん", "のりこちゃん", "みどりちゃん", "こづえちゃん"],
              },
              {
-               :question => "http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg",
+               # :question => "http://farm1.static.flickr.com/54/121077554_eb0138d019.jpg",
+               :question => "https://gyazo.com/756acf45b7456be0a53146732f5a92ca.png",
                :answers => ["物理", "体育", "音楽", "英語", "書道"],
              },
             ],
