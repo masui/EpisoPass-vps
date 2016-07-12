@@ -17,7 +17,7 @@
 ### ダウンロード / インストール
 
 * Firefox
-  * [episopassextension.xpi](https://github.com/masui/EpisoPassExtension/raw/master/episopassextension-0.0.5-fx.xpi)をインストール
+  * [Mozillaアドオンサイト](https://addons.mozilla.org/ja/firefox/addon/episopass/)からインストール
 * Chrome
   * [Chromeウェブストア](https://chrome.google.com/webstore/detail/episopassextension/gempcojpejfhobcccooiifdoddlmokgj)からインストール
 
