@@ -26,6 +26,13 @@ display = (data,name,seed,passelement,qno,answer) ->
   center.append $('<p>')
   div = $('<div>')
   center.append div
+
+  if qno == 0
+    seedinput = $('<input>')
+    seedinput.attr 'type', 'text'
+    seedinput.val seed
+    div.append seedinput
+    div.append $('<p>')
     
   answers = data['qas'][qno]['answers']
   for i in [0...answers.length]
@@ -37,6 +44,8 @@ display = (data,name,seed,passelement,qno,answer) ->
       .css 'padding','1pt'
       .click (event) ->
         event.preventDefault()
+        if qno == 0
+          seed = seedinput.val()
         answer[qno] = Number($(this).attr('anumber'))
         if qno < data['qas'].length - 1
           display(data,name,seed,passelement,qno+1,answer)
