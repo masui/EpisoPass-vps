@@ -33,7 +33,7 @@ display = (data,name,seed,passelement,qno,answer) ->
     seedinput.val seed
     div.append seedinput
     div.append $('<p>')
-    
+
   answers = data['qas'][qno]['answers']
   for i in [0...answers.length]
     input = $('<input>')
