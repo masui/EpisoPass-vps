@@ -64,5 +64,5 @@ secretstr = (data,answer) ->
     secret += qas[i]['answers'][answer[i]]
   secret
 
-exports.run = (data,name,seed,passelement) ->
-  display data,name,seed,passelement,0,[]
+exports.run = (data,name,passelement) ->
+  display data,name,data.seed,passelement,0,[]
