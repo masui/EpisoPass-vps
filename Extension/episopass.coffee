@@ -17,9 +17,8 @@ $ ->
     idelement = $('#ap_email')
     seed = 'Amazon123456'
   if location.href.match /twitter.com/
-    passelement = $('.text-input')[1]
-    idelement = $('.js-signin-email')
-    passelement = idelement
+    idelement = $('.LoginForm-username').children()
+    passelement = $('.LoginForm-password').children()
     seed = 'Twitter123456'
 
   if idelement && passelement && passelement[0] != undefined && passelement.val() == ''
@@ -36,6 +35,7 @@ $ ->
           .css 'height','250px'
           .css 'background-color','#ddd'
           .css 'border-radius','5px'
+          .css 'z-index','100' # 最前面に
           .attr 'id','episopass'
         $('body').append div
 

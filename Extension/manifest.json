@@ -1,12 +1,12 @@
 {
     "name": "EpisoPass",
     "short_name": "EpisoPass",
-    "version": "0.2.1",
+    "version": "0.2.3",
     "manifest_version": 2,
     "description": "FacebookなどにログインしようとするとEpisoPassが開く",
 
     "permissions": [
-	"http://*/"
+	"activeTab"
     ],
     
     "applications": {
@@ -15,6 +15,11 @@
 	    "strict_min_version": "45.0"
 	}
     },
+
+    "page_action": {
+	"default_icon": "icons/episopass-48.png"
+    },
+    
     "icons": {
 	"48": "icons/episopass-48.png",
 	"96": "icons/episopass-96.png"
