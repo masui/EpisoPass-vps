@@ -9,7 +9,7 @@ js:
 #
 # Firefox拡張機能用のxpiを作る
 #
-XPIFILES=manifest.json app.js crypt.js episopass.js exports.js jquery-2.1.4.min.js md5.js episopass.png icons
+XPIFILES=manifest.json app.js crypt.js episopass.js exports.js jquery-2.1.4.min.js md5.js episopass.png icons privacy.html
 xpi: js
 	/bin/rm -f episopass.xpi
 	zip -r episopass.xpi ${XPIFILES}

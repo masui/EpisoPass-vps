@@ -3,8 +3,7 @@
 ![EpisoPass](https://gyazo.com/02708212f9a3b9cf75b7f53c560abde2.png)
 
 * ChromeやFirefoxの**拡張機能**を使って[EpisoPass](http://EpisoPass.com/)がログイン画面で動くようにしたもの
-* FacebookやAmazonのログイン画面で***メールアドレスを入力してから
-パスワード入力枠をクリックする***と上のようにEpisoPass問題が表示され、すべてに回答するとパスワードが計算されて入力される
+* FacebookやAmazonのログイン画面で***メールアドレスを入力してからパスワード入力枠をクリックする***と上のようにEpisoPass問題が表示され、すべてに回答するとパスワードが計算されて入力される
 * たとえばAmazonアカウントのメールアドレスとして```masui@pitecan.com```を使用する場合は[http://EpisoPass.com/masui@pitecan.com](http://EpisoPass.com/masui@pitecan.com)に問題を用意しておき、正答を選択したとき生成されるパスワードをAmazonに登録しておく
 * Amazonのログイン画面上ですべての回答に正しく回答すると
 登録したパスワードが生成されてログインに成功する
@@ -13,6 +12,7 @@
 
 * Amazon (Seedは```Amazon123456```固定)
 * Facebook (Seedは```Facebook123456```固定)
+* Twitter (Seedは```Twitter123456```固定)
 
 ### ダウンロード / インストール
 

@@ -1,7 +1,7 @@
 {
     "name": "EpisoPass",
     "short_name": "EpisoPass",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "manifest_version": 2,
     "description": "FacebookなどにログインしようとするとEpisoPassが開く",
 
