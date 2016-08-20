@@ -1,12 +1,37 @@
+<!--
+    正規表現の拡張を使ってEpisoPass問題生成を助ける
+
+    http://www.pitecan.com/tmp/EpisoQ/ でデプロイ
+-->
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Expand実験</title>
+    <title>EpisoPass問題作成支援</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="expand.js"></script>
+    <style type="text/css">
+      a:link { color: #0000f0 ; }
+      a:visited { color: #0000f0 ; }
+      a {
+        text-decoration: none;
+      }
+      body {
+        background-color: #eee;
+      }
+    </style>
+
   </head>
   <body>
-    <input type="text" id="q" value="スーパー"></input>
+    <h2>EpisoPassのなぞなぞ問題作成支援</h2>
+
+    <ul>
+      <li>下のテキストボックスにキーワードを入力するとなぞなぞ問題候補がリストされる
+      <li><a href="https://www.npmjs.com/package/re_expand">re_expand</a>というnpmを利用
+    </ul>
+    
+    <input type="text" id="q" value="小学 スーパー"></input>
+    
     <p></p>
+    
   </body>
 </html>

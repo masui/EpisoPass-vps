@@ -13,6 +13,7 @@ shops = "(本屋|床屋|散髪屋|レストラン|食堂|スーパー|市場|八
 recs = "(旅行|BBQ|バーベキュー)"
 sports = "(野球|サッカー|ハイキング|サーフィン|散歩)"
 events = "(コンサート|合宿|遠足|花見)"
+animals = "(犬|猫|ウサギ|ネズミ)"
 
 generator.add "#{time}(足|額|手|腕)を怪我した(場所|町)"
 generator.add "#{schools}のころ学校でよく暴れてた奴"
@@ -31,13 +32,16 @@ generator.add "昔(嘘をついた|酷いことをしてしまった)相手"
 generator.add "昔粗相をした場所"
 generator.add "昔恥ずかしいところを見られた相手"
 generator.add "昔振られた相手"
+generator.add "昔好きだった相手"
 generator.add "実は(嫌いな|苦手な)人"
 generator.add "#{schools}のころ嫌いだった先生"
+generator.add "昔嫌いだった食べ物"
+generator.add "#{animals}に関する思い出"
 
 div = null
 
 f = (s, cmd) ->
-  div.append $('<div>').text(s)
+  div.append $('<li>').text(s)
 
 search = ->
   div.remove() if div
