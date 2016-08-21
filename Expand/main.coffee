@@ -28,7 +28,7 @@ generator.add "#{time}の電話番号"
 generator.add "#{time}#{recs}したところ"
 generator.add "#{time}#{sports}したところ"
 generator.add "昔#{events}に行ったところ"
-generator.add "昔(嘘をついた|酷いことをしてしまった)相手"
+generator.add "昔(嘘をついた|酷いことをしてしまった|持ち物を盗んだ|イジメた)相手"
 generator.add "昔粗相をした場所"
 generator.add "昔恥ずかしいところを見られた相手"
 generator.add "昔振られた相手"
@@ -36,17 +36,20 @@ generator.add "昔好きだった相手"
 generator.add "実は(嫌いな|苦手な)人"
 generator.add "#{schools}のころ嫌いだった先生"
 generator.add "昔嫌いだった食べ物"
+generator.add "昔嫌いだった先生"
+generator.add "かわいがってもらった先生"
+generator.add "(失敗した|ヘマをした)試験"
 generator.add "#{animals}に関する思い出"
 
-div = null
+ul = null
 
 f = (s, cmd) ->
-  div.append $('<li>').text(s)
+  ul.append $('<li>').text(s)
 
 search = ->
-  div.remove() if div
-  div = $('<div>')
-  $('body').append div
+  ul.remove() if ul
+  ul = $('<ul>')
+  $('body').append ul
   qstr = $('#q').val()
   generator.filter " #{qstr} ", f, 0
 
