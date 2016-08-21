@@ -2,6 +2,8 @@
 # 正規表現の拡張を使ってEpisoPass問題を作る
 #
 
+hasDom = require 'has-dom'
+
 Generator = require 're_expand'
 
 generator = new Generator()
@@ -13,47 +15,127 @@ shops = "(本屋|床屋|散髪屋|レストラン|食堂|スーパー|市場|八
 recs = "(旅行|BBQ|バーベキュー)"
 sports = "(野球|サッカー|ハイキング|サーフィン|散歩)"
 events = "(コンサート|合宿|遠足|花見)"
-animals = "(犬|猫|ウサギ|ネズミ)"
+cat = "(ネコ|猫)"
+animals = "(犬|#{cat}|ウサギ|ネズミ|ハムスター)"
+amusement = "(遊園地|動物園)"
+specialplace = "(海岸|山頂|神社|砂場)"
 
-generator.add "#{time}(足|額|手|腕)を怪我した(場所|町)"
-generator.add "#{schools}のころ学校でよく暴れてた奴"
-generator.add "#{schools}のころの旅行先での(失敗|病気|怪我)"
-generator.add "#{schools}のころ成績が(良かった|悪かった)奴"
-generator.add "#{schools}のころ(図画|書道|ピアノ|リコーダー)が上手かった奴"
-generator.add "#{time}#{freqgo}#{shops}"
-generator.add "#{time}住んでたところの近くの(店|遊び場所)"
-generator.add "#{time}住んでた家"
-generator.add "#{time}(喧嘩|柔道|テニス|バドミントン|かるた|トランプ|テスト)で負けた相手"
-generator.add "#{time}の住所"
-generator.add "#{time}の電話番号"
-generator.add "#{time}#{recs}したところ"
-generator.add "#{time}#{sports}したところ"
-generator.add "昔#{events}に行ったところ"
-generator.add "昔(嘘をついた|酷いことをしてしまった|持ち物を盗んだ|イジメた)相手"
-generator.add "昔粗相をした場所"
-generator.add "昔恥ずかしいところを見られた相手"
-generator.add "昔振られた相手"
-generator.add "昔好きだった相手"
-generator.add "実は(嫌いな|苦手な)人"
-generator.add "#{schools}のころ嫌いだった先生"
-generator.add "昔嫌いだった食べ物"
-generator.add "昔嫌いだった先生"
-generator.add "かわいがってもらった先生"
-generator.add "(失敗した|ヘマをした)試験"
-generator.add "#{animals}に関する思い出"
+questions = [
+  "#{time}(足|額|手|腕)を怪我した(場所|町)"
+  "#{schools}のころ学校でよく暴れてた奴"
+  "#{schools}のころ一番嫌いだった奴"
+  "#{schools}のころ好きだった人"
+  "#{schools}のころの旅行先での(失敗|病気|怪我)"
+  "#{schools}のころ成績が(良かった|悪かった)奴"
+  "#{schools}のころ(図画|書道|ピアノ|リコーダー)が上手かった奴"
+  "#{time}#{freqgo}#{shops}"
+  "#{time}住んでたところの近くの(店|遊び場所)"
+  "#{time}住んでた家"
+  "#{time}(喧嘩|柔道|テニス|バドミントン|相撲|かるた|トランプ|テスト)で負けた相手"
+  "#{time}の住所"
+  "#{time}の電話番号"
+  "#{time}#{recs}したところ"
+  "#{time}#{sports}したところ"
+  "昔#{events}に行ったところ"
+  "昔(嘘をついた|酷いことをしてしまった|持ち物を盗んだ|イジメた|ズルをした)相手"
+  "昔粗相をした場所"
+  "昔恥ずかしいところを見られた相手"
+  "昔振られた相手"
+  "昔好きだった相手"
+  "実は(嫌いな|苦手な)人"
+  "#{schools}のころ嫌いだった先生"
+  "昔嫌いだった食べ物"
+  "昔嫌いだった先生"
+  "かわいがってもらった先生"
+  "(失敗した|ヘマをした)試験"
+  "#{animals}に関する思い出"
+  "#{cat}にひっかかれた場所"
+  "犬にかまれた場所"
+  "ヘビが出た場所"
+  "(カエル|ウンコ|ミミズ)を踏んでしまった場所"
+  "#{amusement}の思い出"
+  "迷子になった#{amusement}"
+  "(最高|最低)の(先輩|後輩)"
+  "(2014|2015)忘年会の場所"
+  "(会社|オフィス|アパート)の(1F|2F|3F)にあるもの"
+  "(退学|留年)した奴"
+  "(飲み会|宴会)で吐いた場所"
+  "#{specialplace}で叫んでいた奴"
+  "はじめて買った(バイク|ギター|CD)"
+  "拾って驚いたもの"
+  "(自転車|財布)を盗まれた場所"
+  "酷い(上司|先輩)とは"
+  "(サークル|部活)の部屋でで(キス|エッチ)をしていたのは"
+  "展開が好きなアーティスト"
+  "密かにつきあってたのは"
+  "はじめて持ったガラケー"
+  "はじめて買ってもらったおもちゃ"
+  "#{schools}のとき学校から見えた景色"
+  "旅行で盗まれたもの"
+  "小さい頃、2段ベッドにやってきたのは"
+  "最初に美味しいと思った(ワイン|モルトウィスキー|ビール|料理)"
+  "ボイコットしたのは"
+  "役満振り込んだ瞬間に逃げ出したのは"
+  "#{specialplace}(にいたのは|で拾ったのは)"
+  "空に放り上げたのは"
+  "(海|川)に捨てたのは"
+  "人非人といえば"
+  "#{schools}のときよく食べたのは"
+  "(最高|最低)得点は"
+  "(テレビ|箪笥)の裏に隠したのは"
+  "食べたトマトを吐きかけてしまった相手"
+  "酒屋のおじさんのバックホームの返球は"
+  "カッターで指を切り落としたのは"
+  "CDを借りパクしたのは"
+  "片思いの相手は"
+  "嬉し恥ずかしかったのは"
+  "あまずっぱい思い出はどこで"
+  "茶番が好評だったのは"
+  "はじめて登った山は"
+  "子供のころ体のどこを怪我したか"
+  "ぞうきん入れとは何か"
+  "ブタマンジュジュとは"
+  "やりたかったけどできなかった(楽器|スポーツ)は"
+  "滅多打ちであった とは"
+  "下宿の床を焦がした奴は"
+  "夜中に大声を出して迷惑だったのは"
+  "本当は友達じゃないのは"
+  "不愉快な同僚は"
+  "恩知らずといえば"
+  "走り幅跳びで飛んだ距離は"
+  "(ソフトボール|野球)の顧問の専門は"
+  "ホームランだと思ったのにキャッチした奴は"
+  "背負い投げをくらったのは"
+  "役満を振込んだのは"
+  "教室からいなくなるのは"
+]
 
-ul = null
+for q in questions
+  generator.add q
 
-f = (s, cmd) ->
-  ul.append $('<li>').text(s)
+# if process.env['SHELL'] == undefined  # ブラウザ上での実行
 
-search = ->
-  ul.remove() if ul
-  ul = $('<ul>')
-  $('body').append ul
-  qstr = $('#q').val()
-  generator.filter " #{qstr} ", f, 0
+if hasDom()
+  ul = null
 
-$ ->
-  search()
-  $('#q').on 'keyup', search
+  f = (s, cmd) ->
+    ul.append $('<li>').text(s)
+
+  search = ->
+    ul.remove() if ul
+    ul = $('<ul>')
+    $('body').append ul
+    qstr = $('#q').val()
+    generator.filter " #{qstr} ", f, 0
+
+  $ ->
+    search()
+    $('#q').on 'keyup', search
+
+else                                  # コマンドラインでの実行
+  f = (a) -> console.log a
+
+  for q in questions
+    generator.add q
+
+  generator.filter " ", f
