@@ -17,6 +17,7 @@ animals = "(犬|猫|ウサギ|ネズミ)"
 
 generator.add "#{time}(足|額|手|腕)を怪我した(場所|町)"
 generator.add "#{schools}のころ学校でよく暴れてた奴"
+generator.add "#{schools}のころの旅行先での(失敗|病気|怪我)"
 generator.add "#{schools}のころ成績が(良かった|悪かった)奴"
 generator.add "#{schools}のころ(図画|書道|ピアノ|リコーダー)が上手かった奴"
 generator.add "#{time}#{freqgo}#{shops}"
