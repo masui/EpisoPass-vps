@@ -10,7 +10,9 @@
 
 js:
 	coffee -b -c main.coffee
+	coffee -b -c main_e.coffee
 	browserify main.js -o expand.js
+	browserify main_e.js -o expand_e.js
 
 #
 # http://www.pitecan.com/tmp/EpisoQ/ で実験できるように
