@@ -161,7 +161,7 @@ and many other authentication methods have been proposed.
 However,
 password-based authentication is still the most
 convenient and strong method\cite{Bonnearu:ReplacePasswords},
-and it is not supposed to get extinct
+and it is not supposed to become extinct
 in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
 
 % % なのでパスワードと生きる方法が工夫されている
@@ -204,7 +204,7 @@ asking users to remember a single ``master password'' to access the database.
 Although password managers are useful,
 users have to remember the master password
 or use a special hardware device
-for safely handle password managers, and
+for safely handling password managers, and
 password managers usually run on limited devices.
 
 % 読みとることができない脳内情報を利用するという基本手法は良いのだが覚えられないのが問題である
@@ -224,7 +224,7 @@ However, the biggest problem of brain-based authentication is that
 users cannot safely keep memories like long passwords or master password.
 For this reason, we believe that
 it is far better to ``generate'' something for the authentication,
-based on users' episodic memories which they can never forget.
+based on users' episodic memories that they can never forget.
 %
 % We believe that a password manager should have the following features.
 % (1) It should be available on any platform including PCs, smartphones, and the Web.
@@ -232,8 +232,7 @@ based on users' episodic memories which they can never forget.
 % (3) Rely only on the information in the user's brain.
 %
 We propose a password manager \textit{EpisoPass} that generates strong passwords
-based only on the user's secret episodic memories that the user can never forget.
-
+based only on the user's secret episodic memories that the user cannot forget.
 
 \section{EpisoPass}
 
@@ -244,12 +243,13 @@ strong passwords based on users' secret episodic memories.
 % a user provides a seed string and many question-answer pairs to EpisoPass,
 % and a password is generated based on the user's selections.
 %
-Memories in human brain are not uniform.
+% Memories in human brain are not uniform.
+We keep various memories in our brain, but different memories have different natures.
 Some memories are very short-lived, and others are unforgettable.
 When we have a very impressive experience,
 that memory will stay in the brain for a long time and
 cannot easily disappear.
-On the other hand, when we study math and try to remember a formula,
+On the other hand, when we study math and try to remember a new formula,
 it is usually hard to memorize it unless we practice a lot,
 since the knowledge about the formula is not related to
 any personal experiences.
@@ -258,7 +258,6 @@ people cannot easily lose it.
 Memories of passwords belong to the latter type and
 people cannot easily remember them, just like people cannot
 remember math formulas easily.
-%
 
 % \begin{quote}
 % Episodic memory is the memory of autobiographical events (times,
@@ -286,6 +285,10 @@ remember math formulas easily.
 % or implicit memory.[5]
 % \end{quote}
 
+The idea of using episodic memories for authentication is not new.
+
+**** Cognitive Passwords *******
+
 Password generation on EpisoPass is performed through the following steps:
 
 \begin{enumerate}
@@ -300,7 +303,7 @@ a password.
 the user can select the right answer for each question.
 Based on the user's selections,
 EpisoPass substitutes characters in the seed string and generates
-random-looking password candidate strings.
+strong password candidate strings.
 After selecting all the right answers,
 the user copies the calculated string
 and register it as the password for the service.
@@ -313,8 +316,8 @@ on EpisoPass running on a browser.
 Many questions related to the user's episodic memories are shown to the user,
 and many candidate answers are also shown for each question.
 When a user clicks and selects one of the answers for each question,
-the seed string shown at the top-left is converted to a random-looking string
-based on the selections.
+the seed string shown at the top-left is converted to a
+candidate password string based on the selections.
 When the user selects the right answers to all the questions,
 the right password is calculated and shown at the top.
 
@@ -323,10 +326,11 @@ the right password is calculated and shown at the top.
 % only the user can select the set of right answers and
 % use the converted string as the password.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
-\caption{Generating a Twitter password with EpisoPass.}
+% \includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
+\includegraphics[width=1.0\columnwidth]{figures/4d13e6804ba790624c1f8e2b8255bde5}
+\caption{Generating an Amazon password with EpisoPass.}
 \label{web1}
 \end{figure}
 
@@ -367,7 +371,7 @@ sometimes requested by the service.
 The second question in Figure \ref{web1}
 is based on the author's episodic memory at elementary school,
 and the last question is related to a more recent event
-which the author thinks he can never forget.
+which the author thinks he will never forget.
 All the questions are related to the author's episodic memories
 that he thinks he never forgets, and nobody else knows which one of the
 candidate answers is the right one.
@@ -435,6 +439,15 @@ Details of the algorithm is shown in the Appendix.
 % 「利用期間は?」という質問に対して
 % 「2013/1」「2013/2」のような答を用意しておけば、
 % 時期を選択することによって簡単に{\PW}を変更することができるので便利である。
+
+\subsection{EpisoPass on browser extension}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\columnwidth]{figures/43272f2003ed8c78307110c621eb12e5}
+\caption{Running EpisoPass on Browser Extension.}
+\label{extension}
+\end{figure}
 
 \subsection{Android application}
 

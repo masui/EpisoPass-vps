@@ -30,7 +30,7 @@ $ ->
         div = $('<div>')
           .css 'position','absolute'
           .css 'left','200px'
-          .css 'top','100px'
+          .css 'top','250px'
           .css 'width','400px'
           .css 'height','250px'
           .css 'background-color','#ddd'
