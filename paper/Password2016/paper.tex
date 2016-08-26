@@ -52,7 +52,7 @@
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
-\institute{Faculty of Environment and Information Studies, Keio University,\\
+\institute{Faculty of Environment and Information Studies, Keio University\\
 5322 Endo, Fujisawa, Kanagawa 252-8520, Japan\\
 \mailsa\\
 \url{http://pitecan.com/}}
@@ -77,31 +77,146 @@ We propose a password manager {\it EpisoPoss\/} that supports the generation of 
 
 
 \section{Introduction}
+% Passwordは使われている
+% 
+% Passwordが辛いのは一般的事実である[?]
+%   基本的に強くするには長くしなければならない
+%   忘れる
+%   覚えられない
+%   サービスごとにパスワードは変えるべきである[?] でも無理
+%   定期的に更新させられる
+% 強いパスワードを頭で覚えて管理するのは不可能
+%       特に弱者には
+%   パスワード作成アルゴリズムを自力で使っている人もいるがそれは難しい
 
-You are strongly encouraged to use \LaTeXe{} for the
-preparation of your camera-ready manuscript together with the
-corresponding Springer class file \verb+llncs.cls+. Only if you use
-\LaTeXe{} can hyperlinks be generated in the online version
-of your manuscript.
+Passwords have been used for various Web services and applications
+for a long time, and currently the most popular authentication method on the Internet.
+%
+Since short passwords are easily guessed by attackers and
+using the same password for different services is unsafe,
+different long passwords should be used for different services.
+However,
+remembering many long passwords is almost impossible for ordinary humans.
+%
+% According to Flor\^{e}ncio,
+According to a research in 2007,
+people use 6.5 passwords on 25 Web services on average, and
+4.28\% of the users forget their passwords in 3 months\cite{Florencio:2007:LSW:1242572.1242661}.
 
-The \LaTeX{} source of this instruction file for \LaTeX{} users may be
-used as a template. This is
-located in the ``authors'' subdirectory in
-\url{ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/instruct/} and
-entitled \texttt{typeinst.tex}. There is a separate package for Word 
-users. Kindly send the final and checked source
-and PDF files of your paper to the Contact Volume Editor. This is
-usually one of the organizers of the conference. You should make sure
-that the \LaTeX{} and the PDF files are identical and correct and that
-only one version of your paper is sent. It is not possible to update
-files at a later stage. Please note that we do not need the printed
-paper.
+%また2011年の野村総研の調査によれば、
+%一般的なユーザが{\PW}認証を行なうサイトは平均19.4個で、
+%利用している{\PW}は平均3.1個であった\cite{野村総研}。
+%多数の{\PW}を記憶することが困難であるため、
+%多くのユーザが同じ{\PW}を複数サイトで使い回しているのだと思われる。
 
-We would like to draw your attention to the fact that it is not possible
-to modify a paper in any way, once it has been published. This applies
-to both the printed book and the online version of the publication.
-Every detail, including the order of the names of the authors, should
-be checked before the paper is sent to the Volume Editors.
+% People are frequently asked to register a password when
+% they try to use a new service.
+
+% もっと別の認証もいろいろ提案されている
+%   画像認証[MALASYM][その他いろいろ]
+%   
+%   特殊ハードのような持ち物を使う方法など[Pico][YubiKey][RSA]
+%   生体認証 指紋認証
+%   行動からの認証[]
+%   位置ベースの認証[SOUPS]
+%  完全置き換えはしばらくは不可能だろう
+
+Since passwords are difficult to handle,
+various other authentication methods have been proposed.
+For example,
+image-based authentication\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}, 
+biometrics authentication\footnote{
+  % \textsf{https:{\slash}{\slash}en.wikipedia.org{\slash}wiki{\slash}Biometrics}
+  \url{https://en.wikipedia.org/wiki/Biometrics}
+},
+behavior-based authentication\cite{Dandapat:2015:AYD:2702123.2702457}, 
+and many other authentication methods have been proposed.
+
+% というのもパスワードには利点があるから[Bonneau]
+%   すでに普及
+%   KB以外の特殊ハードが要らない
+%   アタック方法はいろいろあるし[] 流出もしばしばだが
+%     うまく実装したシステム上でうまく使えば安全
+%     ハッシュ、ソルト
+%     実装が比較的簡単
+% なのでパスワードが近い将来死滅するとは考えられない
+
+However,
+password-based authentication is still the most
+convenient and strong method\cite{Bonnearu:ReplacePasswords},
+and it is not supposed to get extinct
+in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
+
+% % なのでパスワードと生きる方法が工夫されている
+% %   強いパスワードを考える方法[]
+% %     覚える方法が提案されてたり[Bonneau]
+% %       万人むけはむり
+
+% パスワードが死滅しないならパスワードと生きる方法が必要である
+%   たとえば様々なパスワード管理システム[][][][]の利用がすすめられている
+%   しかしマスターパスワードがいったり特殊ハードがいったりする
+%   特殊システムがいる場合がある
+%   特殊ハードやソフトは利用がどうしても難しい
+
+If we have to live with password-based authentication systems,
+we have to devise some ways to handle many passwords, and
+various ``password managers'' have been proposed
+\cite{OnePassword}%
+\cite{Dashlane}%
+\cite{ミルパス}%
+\cite{LastPass}%
+\cite{KeyPass}%
+\cite{NortonIDSafe}%
+\cite{IDManager}.
+%
+Password managers remember users' passwords and help them enter
+passwords on various services.
+%
+%{\PW}管理システムは
+%ひとつの「マスター{\PW}」を利用して他のすべての{\PW}を管理するもので、
+%暗号化されたデータベースに{\PW}を格納するもの%
+%
+Most password managers can manage various passwords by
+asking users to remember a single ``master password'' to access the database.
+%
+%が多いが、サービス名をもとにマスター{\PW}を変換することによって
+%複数の{\PW}を生成するシステム\cite{SuperGenPass}もある。
+%両者ともにマスター{\PW}の記憶は必須であり、
+%マスター{\PW}を盗まれたり忘れたりする危険がある。
+%
+Although password managers are useful,
+users have to remember the master password
+or use a special hardware device
+for safely handle password managers, and
+password managers usually run on limited devices.
+
+% 読みとることができない脳内情報を利用するという基本手法は良いのだが覚えられないのが問題である
+%   だとすると...パスワードを記憶するかわりに、****脳が既に覚えている秘密の記憶からパスワードを生成すればよいはずである***
+%   確かな脳内情報を使ってパスワードを利用する必要があるが、
+%     沢山の強力なパスワードそのものを覚えることは不可能に近い
+%   だとすると、確かな脳内秘密情報からパスワードをGenerateするしかない
+%   そこでエピソード記憶を使う
+%   秘密の知識からGenerateするとよい
+%
+
+If we don't want to carry any special device for authentication,
+all the information required for the authentication should be
+kept in the brain.
+%
+However, the biggest problem of brain-based authentication is that
+users cannot safely keep memories like long passwords or master password.
+For this reason, we believe that
+it is far better to ``generate'' something for the authentication,
+based on users' episodic memories which they can never forget.
+%
+% We believe that a password manager should have the following features.
+% (1) It should be available on any platform including PCs, smartphones, and the Web.
+% (2) Users should not have secret information (e.g. master password) or special device.
+% (3) Rely only on the information in the user's brain.
+%
+We propose a password manager \textit{EpisoPass} that generates strong passwords
+based only on the user's secret episodic memories that the user can never forget.
+
 
 \subsection{Checking the PDF File}
 
@@ -233,7 +348,9 @@ If screenshots are necessary, please make sure that you are happy with
 the print quality before you send the files.
 \begin{figure}
 \centering
-\includegraphics[height=6.2cm]{eijkel2}
+% \includegraphics[height=6.2cm]{eijkel2}
+%\includegraphics[height=6.2cm]{figures/429eec261024dc6c85351f51c12f09b4.png}
+\includegraphics[width=12cm,bb=0 0 429 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
 \caption{One kernel at $x_s$ (\emph{dotted kernel}) or two kernels at
 $x_i$ and $x_j$ (\textit{left and right}) lead to the same summed estimate
 at $x_s$. This shows a figure consisting of different types of
@@ -241,6 +358,7 @@ lines. Elements of the figure described in the caption should be set in
 italics, in parentheses, as shown in this sample caption.}
 \label{fig:example}
 \end{figure}
+
 
 Please define figures (and tables) as floating objects. Please avoid
 using optional location parameters like ``\verb+[h]+" for ``here".
@@ -383,28 +501,8 @@ full titles, but with their acronyms!
 
 \begin{thebibliography}{4}
 
-\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
-Subsequences. J. Mol. Biol. 147, 195--197 (1981)
 
-\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-Composing a Complex Biological Workflow through Web Services. In: Nagel,
-W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-pp. 1148--1158. Springer, Heidelberg (2006)
-
-\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
-Infrastructure. Morgan Kaufmann, San Francisco (1999)
-
-\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-Information Services for Distributed Resource Sharing. In: 10th IEEE
-International Symposium on High Performance Distributed Computing, pp.
-181--184. IEEE Press, New York (2001)
-
-\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-Grid: an Open Grid Services Architecture for Distributed Systems
-Integration. Technical report, Global Grid Forum (2002)
-
-\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
-
+  
 \end{thebibliography}
 
 
