@@ -22,6 +22,8 @@
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
 
+\usepackage{here} % [H]とするとその場所に配置されるらしい
+
 \usepackage{url}
 \urldef{\mailsa}\path|masui@pitecan.com|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
@@ -70,11 +72,26 @@
 
 
 \begin{abstract}
-We propose a password manager {\it EpisoPoss\/} that supports the generation of strong passwords based on a user's secret episodic memories. To use EpisoPass, a user first collects question-answer pairs related to their own episodic memories. Each is registered with several possible answers: a single correct answer and multiple fake answers. When the user wants to generate a password, EpisoPass shows each question and list of possible answers and asks the user to select those that are correct. EpisoPass then generates a domain-unique password by substituting the characters of a seed string based on the selected answers. Through careful selection of memories and answers, EpisoPass provides an authentication step using memories that are easy to recall, but difficult for others to guess. In this way various strong passwords can be easily managed without the need for the master password or secret device that is otherwise required by conventional password managers. Using a browser extension, users can use EpisoPass directly on the login page of conventional Web services like Facebook, removing the need to type or copy a password string. 
+We propose a password manager \textit{EpisoPass} that supports the
+generation of strong passwords based on a user's secret episodic
+memories. To use EpisoPass, a user first collects question-answer
+pairs related to their own episodic memories. Each is registered with
+several possible answers: a single correct answer and multiple fake
+answers. When the user wants to generate a password, EpisoPass shows
+each question and list of possible answers and asks the user to select
+those that are correct. EpisoPass then generates a domain-unique
+password by substituting the characters of a seed string based on the
+selected answers. Through careful selection of memories and answers,
+EpisoPass provides an authentication step using memories that are easy
+to recall, but difficult for others to guess. In this way various
+strong passwords can be easily managed without the need for the master
+password or secret device that is otherwise required by conventional
+password managers. Using a browser extension, users can use EpisoPass
+directly on the login page of conventional Web services like Facebook,
+removing the need to type or copy a password string.
 
 \keywords{Passwords; password managers; user authentication; episodic memories; EpisoPass}
 \end{abstract}
-
 
 \section{Introduction}
 % Passwordは使われている
@@ -218,139 +235,781 @@ We propose a password manager \textit{EpisoPass} that generates strong passwords
 based only on the user's secret episodic memories that the user can never forget.
 
 
-\subsection{Checking the PDF File}
+\section{EpisoPass}
 
-Kindly assure that the Contact Volume Editor is given the name and email
-address of the contact author for your paper. The Contact Volume Editor
-uses these details to compile a list for our production department at
-SPS in India. Once the files have been worked upon, SPS sends a copy of
-the final pdf of each paper to its contact author. The contact author is
-asked to check through the final pdf to make sure that no errors have
-crept in during the transfer or preparation of the files. This should
-not be seen as an opportunity to update or copyedit the papers, which is
-not possible due to time constraints. Only errors introduced during the
-preparation of the files will be corrected.
+EpisoPass is a password manager that supports generating
+strong passwords based on users' secret episodic memories.
+%
+% Before using EpisoPass for generating passwords,
+% a user provides a seed string and many question-answer pairs to EpisoPass,
+% and a password is generated based on the user's selections.
+%
+Memories in human brain are not uniform.
+Some memories are very short-lived, and others are unforgettable.
+When we have a very impressive experience,
+that memory will stay in the brain for a long time and
+cannot easily disappear.
+On the other hand, when we study math and try to remember a formula,
+it is usually hard to memorize it unless we practice a lot,
+since the knowledge about the formula is not related to
+any personal experiences.
+The former type of memory is called the episodic memory and
+people cannot easily lose it.
+Memories of passwords belong to the latter type and
+people cannot easily remember them, just like people cannot
+remember math formulas easily.
+%
 
-This round of checking takes place about two weeks after the files have
-been sent to the Editorial by the Contact Volume Editor, i.e., roughly
-seven weeks before the start of the conference for conference
-proceedings, or seven weeks before the volume leaves the printer's, for
-post-proceedings. If SPS does not receive a reply from a particular
-contact author, within the timeframe given, then it is presumed that the
-author has found no errors in the paper. The tight publication schedule
-of LNCS does not allow SPS to send reminders or search for alternative
-email addresses on the Internet.
+% \begin{quote}
+% Episodic memory is the memory of autobiographical events (times,
+% places, associated emotions, and other contextual who, what, when,
+% where, why knowledge) that can be explicitly stated. It is the
+% collection of past personal experiences that occurred at a particular
+% time and place. For example, if one remembers the party on his or her
+% 6th birthday, this is an episodic memory. They allow an individual to
+% figuratively travel back in time to remember the event that took place
+% at that particular time and place.[1]
+% 
+% Semantic memory is one of the two types of declarative or explicit
+% memory (our memory of facts or events that is explicitly stored and
+% retrieved).[1] Semantic memory refers to general world knowledge that
+% we have accumulated throughout our lives.[2] This general knowledge
+% (facts, ideas, meaning and concepts) is intertwined in experience and
+% dependent on culture. Semantic memory is distinct from episodic
+% memory, which is our memory of experiences and specific events that
+% occur during our lives, from which we can recreate at any given
+% point.[3] For instance, semantic memory might contain information
+% about what a cat is, whereas episodic memory might contain a specific
+% memory of petting a particular cat. We can learn about new concepts by
+% applying our knowledge learned from things in the past.[4] The
+% counterpart to declarative, or explicit memory, is procedural memory,
+% or implicit memory.[5]
+% \end{quote}
 
-In some cases, it is the Contact Volume Editor that checks all the final
-pdfs. In such cases, the authors are not involved in the checking phase.
+Password generation on EpisoPass is performed through the following steps:
 
-\subsection{Additional Information Required by the Volume Editor}
+\begin{enumerate}
+\item A user registers many question texts related to the user's personal
+secret episodic memories that the user never forgets,
+and provides a correct answer and additional fake answers.
 
-If you have more than one surname, please make sure that the Volume Editor
-knows how you are to be listed in the author index.
+\item The user provides a long ``seed string'' for each service that requires
+a password.
 
-\subsection{Copyright Forms}
+\item EpisoPass shows the data to the user so that
+the user can select the right answer for each question.
+Based on the user's selections,
+EpisoPass substitutes characters in the seed string and generates
+random-looking password candidate strings.
+After selecting all the right answers,
+the user copies the calculated string
+and register it as the password for the service.
+\end{enumerate}
 
-The copyright form may be downloaded from the ``For Authors"
-(Information for LNCS Authors) section of the LNCS Website:
-\texttt{www.springer.com/lncs}. Please send your signed copyright form
-to the Contact Volume Editor, either as a scanned pdf or by fax or by
-courier. One author may sign on behalf of all of the other authors of a
-particular paper. Digital signatures are acceptable.
+\subsection{Using EpisoPass on a browser}
 
-\section{Paper Preparation}
+Figure \ref{web1} shows how to generate a password
+on EpisoPass running on a browser.
+Many questions related to the user's episodic memories are shown to the user,
+and many candidate answers are also shown for each question.
+When a user clicks and selects one of the answers for each question,
+the seed string shown at the top-left is converted to a random-looking string
+based on the selections.
+When the user selects the right answers to all the questions,
+the right password is calculated and shown at the top.
 
-Springer provides you with a complete integrated \LaTeX{} document class
-(\texttt{llncs.cls}) for multi-author books such as those in the LNCS
-series. Papers not complying with the LNCS style will be reformatted.
-This can lead to an increase in the overall number of pages. We would
-therefore urge you not to squash your paper.
+% If the q-a is based on the user's episodic memories and
+% nobody knows the correct answer,
+% only the user can select the set of right answers and
+% use the converted string as the password.
 
-Please always cancel any superfluous definitions that are
-not actually used in your text. If you do not, these may conflict with
-the definitions of the macro package, causing changes in the structure
-of the text and leading to numerous mistakes in the proofs.
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
+\caption{Generating a Twitter password with EpisoPass.}
+\label{web1}
+\end{figure}
 
-If you wonder what \LaTeX{} is and where it can be obtained, see the
-``\textit{LaTeX project site}'' (\url{http://www.latex-project.org})
-and especially the webpage ``\textit{How to get it}''
-(\url{http://www.latex-project.org/ftp.html}) respectively.
+In Figure \ref{web1},
+``\textsf{Twitter123456}'' is provided as the seed string,
+and according to the selections to the five questions,
+the seed string is converted to a string
+``\textsf{Lbasnln542202}'',
+which can be used as the password for Twitter.
 
-When you use \LaTeX\ together with our document class file,
-\texttt{llncs.cls},
-your text is typeset automatically in Computer Modern Roman (CM) fonts.
-Please do
-\emph{not} change the preset fonts. If you have to use fonts other
-than the preset fonts, kindly submit these with your files.
+When the user clicks another candidate,
+the seed string is converted to another strings like
+``\textsf{Bhtuyna904127}'' (Figure \ref{web11}).
 
-Please use the commands \verb+\label+ and \verb+\ref+ for
-cross-references and the commands \verb+\bibitem+ and \verb+\cite+ for
-references to the bibliography, to enable us to create hyperlinks at
-these places.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/01e5507d090eb494a20bcbc47c86b1d2}
+\caption{Selecting a different answer.}
+\label{web11}
+\end{figure}
 
-For preparing your figures electronically and integrating them into
-your source file we recommend using the standard \LaTeX{} \verb+graphics+ or
-\verb+graphicx+ package. These provide the \verb+\includegraphics+ command.
-In general, please refrain from using the \verb+\special+ command.
+In this way, different selections yields different password strings and
+the password string generated after selecting correct answers can be
+used as the password for the service.
 
-Remember to submit any further style files and
-fonts you have used together with your source files.
+Capital letters in the seed string are substituted to capital letters in the password,
+and digits in the seed string are substituted to digits,
+so that generated passwords conforms to password character restrictions
+sometimes requested by the service.
 
-\subsubsection{Headings.}
+% {\SS}として「\textsf{Twitter123456}」という文字列を指定しており、
+% 4個の{\SQ}に対する回答選択に応じて
+% 「\textsf{Mfveabn574923}」のような{\PW}候補が生成される。
+% 異なる答をを選択すると全く異なる文字列が生成される。
+% {\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
+% {\SS}の文字種に対応した{\PW}候補が生成される。
 
-Headings should be capitalized
-(i.e., nouns, verbs, and all other words
-except articles, prepositions, and conjunctions should be set with an
-initial capital) and should,
-with the exception of the title, be aligned to the left.
-Words joined by a hyphen are subject to a special rule. If the first
-word can stand alone, the second word should be capitalized.
+The second question in Figure \ref{web1}
+is based on the author's episodic memory at elementary school,
+and the last question is related to a more recent event
+which the author thinks he can never forget.
+All the questions are related to the author's episodic memories
+that he thinks he never forgets, and nobody else knows which one of the
+candidate answers is the right one.
 
-Here are some examples of headings: ``Criteria to Disprove
-Context-Freeness of Collage Language", ``On Correcting the Intrusion of
-Tracing Non-deterministic Programs by Software", ``A User-Friendly and
-Extendable Data Distribution System", ``Multi-flip Networks:
-Parallelizing GenSAT", ``Self-determinations of Man".
+Questions and answers can be edited directly on the browser, and they can be
+saved on the server by clicking the ``save to server'' button.
+The Q-A data sets are saved on the server,
+but no information about the correct answer or the
+generated password is saved on the server.
 
-\subsubsection{Lemmas, Propositions, and Theorems.}
+% {\SQ}と答はブラウザで編集でき、
+% 右上の「サーバにセーブ」ボタンを押すことにより{\SS}、秘密の問題、答のリストがサーバにセーブされる。
+% 「ファイルにセーブ」ボタンを押すとJSONデータをパソコンにダウンロードでき、
+% パソコン上のJSONデータをブラウザにドラッグ\&ドロップするとサーバにアップロードできる。
+% ユーザはどれが正答かを指定するわけではないので
+% 問題データを見てもユーザの{\PW}はわからない。
 
-The numbers accorded to lemmas, propositions, and theorems, etc. should
-appear in consecutive order, starting with Lemma 1, and not, for
-example, with Lemma 11.
+When we change the secret string to ``\textsf{Facebook123456}'',
+the generated password changes to ``\textsf{Zxghfbqu533131}'',
+as shown in Figure \ref{web2}.
+In this way, we can generate different passwords for
+different services just by changing the seed string.
 
-\subsection{Figures}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/0e2820c279afc70520482e0fc53b6ed9}
+\caption{Generating the password for FaceBook.}
+\label{web2}
+\end{figure}
 
-For \LaTeX\ users, we recommend using the \emph{graphics} or \emph{graphicx}
-package and the \verb+\includegraphics+ command.
+% {\PW}文字列の計算方法}
+% 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
+% {\PW}を生成している。
+% {\PW}文字列の計算方法は附録に示す。
 
-Please check that the lines in line drawings are not
-interrupted and are of a constant width. Grids and details within the
-figures must be clearly legible and may not be written one on top of
-the other. Line drawings should have a resolution of at least 800 dpi
-(preferably 1200 dpi). The lettering in figures should have a height of
-2~mm (10-point type). Figures should be numbered and should have a
-caption which should always be positioned \emph{under} the figures, in
-contrast to the caption belonging to a table, which should always appear
-\emph{above} the table; this is simply achieved as matter of sequence in
-your source.
+%アルゴリズムはここ? Algorithm
 
-Please center the figures or your tabular material by using the \verb+\centering+
-declaration. Short captions are centered by default between the margins
-and typeset in 9-point type (Fig.~\ref{fig:example} shows an example).
-The distance between text and figure is preset to be about 8~mm, the
-distance between figure and caption about 6~mm.
+Character substitution is performed based on the hash value
+calculated from concatinating all the selected answers.
+For example, if the user selects ``\textbf{\texttt{Ebisawa}}'' to the question ``\textbf{\texttt{Who's the bully?}}'',
+a hash value calculated from  ``\textbf{\texttt{Who's the bully:Ebisawa}}''
+is used for the substitution.
+Details of the algorithm is shown in the Appendix.
 
-To ensure that the reproduction of your illustrations is of a reasonable
-quality, we advise against the use of shading. The contrast should be as
-pronounced as possible.
+% 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
+% {\PW}を生成している。
+% {\PW}文字列の計算方法は附録に示す。
 
-If screenshots are necessary, please make sure that you are happy with
-the print quality before you send the files.
+% \subsubsection{回答選択により{\PW}を切り換え}
+% \label{pwgen}
+% 
+% サービスごとに{\SS}を変えるのではなく、
+% 図\ref{web3}のように
+% サービス名に応じて回答を変えることによって異なる{\PW}を作成することも可能である。
+% {\PW}としての長さや文字種に特種な制約が無いサービスに関してはこの方法が便利である。
+% 
+% \begin{figure}[H]
+% \centerline{\includegraphics[width=83mm,bb=0 0 718 428]{../WISS/figures/a9167a6ec6af9c70dd1617e3fc25ec30.png}}
+% \centerline{\includegraphics[width=83mm,bb=0 0 718 428]{../WISS/figures/5b887fabeb8e3319623901fe4a6c56f2.png}}
+% \caption{サービス名に対応する回答で異なる{\PW}を生成.}
+% \label{web3}
+% \end{figure}
+
+% 定期的に{\PW}変更を求められるシステムでは、
+% 「利用期間は?」という質問に対して
+% 「2013/1」「2013/2」のような答を用意しておけば、
+% 時期を選択することによって簡単に{\PW}を変更することができるので便利である。
+
+\subsection{Android application}
+
+
+% Webサービスを利用する場合、ブラウザとサーバとの間の通信を
+% 記録されたり盗み見されたりされる心配を完全に払拭することはできない。
+% % 危険を完全になくすことはできない。
+% 前述の例において、
+% {\PW}はブラウザ内部でJavaScriptにより生成されるので、
+% 一度ページを表示した後は
+% ネットワークを遮断しても{\PW}計算を行なえるようになっているが、
+% 最初から全く通信を行なわずに{\PW}を作成できる方がより安心であろう。
+% このため、通信を全く行なわずにマシン単体で{\PW}計算を行なうための
+% Androidアプリを用意した。
+% ページの右上の「Androidアプリ」ボタンを押すと、
+% 現在表示している秘密の問題と答を内蔵したAndroidアプリが
+% サーバ上でビルドされてダウンロードされる。
+
+If a user doesn't like to use EpisoPass service on the Net,
+he can use an EpisoPass application on Android
+which does not require network connection.
+After registering questions and answers on the EpisoPass service,
+the user can download an Android application from the server
+by clicking the ``Android app'' button.
+The application contains all the information required for generating passwords.
+(The application is compiled and built on the server.)
+
+% Android端末でアプリを実行すると図\ref{android1}のような画面が表示される。
+% {\SS}を設定して「開始」ボタンを押すと図\ref{android2}のように質問がひとつずつ表示され、
+% ボタンを押してすべて回答すると{\PW}が計算され図\ref{android3}のように表示される。
+
+When the user runs the application and selects the right answer
+to each question, he can eventually get the password and copy it to the password entry.
+(Figure \ref{android1},\ref{android2})
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\columnwidth]{figures/429eec261024dc6c85351f51c12f09b4}
+\caption{Running EpisoPass on Android.}
+\label{android1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\columnwidth]{figures/ba8f5aeaa935ad63437969f4d746746b}
+\caption{After finishing selections.}
+\label{android2}
+\end{figure}
+
+% 回答入力と{\PW}計算はAndroid端末で実行されるため、
+% 端末を「機内モード」に設定するなどの方法で
+% ネットワーク接続を遮断した状態でも{\PW}を計算することができる。
+% {\EP}をインストールしたAndroid端末を持っていれば常に各種の{\PW}を計算できるので、
+% 他人のマシンや公共の場所に設置されたパソコンなどでも
+% 容易にtwitterなどのネットサービスを利用することができる。
+
+% The calculation is performed on Android without network connection,
+% and the user can safely generate passwords 
+% without feeling the fear of ...
+
+% 前述の方法で{\EP}アプリをサーバからダウンロードする場合は、
+% ブラウザ上で秘密の問題をサーバに登録する必要があるが、
+% 秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
+
+\section{DISCUSSIONS}
+
+In this section, we discuss the advantages and caveats of
+using EpisoPass.
+
+\subsection{Unforgettability}
+
+The biggest advantage of using EpisoPass is that
+users don't have to remember passwords of any kind and
+they can stop worrying about password-related troubles.
+%
+Users of EpisoPass can save the seed string and question-answer data
+at any place, and easily generate passwords by running
+EpisoPass and answering questions.
+If the question is based on old unforgettable episodic memories,
+there is little chance of losing passwords.
+If the user's memory is related to an episode of 20 years ago and the user clearly
+remembers the episode now, it is unlikely that he forgets the episode 10 years later.
+
+\subsection{Security strength of EpisoPass}
+
+The strength of the generated password depends on the number of
+questions and the secret level of the questions.
+%
+There have been many studies on the strength of passwords
+\cite{Hayashi:2011:DSP:1978942.1979326}%
+\cite{Komanduri:2011:PPM:1978942.1979321}, % どういうパスワードが強いか
+but the strength of secret questions has not been studied enough.
+%
+% {\EP}で選択枝が10個の{\SQ}を8個使用する場合、
+% 総当たりで{\PW}を生成するには
+% 1億($10^8$)通りの試行が必要であり、
+% % エントロピーは26.6 ($ = 8 \times \log_2 10$) ビット
+% エントロピーは26.6ビットとなる。
+%
+When we use 10 secret questions with 20 answers and
+there's no clue for the answer,
+1 billion ($20^{10}$) trials should be performed to check
+all the combinations of the answers,
+and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
+%
+% 英字からランダムに8文字を並べて作成した{\PW}のエントロピーは37.6ビットになるが、
+% ``\textsf{pmvixuzq}''のように全く意味のない{\PW}を記憶して利用することは少ないため、
+% 実際に利用される{\PW}のエントロピーは20ビット程度と考えられているので\cite{NIST}、
+% {\SQ}と選択枝の数を10個程度用意すれば
+% 通常の{\PW}と同程度の強度が期待できることになる。
+%
+It is almost the same entropy as using random 8-character English alphabets
+as a password, in which case the entropy is 45.6 bits.
+This level is considered to be strong enough for Web services,
+where online brute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
+
+\subsection{Selecting good questions}
+
+% {\EP}利用において{\SQ}の選択は非常に重要である。
+% 他人が推測することが難しく、自分が決して忘れないような{\EM}を{\SQ}として利用すべきであり、
+% 以下のような性質をもつ記憶は{\SQ}として利用すべきではない。
+
+The quality of the questions is the key to using EpisoPass.
+If the episode is shared by someone else,
+that person can easily answer the question and generate the
+password just like the user.
+%
+The episode related to each question should not be known to other people,
+and the episode should be unforgettable.
+%
+Finding such episodes seems difficult at first, but
+when we try to remember experiences of old days,
+we can recall many trivial episodes which are unforgettable but
+not important to other people.
+%
+Old experiences like the following are candidates for
+good questions used in EpisoPass.
+
+\begin{itemize}
+\item Memory of small injury. (Nobody cares it but you.)
+
+\item Memories of bad experience like blunders or defeat.
+(You don't tell it to anybody.)
+
+\item Experience of finding a small special item which only you are interested in.
+\end{itemize}
+
+For example, a question like
+``who hit you when you were 6 years old?''
+is about a trivial experience that people do not mention,
+but a bad experience like this is not forgettable.
+
+Questions like ``Which food do you like best?'' should be avoided,
+since some of the friends might know the user's taste.
+Questions related to an episode which the user is proud of should also be
+avoided, since the user might talk about the episode to somebody else.
+
+We usually don't tell our bad trivial experiences to other people,
+but we might boast of good experiences or even write a blog about it.
+Also, our tastes (e.g. favorite food) might change in the long run.
+Using such episodes for questions should be avoided.
+
+% \begin{itemize}
+% \item \textsf{自慢になるもの
+% (何かの機会にうっかり他人に話してしまう可能性がある)}
+% 
+% \vspace{-1mm}
+% \item \textsf{ネット上に記録が残っているもの}
+% 
+% \vspace{-1mm}
+% \item \textsf{他人と情報を共有しているもの}
+% 
+% \vspace{-1mm}
+% \item \textsf{趣味や嗜好に関連するもの
+% (他人に推測されやすいうえに嗜好が変化する可能性がある)}
+% 
+% \end{itemize}
+
+\subsection{Creating fake answers}
+
+% {\SQ}の種類によっては偽答の生成が難しい場合がある。
+% 図\ref{atmega}は電子工作に関する{\SQ}の例であるが、
+% 正答と区別がつかない偽答を充分リストすることは難しい。
+
+It is difficult to provide enough number of fake answers to a question like
+``what was your favorite sport?''
+because possible answers are limited.
+%
+% \begin{figure}[H]
+% \centerline{\includegraphics[width=83mm,bb=0 0 512 113]{../figures/2f63ceb9ab6faf8d81393953f2f95a8c.png}}
+% \caption{偽答の生成が難しい例.}
+% \label{atmega}
+% \end{figure}
+%
+% 一方、正答として人名や地名を利用する場合、
+% 正答に似た人名や地名をリストすることは難しくない。
+% 「世田谷」が正答であるとき、
+% 「目黒」「杉並」のような偽答を用意するのは簡単である。
+%
+On the other hand, if the right answer to the question is a name of a place or a person,
+generating similar answers is easy.
+For example, if the answer to the question is ``Colorado'',
+we can easily provide fake answers like ``California'', ``Utah'', etc.
+because we can use the list of states in the U.S.
+
+% 正答と同じカテゴリに属する単語を自動的にリストすることができれば
+% 正答をもとにして簡単に偽答のリストを生成することができる。
+In this way, fake answers can be easily generated
+if it is possible to collect words which belong to the same
+category as the right answer.
+%
+% ひとつの単語もしくは単語の集合と同じカテゴリに属する単語を検索する手法は
+% 「同位語検索」と呼ばれ、
+% Webのデータを利用した様々な同位語検索システムが提案されている%
+Various methods have been proposed for collecting words in the
+same category, mainly for information retrieval tasks%
+\cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
+\cite{BooWa}% Boo!Wa!というサイトをやっている
+\cite{Wang:2007:LSE:1441428.1442086}.% BooWa
+%\cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
+We can use such techniques for getting similar names.
+
+\subsection{Universality}
+
+Although everyone has to use authentication systems on the Internet these days,
+not all the people are good at handling passwords.
+Even experienced computer users have trouble with passwords,
+since choosing a good password is not intuitive and
+people forget passwords frequently.
+%
+Using EpisoPass, people can use password-based systems without knowing
+techniques for creating and remembering strong passwords.
+They only have to provide
+questions and answers based on secret episodic memories.
+%
+By integrating EpisoPass into existing password-based services,
+people can even use services without noticing that passwords are
+required for the service.
+
+\subsection{Frequent password update}
+
+On many services, users are requested to change passwords periodically
+to strengthen security.
+%
+% A user can generate a new strong password by using a randam character generator
+% on a password manager, but he might want to old passwords in case some trouble happens.
+%
+Using EpisoPass, users can just provide a date-related question
+like the first question shown in Figure \ref{web1},
+and generate different strong passwords based on the answer.
+Using this technique, people can easily manage old and new passwords.
+
+\subsection{Comparison with challenge-response authentication}
+
+% 一方、{\SQ}を利用する認証の脆弱性を利用した攻撃が近年問題になっている。
+% {\PW}を忘れたときのために、
+% あらかじめ設定した{\SQ}に答えることによって{\PW}をリセットできるサービスがあり、
+% 「母親の旧姓は?」や「最初に飼ったペットの名前は?」のような
+% 質問に対してユーザが答を登録するようになっている。
+% このような問題は他人が調べたり推測したりすることが容易であるうえに
+% {\SQ}の数は一般的に少なく、
+% {\PW}よりも脆弱だといえる\cite{Rabkin:2008:PKQ:1408664.1408667}。% 銀行20個調べて{\SQ}の弱さを指摘
+
+In many services, users are adviced to define answers to secret questions like
+``what is your mother's maiden name''
+so that he can log into the service even when he forgets the password.
+This kind of authentication is far less secure than simple password systems,
+since it is fairly easy for attackers to know the right answer.
+The variation of system-provided questions are usually small, and
+such challenge-response systems are considered to be
+insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
+
+It would be better if the user can register his own secret questions
+based on his episodic memory.
+However, answers to user-generated challenge questions are more easily
+forgotten or cracked,
+and using simple challenge-responce is not considered to be safe enough
+\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}.
+%
+Also, in this case,
+the user should register the answer to the system in addition to the question.
+Telling secret facts to service providers is like
+registering raw password string on the server,
+and it is not safe unless the strings are properly hashed and salted on the server.
+
+%
+%ユーザが作成した{\SQ}を使えばこのような問題はなくなるはずであるが、
+%他人に解かれにくい問題をユーザが作成することは難しく、
+%またユーザ自身が答を忘れてしまうことも多いと考えられている\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}。
+%
+%また、古い記憶にもとづいて作成した秘密の問題は
+%ユーザが想像するよりも解かれやすいという実験結果にもとづき、
+%忘れない{\SQ}を複数利用する方法、
+%問題と答を連想するために画像を利用する方法、
+%複数の問題を連続的に利用する手法などが提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
+
+% {\EP}では、
+% 他人には解くことが難しく自分では忘れないような{\SQ}を自由にいくつでも利用できるようになっている。
+% 問題作成に慣れていないユーザには有効な{\SQ}を作成することは難しいかもしれないが、
+% 次節で述べるように、適切な質問を選ぶことによりこの問題を解決できるはずである。
+
+\subsection{Care for handling secret information}
+
+Users don't have to be very careful about handling questions and answers.
+They can even be put on a public place
+if enough amount of questions and fake answers are provided.
+%
+Keeping secrets is always a pain for many people including
+the authors, but if the whole questions and answers used on EpisoPass
+can be put on a public place,
+handling it becomes very easy.
+Usually we have to be very careful about handling
+secret information like passwords, secret key for SSH, etc.
+because they should not be copied or saved at unsafe places.
+On the other hand,
+we can save the EpisoPass data as a plain text file and put it at
+any place without great care, since malicious person cannot calculate
+passwords without having the owner's episodic memories.
+
+\subsection{Risk of password leak}
+
+EpisoPass is just a string-conversion system and it does not
+have any information on which one is the correct answer.
+Also, it does not save any password information in any form, and
+it is almost impossible to get the right password 
+without having the episodic memory.
+
+% 聞かれてもわからないし書き留める必要がないからウッカリもらす可能性はない
+% ローカルに実行すればネットでもれる心配もない
+
+Since the password is generated by the algorithm and the password
+string is not kept on a computer in any form,
+unexpected leak of the password is unlikely.
+The user doesn't have to remember the password string, and
+there is no chance he will reveal it to somebody
+even when he is forced to tell the password.
+
+% \subsection{Strong passwords can be generated}
+%   強度を自由に設定できる
+
+\subsection{Simplicity}
+
+The algorithm of generating a password (shown in Appendix)
+is fairly simple and
+it can be implemented on any browser JavaScripts or
+applications on smartphones and small devices.
+
+\subsection{Risk of password leak at the service side}
+
+If one of the passwords generated by EpisoPass is revealed
+for some reason, other passwords based on the same questions
+might also be revealed.
+%
+For example, if Twitter is attacked by a cracker and
+the password for Twitter (``\textsf{Lbasnln542202}'' in Figure \ref{web1})
+is revealed to the attacker,
+the attacker can try all the answer combinations and find out
+the answers to all the questions,
+if questions and answers are also known by the attacker.
+Once all the answers to the questions are known,
+the attacker can freely generate all the passwords
+generated with the same questions.
+
+To prevent such troble, it is safer to keep all the questions and answers
+in a secret place or
+use sufficient number of questions so that brute-force does not work.
+
+% 問題自体が秘密であればひとつ漏れても大丈夫
+% 
+% {\SQ}を公開している場合、
+% {\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
+% 総当たり計算でチェックすることにより、
+% すべて{\SQ}の正答が判明してしまう。
+% {\SQ}の正答を知っていれば
+% {\SS}から{\PW}を計算することができるので、
+% 漏洩した{\SQ}は利用不可能になってしまう。
+%
+% \ref{pattern1}や
+% \ref{pattern2}のような運用をしている場合は
+% {\PW}がひとつ漏洩しても他の{\PW}は安全だが、
+% \ref{pattern3}のような運用をしている場合は
+% ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
+
+\subsection{Using images}
+
+Old pictures can be used as the questions of EpisoPass,
+just like the 5th question shown in Figure \ref{web1}.
+Even when people cannot create good secret questions,
+people can fairly easily select a secret image from their photo collections
+and use it as the question.
+For example, if you have an old picture of your friend,
+you can use it as the question
+and use his real name as well as other similar fake names.
+
+% 画像検索とかされないようにする必要はある
+
+Of course, the photo should not have information related to the
+person's real name, since image search is fairly easy on the Web these days.
+
+% 忘れにくい{\EM}を利用する認証手法として
+% 様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
+% 複数の画像の中から正答を選択するもの(Cognometric方式)、
+% ひとつの画像の中の特定の場所を指定するもの(Locimetric方式)、
+% 画像の上で描画操作を行なうもの(Drawmetric方式)
+% が広く利用されているが\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{Guideline}、
+% {\EP}は図\ref{web1}のように
+% 文字列のかわりに画像URLを{\SQ}として利用する点が異なっている。
+% %
+% Cognometric方式は{\EM}を効果的に利用できるが、
+% 多数の偽答画像が必要だという問題がある。
+% Locimetric方式は
+% {\EM}を効果的に利用できないことに加え、
+% クリックしやすい「ホットスポット」は限られているため
+% 充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}。
+% またDrawmetric方式も{\EM}を効果的に利用できないし、
+% ユーザは似た傾向のストロークを選びがちであるため
+% 充分なエントロピーを確保しにくいことが知られている\cite{Nali}。
+% %
+% {\EP}のように画像を{\SQ}として利用する場合、
+% 通常の{\SQ}の場合と同様に偽答を増やすことが容易であることに加え、
+% 画像に関連した{\EM}を有効に利用できるという利点がある\cite{増井:CSS}。
+
+% 図\ref{leiko}は
+% 本棚.org\cite{hondana}\cite{hondanaorg}
+% のユーザのひとり\footnote{
+%   \textsf{http://hondana.org/Leiko}
+% }が利用している画像認証問題である。
+% このユーザ以外には正答は見当もつかないが、
+% 本人にとっては忘れることがない{\EM}と結びついた画像だということであった。
+
+% 答を書くわけではないから安全
+% 心配ならオフラインでやれば大丈夫
+% 
+% 弱いパスワードを強くすることも簡単
+% 
+% 
+% Bookmarkletも用意した
+%   拡張機能も用意したい
+%
+
+\section{RELATED WORK}
+
+As shown in previous sections,
+there are many attemps for replacing password-based authentication systems,
+none of which has succeeded so far.
+
+Various types of image-based authentication systems have been proposed recently,
+in the hope that images are easier to remember than text
+because images are usually more directly linked to episodic memories.
+However, on many systems,
+users have to remember new information related to the images
+used in the authentication process, or
+perform special operations on the image, and
+it is not much easier than using passwords.
+%
+Image-based authentication based on episodic memories might work
+if anyone can prepare many images 
+that are tightly linked to his episodic memories.
+However, finding such images is usually not easy, and
+image-only authentication systems would not take off
+until simple and effective technique is invented.
+% [Malasym]
+
+Even when a new ideal authentication method is invented,
+replacing all the password-based systems should take very long, and
+various password managers should be used until the ideal method
+prevails in the whole world.
+In the age of password-based authentication,
+using password managers seems to be the only way to tackle
+the problem of passwords.
+%
+While most of the password managers only remember passwords given by the user,
+generating passwords with a password manager is a new approach for
+handling password-based systems.
+Just like EpisoPass generates passwords,
+Versipass\cite{Stobert:2014:PMD:2683467.2683471} %Versipass 画像のヒントからパスワード生成 % A Password Manager that Doesn’t Remember
+helps the user to generate password strings
+using ``visual cues'' on an arbitrary image.
+Instead of directly using images for authentication,
+users use the system to generate a password text with the help of
+the image shown to the user.
+
+% 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは無い
+% 
+% パスワード管理システム
+%   沢山ある
+% 
+% 強いパスワードを作るシステム
+%   ランダムに生成するサイトが沢山ある
+% 
+% 強いパスワードを覚えるための工夫
+%   Bonneau
+% 
+% 画像を使う
+% 
+% パスワードに関する全情報を公開してどこかに置いておける
+%   ググれるかもしれない
+%   紛失する可能性が少ない
+%
+
+\section{EXPERIENCES}
+
+EpisoPass has been used by the authors for more than three years, and
+the authors are using it for various services including
+Twitter, Facebook, Amazon, Skype, etc.
+Since passwords for these services are remembered on the browser,
+EpisoPass is used only once in one week at most.
+%
+Before using EpisoPass, taking care of many passwords was really
+a pain for the authors, but
+currently all the information for generating passswords is put on the cloud
+and no trouble has been found during the period.
+
+Unfortunately EpisoPass is currently not used by many people.
+One big reason is that most people cannot fully understand the
+idea of EpisoPass and also cannot fully trust it
+because it is not operated by a big IT company nor supported by
+famous computer users.
+Another reason might be that users cannot estimate the strength
+of EpisoPass.
+Since all the questions and answers are
+quite obvious to the users,
+they might feel that everyone else also know the episode
+and easily solve all the questions.
+These kinds of psychological issues are quite important for
+an authentication system for everybody,
+and we hope to eliminate such obstacles in the future.
+
+\section{CONCLUSION}
+
+We introduced a password management system EpisoPass
+that converts a seed string into a password using the user's
+episodic memories represented as a set of questions and answers
+which can be solved only by the user.
+%
+Using EpisoPass with well-defined questions and answers,
+a user can always retrieve various passwords without worrying about
+remembering secret information.
+%
+We'll try to integrate the system with existing password-based
+services, and finally hope to eliminate all the problems
+derived from password-based authentication.
+
+% {\EM}に結びついた{\SQ}を利用して{\PW}を生成/管理できるシステム{\EP}を提案した。
+% {\EP}は単純な原理にもとづいており柔軟な利用形態が可能であり、
+% 強力な{\SQ}を用意することにより
+% 秘密情報を全く覚えることなく安全な認証を行なうことができる。
+% %
+% 強力な{\SQ}を作成して安全に運用が可能かどうかを長期的に評価したいと考えている。
+%
+%欠点:
+%なぞなぞを考えるのがめんどくさい
+%安全になぞなぞを扱うのが面倒
+%  ネットなしで運用したりとか
+%運用を間違うと思わぬところで回答がバレる可能性がある
+%
+% {\EP}は\textsf{http://Episopass.com/}で運用しており、
+% ソースはGitHubで公開している\footnote{
+%   \textsf{http://GitHub.com/masui/EpisoPass}
+% }。
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \centering
 % \includegraphics[height=6.2cm]{eijkel2}
 %\includegraphics[height=6.2cm]{figures/429eec261024dc6c85351f51c12f09b4.png}
-\includegraphics[width=12cm,bb=0 0 429 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
+\includegraphics[width=6cm,bb=0 0 429 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
 \caption{One kernel at $x_s$ (\emph{dotted kernel}) or two kernels at
 $x_i$ and $x_j$ (\textit{left and right}) lead to the same summed estimate
 at $x_s$. This shows a figure consisting of different types of
@@ -359,179 +1018,13 @@ italics, in parentheses, as shown in this sample caption.}
 \label{fig:example}
 \end{figure}
 
-
-Please define figures (and tables) as floating objects. Please avoid
-using optional location parameters like ``\verb+[h]+" for ``here".
-
-\paragraph{Remark 1.}
-
-In the printed volumes, illustrations are generally black and white
-(halftones), and only in exceptional cases, and if the author is
-prepared to cover the extra cost for color reproduction, are colored
-pictures accepted. Colored pictures are welcome in the electronic
-version free of charge. If you send colored figures that are to be
-printed in black and white, please make sure that they really are
-legible in black and white. Some colors as well as the contrast of
-converted colors show up very poorly when printed in black and white.
-
-\subsection{Formulas}
-
-Displayed equations or formulas are centered and set on a separate
-line (with an extra line or halfline space above and below). Displayed
-expressions should be numbered for reference. The numbers should be
-consecutive within each section or within the contribution,
-with numbers enclosed in parentheses and set on the right margin --
-which is the default if you use the \emph{equation} environment, e.g.,
-\begin{equation}
-  \psi (u) = \int_{o}^{T} \left[\frac{1}{2}
-  \left(\Lambda_{o}^{-1} u,u\right) + N^{\ast} (-u)\right] dt \;  .
-\end{equation}
-
-Equations should be punctuated in the same way as ordinary
-text but with a small space before the end punctuation mark.
-
-\subsection{Footnotes}
-
-The superscript numeral used to refer to a footnote appears in the text
-either directly after the word to be discussed or -- in relation to a
-phrase or a sentence -- following the punctuation sign (comma,
-semicolon, or period). Footnotes should appear at the bottom of
-the
-normal text area, with a line of about 2~cm set
-immediately above them.\footnote{The footnote numeral is set flush left
-and the text follows with the usual word spacing.}
-
-\subsection{Program Code}
-
-Program listings or program commands in the text are normally set in
-typewriter font, e.g., CMTT10 or Courier.
-
-\medskip
-
-\noindent
-{\it Example of a Computer Program}
-\begin{verbatim}
-program Inflation (Output)
-  {Assuming annual inflation rates of 7%, 8%, and 10%,...
-   years};
-   const
-     MaxYears = 10;
-   var
-     Year: 0..MaxYears;
-     Factor1, Factor2, Factor3: Real;
-   begin
-     Year := 0;
-     Factor1 := 1.0; Factor2 := 1.0; Factor3 := 1.0;
-     WriteLn('Year  7% 8% 10%'); WriteLn;
-     repeat
-       Year := Year + 1;
-       Factor1 := Factor1 * 1.07;
-       Factor2 := Factor2 * 1.08;
-       Factor3 := Factor3 * 1.10;
-       WriteLn(Year:5,Factor1:7:3,Factor2:7:3,Factor3:7:3)
-     until Year = MaxYears
-end.
-\end{verbatim}
-%
-\noindent
-{\small (Example from Jensen K., Wirth N. (1991) Pascal user manual and
-report. Springer, New York)}
-
 \subsection{Citations}
-
-For citations in the text please use
-square brackets and consecutive numbers: \cite{jour}, \cite{lncschap},
-\cite{proceeding1} -- provided automatically
-by \LaTeX 's \verb|\cite| \dots\verb|\bibitem| mechanism.
-
-\subsection{Page Numbering and Running Heads}
-
-There is no need to include page numbers. If your paper title is too
-long to serve as a running head, it will be shortened. Your suggestion
-as to how to shorten it would be most welcome.
-
-\section{LNCS Online}
-
-The online version of the volume will be available in LNCS Online.
-Members of institutes subscribing to the Lecture Notes in Computer
-Science series have access to all the pdfs of all the online
-publications. Non-subscribers can only read as far as the abstracts. If
-they try to go beyond this point, they are automatically asked, whether
-they would like to order the pdf, and are given instructions as to how
-to do so.
-
-Please note that, if your email address is given in your paper,
-it will also be included in the meta data of the online version.
-
-\section{BibTeX Entries}
-
-The correct BibTeX entries for the Lecture Notes in Computer Science
-volumes can be found at the following Website shortly after the
-publication of the book:
-\url{http://www.informatik.uni-trier.de/~ley/db/journals/lncs.html}
 
 \subsubsection*{Acknowledgments.} The heading should be treated as a
 subsubsection heading and should not be assigned a number.
 
-\section{The References Section}\label{references}
-
-In order to permit cross referencing within LNCS-Online, and eventually
-between different publishers and their online databases, LNCS will,
-from now on, be standardizing the format of the references. This new
-feature will increase the visibility of publications and facilitate
-academic research considerably. Please base your references on the
-examples below. References that don't adhere to this style will be
-reformatted by Springer. You should therefore check your references
-thoroughly when you receive the final pdf of your paper.
-The reference section must be complete. You may not omit references.
-Instructions as to where to find a fuller version of the references are
-not permissible.
-
-We only accept references written using the latin alphabet. If the title
-of the book you are referring to is in Russian or Chinese, then please write
-(in Russian) or (in Chinese) at the end of the transcript or translation
-of the title.
-
-The following section shows a sample reference list with entries for
-journal articles \cite{jour}, an LNCS chapter \cite{lncschap}, a book
-\cite{book}, proceedings without editors \cite{proceeding1} and
-\cite{proceeding2}, as well as a URL \cite{url}.
-Please note that proceedings published in LNCS are not cited with their
-full titles, but with their acronyms!
-
-%\begin{thebibliography}{4}
-
-
-  
-%\end{thebibliography}
 
 \bibliographystyle{splncs03}
 \bibliography{paper}
 
-
-\section*{Appendix: Springer-Author Discount}
-
-LNCS authors are entitled to a 33.3\% discount off all Springer
-publications. Before placing an order, the author should send an email, 
-giving full details of his or her Springer publication,
-to \url{orders-HD-individuals@springer.com} to obtain a so-called token. This token is a
-number, which must be entered when placing an order via the Internet, in
-order to obtain the discount.
-
-\section{Checklist of Items to be Sent to Volume Editors}
-Here is a checklist of everything the volume editor requires from you:
-
-
-\begin{itemize}
-\settowidth{\leftmargin}{{\Large$\square$}}\advance\leftmargin\labelsep
-\itemsep8pt\relax
-\renewcommand\labelitemi{{\lower1.5pt\hbox{\Large$\square$}}}
-
-\item The final \LaTeX{} source files
-\item A final PDF file
-\item A copyright form, signed by one author on behalf of all of the
-authors of the paper.
-\item A readme giving the name and email address of the
-corresponding author.
-\end{itemize}
 \end{document}
