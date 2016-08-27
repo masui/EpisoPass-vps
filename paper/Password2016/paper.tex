@@ -15,6 +15,23 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% 問題を沢山使ってる例を出す
+% わからない問題でもいいことを示す Who's the bully? when?
+% エピソードを使う認証は多いが、パスワードを生成するものは何故かない
+%   毎日の行動から認証するものもある
+% 家族や友人が知らない秘密は存在するはず
+% 秘密の質問が駄目と言われるのは質問の質が悪いから
+%
+% ○ 拡張機能の説明
+%
+% 参考文献たくさん
+% 大きなことをいわない
+% パスワードを覚えるのは無理
+% シード文字列の選びかた
+% エントロピーの計算
+% アルゴリズムの選択 
+% 偽答生成が簡単であることを示す 
+% サポートシステムを作っていることをかく ★
 
 \documentclass[runningheads,a4paper]{llncs}
 
@@ -286,8 +303,13 @@ remember math formulas easily.
 % \end{quote}
 
 The idea of using episodic memories for authentication is not new.
-
-**** Cognitive Passwords *******
+Early papers suggested using episodic memories for creating passwords, and
+authentication by using secret questions,
+sometimes called as ``cognitive passwords'', has long been used as an
+alternative to password-based authentication systems.
+%
+However, conversion from episodic memories to password strings
+was not studied very much. *******
 
 Password generation on EpisoPass is performed through the following steps:
 
@@ -335,19 +357,19 @@ the right password is calculated and shown at the top.
 \end{figure}
 
 In Figure \ref{web1},
-``\textsf{Twitter123456}'' is provided as the seed string,
+``\textsf{Amazon123456}'' is provided as the seed string,
 and according to the selections to the five questions,
 the seed string is converted to a string
-``\textsf{Lbasnln542202}'',
-which can be used as the password for Twitter.
+``\textsf{Tblgeq808187}'',
+which can be used as the password for Amazon.com.
 
 When the user clicks another candidate,
 the seed string is converted to another strings like
-``\textsf{Bhtuyna904127}'' (Figure \ref{web11}).
+``\textsf{Xvdkzb940345}'' (Figure \ref{web11}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.0\columnwidth]{figures/01e5507d090eb494a20bcbc47c86b1d2}
+\includegraphics[width=1.0\columnwidth]{figures/8447eaba1ede0f678b3ce6fea63681f3}
 \caption{Selecting a different answer.}
 \label{web11}
 \end{figure}
@@ -390,16 +412,17 @@ generated password is saved on the server.
 % 問題データを見てもユーザの{\PW}はわからない。
 
 When we change the secret string to ``\textsf{Facebook123456}'',
-the generated password changes to ``\textsf{Zxghfbqu533131}'',
+the generated password changes to ``\textsf{Onjbrppy030937}'',
 as shown in Figure \ref{web2}.
 In this way, we can generate different passwords for
 different services just by changing the seed string.
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=1.0\columnwidth]{figures/0e2820c279afc70520482e0fc53b6ed9}
-\caption{Generating the password for FaceBook.}
-\label{web2}
+  \centering
+%  \includegraphics[width=1.0\columnwidth]{figures/0e2820c279afc70520482e0fc53b6ed9}
+  \includegraphics[width=1.0\columnwidth]{figures/ab4517dd593c1cabab5fecef546f7e88}
+  \caption{Generating the password for Facebook.}
+  \label{web2}
 \end{figure}
 
 % {\PW}文字列の計算方法}
@@ -411,6 +434,7 @@ different services just by changing the seed string.
 
 Character substitution is performed based on the hash value
 calculated from concatinating all the selected answers.
+  
 For example, if the user selects ``\textbf{\texttt{Ebisawa}}'' to the question ``\textbf{\texttt{Who's the bully?}}'',
 a hash value calculated from  ``\textbf{\texttt{Who's the bully:Ebisawa}}''
 is used for the substitution.
@@ -440,17 +464,7 @@ Details of the algorithm is shown in the Appendix.
 % 「2013/1」「2013/2」のような答を用意しておけば、
 % 時期を選択することによって簡単に{\PW}を変更することができるので便利である。
 
-\subsection{EpisoPass on browser extension}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\columnwidth]{figures/43272f2003ed8c78307110c621eb12e5}
-\caption{Running EpisoPass on Browser Extension.}
-\label{extension}
-\end{figure}
-
 \subsection{Android application}
-
 
 % Webサービスを利用する場合、ブラウザとサーバとの間の通信を
 % 記録されたり盗み見されたりされる心配を完全に払拭することはできない。
@@ -512,7 +526,40 @@ to each question, he can eventually get the password and copy it to the password
 % ブラウザ上で秘密の問題をサーバに登録する必要があるが、
 % 秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
 
-\section{DISCUSSIONS}
+\subsection{Using browser extension}
+
+Using the EpisoPass service or the application,
+users have to type the password string after generating the password.
+Since it is not convenient for users,
+we provide a browser extension for using EpisoPass on the login window of
+various services.
+
+Figure \ref{extension} shows the login window of Amazon.com, where
+EpisoPass questions are displayed using the browser extension.
+
+A browser extension is a JavaScript add-on program which can
+run on top of existing HTML and JavaScript.
+In this case, when the Amazon login page is accessed from the browser,
+the extension automatically runs on the page and
+gets questions from the EpisoPass server, and
+shows the questions nad candidate answers just like the Android application.
+
+After answering all the questions, a password is calculated from the
+selected answers and pasted to the password section of the page.
+Using the extension, not only users don't have to type or copy the password,
+but users don't even see the string.
+It is almost as if Amazon had provided a EpisoPass-based authentication
+for its services.
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.7\columnwidth]{figures/43272f2003ed8c78307110c621eb12e5}
+\includegraphics[width=0.7\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
+\caption{Using EpisoPass on the login window.}
+\label{extension}
+\end{figure}
+
+\section{Discussions}
 
 In this section, we discuss the advantages and caveats of
 using EpisoPass.
