@@ -530,26 +530,28 @@ to each question, he can eventually get the password and copy it to the password
 
 Using the EpisoPass service or the application,
 users have to type the password string after generating the password.
-Since it is not convenient for users,
+Since it is not convenient,
 we provide a browser extension for using EpisoPass on the login window of
 various services.
 
-Figure \ref{extension} shows the login window of Amazon.com, where
-EpisoPass questions are displayed using the browser extension.
 
 A browser extension is a JavaScript add-on program which can
 run on top of existing HTML and JavaScript.
+%
+Figure \ref{extension} shows the login page of Amazon.com, where
+EpisoPass questions are displayed by the browser extension.
+%
 In this case, when the Amazon login page is accessed from the browser,
-the extension automatically runs on the page and
-gets questions from the EpisoPass server, and
-shows the questions nad candidate answers just like the Android application.
-
+the extension automatically runs on the page,
+acquires questions and andwers from the EpisoPass server,
+and shows them to the user just like the Android application.
+%
 After answering all the questions, a password is calculated from the
-selected answers and pasted to the password section of the page.
-Using the extension, not only users don't have to type or copy the password,
-but users don't even see the string.
-It is almost as if Amazon had provided a EpisoPass-based authentication
-for its services.
+selected answers and pasted to the password textbox of the page.
+Using the extension, users can login to various services
+without seeing a password string;
+It looks as if various services are offering
+EpisoPass-based authentication.
 
 \begin{figure}[H]
 \centering
