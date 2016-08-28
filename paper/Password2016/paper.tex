@@ -177,7 +177,7 @@ and many other authentication methods have been proposed.
 
 However,
 password-based authentication is still the most
-convenient and strong method\cite{Bonnearu:ReplacePasswords},
+convenient and strong method\cite{Bonneau:ReplacePasswords},
 and it is not supposed to become extinct
 in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
 
@@ -523,8 +523,8 @@ we provide a browser extension for using EpisoPass on the login window of
 various Web services.
 
 
-A browser extension is a JavaScript add-on program which can
-run on top of existing HTML and JavaScript.
+A browser extension is a JavaScript add-on program which runs
+on top of existing HTML and JavaScript.
 %
 Figure \ref{extension} shows the login page of Amazon.com, with which
 EpisoPass questions are automatically displayed by the browser extension.
@@ -532,7 +532,7 @@ EpisoPass questions are automatically displayed by the browser extension.
 Here, when the Amazon login page is accessed from the browser,
 the browser extension program automatically runs on the page,
 acquires questions and answers from the EpisoPass server,
-and shows them to the user just the same as the Android application.
+and shows them to the user just the same way as the Android application.
 %
 After answering all the questions, a password is calculated from the
 selected answers and pasted to the password input form of the page.
@@ -554,19 +554,31 @@ EpisoPass-based authentication.
 In this section, we discuss the advantages and caveats of
 using EpisoPass.
 
-\subsection{Unforgettability}
+\subsection{Recallability of answers}
 
 The biggest advantage of using EpisoPass is that
-users don't have to remember passwords of any kind and
-they can stop worrying about password-related troubles.
+users don't have to remember strong password strings.
 %
 Users of EpisoPass can save the seed string and question-answer data
 at any place, and easily generate passwords by running
 EpisoPass and answering questions.
 If the question is based on old unforgettable episodic memories,
-there is little chance of losing passwords.
+there is little chance of losing passwords
+as long as the seed string and the questions are available.
 If the user's memory is related to an episode of 20 years ago and the user clearly
 remembers the episode now, it is unlikely that he forgets the episode 10 years later.
+
+\subsection{Selection of seed strings}
+
+In the previous examples showing the author's real EpisoPass questions,
+a seed string ``\textsf{Amazon123456}'' was used for Amazon.com, and
+``\textsf{Facebook123456}'' was used for Facebook.
+Such strings are used because they are easily memorable.
+Of course any seed string can be used as seeds for various services,
+and automatic generation of seed strings is possible,
+although generating service specific unique seed string is not trivial.
+For example, users can use the same username and password both
+for Amazon.com and Amazon.co.uk, but not for Amazon.co.jp.
 
 \subsection{Security strength of EpisoPass}
 
@@ -601,11 +613,9 @@ as a password, in which case the entropy is 45.6 bits.
 This level is considered to be strong enough for Web services,
 where online brute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
 
-\subsection{Selecting good questions}
+\subsection{}
 
-% {\EP}利用において{\SQ}の選択は非常に重要である。
-% 他人が推測することが難しく、自分が決して忘れないような{\EM}を{\SQ}として利用すべきであり、
-% 以下のような性質をもつ記憶は{\SQ}として利用すべきではない。
+\subsection{Selecting good questions}
 
 The quality of the questions is the key to using EpisoPass.
 If the episode is shared by someone else,
@@ -647,42 +657,11 @@ but we might boast of good experiences or even write a blog about it.
 Also, our tastes (e.g. favorite food) might change in the long run.
 Using such episodes for questions should be avoided.
 
-% \begin{itemize}
-% \item \textsf{自慢になるもの
-% (何かの機会にうっかり他人に話してしまう可能性がある)}
-% 
-% \vspace{-1mm}
-% \item \textsf{ネット上に記録が残っているもの}
-% 
-% \vspace{-1mm}
-% \item \textsf{他人と情報を共有しているもの}
-% 
-% \vspace{-1mm}
-% \item \textsf{趣味や嗜好に関連するもの
-% (他人に推測されやすいうえに嗜好が変化する可能性がある)}
-% 
-% \end{itemize}
-
 \subsection{Creating fake answers}
-
-% {\SQ}の種類によっては偽答の生成が難しい場合がある。
-% 図\ref{atmega}は電子工作に関する{\SQ}の例であるが、
-% 正答と区別がつかない偽答を充分リストすることは難しい。
 
 It is difficult to provide enough number of fake answers to a question like
 ``what was your favorite sport?''
 because possible answers are limited.
-%
-% \begin{figure}[H]
-% \centerline{\includegraphics[width=83mm,bb=0 0 512 113]{../figures/2f63ceb9ab6faf8d81393953f2f95a8c.png}}
-% \caption{偽答の生成が難しい例.}
-% \label{atmega}
-% \end{figure}
-%
-% 一方、正答として人名や地名を利用する場合、
-% 正答に似た人名や地名をリストすることは難しくない。
-% 「世田谷」が正答であるとき、
-% 「目黒」「杉並」のような偽答を用意するのは簡単である。
 %
 On the other hand, if the right answer to the question is a name of a place or a person,
 generating similar answers is easy.
@@ -690,22 +669,17 @@ For example, if the answer to the question is ``Colorado'',
 we can easily provide fake answers like ``California'', ``Utah'', etc.
 because we can use the list of states in the U.S.
 
-% 正答と同じカテゴリに属する単語を自動的にリストすることができれば
-% 正答をもとにして簡単に偽答のリストを生成することができる。
 In this way, fake answers can be easily generated
 if it is possible to collect words which belong to the same
 category as the right answer.
 %
-% ひとつの単語もしくは単語の集合と同じカテゴリに属する単語を検索する手法は
-% 「同位語検索」と呼ばれ、
-% Webのデータを利用した様々な同位語検索システムが提案されている%
 Various methods have been proposed for collecting words in the
 same category, mainly for information retrieval tasks%
 \cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
 \cite{BooWa}% Boo!Wa!というサイトをやっている
 \cite{Wang:2007:LSE:1441428.1442086}.% BooWa
 %\cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
-We can use such techniques for getting similar names.
+Using such systems, we can get a list of fake answers almost automatically.
 
 \subsection{Universality}
 
@@ -713,7 +687,7 @@ Although everyone has to use authentication systems on the Internet these days,
 not all the people are good at handling passwords.
 Even experienced computer users have trouble with passwords,
 since choosing a good password is not intuitive and
-people forget passwords frequently.
+people forget passwords very easily.
 %
 Using EpisoPass, people can use password-based systems without knowing
 techniques for creating and remembering strong passwords.
@@ -723,11 +697,17 @@ questions and answers based on secret episodic memories.
 By integrating EpisoPass into existing password-based services,
 people can even use services without noticing that passwords are
 required for the service.
+%
+Our experience of using browser extensions suggests that
+that approach is worth consideration.
 
 \subsection{Frequent password update}
 
 On many services, users are requested to change passwords periodically
 to strengthen security.
+
+*****Shneier******
+
 %
 % A user can generate a new strong password by using a randam character generator
 % on a password manager, but he might want to old passwords in case some trouble happens.
@@ -804,33 +784,31 @@ we can save the EpisoPass data as a plain text file and put it at
 any place without great care, since malicious person cannot calculate
 passwords without having the owner's episodic memories.
 
-\subsection{Risk of password leak}
+% \subsection{Risk of password leak}
+% 
+% EpisoPass is just a string-conversion system and it does not
+% have any information on which one is the correct answer.
+% Also, it does not save any password information in any form, and
+% it is almost impossible to get the right password 
+% without having the episodic memory.
+% 
+% Since the password is generated by the algorithm and the password
+% string is not kept on a computer in any form,
+% unexpected leak of the password is unlikely.
+% The user doesn't have to remember the password string, and
+% there is no chance he will reveal it to somebody
+% even when he is forced to tell the password.
 
-EpisoPass is just a string-conversion system and it does not
-have any information on which one is the correct answer.
-Also, it does not save any password information in any form, and
-it is almost impossible to get the right password 
-without having the episodic memory.
+\subsection{Using shared secrets}
 
-% 聞かれてもわからないし書き留める必要がないからウッカリもらす可能性はない
-% ローカルに実行すればネットでもれる心配もない
+% \subsection{Simplicity}
+% 
+% The algorithm of generating a password (shown in Appendix)
+% is fairly simple and
+% it can be implemented on any browser JavaScripts or
+% applications on smartphones and small devices.
 
-Since the password is generated by the algorithm and the password
-string is not kept on a computer in any form,
-unexpected leak of the password is unlikely.
-The user doesn't have to remember the password string, and
-there is no chance he will reveal it to somebody
-even when he is forced to tell the password.
-
-% \subsection{Strong passwords can be generated}
-%   強度を自由に設定できる
-
-\subsection{Simplicity}
-
-The algorithm of generating a password (shown in Appendix)
-is fairly simple and
-it can be implemented on any browser JavaScripts or
-applications on smartphones and small devices.
+\subsection{Hash function}
 
 \subsection{Risk of password leak at the service side}
 
@@ -852,22 +830,6 @@ To prevent such troble, it is safer to keep all the questions and answers
 in a secret place or
 use sufficient number of questions so that brute-force does not work.
 
-% 問題自体が秘密であればひとつ漏れても大丈夫
-% 
-% {\SQ}を公開している場合、
-% {\SS}と{\PW}の対応がひとつでも漏洩してしまうと、
-% 総当たり計算でチェックすることにより、
-% すべて{\SQ}の正答が判明してしまう。
-% {\SQ}の正答を知っていれば
-% {\SS}から{\PW}を計算することができるので、
-% 漏洩した{\SQ}は利用不可能になってしまう。
-%
-% \ref{pattern1}や
-% \ref{pattern2}のような運用をしている場合は
-% {\PW}がひとつ漏洩しても他の{\PW}は安全だが、
-% \ref{pattern3}のような運用をしている場合は
-% ひとつでも{\PW}が漏洩するとあらゆる{\PW}が漏洩してしまうことになる。
-
 \subsection{Using images}
 
 Old pictures can be used as the questions of EpisoPass,
@@ -884,52 +846,37 @@ and use his real name as well as other similar fake names.
 Of course, the photo should not have information related to the
 person's real name, since image search is fairly easy on the Web these days.
 
-% 忘れにくい{\EM}を利用する認証手法として
-% 様々な画像認証システム\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{小池英樹:2006-05-15}が提案されている。
-% 複数の画像の中から正答を選択するもの(Cognometric方式)、
-% ひとつの画像の中の特定の場所を指定するもの(Locimetric方式)、
-% 画像の上で描画操作を行なうもの(Drawmetric方式)
-% が広く利用されているが\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}\cite{Guideline}、
-% {\EP}は図\ref{web1}のように
-% 文字列のかわりに画像URLを{\SQ}として利用する点が異なっている。
-% %
-% Cognometric方式は{\EM}を効果的に利用できるが、
-% 多数の偽答画像が必要だという問題がある。
-% Locimetric方式は
-% {\EM}を効果的に利用できないことに加え、
-% クリックしやすい「ホットスポット」は限られているため
-% 充分なエントロピーを確保できないことが問題になる\cite{Dirik:2007:MUC:1280680.1280684}。
-% またDrawmetric方式も{\EM}を効果的に利用できないし、
-% ユーザは似た傾向のストロークを選びがちであるため
-% 充分なエントロピーを確保しにくいことが知られている\cite{Nali}。
-% %
-% {\EP}のように画像を{\SQ}として利用する場合、
-% 通常の{\SQ}の場合と同様に偽答を増やすことが容易であることに加え、
-% 画像に関連した{\EM}を有効に利用できるという利点がある\cite{増井:CSS}。
+\section{Related Work}
 
-% 図\ref{leiko}は
-% 本棚.org\cite{hondana}\cite{hondanaorg}
-% のユーザのひとり\footnote{
-%   \textsf{http://hondana.org/Leiko}
-% }が利用している画像認証問題である。
-% このユーザ以外には正答は見当もつかないが、
-% 本人にとっては忘れることがない{\EM}と結びついた画像だということであった。
-
-% 答を書くわけではないから安全
-% 心配ならオフラインでやれば大丈夫
-% 
-% 弱いパスワードを強くすることも簡単
-% 
-% 
-% Bookmarkletも用意した
-%   拡張機能も用意したい
-%
-
-\section{RELATED WORK}
+% 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは少ない
 
 As shown in previous sections,
 there are many attemps for replacing password-based authentication systems,
 none of which has succeeded so far.
+
+Various authentication systems have been proposed for replacing
+passwords, but none of them are found to be better than
+password-related systems\ref{Bonneau:ReplacePasswords}.
+
+Although cognitive password systems have been studied for a
+long time\ref{xxx}\ref{ZZZZ},
+they were meant to be implemented as a replacement to password-based systems,
+and few system has tried to convert episodic memories into passwords.
+
+% 普段の行動を質問に利用する[][]
+
+\ref{Dandapat:2015:AYD:2702123.2702457} % 日常行動からパスワード作るActivePass
+  % これはパスワードを作るのか
+\ref{Das:2013:ECE:2493432.2493453} % スマホの利用状況を認証に使う
+\ref{conf/percom/GuptaWRLGB12} % スマホの利用状況を認証に使う
+% これはEpisodicMemoryと関係ないなぁ
+
+The idea of using episodic memories for user authtication is also not new.
+In fact, using episodic memories for selecting password is gnerally recommended[],
+and many current computer users are probably using password that are
+related their episodic memories in some way.
+
+
 
 Various types of image-based authentication systems have been proposed recently,
 in the hope that images are easier to remember than text
@@ -967,10 +914,8 @@ Instead of directly using images for authentication,
 users use the system to generate a password text with the help of
 the image shown to the user.
 
-% 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは無い
-% 
-% パスワード管理システム
-%   沢山ある
+
+% パスワードに変換するシステムはみつからない
 % 
 % 強いパスワードを作るシステム
 %   ランダムに生成するサイトが沢山ある
