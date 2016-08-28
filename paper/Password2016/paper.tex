@@ -15,19 +15,19 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 問題を沢山使ってる例を出す
+% ○ 問題を沢山使ってる例を出す
 % わからない問題でもいいことを示す Who's the bully? when?
-% エピソードを使う認証は多いが、パスワードを生成するものは何故かない
-%   毎日の行動から認証するものもある
+% ○エピソードを使う認証は多いが、パスワードを生成するものは何故かない
+% ○  毎日の行動から認証するものもある
 % 家族や友人が知らない秘密は存在するはず
 % 秘密の質問が駄目と言われるのは質問の質が悪いから
 %
 % ○ 拡張機能の説明
 %
-% 参考文献たくさん
+% ○ 参考文献たくさん
 % 大きなことをいわない
 % パスワードを覚えるのは無理
-% シード文字列の選びかた
+% ○ シード文字列の選びかた
 % エントロピーの計算
 % アルゴリズムの選択 
 % 偽答生成が簡単であることを示す 
@@ -132,28 +132,9 @@ different long passwords should be used for different services.
 However,
 remembering many long passwords is almost impossible for ordinary humans.
 %
-% According to Flor\^{e}ncio,
 According to a research in 2007,
 people use 6.5 passwords on 25 Web services on average, and
 4.28\% of the users forget their passwords in 3 months\cite{Florencio:2007:LSW:1242572.1242661}.
-
-%また2011年の野村総研の調査によれば、
-%一般的なユーザが{\PW}認証を行なうサイトは平均19.4個で、
-%利用している{\PW}は平均3.1個であった\cite{野村総研}。
-%多数の{\PW}を記憶することが困難であるため、
-%多くのユーザが同じ{\PW}を複数サイトで使い回しているのだと思われる。
-
-% People are frequently asked to register a password when
-% they try to use a new service.
-
-% もっと別の認証もいろいろ提案されている
-%   画像認証[MALASYM][その他いろいろ]
-%   
-%   特殊ハードのような持ち物を使う方法など[Pico][YubiKey][RSA]
-%   生体認証 指紋認証
-%   行動からの認証[]
-%   位置ベースの認証[SOUPS]
-%  完全置き換えはしばらくは不可能だろう
 
 Since passwords are difficult to handle,
 various other authentication methods have been proposed.
@@ -181,23 +162,12 @@ convenient and strong method\cite{Bonneau:ReplacePasswords},
 and it is not supposed to become extinct
 in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
 
-% % なのでパスワードと生きる方法が工夫されている
-% %   強いパスワードを考える方法[]
-% %     覚える方法が提案されてたり[Bonneau]
-% %       万人むけはむり
-
-% パスワードが死滅しないならパスワードと生きる方法が必要である
-%   たとえば様々なパスワード管理システム[][][][]の利用がすすめられている
-%   しかしマスターパスワードがいったり特殊ハードがいったりする
-%   特殊システムがいる場合がある
-%   特殊ハードやソフトは利用がどうしても難しい
-
 If we have to live with password-based authentication systems,
 we have to devise some ways to handle many passwords, and
 various ``password managers'' have been proposed
 \cite{OnePassword}%
 \cite{Dashlane}%
-\cite{ミルパス}%
+\cite{MilPass}%
 \cite{LastPass}%
 \cite{KeyPass}%
 \cite{NortonIDSafe}%
@@ -206,17 +176,8 @@ various ``password managers'' have been proposed
 Password managers remember users' passwords and help them enter
 passwords on various services.
 %
-%{\PW}管理システムは
-%ひとつの「マスター{\PW}」を利用して他のすべての{\PW}を管理するもので、
-%暗号化されたデータベースに{\PW}を格納するもの%
-%
 Most password managers can manage various passwords by
 asking users to remember a single ``master password'' to access the database.
-%
-%が多いが、サービス名をもとにマスター{\PW}を変換することによって
-%複数の{\PW}を生成するシステム\cite{SuperGenPass}もある。
-%両者ともにマスター{\PW}の記憶は必須であり、
-%マスター{\PW}を盗まれたり忘れたりする危険がある。
 %
 Although password managers are useful,
 users have to remember the master password
@@ -302,14 +263,15 @@ remember math formulas easily.
 % or implicit memory.[5]
 % \end{quote}
 
-The idea of using episodic memories for authentication is not new.
+The idea of using episodic memories for authentication has a long history.
 Early papers suggested using episodic memories for creating passwords, and
 authentication by using secret questions,
-sometimes called as ``cognitive passwords'', has long been used as an
+sometimes called as ``cognitive passwords''\cite{Zviran:1990:UAC:100512.100538},
+has long been used as an
 alternative to password-based authentication systems.
 %
 However, conversion from episodic memories to password strings
-was not studied very much. *******
+was not studied at all.
 
 Password generation on EpisoPass is performed through the following steps:
 
@@ -383,13 +345,6 @@ and digits in the seed string are substituted to digits,
 so that generated passwords conforms to password character restrictions
 sometimes requested by the service.
 
-% {\SS}として「\textsf{Twitter123456}」という文字列を指定しており、
-% 4個の{\SQ}に対する回答選択に応じて
-% 「\textsf{Mfveabn574923}」のような{\PW}候補が生成される。
-% 異なる答をを選択すると全く異なる文字列が生成される。
-% {\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
-% {\SS}の文字種に対応した{\PW}候補が生成される。
-
 The first question in Figure \ref{web1}
 is based on the author's episodic memory at elementary school,
 and the question with a photo at the bottom is related to a more recent event
@@ -407,9 +362,6 @@ The Q-A data in JSON format can be downloaded to the local machine
 by cliking the ``save to file'' button.
 the data can be uploaded to the server by dragging the JSON file to the EpisoPass page.
 
-% ユーザはどれが正答かを指定するわけではないので
-% 問題データを見てもユーザの{\PW}はわからない。
-
 When we change the secret string to ``\textsf{Facebook123456}'',
 the generated password changes to ``\textsf{Onjbrppy030937}'',
 as shown in Figure \ref{web2}.
@@ -424,10 +376,6 @@ different services just by changing the seed string.
   \label{web2}
 \end{figure}
 
-% {\PW}文字列の計算方法}
-% 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
-% {\PW}を生成している。
-
 Character substitution is performed based on the hash value
 calculated from concatinating all the selected answers.
 %
@@ -438,35 +386,9 @@ is used for the substitution.
 The last question in Figure \ref{web1} is not a secret question, but a question
 for generating different passwords for different situations.
 By providing such a question, users can generate completely different passwords
-for different months and years.
-
-% サービスごとに{\SS}を変えるのではなく、
-% 図\ref{web3}のように
-% サービス名に応じて回答を変えることによって異なる{\PW}を作成することも可能である。
-% {\PW}としての長さや文字種に特種な制約が無いサービスに関してはこの方法が便利である。
-% 
-% \begin{figure}[H]
-% \centerline{\includegraphics[width=83mm,bb=0 0 718 428]{../WISS/figures/a9167a6ec6af9c70dd1617e3fc25ec30.png}}
-% \centerline{\includegraphics[width=83mm,bb=0 0 718 428]{../WISS/figures/5b887fabeb8e3319623901fe4a6c56f2.png}}
-% \caption{サービス名に対応する回答で異なる{\PW}を生成.}
-% \label{web3}
-% \end{figure}
+for different months and years, for example.
 
 \subsection{Android application}
-
-% Webサービスを利用する場合、ブラウザとサーバとの間の通信を
-% 記録されたり盗み見されたりされる心配を完全に払拭することはできない。
-% % 危険を完全になくすことはできない。
-% 前述の例において、
-% {\PW}はブラウザ内部でJavaScriptにより生成されるので、
-% 一度ページを表示した後は
-% ネットワークを遮断しても{\PW}計算を行なえるようになっているが、
-% 最初から全く通信を行なわずに{\PW}を作成できる方がより安心であろう。
-% このため、通信を全く行なわずにマシン単体で{\PW}計算を行なうための
-% Androidアプリを用意した。
-% ページの右上の「Androidアプリ」ボタンを押すと、
-% 現在表示している秘密の問題と答を内蔵したAndroidアプリが
-% サーバ上でビルドされてダウンロードされる。
 
 If a user doesn't like to use EpisoPass service on the Net,
 he can use an EpisoPass application on Android
@@ -477,11 +399,7 @@ by clicking the ``Android app'' button at the top.
 The application contains all the information required for generating passwords.
 (The application is compiled and built on the server.)
 
-% Android端末でアプリを実行すると図\ref{android1}のような画面が表示される。
-% {\SS}を設定して「開始」ボタンを押すと図\ref{android2}のように質問がひとつずつ表示され、
-% ボタンを押してすべて回答すると{\PW}が計算され図\ref{android3}のように表示される。
-
-When the user runs the application and selects the right answer
+When the user runs the application and selects the correct answer
 to each question, he can eventually get the password and copy it to the password entry.
 (Figure \ref{android1},\ref{android2})
 
@@ -499,20 +417,9 @@ to each question, he can eventually get the password and copy it to the password
 \label{android2}
 \end{figure}
 
-% 回答入力と{\PW}計算はAndroid端末で実行されるため、
-% 端末を「機内モード」に設定するなどの方法で
-% ネットワーク接続を遮断した状態でも{\PW}を計算することができる。
-% {\EP}をインストールしたAndroid端末を持っていれば常に各種の{\PW}を計算できるので、
-% 他人のマシンや公共の場所に設置されたパソコンなどでも
-% 容易にtwitterなどのネットサービスを利用することができる。
-
-% The calculation is performed on Android without network connection,
-% and the user can safely generate passwords 
-% without feeling the fear of ...
-
-% 前述の方法で{\EP}アプリをサーバからダウンロードする場合は、
-% ブラウザ上で秘密の問題をサーバに登録する必要があるが、
-% 秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
+The calculation is performed on Android without network connection,
+and the user can safely generate passwords 
+without feeling the fear of being observed by attackers
 
 \subsection{Using the browser extension}
 
@@ -543,7 +450,6 @@ EpisoPass-based authentication.
 
 \begin{figure}[H]
 \centering
-% \includegraphics[width=0.7\columnwidth]{figures/43272f2003ed8c78307110c621eb12e5}
 \includegraphics[width=0.8\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
 \caption{Using EpisoPass on the login window.}
 \label{extension}
@@ -551,8 +457,7 @@ EpisoPass-based authentication.
 
 \section{Discussions}
 
-In this section, we discuss the advantages and caveats of
-using EpisoPass.
+In this section, we discuss the advantages and caveats of using EpisoPass.
 
 \subsection{Recallability of answers}
 
@@ -587,14 +492,8 @@ questions and the secret level of the questions.
 %
 There have been many studies on the strength of passwords
 \cite{Hayashi:2011:DSP:1978942.1979326}%
-\cite{Komanduri:2011:PPM:1978942.1979321}, % どういうパスワードが強いか
+\cite{Komanduri:2011:PPM:1978942.1979321}, % What password is strong
 but the strength of secret questions has not been studied enough.
-%
-% {\EP}で選択枝が10個の{\SQ}を8個使用する場合、
-% 総当たりで{\PW}を生成するには
-% 1億($10^8$)通りの試行が必要であり、
-% % エントロピーは26.6 ($ = 8 \times \log_2 10$) ビット
-% エントロピーは26.6ビットとなる。
 %
 When we use 10 secret questions with 20 answers and
 there's no clue for the answer,
@@ -602,18 +501,10 @@ there's no clue for the answer,
 all the combinations of the answers,
 and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
 %
-% 英字からランダムに8文字を並べて作成した{\PW}のエントロピーは37.6ビットになるが、
-% ``\textsf{pmvixuzq}''のように全く意味のない{\PW}を記憶して利用することは少ないため、
-% 実際に利用される{\PW}のエントロピーは20ビット程度と考えられているので\cite{NIST}、
-% {\SQ}と選択枝の数を10個程度用意すれば
-% 通常の{\PW}と同程度の強度が期待できることになる。
-%
 It is almost the same entropy as using random 8-character English alphabets
 as a password, in which case the entropy is 45.6 bits.
 This level is considered to be strong enough for Web services,
 where online brute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
-
-\subsection{}
 
 \subsection{Selecting good questions}
 
@@ -675,10 +566,9 @@ category as the right answer.
 %
 Various methods have been proposed for collecting words in the
 same category, mainly for information retrieval tasks%
-\cite{Huang:2012:LFC:2426725.2426728}% 読んでないけど
-\cite{BooWa}% Boo!Wa!というサイトをやっている
-\cite{Wang:2007:LSE:1441428.1442086}.% BooWa
-%\cite{大島裕明:2006-12-15}.% ライバルサーチ「やーやら」
+\cite{Huang:2012:LFC:2426725.2426728}% 
+\cite{BooWa}% Boo!Wa!
+\cite{Wang:2007:LSE:1441428.1442086}.% 
 Using such systems, we can get a list of fake answers almost automatically.
 
 \subsection{Universality}
@@ -705,15 +595,15 @@ that approach is worth consideration.
 
 On many services, users are requested to change passwords periodically
 to strengthen security.
-
-*****Shneier******
-
+%
+Such a practice is not recommended these days
+because humans cannot create strong passwords frequently\cite{Schneier:change}.
 %
 % A user can generate a new strong password by using a randam character generator
 % on a password manager, but he might want to old passwords in case some trouble happens.
 %
 Using EpisoPass, users can just provide a date-related question
-like the first question shown in Figure \ref{web1},
+like the last question shown in Figure \ref{web1},
 and generate different strong passwords based on the answer.
 Using this technique, people can easily manage old and new passwords.
 
@@ -784,31 +674,16 @@ we can save the EpisoPass data as a plain text file and put it at
 any place without great care, since malicious person cannot calculate
 passwords without having the owner's episodic memories.
 
-% \subsection{Risk of password leak}
+% \subsection{Using shared secrets}
 % 
-% EpisoPass is just a string-conversion system and it does not
-% have any information on which one is the correct answer.
-% Also, it does not save any password information in any form, and
-% it is almost impossible to get the right password 
-% without having the episodic memory.
-% 
-% Since the password is generated by the algorithm and the password
-% string is not kept on a computer in any form,
-% unexpected leak of the password is unlikely.
-% The user doesn't have to remember the password string, and
-% there is no chance he will reveal it to somebody
-% even when he is forced to tell the password.
-
-\subsection{Using shared secrets}
-
 % \subsection{Simplicity}
 % 
 % The algorithm of generating a password (shown in Appendix)
 % is fairly simple and
 % it can be implemented on any browser JavaScripts or
 % applications on smartphones and small devices.
-
-\subsection{Hash function}
+%
+% \subsection{Hash function}
 
 \subsection{Risk of password leak at the service side}
 
@@ -851,41 +726,51 @@ person's real name, since image search is fairly easy on the Web these days.
 % 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは少ない
 
 As shown in previous sections,
-there are many attemps for replacing password-based authentication systems,
-none of which has succeeded so far.
-
-Various authentication systems have been proposed for replacing
-passwords, but none of them are found to be better than
-password-related systems\ref{Bonneau:ReplacePasswords}.
-
+there have been many attemps for replacing password-based authentication systems,
+but none of them are found to be better than
+password-based systems\cite{Bonneau:ReplacePasswords}.
+%
 Although cognitive password systems have been studied for a
-long time\ref{xxx}\ref{ZZZZ},
-they were meant to be implemented as a replacement to password-based systems,
-and few system has tried to convert episodic memories into passwords.
+long time\cite{Lazar2011}\cite{Zviran:1990:UAC:100512.100538},
+they were implemented as a replacement to password-based systems,
+and no password-generation system have been proposed
+based on cognitive authentication.
 
 % 普段の行動を質問に利用する[][]
-
-\ref{Dandapat:2015:AYD:2702123.2702457} % 日常行動からパスワード作るActivePass
-  % これはパスワードを作るのか
-\ref{Das:2013:ECE:2493432.2493453} % スマホの利用状況を認証に使う
-\ref{conf/percom/GuptaWRLGB12} % スマホの利用状況を認証に使う
+% \ref{Dandapat:2015:AYD:2702123.2702457} % 日常行動からパスワード作るActivePass
+% これはパスワードを作るのか
+% \ref{Das:2013:ECE:2493432.2493453} % スマホの利用状況を認証に使う
+% \ref{conf/percom/GuptaWRLGB12} % スマホの利用状況を認証に使う
 % これはEpisodicMemoryと関係ないなぁ
 
-The idea of using episodic memories for user authtication is also not new.
-In fact, using episodic memories for selecting password is gnerally recommended[],
+The idea of using episodic memories for authtication is not new.
+In fact, using episodic memories for selecting password
+has generally been recommended,
 and many current computer users are probably using password that are
-related their episodic memories in some way.
+in some way related to their episodic memories.
 
+Recently, people are trying to use mobile devices for authentication,
+because mobile devices remember all the user's behaviors and
+the user can easily recall what he did%
+\cite{Dandapat:2015:AYD:2702123.2702457}%
+\cite{Das:2013:ECE:2493432.2493453}%
+\cite{GuptaWRLGB12}%
+.
+For example, if a user can answer questions like
+``who did you call last night?'' correctly, the authentication will succeed.
+Using mobile or wearable devices for authentication works in many cases,
+but users should have a fairly good long-term memory about their behaviors,
+and that not easy for everybody.
 
-
-Various types of image-based authentication systems have been proposed recently,
+Various types of image-based authentication systems have been proposed recently%
+\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords},
 in the hope that images are easier to remember than text
 because images are usually more directly linked to episodic memories.
 However, on many systems,
 users have to remember new information related to the images
 used in the authentication process, or
 perform special operations on the image, and
-it is not much easier than using passwords.
+it is not much easier than remembering passwords.
 %
 Image-based authentication based on episodic memories might work
 if anyone can prepare many images 
@@ -893,12 +778,11 @@ that are tightly linked to his episodic memories.
 However, finding such images is usually not easy, and
 image-only authentication systems would not take off
 until simple and effective technique is invented.
-% [Malasym]
 
 Even when a new ideal authentication method is invented,
 replacing all the password-based systems should take very long, and
 various password managers should be used until the ideal method
-prevails in the whole world.
+prevails in the world.
 In the age of password-based authentication,
 using password managers seems to be the only way to tackle
 the problem of passwords.
@@ -914,34 +798,33 @@ Instead of directly using images for authentication,
 users use the system to generate a password text with the help of
 the image shown to the user.
 
-
-% パスワードに変換するシステムはみつからない
-% 
 % 強いパスワードを作るシステム
 %   ランダムに生成するサイトが沢山ある
 % 
-% 強いパスワードを覚えるための工夫
+% 強いパスワードを覚えるための工夫 ★
 %   Bonneau
-% 
-% 画像を使う
 % 
 % パスワードに関する全情報を公開してどこかに置いておける
 %   ググれるかもしれない
 %   紛失する可能性が少ない
 %
 
-\section{EXPERIENCES}
+\section{Experiences}
 
 EpisoPass has been used by the authors for more than three years, and
 the authors are using it for various services including
 Twitter, Facebook, Amazon, Skype, etc.
-Since passwords for these services are remembered on the browser,
-EpisoPass is used only once in one week at most.
+% Since passwords for these services are remembered on the browser,
+% EpisoPass is used only once in one week at most.
 %
 Before using EpisoPass, taking care of many passwords was really
 a pain for the authors, but
 currently all the information for generating passswords is put on the cloud
 and no trouble has been found during the period.
+%
+After the introduction of browser extension,
+logging into various services became even easier,
+because visiting the EpisoPass service is unneccesary.
 
 Unfortunately EpisoPass is currently not used by many people.
 One big reason is that most people cannot fully understand the
@@ -958,7 +841,7 @@ These kinds of psychological issues are quite important for
 an authentication system for everybody,
 and we hope to eliminate such obstacles in the future.
 
-\section{CONCLUSION}
+\section{Conclusion}
 
 We introduced a password management system EpisoPass
 that converts a seed string into a password using the user's
@@ -992,32 +875,12 @@ derived from password-based authentication.
 % }。
 
 
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-\centering
-% \includegraphics[height=6.2cm]{eijkel2}
-%\includegraphics[height=6.2cm]{figures/429eec261024dc6c85351f51c12f09b4.png}
-\includegraphics[width=6cm,bb=0 0 429 386]{figures/429eec261024dc6c85351f51c12f09b4.png}
-\caption{One kernel at $x_s$ (\emph{dotted kernel}) or two kernels at
-$x_i$ and $x_j$ (\textit{left and right}) lead to the same summed estimate
-at $x_s$. This shows a figure consisting of different types of
-lines. Elements of the figure described in the caption should be set in
-italics, in parentheses, as shown in this sample caption.}
-\label{fig:example}
-\end{figure}
 
-\subsection{Citations}
+% \subsection{Citations}
 
 \subsubsection*{Acknowledgments.} The heading should be treated as a
 subsubsection heading and should not be assigned a number.
-
 
 \bibliographystyle{splncs03}
 \bibliography{paper}
