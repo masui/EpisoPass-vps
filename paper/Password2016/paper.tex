@@ -390,24 +390,23 @@ sometimes requested by the service.
 % {\SS}の8文字目が数字である場合は{\PW}の8文字目も数字になるなど、
 % {\SS}の文字種に対応した{\PW}候補が生成される。
 
-The second question in Figure \ref{web1}
+The first question in Figure \ref{web1}
 is based on the author's episodic memory at elementary school,
-and the last question is related to a more recent event
-which the author thinks he will never forget.
-All the questions are related to the author's episodic memories
-that he thinks he never forgets, and nobody else knows which one of the
-candidate answers is the right one.
+and the question with a photo at the bottom is related to a more recent event
+which the author believes he will never forget.
+All the questions are based on the author's episodic memories
+that he thinks he never forgets, and he believes that
+nobody else knows which one of the candidate is the right answer.
 
 Questions and answers can be edited directly on the browser, and they can be
 saved on the server by clicking the ``save to server'' button.
 The Q-A data sets are saved on the server,
 but no information about the correct answer or the
 generated password is saved on the server.
+The Q-A data in JSON format can be downloaded to the local machine
+by cliking the ``save to file'' button.
+the data can be uploaded to the server by dragging the JSON file to the EpisoPass page.
 
-% {\SQ}と答はブラウザで編集でき、
-% 右上の「サーバにセーブ」ボタンを押すことにより{\SS}、秘密の問題、答のリストがサーバにセーブされる。
-% 「ファイルにセーブ」ボタンを押すとJSONデータをパソコンにダウンロードでき、
-% パソコン上のJSONデータをブラウザにドラッグ\&ドロップするとサーバにアップロードできる。
 % ユーザはどれが正答かを指定するわけではないので
 % 問題データを見てもユーザの{\PW}はわからない。
 
@@ -428,25 +427,19 @@ different services just by changing the seed string.
 % {\PW}文字列の計算方法}
 % 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
 % {\PW}を生成している。
-% {\PW}文字列の計算方法は附録に示す。
-
-%アルゴリズムはここ? Algorithm
 
 Character substitution is performed based on the hash value
 calculated from concatinating all the selected answers.
-  
+%
 For example, if the user selects ``\textbf{\texttt{Ebisawa}}'' to the question ``\textbf{\texttt{Who's the bully?}}'',
 a hash value calculated from  ``\textbf{\texttt{Who's the bully:Ebisawa}}''
 is used for the substitution.
-Details of the algorithm is shown in the Appendix.
 
-% 問題と回答から文字列を生成し、そのMD5値によって{\SS}を換字することにより
-% {\PW}を生成している。
-% {\PW}文字列の計算方法は附録に示す。
+The last question in Figure \ref{web1} is not a secret question, but a question
+for generating different passwords for different situations.
+By providing such a question, users can generate completely different passwords
+for different months and years.
 
-% \subsubsection{回答選択により{\PW}を切り換え}
-% \label{pwgen}
-% 
 % サービスごとに{\SS}を変えるのではなく、
 % 図\ref{web3}のように
 % サービス名に応じて回答を変えることによって異なる{\PW}を作成することも可能である。
@@ -458,11 +451,6 @@ Details of the algorithm is shown in the Appendix.
 % \caption{サービス名に対応する回答で異なる{\PW}を生成.}
 % \label{web3}
 % \end{figure}
-
-% 定期的に{\PW}変更を求められるシステムでは、
-% 「利用期間は?」という質問に対して
-% 「2013/1」「2013/2」のような答を用意しておけば、
-% 時期を選択することによって簡単に{\PW}を変更することができるので便利である。
 
 \subsection{Android application}
 
@@ -482,10 +470,10 @@ Details of the algorithm is shown in the Appendix.
 
 If a user doesn't like to use EpisoPass service on the Net,
 he can use an EpisoPass application on Android
-which does not require network connection.
+which does not use network connections.
 After registering questions and answers on the EpisoPass service,
 the user can download an Android application from the server
-by clicking the ``Android app'' button.
+by clicking the ``Android app'' button at the top.
 The application contains all the information required for generating passwords.
 (The application is compiled and built on the server.)
 
@@ -526,37 +514,37 @@ to each question, he can eventually get the password and copy it to the password
 % ブラウザ上で秘密の問題をサーバに登録する必要があるが、
 % 秘密の問題を全くネット上に露出することなくアプリを利用することもできる。
 
-\subsection{Using browser extension}
+\subsection{Using the browser extension}
 
-Using the EpisoPass service or the application,
-users have to type the password string after generating the password.
+When a user use the EpisoPass service or the EpisoPass application,
+he has to type or copy the password string after generating the password.
 Since it is not convenient,
 we provide a browser extension for using EpisoPass on the login window of
-various services.
+various Web services.
 
 
 A browser extension is a JavaScript add-on program which can
 run on top of existing HTML and JavaScript.
 %
-Figure \ref{extension} shows the login page of Amazon.com, where
-EpisoPass questions are displayed by the browser extension.
+Figure \ref{extension} shows the login page of Amazon.com, with which
+EpisoPass questions are automatically displayed by the browser extension.
 %
-In this case, when the Amazon login page is accessed from the browser,
-the extension automatically runs on the page,
-acquires questions and andwers from the EpisoPass server,
-and shows them to the user just like the Android application.
+Here, when the Amazon login page is accessed from the browser,
+the browser extension program automatically runs on the page,
+acquires questions and answers from the EpisoPass server,
+and shows them to the user just the same as the Android application.
 %
 After answering all the questions, a password is calculated from the
-selected answers and pasted to the password textbox of the page.
-Using the extension, users can login to various services
-without seeing a password string;
-It looks as if various services are offering
+selected answers and pasted to the password input form of the page.
+Using the extension, users can login to various services just by
+answering questions, without seeing any password string.
+It looks as if these services are offering
 EpisoPass-based authentication.
 
 \begin{figure}[H]
 \centering
 % \includegraphics[width=0.7\columnwidth]{figures/43272f2003ed8c78307110c621eb12e5}
-\includegraphics[width=0.7\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
+\includegraphics[width=0.8\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
 \caption{Using EpisoPass on the login window.}
 \label{extension}
 \end{figure}
