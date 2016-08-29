@@ -39,10 +39,13 @@
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
 
+\usepackage{marginnote}
+
 \usepackage{here} % [H]とするとその場所に配置されるらしい
 
 \usepackage{url}
-\urldef{\mailsa}\path|masui@pitecan.com|
+% \urldef{\mailsa}\path|masui@pitecan.com|
+\urldef{\mailsa}\path|***@***.***.***|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
 
@@ -54,7 +57,7 @@
 \title{EpisoPass: Password Management based on Episodic Memories}
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{Lecture Notes in Computer Science: Authors' Instructions}
+\titlerunning{EpisoPass: Password Management based on Episodic Memories}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -62,8 +65,9 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{Toshiyuki Masui%
-\thanks{Thanks...}%
+% \author{Toshiyuki Masui%
+\author{***** ****
+% \thanks{Thanks...}%
 }
 %
 \authorrunning{Lecture Notes in Computer Science: Authors' Instructions}
@@ -71,10 +75,15 @@
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
-\institute{Faculty of Environment and Information Studies, Keio University\\
-5322 Endo, Fujisawa, Kanagawa 252-8520, Japan\\
+%\institute{Faculty of Environment and Information Studies, Keio University\\
+%5322 Endo, Fujisawa, Kanagawa 252-8520, Japan\\
+%\mailsa\\
+%\url{http://pitecan.com/}}
+\institute{******* ******* ******* *******\\
+******, ****** *******, *******\\
 \mailsa\\
-\url{http://pitecan.com/}}
+% \url{http://pitecan.com/}}
+\url{http://*****.***.***/}}
 
 %
 % NB: a more complex sample for affiliations and the mapping to the
@@ -111,41 +120,29 @@ removing the need to type or copy a password string.
 \end{abstract}
 
 \section{Introduction}
-% Passwordは使われている
-% 
-% Passwordが辛いのは一般的事実である[?]
-%   基本的に強くするには長くしなければならない
-%   忘れる
-%   覚えられない
-%   サービスごとにパスワードは変えるべきである[?] でも無理
-%   定期的に更新させられる
-% 強いパスワードを頭で覚えて管理するのは不可能
-%       特に弱者には
-%   パスワード作成アルゴリズムを自力で使っている人もいるがそれは難しい
 
-Passwords have been used for various Web services and applications
-for a long time, and currently the most popular authentication method on the Internet.
+Passwords have been used as a means of authenticating to Web services
+and applications for a long time, and remain the most popular
+authentication method on the Internet.
 %
-Since short passwords are easily guessed by attackers and
-using the same password for different services is unsafe,
-different long passwords should be used for different services.
-However,
-remembering many long passwords is almost impossible for ordinary humans.
+Since short passwords are easily guessable by attackers and using the
+same password for multiple services is unsafe, a different long
+password should be used for each service a person uses.  However,
+remembering numerous long passwords is almost impossible for ordinary
+humans.
 %
-According to a research in 2007,
-people use 6.5 passwords on 25 Web services on average, and
-4.28\% of the users forget their passwords in 3 months\cite{Florencio:2007:LSW:1242572.1242661}.
+According to research conducted by Flor\^{e}ncio {\it et al.\/} in 2007,
+people use on average only 6.5 different passwords to access 25 Web services, and
+4.28\% of users forget their passwords within 3 months \cite{Florencio:2007:LSW:1242572.1242661}.
 
-Since passwords are difficult to handle,
-various other authentication methods have been proposed.
-For example,
-image-based authentication\cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}, 
+Since passwords are difficult to handle, various other authentication methods have been proposed.
+For example, image-based authentication\cite{Biddle:2012:GPL:2333112.2333114,GraphicalPasswords},
 biometrics authentication\footnote{
   % \textsf{https:{\slash}{\slash}en.wikipedia.org{\slash}wiki{\slash}Biometrics}
-  \url{https://en.wikipedia.org/wiki/Biometrics}
+  % \url{https://en.wikipedia.org/wiki/Biometrics}
+  \url{https://en.wikipedia.org/w/index.php?title=Biometrics&oldid=736189000}
 },
-behavior-based authentication\cite{Dandapat:2015:AYD:2702123.2702457}, 
-and many other authentication methods have been proposed.
+behavior-based authentication\cite{Dandapat:2015:AYD:2702123.2702457}, and many others.
 
 % というのもパスワードには利点があるから[Bonneau]
 %   すでに普及
@@ -156,34 +153,28 @@ and many other authentication methods have been proposed.
 %     実装が比較的簡単
 % なのでパスワードが近い将来死滅するとは考えられない
 
-However,
-password-based authentication is still the most
-convenient and strong method\cite{Bonneau:ReplacePasswords},
-and it is not supposed to become extinct
-in a short period of time\cite{Herley:2009:PSS:1601990.1602010}.
+However, password-based authentication is still the most
+convenient and widely deployed method \cite{Bonneau:ReplacePasswords},
+and is not expected to disappear any time soon \cite{Herley:2009:PSS:1601990.1602010}.
 
-If we have to live with password-based authentication systems,
-we have to devise some ways to handle many passwords, and
-various ``password managers'' have been proposed
-\cite{OnePassword}%
-\cite{Dashlane}%
-\cite{MilPass}%
-\cite{LastPass}%
-\cite{KeyPass}%
-\cite{NortonIDSafe}%
-\cite{IDManager}.
+Given we will have to continue to live with password-based
+authentication systems for the foreseeable future, we have to devise
+practical methods for handling many passwords, and various ``password
+managers''
+have been proposed\cite{OnePassword,Dashlane,MilPass,LastPass,KeyPass,NortonIDSafe,IDManager}.
 %
-Password managers remember users' passwords and help them enter
-passwords on various services.
+Password managers remember users' passwords and aim to directly enter
+them into the login pages of the various services a user wants to
+access.
 %
-Most password managers can manage various passwords by
-asking users to remember a single ``master password'' to access the database.
+The burden on the user is reduced by requiring just a single ``master
+password'' to access the database of stored passwords.
 %
-Although password managers are useful,
-users have to remember the master password
-or use a special hardware device
-for safely handling password managers, and
-password managers usually run on limited devices.
+Although password managers are widely used and a clear step forward
+from having to remember multiple passwords, uses nonetheless have to
+remember the master password or use a special hardware device for
+safely handling the password database, and password managers usually
+run on only a limited set of devices.
 
 % 読みとることができない脳内情報を利用するという基本手法は良いのだが覚えられないのが問題である
 %   だとすると...パスワードを記憶するかわりに、****脳が既に覚えている秘密の記憶からパスワードを生成すればよいはずである***
@@ -194,48 +185,53 @@ password managers usually run on limited devices.
 %   秘密の知識からGenerateするとよい
 %
 
-If we don't want to carry any special device for authentication,
-all the information required for the authentication should be
-kept in the brain.
+If we want to avoid having to carry any special device for
+authentication, either we must used some form of biometrics, or all
+the information required for the authentication must be must be stored
+in the user's memory.
 %
-However, the biggest problem of brain-based authentication is that
-users cannot safely keep memories like long passwords or master password.
-For this reason, we believe that
-it is far better to ``generate'' something for the authentication,
-based on users' episodic memories that they can never forget.
+However, the biggest problem with memory-based authentication is that
+users cannot reliably remember passwords or master password that are
+long and complex enough to be secure.
+
+For this reason, we believe that it is far better to ``generate''
+something for the authentication, based on a user's episodic
+memories. This has the benefit that unlike a password, a person is
+highly unlikely to forget such episodic memories.
 %
 % We believe that a password manager should have the following features.
 % (1) It should be available on any platform including PCs, smartphones, and the Web.
 % (2) Users should not have secret information (e.g. master password) or special device.
 % (3) Rely only on the information in the user's brain.
 %
-We propose a password manager \textit{EpisoPass} that generates strong passwords
-based only on the user's secret episodic memories that the user cannot forget.
+We therefore propose \textit{EpisoPass}, a password manager that
+generates strong passwords based only on a user's secret and
+unforgettable episodic memories.
 
 \section{EpisoPass}
 
-EpisoPass is a password manager that supports generating
-strong passwords based on users' secret episodic memories.
+EpisoPass is a password manager that supports the generation of
+strong passwords based on a user's secret episodic memories.
 %
 % Before using EpisoPass for generating passwords,
 % a user provides a seed string and many question-answer pairs to EpisoPass,
 % and a password is generated based on the user's selections.
 %
 % Memories in human brain are not uniform.
-We keep various memories in our brain, but different memories have different natures.
-Some memories are very short-lived, and others are unforgettable.
-When we have a very impressive experience,
-that memory will stay in the brain for a long time and
-cannot easily disappear.
-On the other hand, when we study math and try to remember a new formula,
-it is usually hard to memorize it unless we practice a lot,
-since the knowledge about the formula is not related to
-any personal experiences.
-The former type of memory is called the episodic memory and
-people cannot easily lose it.
-Memories of passwords belong to the latter type and
-people cannot easily remember them, just like people cannot
-remember math formulas easily.
+Our brains store numerous memories, but different memories have
+different characteristics.  Some memories are very short-lived, while
+others are recallable for long periods of time.  When we have a
+particularly impressive experience, the memory of it will stay in our
+mind for a long time and can't be easily forgotten.  On the other
+hand, other topics are more difficult to remember. For example, when
+studying mathematics and trying to remember a new formula, it can be
+hard to memorize without significant practice, since knowledge of the
+formula is unrelated to any personal experiences.
+The former type of memory is called an {\it episodic\/} memory and most people find such
+memories easy to recollect and hard to forget.
+Memories of passwords belong in the latter category. People find them
+hard to remember and easy to forget, in the same way people find it difficult
+ to remember mathematical formulas.
 
 % \begin{quote}
 % Episodic memory is the memory of autobiographical events (times,
@@ -264,14 +260,14 @@ remember math formulas easily.
 % \end{quote}
 
 The idea of using episodic memories for authentication has a long history.
-Early papers suggested using episodic memories for creating passwords, and
-authentication by using secret questions,
+Early papers suggested using episodic memories for creating passwords.
+Authentication by using secret questions,
 sometimes called as ``cognitive passwords''\cite{Zviran:1990:UAC:100512.100538},
 has long been used as an
 alternative to password-based authentication systems.
 %
-However, conversion from episodic memories to password strings
-was not studied at all.
+% However, conversion from episodic memories to password strings
+% was not studied at all.
 
 Password generation on EpisoPass is performed through the following steps:
 
@@ -293,6 +289,14 @@ the user copies the calculated string
 and register it as the password for the service.
 \end{enumerate}
 
+\begin{figure}[H]
+\centering
+% \includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
+\includegraphics[width=1.0\columnwidth]{figures/4d13e6804ba790624c1f8e2b8255bde5}
+\caption{Generating an Amazon password with EpisoPass.}
+\label{web1}
+\end{figure}
+
 \subsection{Using EpisoPass on a browser}
 
 Figure \ref{web1} shows how to generate a password
@@ -302,21 +306,13 @@ and many candidate answers are also shown for each question.
 When a user clicks and selects one of the answers for each question,
 the seed string shown at the top-left is converted to a
 candidate password string based on the selections.
-When the user selects the right answers to all the questions,
+When the user selects the correct answers to all the questions,
 the right password is calculated and shown at the top.
 
 % If the q-a is based on the user's episodic memories and
 % nobody knows the correct answer,
 % only the user can select the set of right answers and
 % use the converted string as the password.
-
-\begin{figure}[H]
-\centering
-% \includegraphics[width=1.0\columnwidth]{figures/c1bd6e7f67698c70978f528ccd2339d9}
-\includegraphics[width=1.0\columnwidth]{figures/4d13e6804ba790624c1f8e2b8255bde5}
-\caption{Generating an Amazon password with EpisoPass.}
-\label{web1}
-\end{figure}
 
 In Figure \ref{web1},
 ``\textsf{Amazon123456}'' is provided as the seed string,
@@ -359,7 +355,7 @@ The Q-A data sets are saved on the server,
 but no information about the correct answer or the
 generated password is saved on the server.
 The Q-A data in JSON format can be downloaded to the local machine
-by cliking the ``save to file'' button.
+by clicking the ``save to file'' button.
 the data can be uploaded to the server by dragging the JSON file to the EpisoPass page.
 
 When we change the secret string to ``\textsf{Facebook123456}'',
@@ -377,11 +373,12 @@ different services just by changing the seed string.
 \end{figure}
 
 Character substitution is performed based on the hash value
-calculated from concatinating all the selected answers.
+calculated from concatenating all the questions and selected answers.
 %
-For example, if the user selects ``\textbf{\texttt{Ebisawa}}'' to the question ``\textbf{\texttt{Who's the bully?}}'',
-a hash value calculated from  ``\textbf{\texttt{Who's the bully:Ebisawa}}''
-is used for the substitution.
+For example, if the user selects ``\textbf{\texttt{Ebisawa}}''
+to the question ``\textbf{\texttt{Who's the bully?}}'',
+a string including ``\textbf{\texttt{Who's the bully:Ebisawa}}''
+is used for calculating the hash value.
 
 The last question in Figure \ref{web1} is not a secret question, but a question
 for generating different passwords for different situations.
@@ -390,7 +387,7 @@ for different months and years, for example.
 
 \subsection{Android application}
 
-If a user doesn't like to use EpisoPass service on the Net,
+If a user doesn't like to use the EpisoPass service on the Net,
 he can use an EpisoPass application on Android
 which does not use network connections.
 After registering questions and answers on the EpisoPass service,
@@ -419,9 +416,10 @@ to each question, he can eventually get the password and copy it to the password
 
 The calculation is performed on Android without network connection,
 and the user can safely generate passwords 
-without feeling the fear of being observed by attackers
+without feeling the fear of being observed by attackers.
 
 \subsection{Using the browser extension}
+\label{extensionsection}
 
 When a user use the EpisoPass service or the EpisoPass application,
 he has to type or copy the password string after generating the password.
@@ -431,7 +429,7 @@ various Web services.
 
 
 A browser extension is a JavaScript add-on program which runs
-on top of existing HTML and JavaScript.
+on top of existing Web pages.
 %
 Figure \ref{extension} shows the login page of Amazon.com, with which
 EpisoPass questions are automatically displayed by the browser extension.
@@ -442,7 +440,7 @@ acquires questions and answers from the EpisoPass server,
 and shows them to the user just the same way as the Android application.
 %
 After answering all the questions, a password is calculated from the
-selected answers and pasted to the password input form of the page.
+selected answers and pasted to the password field of the page.
 Using the extension, users can login to various services just by
 answering questions, without seeing any password string.
 It looks as if these services are offering
@@ -450,7 +448,7 @@ EpisoPass-based authentication.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
+\includegraphics[width=0.9\columnwidth]{figures/aeff16ffcab956e554364e9e5aca8359}
 \caption{Using EpisoPass on the login window.}
 \label{extension}
 \end{figure}
@@ -475,15 +473,16 @@ remembers the episode now, it is unlikely that he forgets the episode 10 years l
 
 \subsection{Selection of seed strings}
 
-In the previous examples showing the author's real EpisoPass questions,
+In the previous examples showing the author's EpisoPass questions,
 a seed string ``\textsf{Amazon123456}'' was used for Amazon.com, and
 ``\textsf{Facebook123456}'' was used for Facebook.
 Such strings are used because they are easily memorable.
 Of course any seed string can be used as seeds for various services,
-and automatic generation of seed strings is possible,
-although generating service specific unique seed string is not trivial.
-For example, users can use the same username and password both
-for Amazon.com and Amazon.co.uk, but not for Amazon.co.jp.
+and automatic generation of seed strings is possible.
+
+% although generating service-specific unique seed string is not trivial.
+% For example, users can use the same username and password both
+% for Amazon.com and Amazon.co.uk, but not for Amazon.co.jp.
 
 \subsection{Security strength of EpisoPass}
 
@@ -501,160 +500,144 @@ there's no clue for the answer,
 all the combinations of the answers,
 and the entropy of the system is 43.2 ($10 \times \log_2 20$) bits.  % 10.0 * (Math.log(20.0)/Math.log(2.0))
 %
-It is almost the same entropy as using random 8-character English alphabets
-as a password, in which case the entropy is 45.6 bits.
+This represents roughly the same entropy as using a random 8-character Latin-alphabet
+password, for which the entropy is 45.6 bits.
 This level is considered to be strong enough for Web services,
-where online brute-force attack is impossible\cite{Florencio:2007:SWP:1361419.1361429}.
+where it's not possible to perform online brute-force attacks\cite{Florencio:2007:SWP:1361419.1361429}.
+
 
 \subsection{Selecting good questions}
 
-The quality of the questions is the key to using EpisoPass.
+The quality of the questions is key to using EpisoPass effectively.
 If the episode is shared by someone else,
-that person can easily answer the question and generate the
-password just like the user.
+this other person might easily be able to answer the question and generate the
+user's password.
 %
-The episode related to each question should not be known to other people,
+The episode related to each question should therefore not be known to any other person,
 and the episode should be unforgettable.
 %
-Finding such episodes seems difficult at first, but
-when we try to remember experiences of old days,
-we can recall many trivial episodes which are unforgettable but
-not important to other people.
+Finding such episodes seems difficult at first, but our experience
+has been that we try to remember such experiences from our personal past,
+we can soon recall many trivial episodes which are unforgettable but
+nonetheless not important to other people.
 %
-Old experiences like the following are candidates for
-good questions used in EpisoPass.
+The following list shows some examples of experiences that we believe
+make good candidates for EpisoPass questions.
 
 \begin{itemize}
-\item Memory of small injury. (Nobody cares it but you.)
+\item Memories of very minor injuries that nobody would have cared about apart from you.
 
-\item Memories of bad experience like blunders or defeat.
-(You don't tell it to anybody.)
+\item Memories of bad experience such as embarrassing blunders or failures,
+especially in the case where it was never admitted to anyone else.
 
-\item Experience of finding a small special item which only you are interested in.
+\item Experiences of finding inconsequential but special items which only you are interested in.
 \end{itemize}
 
-For example, a question like
-``who hit you when you were 6 years old?''
-is about a trivial experience that people do not mention,
-but a bad experience like this is not forgettable.
+For example, a question such as
+``who hit you when you were six years old?''
+is about a trivial experience that most people would never have reason to discuss,
+but an experience that may have been unpleasant at the time is hard to forget.
 
-Questions like ``Which food do you like best?'' should be avoided,
-since some of the friends might know the user's taste.
+Questions such as ``Which food do you like best?'' should be avoided,
+since friends or family might know the user's tastes, thereby allowing 
+others to select the correct answer.
+
 Questions related to an episode which the user is proud of should also be
-avoided, since the user might talk about the episode to somebody else.
-
-We usually don't tell our bad trivial experiences to other people,
-but we might boast of good experiences or even write a blog about it.
-Also, our tastes (e.g. favorite food) might change in the long run.
-Using such episodes for questions should be avoided.
+avoided, since this is a something the user might prefer to discuss with others.
+We don't usually talk about trivial bad experiences with other people,
+but we might boast about good experiences (some might even write blog posts about them).
+Similarly our tastes ({\it e.g.\/} favorite foods) might change in the long run.
+Using such episodes for questions should therefore be avoided.
 
 \subsection{Creating fake answers}
 
-It is difficult to provide enough number of fake answers to a question like
-``what was your favorite sport?''
-because possible answers are limited.
+It can be difficult to provide a large number of false answers to a question like
+``what is your favorite sport?''
+because the number of possible answers is limited.
 %
 On the other hand, if the right answer to the question is a name of a place or a person,
-generating similar answers is easy.
+generating similar answers is straightforward.
 For example, if the answer to the question is ``Colorado'',
 we can easily provide fake answers like ``California'', ``Utah'', etc.
-because we can use the list of states in the U.S.
 
-In this way, fake answers can be easily generated
+In this way, false answers can be easily generated
 if it is possible to collect words which belong to the same
 category as the right answer.
 %
 Various methods have been proposed for collecting words in the
 same category, mainly for information retrieval tasks%
-\cite{Huang:2012:LFC:2426725.2426728}% 
-\cite{BooWa}% Boo!Wa!
-\cite{Wang:2007:LSE:1441428.1442086}.% 
-Using such systems, we can get a list of fake answers almost automatically.
+\cite{Huang:2012:LFC:2426725.2426728,BooWa,Wang:2007:LSE:1441428.1442086}. % Boo!Wa!
+We can use such systems to provide a list of potential false answers almost automatically.
 
 \subsection{Universality}
 
-Although everyone has to use authentication systems on the Internet these days,
-not all the people are good at handling passwords.
+Although everyone has to make use of authentication systems, not everyone
+is good at handling passwords.
 Even experienced computer users have trouble with passwords,
-since choosing a good password is not intuitive and
-people forget passwords very easily.
+since choosing a good password is unintuitive and remembering complex
+passwords is hard.
 %
-Using EpisoPass, people can use password-based systems without knowing
-techniques for creating and remembering strong passwords.
-They only have to provide
-questions and answers based on secret episodic memories.
+Using EpisoPass, people can use password-based systems without having to invent
+techniques for creating and remembering strong passwords. The Q-A configuration step
+is a one-time process, after which the system becomes straightforward to use.
 %
 By integrating EpisoPass into existing password-based services,
 people can even use services without noticing that passwords are
 required for the service.
 %
 Our experience of using browser extensions suggests that
-that approach is worth consideration.
+this approach offers the most seamless experience.
 
-\subsection{Frequent password update}
+\subsection{Password requiring frequent updates}
 
-On many services, users are requested to change passwords periodically
+Many services still require users to change passwords periodically in an attempt
 to strengthen security.
 %
-Such a practice is not recommended these days
-because humans cannot create strong passwords frequently\cite{Schneier:change}.
+Although this is no longer considered good-practice, since humans struggle to
+generate a stream of strong passwords \cite{Schneier:change}, the practice is
+still widespread.
 %
-% A user can generate a new strong password by using a randam character generator
+% A user can generate a new strong password by using a random character generator
 % on a password manager, but he might want to old passwords in case some trouble happens.
 %
-Using EpisoPass, users can just provide a date-related question
-like the last question shown in Figure \ref{web1},
-and generate different strong passwords based on the answer.
-Using this technique, people can easily manage old and new passwords.
+Using EpisoPass, users can provide a date-related question
+similar to that shown as the final question in Figure \ref{web1}. This allows
+different strong passwords to be generated depending on the answer chosen
+for this question. Using this technique, people can easily manage both old and new 
+passwords efficiently.
 
-\subsection{Comparison with challenge-response authentication}
-
-% 一方、{\SQ}を利用する認証の脆弱性を利用した攻撃が近年問題になっている。
-% {\PW}を忘れたときのために、
-% あらかじめ設定した{\SQ}に答えることによって{\PW}をリセットできるサービスがあり、
-% 「母親の旧姓は?」や「最初に飼ったペットの名前は?」のような
-% 質問に対してユーザが答を登録するようになっている。
-% このような問題は他人が調べたり推測したりすることが容易であるうえに
-% {\SQ}の数は一般的に少なく、
-% {\PW}よりも脆弱だといえる\cite{Rabkin:2008:PKQ:1408664.1408667}。% 銀行20個調べて{\SQ}の弱さを指摘
-
-In many services, users are adviced to define answers to secret questions like
-``what is your mother's maiden name''
-so that he can log into the service even when he forgets the password.
-This kind of authentication is far less secure than simple password systems,
-since it is fairly easy for attackers to know the right answer.
-The variation of system-provided questions are usually small, and
-such challenge-response systems are considered to be
-insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
-
-It would be better if the user can register his own secret questions
-based on his episodic memory.
-However, answers to user-generated challenge questions are more easily
-forgotten or cracked,
-and using simple challenge-responce is not considered to be safe enough
-\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}.
-%
-Also, in this case,
-the user should register the answer to the system in addition to the question.
-Telling secret facts to service providers is like
-registering raw password string on the server,
-and it is not safe unless the strings are properly hashed and salted on the server.
-
-%
-%ユーザが作成した{\SQ}を使えばこのような問題はなくなるはずであるが、
-%他人に解かれにくい問題をユーザが作成することは難しく、
-%またユーザ自身が答を忘れてしまうことも多いと考えられている\cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}。
-%
-%また、古い記憶にもとづいて作成した秘密の問題は
-%ユーザが想像するよりも解かれやすいという実験結果にもとづき、
-%忘れない{\SQ}を複数利用する方法、
-%問題と答を連想するために画像を利用する方法、
-%複数の問題を連続的に利用する手法などが提案されている\cite{Renaud:2010:PQE:2146303.2146318}。
-
-% {\EP}では、
-% 他人には解くことが難しく自分では忘れないような{\SQ}を自由にいくつでも利用できるようになっている。
-% 問題作成に慣れていないユーザには有効な{\SQ}を作成することは難しいかもしれないが、
-% 次節で述べるように、適切な質問を選ぶことによりこの問題を解決できるはずである。
+% \subsection{Comparison with challenge-response authentication}
+% 
+% % 一方、{\SQ}を利用する認証の脆弱性を利用した攻撃が近年問題になっている。
+% % {\PW}を忘れたときのために、
+% % あらかじめ設定した{\SQ}に答えることによって{\PW}をリセットできるサービスがあり、
+% % 「母親の旧姓は?」や「最初に飼ったペットの名前は?」のような
+% % 質問に対してユーザが答を登録するようになっている。
+% % このような問題は他人が調べたり推測したりすることが容易であるうえに
+% % {\SQ}の数は一般的に少なく、
+% % {\PW}よりも脆弱だといえる\cite{Rabkin:2008:PKQ:1408664.1408667}。% 銀行20個調べて{\SQ}の弱さを指摘
+% 
+% In many services, users are advised to define answers to secret questions like
+% ``what is your mother's maiden name''
+% so that he can log into the service even when he forgets the password.
+% This kind of authentication is far less secure than simple password systems,
+% since it is fairly easy for attackers to know the right answer.
+% The variation of system-provided questions are usually small, and
+% such challenge-response systems are considered to be
+% insecure\cite{Rabkin:2008:PKQ:1408664.1408667}.
+% 
+% It would be better if the user can register his own secret questions
+% based on his episodic memory.
+% However, answers to user-generated challenge questions are more easily
+% forgotten or cracked,
+% and using simple challenge-responce is not considered to be safe enough
+% \cite{Just:2009:PCC:1572532.1572543}\cite{Schechter:2009:NSM:1607723.1608145}.
+% %
+% Also, in this case,
+% the user should register the answer to the system in addition to the question.
+% Telling secret facts to service providers is like
+% registering raw password string on the server,
+% and it is not safe unless the strings are properly hashed and salted on the server.
 
 \subsection{Care for handling secret information}
 
@@ -701,14 +684,14 @@ Once all the answers to the questions are known,
 the attacker can freely generate all the passwords
 generated with the same questions.
 
-To prevent such troble, it is safer to keep all the questions and answers
+To prevent such trouble, it is safer to keep all the questions and answers
 in a secret place or
 use sufficient number of questions so that brute-force does not work.
 
 \subsection{Using images}
 
 Old pictures can be used as the questions of EpisoPass,
-just like the 5th question shown in Figure \ref{web1}.
+just like the question shown at the bottom of Figure \ref{web1}.
 Even when people cannot create good secret questions,
 people can fairly easily select a secret image from their photo collections
 and use it as the question.
@@ -726,7 +709,7 @@ person's real name, since image search is fairly easy on the Web these days.
 % 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは少ない
 
 As shown in previous sections,
-there have been many attemps for replacing password-based authentication systems,
+there have been many attempts for replacing password-based authentication systems,
 but none of them are found to be better than
 password-based systems\cite{Bonneau:ReplacePasswords}.
 %
@@ -743,7 +726,7 @@ based on cognitive authentication.
 % \ref{conf/percom/GuptaWRLGB12} % スマホの利用状況を認証に使う
 % これはEpisodicMemoryと関係ないなぁ
 
-The idea of using episodic memories for authtication is not new.
+The idea of using episodic memories for authentication is not new.
 In fact, using episodic memories for selecting password
 has generally been recommended,
 and many current computer users are probably using password that are
@@ -758,7 +741,8 @@ the user can easily recall what he did%
 .
 For example, if a user can answer questions like
 ``who did you call last night?'' correctly, the authentication will succeed.
-Using mobile or wearable devices for authentication works in many cases,
+Using mobile or wearable devices for authentication will become more usable
+in the future,
 but users should have a fairly good long-term memory about their behaviors,
 and that not easy for everybody.
 
@@ -819,18 +803,24 @@ Twitter, Facebook, Amazon, Skype, etc.
 %
 Before using EpisoPass, taking care of many passwords was really
 a pain for the authors, but
-currently all the information for generating passswords is put on the cloud
+currently all the information for generating passwords is put on the cloud
 and no trouble has been found during the period.
 %
 After the introduction of browser extension,
 logging into various services became even easier,
 because visiting the EpisoPass service is unneccesary.
 
-Unfortunately EpisoPass is currently not used by many people.
+EpisoPass service have been on the Web and the source code is
+available on GitHub\footnote{
+  (url removed for double-blind review)
+  % \url{https://EpisoPass.com/},
+  % \url{https://github.com/masui/EpisoPass}
+}, but
+unfortunately EpisoPass is currently not used by many people.
 One big reason is that most people cannot fully understand the
 idea of EpisoPass and also cannot fully trust it
-because it is not operated by a big IT company nor supported by
-famous computer users.
+because it is not operated by a big IT company.
+% nor supported by famous computer users.
 Another reason might be that users cannot estimate the strength
 of EpisoPass.
 Since all the questions and answers are
@@ -874,6 +864,13 @@ derived from password-based authentication.
 %   \textsf{http://GitHub.com/masui/EpisoPass}
 % }。
 
+\subsection*{Note.}
+
+This paper is largely a translation of a 2013 paper published by the
+author in Japanese\cite{WISS2013}. This is the first time that the
+work is presented to an international audience in English.
+Additionally, in the intervening three years the author has
+developed the browser extension described in section \ref{extensionsection}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
