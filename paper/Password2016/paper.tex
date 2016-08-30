@@ -257,7 +257,8 @@ to remember mathematical formulas.
 
 The idea of using episodic memories for authentication has a long
 history and early papers suggested using episodic memories for
-creating passwords. Authentication using secret questions is sometimes
+creating passwords \cite{Barton:Password}.
+Authentication using secret questions is sometimes
 referred to as ``cognitive
 passwords''\cite{Zviran:1990:UAC:100512.100538}, and such approaches
 have been used as an alternative to password-based authentication
@@ -720,6 +721,22 @@ Of course, it's important the photo should have no information related
 to the location, especially given how sophisticated
 Web-based image searching has become.
 
+\subsection{Password entry time}
+
+Answering to many questions takes much longer time than typing a
+remembered password, so most people may prefer typing password
+rather than using EpisoPass if they have to log in to a service frequently.
+The tradeoff betwee security and usability has long been a big issue
+of authentication systems \cite{Braz:2007:DTU:1778331.1778344},
+but we believe we can approach the best solution by
+improving the user interface of answering questions.
+
+% Frank's comment
+% 3.11. It takes a rather long time to enter one password!''
+% should also be discussed, and may be a killer in some cases. Maybe
+% Episopass is good for infrequently used passwords where the penalty of
+% a slow login is less relevant.
+
 \section{Related Work}
 
 % 様々なシステムがあるが、エピソード記憶からパスワードを直接生成するものは少ない
@@ -763,7 +780,7 @@ arbitrary behavior over the long-term. This may be a challenge for many people, 
 benefit of EpisoPass in comparison is that the user is able to select memories that they
 know to be memorable, rather than having their mobile device choose them arbitrarily.
 
-Various types of image-based authentication systems have been proposed recently%
+Various types of image-based authentication systems have been proposed recently
 \cite{Biddle:2012:GPL:2333112.2333114,GraphicalPasswords},
 based on the realisation that images are easier to remember than text
 given they are usually more directly linked to episodic memories.
@@ -822,7 +839,7 @@ for various services including Twitter, Facebook, Amazon, Skype, {\it etc}.
 %
 Before using EpisoPass, managing multiple passwords was a significant challenge
 for the authors. We now have all the information for generating passwords 
-stored in the cloud and no problems have arisen from this during this period.
+stored in the cloud and no problems have arisen during this period.
 %
 Since the introduction of our browser extension, visiting the EpisoPass 
 service has now become unnecessary, making authentication to the various
@@ -838,7 +855,7 @@ reason being that most people cannot fully understand the
 idea behind EpisoPass, and may not trust it without the 
 support of a well-known IT company.
 % nor supported by famous computer users.
-Another reason is that it's difficult for general users to 
+Another reason is that it's difficult for users to
 assess the security of EpisoPass.
 Since the intention is for the questions and answers to be obvious
 to those that know them (but not to others), users may lack
@@ -897,10 +914,11 @@ developed the browser extension described in section \ref{extensionsection}.
 %   as you see fit of course. I'm afraid I don't know the grant number
 %   so have left a gap; ideally this should be added in too.}
 
-% \subsubsection*{Acknowledgments.} 
-% The work presented in this paper was in part conducted while on
+% \subsubsection*{Acknowledgments.}
+% This paper was written while on
 % sabbatical at the University of Cambridge, hosted by Frank Stajano and
-% the Pico group, and supported by EPSRC grant number ??????.
+% the Pico group, and supported by EPSRC grant number
+% EPSRC IRIS grant EP/M019055/1 on  ``Future Authentication Systems''.
 
 \bibliographystyle{splncs03}
 \bibliography{paper}
