@@ -1,0 +1,392 @@
+
+UIST 2016 Papers
+
+Reviews of submission #4575: "EpisoPass: Password Management based on
+Episodic Memories"
+
+------------------------ Submission 4575, Review 4 ------------------------
+
+Reviewer:           primary
+
+Overall Rating
+
+   1  (Definite reject: I would argue strongly for rejecting this paper.)
+
+Expertise
+
+   3  (Knowledgeable)
+
+Summary and Contribution
+
+   This short paper describes episopass, an episodic memory based password
+   management tool. Some of the features of episopass are discussed, as well
+   as some arguments about the strength of the passwords produced and the
+   usability of the system.
+
+The Personal Review (Primary)
+
+   When reviewing any paper that describes a new system, Y, for
+   accomplishing X, I ask myself one question: Is Y a good idea? 
+   Unfortunately, when I read this paper, I cannot glean the answer to this
+   question from the paper itself. 
+
+   The authors claim that the system is beneficial, that users will never
+   need to remember a password again, and that the system will be secure
+   with high entropy. However, when I think about this system, I realize
+   that my children may not be able to secure an account from me, my spouse
+   may be able to guess the answers to my questions, essentially that the
+   password scheme is not nearly as secure as presented. Of course, there's
+   always the assumption that, if I know someone well enough, then maybe
+   they should be able to guess my password, as in "The honest person has
+   nothing to hide", but that's not really our goal when creating password
+   systems.
+
+   So ... does the system work? How well do end users like the system? What
+   are the results of a lab study? Unfortunately none of this information is
+   provided.
+
+   As a result, this is really a system that the authors have proposed,
+   constructed, but not evaluated in any meaningful way. Further, the
+   research is poorly contextualized with related work in psychology and
+   security.
+
+The Meta Review (Primary)
+
+   Reviewers are consistent in their belief that this work is not ready for
+   publication. Reviewer 1 and reviewer 3, in particular, have some pointed
+   comments on what must be done to this work to present it as research
+   rather than as an early prototype system that has merit based upon the
+   belief of the authors. Rather than replicate these excellent reviews
+   here, I refer the authors to the comments of these reviewers so that they
+   can continue to refine and improve their work.
+
+Issues for Rebuttal
+
+
+
+------------------------ Submission 4575, Review 1 ------------------------
+
+Reviewer:           external
+
+Overall Rating
+
+   1  (Definite reject: I would argue strongly for rejecting this paper.)
+
+Expertise
+
+   4  (Expert)
+
+Summary and Contribution
+
+   This paper presents the design of a episodic-memory-based approach
+   for authentication, using this approach in the context of a password
+   manager. Users can specify questions that they are likely to remember
+   based on personal events, and the responses to these questions modify
+   a seed, which ultimately is used as the password for an account.
+
+The Review (entered before the rebuttal period, and uneditable thereafter)
+
+   Overall, there are four major areas for improvement for this paper.
+   First, the writing needs to be improved. Second, the work and 
+   presentation of the paper needs more depth and rigor. Third, there
+   is no substantial evaluation of the work. Fourth, the paper is
+   missing some references to existing work on using episodic memory
+   for authentication.
+
+   With respect to writing, the paper is readable but needs a lot of 
+   work in improving the writing. I'd recommend getting a native 
+   English speaker to help smooth out the writing.
+
+   With respect to depth and rigor, in a lot of cases, the paper
+   makes many assertions as to why an approach should be good,
+   but only offers rhetorical arguments without empirical evidence.
+   More citations, for example to cognitive psychology, would help
+   bolster the claims. 
+
+   With respect to evaluation, the paper discusses the authors'
+   own use of the system (which is good), but doesn't explore other
+   dimensions. For example, what kinds of episodic memories are 
+   good? How well can people use and understand the system? How
+   much relative advantage is there over other approaches?
+
+   Lastly, there are at least three papers which have investigated
+   the use of episodic memory for authentication. These papers looked
+   at the topic in the context of using smartphones to generate 
+   challenges, as opposed to users creating their own questions.
+   However, the submitted paper should still cite these and may even
+   gain more depth by leveraging ideas from this past work.
+
+
+   Other notes:
+   p2 "The user provides a long 窶徭eed string窶� for each service that
+   requires a password."
+   Why not generate one for users?
+
+   p2 "generates random-looking password candidate strings"
+   This writing is very imprecise. What does random-looking mean?
+   Also, how strong is it?
+
+   Unforgettability, not sure if this is an actual English word.
+   Also, the argument here is a reasonable one, that there are
+   some things that people may remember well, but the rigor of the
+   argument is weak. It would be useful to discuss memorability
+   studies from psychology, for example. 
+
+   Similar comments for section Selecting Good Questions. The
+   argument here also feels weak and doesn't offer a lot of 
+   supporting evidence.
+
+   The setup costs for using the system seem high. For example,
+   a user has to select questions and then create plausible fake
+   answers. The paper presents some approaches for doing so, but it's
+   not clear how well they map to usage in practice. For example,
+   state names or cities seem easy, but names of bullies does not.
+
+   Also, suggest offering a stronger rationale as to why a substitution
+   algorithm is used. Also, it would be useful to demonstrate that the
+   algorithm does transformations in a way that does not shrink the
+   password search space. 
+
+
+
+   Writing:
+   p1 "and it is not supposed to get extinct in a short period of time"
+   Very awkward phrasing
+
+   p1 "Memories in human brain are not uniform."
+   Also awkward phrasing.
+
+   Figure 1 and 4, "When do you use this?" is a very ambiguous
+   question. I'm not sure I understand what it's asking for.
+
+   p6, several typos in the Appendix, "generationg",
+   "If the value of N if 5"
+
+
+   Missing cites:
+   Gupta et al, HuMan: Creating memorable fingerprints of mobile users. 
+   In PERCOM'12 Workshops.
+
+   Das et al, Memorability of the Mundane: Exploring Capturable Everyday
+   Memory for Autobiographical Authentication. In Ubicomp 2013.
+
+   Dandapat et al, Activpass: Your daily activity is your password. In CHI
+   2015.
+
+
+   Also, the authors mentioned the challenge of using personal 
+   images for authentication. The authors may be interested in
+   papers by Eiji Hayashi, who investigated how to blur images
+   in a way so that end-users could still recognize them but
+   adversaries could not easily do so.
+
+   Here are the papers:
+   Hayashi et al. Security through a different kind of obscurity: Evaluating
+   Distortion in Graphical Authentication Schemes. In CHI 2011.
+
+   Hayashi et al, Use Your Illusion: secure authentication usable anywhere.
+   in SOUPS 2008.
+
+Additional review comments (entered after the start of rebuttal period)
+
+
+
+------------------------ Submission 4575, Review 2 ------------------------
+
+Reviewer:           external
+
+Overall Rating
+
+   2  (Probably reject: I would argue for rejecting this paper.)
+
+Expertise
+
+   3  (Knowledgeable)
+
+Summary and Contribution
+
+   This paper presents a web/mobile system that helps people turn questions
+   about their episodic memories into passwords, which are then recoverable
+   by answering the questions.
+
+The Review (entered before the rebuttal period, and uneditable thereafter)
+
+   This paper presents an interesting idea -- using episodic memories (those
+   we are unlikely to forget) as passwords. The specific approach is to have
+   people provide a bunch of questions along with quick answers (and a
+   number of reasonable distractors). Users then provide the system with a
+   site-specific seed, and the system turns the questions into passwords
+   automatically.
+
+   This paper reminds me of a number prior approaches, but still offers a
+   new contribution. Some work that wasn't cited that the authors may be
+   interested in:
+   "Access control by testing for shared knowledge" by Toomim et al. 2008.
+   "Crowd storage: storing information on existing memories" by Bigham and
+   Lasecki. 2014.
+
+   At a high level, this system offers functionality similar to the password
+   recovery systems curently in use. On many web sites, one can reset their
+   password by answering a number of previously answered questions. The
+   difference here is that it works across different services and gives
+   control to users.
+
+   The primary drawback of the system is that it seems complicated to use,
+   and requires substantial upfront investment in answering questions. The
+   authors seem aware of this, they mention that the reason no one other
+   than the authors are using it is because it is too complicated. It may
+   also be difficult for people to create questions/answers that are not
+   easily guessable. Without some sort of investigation into whether users
+   could actually use this to create good passwords, I don't think it can be
+   accepted. It was also unclear to me how users were supposed to remember
+   their password seeds for a given service.
+
+   Going forward, it seems like there are opportunities to make a stronger
+   contribution from this system. Maybe there is a way to guide users
+   through the process of creating high-quality questions, for instance.
+   And, it certainly seem possible to evaluate the system with users -- I'm
+   curious how easy it would be for users to understand what would make good
+   questions, if they understand the concept of the seed, etc.
+
+   One other bit of feedback is that the paper is written to exaggerate its
+   contribution in some places, which I found offputting. As an example, it
+   is often stated in the paper how easy everything is, but in fact it seems
+   like the system isn't currently particulary easy to use. While EpisoPass
+   could be part of the soultion for password generation and recovery,
+   several times in the paper it is suggested that this is the only problem.
+   I don't understand how EpisoPass would obviate use of password managers,
+   for instance (as suggested on the first page). The authors even say later
+   that they used their browser password remembering feature so they didn't
+   have to generate the password each time.
+
+Additional review comments (entered after the start of rebuttal period)
+
+
+
+------------------------ Submission 4575, Review 3 ------------------------
+
+Reviewer:           external
+
+Overall Rating
+
+   1  (Definite reject: I would argue strongly for rejecting this paper.)
+
+Expertise
+
+   2  (Passing Knowledge)
+
+Summary and Contribution
+
+   This paper presents EpisoPass, a password management technique wherein
+   users configure a series of questions only they know the answer to, the
+   real answer, and a set of "fake" multiple choice answers.  A password is
+   generated by running a permutation function over the the set of questions
+   and correct answers.  Users are expected to pick questions about their
+   episodic memory, making them unlikely to forget over a long time period.
+
+   The work appears to be implemented on a central server, as well as an
+   Android app (which is compiled on the server with the user's
+   question/answer sets built in).
+
+   The only evaluation done is having the authors themselves use the system
+   for three years.  The only result of the evaluation is that "no trouble
+   has been found".
+
+The Review (entered before the rebuttal period, and uneditable thereafter)
+
+   === Strengths ===
+
+   I like the idea of a password scheme that derives entropy from a
+   combination of many easily-remembered scenarios.  It has the advantage of
+   password managers in generating passwords that are more random than users
+   themselves can remember (albeit *less* random in this case), but without
+   the disadvantage of having to carry your password manager file around
+   with you and keep it safe.
+
+   === Weaknesses ===
+
+   My biggest criticism of this idea is that it relies on users to create
+   secure sets of security questions and answers.  Security questions are
+   generally considered extremely insecure, and the easiest way to gain
+   access to another person's account (as is the case with most
+   celebrity/politician email account hacking).  Users need to pick personal
+   questions that are impossible to research about them on the internet, and
+   difficult even for people they know.  I would argue that this system is
+   flat-out impossible to secure against most spouses.  The paper does not
+   discuss how users would be prompted to create secure questions.  There
+   are no screenshots of the enrolment screens, and no mention of the copy
+   text provided to new users.
+
+   The algorithm used to generate password strings is *weird*.  There is
+   definitely some redundancy here, which means the entropy of the passwords
+   is less than claimed.  In particular, by breaking a 16-byte (not 32-byte,
+   as stated in the paper) MD5 sum into sets of 2 bytes, you can only
+   permute a "seed string" up to 8 characters long before you need to start
+   reusing sets. An attacker can then observe algebraic relations between
+   different characters in the password.  There is a standard solution for
+   generating passwords from user-created strings (PBKDF2), and the authors
+   should just use this instead.
+
+   The idea of changing a single date-based question every time the user is
+   required to change their password is terrible and should be discouraged. 
+   This is akin to changing "password0" to "password1" and then "password2",
+   since if the attacker knows the pattern (a good assumption) it becomes
+   trivial to predict.
+
+   The authors do not stick to a threat model throughout the paper
+   (imperative for any security technology).  A back-of-the-envelope entropy
+   calculation compares using 10 questions with 20 fake answers each to an
+   8-character password *in an online brute force attack*.  8-character
+   passwords are definitively considered insecure against offline brute
+   force attack, even with a proper salt-and-slow-hash scheme.  (Also,
+   writing 10 questions with 20 convincing fake answers seems quite tedious;
+   the example in the paper shows only 5 questions with at *most* 18
+   answers, most with far less.)  However, the data is stored on a remote
+   server, and the authors even suggest at one point that it could be stored
+   in a public place.  This clearly makes it susceptible to *offline*
+   guessing attacks.  They also suggest that the scheme is resilient to
+   rubber-hose cryptanalysis ("there is no chance he will reveal it to
+   somebody even when he is forced to tell the password") but this is
+   clearly not true if the attacker is just asking for the answers to the
+   questions.
+
+   As mentioned above, there is no real evaluation of this scheme.  The
+   authors themselves have been using EpisoPass for three years, but have no
+   qualitative feedback to offer.
+
+   The Related Work section only has one reference, and the paper is missing
+   discussion of the current state of the art in the field in general. 
+   Creating human-memorable passwords has been the subject of a huge amount
+   of academic work recently, and none of it seems to be mentioned.  Even
+   the topic of secret questions' security and memorability has been studied
+   a bit.  I would suggest "Secrets, Lies, and Account Recovery:
+   Lessons from the Use of Personal Knowledge Questions at Google" by
+   Bonneau et al. as a starting point.
+
+   === Other comments ===
+
+   The paper is written well enough to understand, but it has some serious
+   grammatical and spelling issues, including some that would be caught by a
+   spellchecker ("troble").
+
+   I don't like the claim (p4) that "it is almost impossible to get the
+   right password without having the episodic memory".  This is clearly only
+   true if users pick extremely secure Q&A sets, and the paper doesn't
+   discuss how or why they would do that.  If the question is "What is my
+   middle name?" it could be easily searched on the internet.  If the only
+   answers are {"George", "Purple", "Colorado", "Kangaroo"} then it's easy
+   to pick out the correct one.
+
+   I'm also not a fan of adhering to the pattern of character classes used
+   for the seed string.  I get that the intention is to make passwords
+   confirm to site-specific rules, but it doesn't allow very sophisticated
+   rules ("no double letters") and having a few tick-boxes the way password
+   managers do ("include digits", "no double letters") seems like a better
+   approach.  Doing it this way means you're tossing out a lot of entropy by
+   modding away bits from the hash, and means users can enter seeds that
+   lead to especially weak passwords like "1111" or "abc123".
+
+Additional review comments (entered after the start of rebuttal period)
+
+
+

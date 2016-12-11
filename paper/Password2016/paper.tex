@@ -312,12 +312,21 @@ the seed string is converted to the string
 to be used as the password for Amazon.com.
 
 When the user clicks on different candidate answers 
-the seed string is converted to a completely different strings, such as
+the seed string is converted to a completely different string, such as
 ``\textsf{Xvdkzb940345}'', as shown in Figure \ref{web11}.
 
 In this way, different selections yield different password strings and
 the unique password string generated after selecting the correct answers should be
 used as the password for the service.
+
+% Frank:
+% This is a very overconstraining way of saying ``upper, lower and
+% digits''. First, it says ``one upper, five lower, six
+% digits''. Second, it puts them in specific places. Aren't you being a
+% lot more prescriptive than the site's own policy? This reduces the
+% space of passwords that can be generated, for very little benefit.
+%
+% そうかな? まぁ言いたいことはわかるけど
 
 Capital letters in the seed string are substituted for capital letters in the password,
 and digits in the seed string are substituted for digits. In this way
@@ -354,6 +363,11 @@ the generated password changes to ``\textsf{Onjbrppy030937}'',
 as shown in Figure \ref{web2}.
 In this way, the user can generate different passwords for
 different services just by changing the seed string.
+Seed strings like ``\textsf{Amazon123456}'' and ``\textsf{Facebook123456}'' are used
+in the examples because users can easily remember
+for which service the set of seeds and Q-A pairs are used.
+Users don't have to remember the seed strings,
+just like users don't have to remember the Q-A pairs.
 
 \begin{figure}
   \centering
@@ -457,9 +471,23 @@ In this section, we discuss the advantages and potential disadvantages of using 
 
 \subsection{Recallability of answers}
 
+% David opinion
 % \marginnote{The fact that an `old' memory is unlikely to be forgotten
 %   is perhaps obvious, but this could be a good place to cite a paper
 %   on memory/psychology about this if you're aware of any?}
+
+% Frank:
+% I second David's margin note. Can you back this claim--or more
+% precisely the implied claim that old episodic memories will be
+% unforgettable? (You could argue that no, you only said that IF the
+% memory is old, episodic and unforgettable, THEN there's little chance
+% to lose the password; you haven't said that IF the memory is old and
+% episodic THEN it is unforgettable. Ok, ok, but then the question
+% becomes: if I come up with and old and episodic memory, how do I know
+% if it's a good one (unforgettable) or one that I will forget later? If
+% you answer ``it never happens'' then you must back this claim. If it
+% can happen, you should give me a criterion to tell in advance if it
+% will, and why I should trust it.
 
 The biggest advantage of using EpisoPass is that
 users don't have to remember strong password strings.
@@ -532,8 +560,8 @@ EpisoPass questions.
 \begin{itemize}
 \item Memories of very minor injuries that nobody would have cared about apart from you.
 
-\item Memories of bad experience such as embarrassing blunders or failures, especially in the case where
-it was never admitted to anyone else.
+\item Memories of bad experience such as embarrassing blunders or failures,
+especially in the case where it was never admitted to anyone else.
 
 \item Experiences of finding inconsequential but special items which only you are interested in.
 \end{itemize}
@@ -692,9 +720,11 @@ generated from the same set of questions.
 % \marginnote{It may be helpful to give an indication of how many Q-A sets you think
 % would be considered `sufficient' here.}
 %
-To prevent this, it is safer to keep all of the questions and answers
-in a secret place or
+To prevent this, users can prefer saving questions and answers in a secret place or
 use sufficient questions to prevent such a brute-force attack from being viable.
+The entropy of 12 questions with 30 candidate answers 
+is 58.9 ($12 \times \log_2 30$) bits, and this is considered to be safe
+enough at this moment.
 
 \subsection{Using images}
 
@@ -724,7 +754,7 @@ Web-based image searching has become.
 \subsection{Password entry time}
 
 Answering to many questions takes much longer time than typing a
-remembered password, so most people may prefer typing password
+remembered password, so people may prefer typing password
 rather than using EpisoPass if they have to log in to a service frequently.
 The tradeoff betwee security and usability has long been a big issue
 of authentication systems \cite{Braz:2007:DTU:1778331.1778344},
