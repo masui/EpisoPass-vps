@@ -1,0 +1,46 @@
+<!--
+    正規表現の拡張を使ってEpisoPass問題生成を助ける
+
+    http://www.pitecan.com/tmp/EpisoQ/ でデプロイ
+
+    2016/08/20 21:13:52 Toshiyuki Masui
+-->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Supporting EpisoPass question generation</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="expand_e.js"></script>
+    <style type="text/css">
+      a:link { color: #0000f0 ; }
+      a:visited { color: #0000f0 ; }
+      a {
+        text-decoration: none;
+      }
+      body {
+        background-color: #eee;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h2>Helping remembering your episodic memories</h2>
+
+    <ul>
+      <li>Supports generating <a href="http://EpisoPass.com">EpisoPass</a> questions.</li>
+      <li>Shows hints for remembering your episodic memories after entering kenwords in the text box.</li>
+      <li>
+	<a href="https://github.com/masui/EpisoPass/blob/master/Expand/main.coffee">List of episodes</a>
+	represented in <b>regular expressions</b> are <i>expanded and filtered</i> by the keyword,
+	using an
+        <a href="https://www.npmjs.com/package/re_expand">npm</a> module
+	<a href="https://github.com/masui/expand_node">re_expand</a>.
+      </li>
+    </ul>
+    
+    <input type="text" id="q" value=" a " autocomplete="off"></input>
+    
+    <p></p>
+    
+  </body>
+</html>

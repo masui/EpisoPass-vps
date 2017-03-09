@@ -1,0 +1,32 @@
+* Add more references
+* Correct sentences
+* Don't say big things (exassulation)
+
+
+
+
+* talk about browser extensions
+
+* state that 'remembering password' is almost impossible for ordinary
+people, even though various techniques are proposed[][]
+
+* convince that we don't tell everything to spouses, parents, etcc.
+
+* state how seed strings can be selected
+
+* state why the algorithm is strong enough, by calculating the entropy
+
+* character substitution algorithm is used because we want existing passwords
+  which we don't want to change.
+
+nn
+
+* state that creating fake answers is easy if they are proper nouns
+
+* strange question is okay as long as the user can never forget
+
+* talk about supporting systems - some screenshot might be good
+
+* remove exaggerations (?)
+
+* security questions are NOT insecure if it is a real secret!

@@ -1,0 +1,1 @@
+{"qas":[{"answers":["0","1","2","3","4"],"question":"暗証番号の1桁目は?"},{"answers":["0","1","2","3"],"question":"暗証番号の2桁目は?"},{"question":"暗証番号の3桁目は?","answers":["0","1","2","3"]}],"seed":"abcdefghijklmn123"}

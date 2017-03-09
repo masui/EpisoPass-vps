@@ -1,0 +1,91 @@
+
+
+{
+  "qas": [
+    {
+      "answers": [
+        "knee",
+        "teeth",
+        "shin",
+        "lungs",
+        "ear",
+        "kidney",
+        "roof"
+      ],
+      "question": "Pain in primary school"
+    },
+    {
+      "answers": [
+        "scott",
+        "angie",
+        "stuart",
+        "marcus",
+        "jean-piere",
+        "jodie",
+        "fiona"
+      ],
+      "question": "Tallest"
+    },
+    {
+      "answers": [
+        "swimming",
+        "football",
+        "skiing",
+        "dancing",
+        "chess",
+        "art",
+        "singing"
+      ],
+      "question": "Missed event because of circles"
+    },
+    {
+      "answers": [
+        "sprite",
+        "module",
+        "app",
+        "text",
+        "jpeg",
+        "util",
+        "raw"
+      ],
+      "question": "Hide an app as a filetype"
+    },
+    {
+      "answers": [
+        "world war II",
+        "oak",
+        "four minutes",
+        "greater than",
+        "rugby",
+        "zeus",
+        "mercedes"
+      ],
+      "question": "Jellyfish lie"
+    },
+    {
+      "answers": [
+        "church road",
+        "huntingdon road ",
+        "london road",
+        "scotland road",
+        "market street",
+        "paradise street",
+        "high street"
+      ],
+      "question": "Bycycle collision"
+    },
+    {
+      "answers": [
+        "\u56de\u7b5411",
+        "\u56de\u7b5422",
+        "\u56de\u7b5433"
+      ],
+      "question": "\u65b0\u3057\u3044\u8cea\u554f"
+    }
+  ],
+  "seed": "amazon.com"
+}
+
+-- 
+Computer Laboratory, University of Cambridge
+Pico Project: https://www.mypico.org
