@@ -49,7 +49,7 @@ answerspan = (q,a) -> # q番目の質問のa番目の選択肢のspan
     .css 'background-color', if a == 0 then '#ccf' else '#fff'
     .on 'click', selfunc(q,a)
     .on 'keyup', editfunc(q,a)
-    .hover hover_in_func(q,a), hover_out_func()
+    # .hover hover_in_func(q,a), hover_out_func()
   aspan.append(input)
 
 showimage = (str,img) ->
