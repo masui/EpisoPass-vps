@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="stylesheets/episopass.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="names.js"></script>
+    <script type="text/javascript">
+      function shuffle(array, n){
+        for(var i=0; i<n; i++){
+          var r = i + 1 + Math.floor(Math.random() * (array.length - i - 1));
+          var tmp = array[i];
+          array[i] = array[r];
+          array[r] = tmp;
+        }
+      }
+      $(function() {
+        $('#addnames').click(function(){
+	  shuffle(names,10);
+	  namestr = names.slice(0,10).join(" ");
+	  text = $('#answers').val();
+	  if(text != "") text = text + " ";
+          $('#answers').val(text + namestr);
+        });
+        $('#register').click(function(){
+	  var id = $('#id').val();
+	  if(id == ''){
+	    alert("IDを指定して下さい");
+	    return;
+	  }
+	  var seed = $('#seed').val();
+	  if(seed == ''){
+	    alert("シードを指定して下さい");
+	    return;
+	  }
+	  data = {};
+	  data['seed'] = seed
+	  answers = $('#answers').val().split(/\s+/);
+	  questions = $('#questions').val().split(/\s+/);
+	  qas = [];
+	  for(var i=0;i<questions.length;i++){
+            qa = {};
+	    qa['question'] = questions[i];
+	    qa['answers'] = answers;
+	    qas.push(qa);
+	  }
+	  data['qas'] = qas;
+	  //
+	  $.ajax({
+	    type: "POST",
+	    async: true,
+            url: `/${id}/__write`,
+            data: `data=${JSON.stringify(data)}`,
+	    success: function(){
+	      location.href = `http://EpisoPass.com/${id}/${seed}`;
+	    }
+	  });
+        });
+      });
+
+    //save = () ->
+    //  data['seed'] = $('#seed').val()
+    //  $.ajax
+    //    type: "POST"
+    //	async: true
+    // url: "/#{name}/__write"
+    // data: "data=#{JSON.stringify(data)}"
+		    
+    </script>
+    <style type="text/css">
+    <!--
+    li.q {
+      font-size:12pt;
+      font-weight:bold;
+      color: #009;
+    }
+    -->
+    </style>
+    <title>かんたん問題作成</title>
+  </head>
+  <body>
+    <div class="title">
+      <div class="title2">
+        <span class="title"><a href="index.html">EpisoPass</a> - かんたん問題作成</span>
+      </div>
+    </div>
+
+    <blockquote>
+      自分だけが覚えているエピソード記憶を思い出して問題を作るのは難しいかもしれませんが、
+      昔の友達や知り合いにまつわる特別なエピソードを思い出すことならできるかもしれません。
+      以下のような手順でなぞなぞ問題を作成すれば、
+      誰でも比較的簡単になぞなぞ問題を作成できると思われます。
+      
+      <ul>
+	<li>昔の知人の名前のリストを作成する</li>
+	<li>その中のひとりに関して特殊な記憶があればそれを問題とする</li>
+      </ul>
+
+      たとえば、小学生の同級生の名前を数人リストしておき、
+      そのうちの誰かがイジメっ子だったことを覚えていれば?
+      「イジメっ子は?」という問題を作ることができます。
+      こういう問題をいくつか作れば、
+      強力なパスワードを作成することができるようになります。
+
+    </blockquote>
+
+    <div class="section">
+      <div class="section2">
+         <span class="section">1. 解答リストを作成</span>
+      </div>
+    </div>
+
+    <blockquote>
+      古い知人の名前を空白か改行で区切って並べて下さい
+      <br/>
+      <textarea id="answers" placeholder="佐藤 山田" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <br clear='all' />
+      <input type="button" id="addnames" value="ランダムに名前を10個追加"/>
+    </blockquote>
+    
+    <div class="section">
+      <div class="section2">
+         <span class="section">2. 問題リストを作成</span>
+      </div>
+    </div>
+
+    <blockquote>
+      1. のリストの中の誰かに関連する特殊なエピソードを並べて下さい。
+      
+      <br/>
+      <textarea id="questions" placeholder="餠をくれたのは?
+乱暴者は?" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <br clear='all' />
+
+    </blockquote>
+    
+    <div class="section">
+      <div class="section2">
+         <span class="section">3. EpisoPassデータ登録</span>
+      </div>
+    </div>
+
+    <blockquote>
+      IDとシード文字列を指定して
+      <br clear='all' />
+      ID: <input type="text" id="id" placeholder="myaccount" />
+      シード文字列: <input type="text" id="seed" placeholder="Facebook123456" />
+      <p></p>
+      <input type="button" id="register" value="登録" style="width:50pt;height:50pt;" />
+    </blockquote>
+    
+  </body>
+</html>
+  
