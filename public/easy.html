@@ -15,6 +15,8 @@
         }
       }
       $(function() {
+        $('#id').val('MyAccount');
+        $('#seed').val('MySeed0123456');
         $('#addnames').click(function(){
 	  shuffle(names,10);
 	  namestr = names.slice(0,10).join(" ");
@@ -35,8 +37,20 @@
 	  }
 	  data = {};
 	  data['seed'] = seed
-	  answers = $('#answers').val().split(/\s+/);
-	  questions = $('#questions').val().split(/\s+/);
+	  answers = $.grep($('#answers').val().split(/\s+/), function(s,i){
+            return s != "";
+          })
+          if(answers.length == 0){
+	    alert("複数の答を指定して下さい");
+	    return;
+          }
+	  questions = $.grep($('#questions').val().split(/\s+/), function(s,i){
+            return s != "";
+          })
+          if(questions.length == 0){
+	    alert("なぞなぞ問題を指定して下さい");
+	    return;
+          }
 	  qas = [];
 	  for(var i=0;i<questions.length;i++){
             qa = {};
@@ -57,15 +71,6 @@
 	  });
         });
       });
-
-    //save = () ->
-    //  data['seed'] = $('#seed').val()
-    //  $.ajax
-    //    type: "POST"
-    //	async: true
-    // url: "/#{name}/__write"
-    // data: "data=#{JSON.stringify(data)}"
-		    
     </script>
     <style type="text/css">
     <!--
@@ -111,9 +116,12 @@
     </div>
 
     <blockquote>
-      古い知人の名前を空白か改行で区切って並べて下さい
+      <ul>
+        <li>古い知人の名前を空白か改行で区切って並べて下さい。</li>
+        <li>ランダムに生成される名前を混ぜてもかまいません。</li>
+      </ul>
       <br/>
-      <textarea id="answers" placeholder="佐藤 山田" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="answers" placeholder="佐藤 山田 田中 増井" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
       <input type="button" id="addnames" value="ランダムに名前を10個追加"/>
     </blockquote>
@@ -125,11 +133,13 @@
     </div>
 
     <blockquote>
-      1. のリストの中の誰かに関連する特殊なエピソードを並べて下さい。
-      
+      <ul>
+        <li>1. のリストの中の誰かに関連する特殊なエピソードを並べて下さい。</li>
+        <li>自分だけしか知らないもので、将来忘れることがないと思われるエピソードを選んでください。</li>
+      </ul>
       <br/>
       <textarea id="questions" placeholder="餠をくれたのは?
-乱暴者は?" style="width:90%;height:100px;font-size:12pt;"></textarea>
+正月に大凶を引いたのは?" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
 
     </blockquote>
@@ -141,10 +151,12 @@
     </div>
 
     <blockquote>
-      IDとシード文字列を指定して
-      <br clear='all' />
-      ID: <input type="text" id="id" placeholder="myaccount" />
-      シード文字列: <input type="text" id="seed" placeholder="Facebook123456" />
+      <ul>
+        <li>IDとシード文字列を指定して登録ボタンを押すとEpisoPassデータが作成されます。</li>
+        <li>IDは何でもかまいませんが、その名前で問題をEpisoPass.comに登録することができるので、ユニークなものを利用してください。</ul>
+      </ul>
+      ID: <input type="text" id="id" />
+      シード文字列: <input type="text" id="seed" />
       <p></p>
       <input type="button" id="register" value="登録" style="width:50pt;height:50pt;" />
     </blockquote>
