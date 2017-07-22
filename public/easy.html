@@ -15,8 +15,8 @@
         }
       }
       $(function() {
-        $('#id').val('MyAccount');
-        $('#seed').val('MySeed0123456');
+        $('#id').val('MyTwitterAccount');
+        $('#seed').val('Twitter12345678');
         $('#addnames').click(function(){
 	  shuffle(names,10);
 	  namestr = names.slice(0,10).join(" ");
@@ -92,7 +92,7 @@
 
     <blockquote>
       自分だけが覚えている古い記憶を思い出してなぞなぞ問題と回答例を作るのは大変かもしれませんが、
-      昔の友達や知り合いに関連する記憶を思い出して問題を作るのは難しくないかもしれません。
+      昔の友達や知り合いに関連する記憶を思い出して問題を作るのは難しくないでしょう。
       以下のような手順でなぞなぞ問題を作成すれば、
       誰でも比較的簡単にEpisoPass問題を作成できると思われます。
       
@@ -105,7 +105,7 @@
       誰かがイジメっ子だったことを覚えていれば、
       「イジメっ子は?」という問題を作ることができます。
       こういう方法で問題を作成することにより、
-      あまり苦労せずにEpisoPass問題を作成できるでしょう。
+      苦労せずにEpisoPass問題を作成できるでしょう。
       関係無い名前も混ぜておけば問題を解くことはより難しくなります。
 
     </blockquote>
@@ -122,7 +122,9 @@
         <li>ランダムに生成される名前を混ぜてもかまいません。</li>
       </ul>
       <br/>
-      <textarea id="answers" placeholder="佐藤 山田 田中 増井" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="answers" placeholder="芳賀 西山 西崎 西水 覚前 野口 高田 日下部 海老沢 中島 横山 小林 鈴木
+皆川 井谷 南角 大津 桜井 浜中 狭間 三浦 中園 今田 仲西 勝谷 和田 津田
+堀井 塩田 大西 妹尾 岩田 岸野 川村 村上 板尾 櫛田 水田 河野 米山 結城" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
       <input type="button" id="addnames" value="ランダムに名前を10個追加" style="font-size:1.5em;"/>
     </blockquote>
@@ -139,9 +141,16 @@
         <li>自分だけしか知らないもので、将来忘れることがないと思われるエピソードを選んでください。</li>
       </ul>
       <br/>
-      <textarea id="questions" placeholder="イジメっ子は?
-餠をくれたのは?
-正月に大凶を引いたのは?" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="questions" placeholder="自費出版してたのは?
+バックハンドキャッチしたのは?
+耳の形が特徴的なのは?
+ソニーにいたのは?
+双子は?
+絵が上手いのは?
+意外と足が遅いのは?
+バクスターといえば?
+スケート場は?
+愛知の軽トラは?" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
 
     </blockquote>
