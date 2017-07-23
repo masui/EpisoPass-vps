@@ -17,58 +17,73 @@
       $(function() {
         $('#id').val('MyTwitterAccount');
         $('#seed').val('Twitter12345678');
+        $('#answers').val(
+	   "芳賀 西山 西崎 西水 覚前 野口 高田 日下部 海老沢 中島 横山 小林 鈴木\n" +
+           "皆川 井谷 南角 大津 桜井 浜中 狭間 三浦 中園 今田 仲西 勝谷 和田 津田\n" +
+           "堀井 塩田 大西 妹尾 岩田 岸野 川村 村上 板尾 櫛田 水田 河野 米山 結城");
+        $('#questions').val(
+           "自費出版してたのは?\n" +
+           "バックハンドキャッチしたのは?\n" +
+           "耳の形が特徴的なのは?\n" +
+           "ソニーにいたのは?\n" +
+           "双子は?\n" +
+           "絵が上手いのは?\n" +
+           "意外と足が遅いのは?\n" +
+           "バクスターといえば?\n" +
+           "スケート場は?\n" +
+           "愛知の軽トラは?");
         $('#addnames').click(function(){
-	  shuffle(names,10);
-	  namestr = names.slice(0,10).join(" ");
-	  text = $('#answers').val();
-	  if(text != "") text = text + " ";
+          shuffle(names,10);
+          namestr = names.slice(0,10).join(" ");
+          text = $('#answers').val();
+          if(text != "") text = text + " ";
           $('#answers').val(text + namestr);
         });
         $('#register').click(function(){
-	  var id = $('#id').val();
-	  if(id == ''){
-	    alert("IDを指定して下さい");
-	    return;
-	  }
-	  var seed = $('#seed').val();
-	  if(seed == ''){
-	    alert("シードを指定して下さい");
-	    return;
-	  }
-	  data = {};
-	  data['seed'] = seed
-	  answers = $.grep($('#answers').val().split(/\s+/), function(s,i){
+          var id = $('#id').val();
+          if(id == ''){
+            alert("IDを指定して下さい");
+            return;
+          }
+          var seed = $('#seed').val();
+          if(seed == ''){
+            alert("シードを指定して下さい");
+            return;
+          }
+          data = {};
+          data['seed'] = seed
+          answers = $.grep($('#answers').val().split(/\s+/), function(s,i){
             return s != "";
           })
           if(answers.length == 0){
-	    alert("複数の答を指定して下さい");
-	    return;
+            alert("複数の答を指定して下さい");
+            return;
           }
-	  questions = $.grep($('#questions').val().split(/\s+/), function(s,i){
+          questions = $.grep($('#questions').val().split(/\s+/), function(s,i){
             return s != "";
           })
           if(questions.length == 0){
-	    alert("なぞなぞ問題を指定して下さい");
-	    return;
+            alert("なぞなぞ問題を指定して下さい");
+            return;
           }
-	  qas = [];
-	  for(var i=0;i<questions.length;i++){
+          qas = [];
+          for(var i=0;i<questions.length;i++){
             qa = {};
-	    qa['question'] = questions[i];
-	    qa['answers'] = answers;
-	    qas.push(qa);
-	  }
-	  data['qas'] = qas;
-	  //
-	  $.ajax({
-	    type: "POST",
-	    async: true,
+            qa['question'] = questions[i];
+            qa['answers'] = answers;
+            qas.push(qa);
+          }
+          data['qas'] = qas;
+          //
+          $.ajax({
+            type: "POST",
+            async: true,
             url: `/${id}/__write`,
             data: `data=${JSON.stringify(data)}`,
-	    success: function(){
-	      location.href = `http://EpisoPass.com/${id}/${seed}`;
-	    }
-	  });
+            success: function(){
+              location.href = `http://EpisoPass.com/${id}/${seed}`;
+            }
+          });
         });
       });
     </script>
@@ -96,8 +111,8 @@
       以下のような手順によって誰でも比較的簡単にEpisoPass問題を作成できると思われます。
       
       <ol>
-	<li><i><b>昔の友人や知人の名前をリストする</i></b></li>
-	<li><i><b>その中の誰かに関して特別な記憶があれば、それに関する質問を作る</i></b></li>
+        <li><i><b>昔の友人や知人の名前をリストする</i></b></li>
+        <li><i><b>その中の誰かに関して特別な記憶があれば、それに関する質問を作る</i></b></li>
       </ol>
 
       たとえば昔の同級生の名前などをリストしておき、
@@ -120,9 +135,7 @@
         <li>ランダムに生成される名前も混ぜると良いでしょう。</li>
       </ul>
       <br/>
-      <textarea id="answers" placeholder="芳賀 西山 西崎 西水 覚前 野口 高田 日下部 海老沢 中島 横山 小林 鈴木
-皆川 井谷 南角 大津 桜井 浜中 狭間 三浦 中園 今田 仲西 勝谷 和田 津田
-堀井 塩田 大西 妹尾 岩田 岸野 川村 村上 板尾 櫛田 水田 河野 米山 結城" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="answers" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
       <input type="button" id="addnames" value="ランダムに名前を10個追加" style="font-size:1.5em;"/>
     </blockquote>
@@ -139,16 +152,7 @@
         <li>自分だけが知っている事実で、将来忘れることがないと思われるものを選んで下さい。</li>
       </ul>
       <br/>
-      <textarea id="questions" placeholder="自費出版してたのは?
-バックハンドキャッチしたのは?
-耳の形が特徴的なのは?
-ソニーにいたのは?
-双子は?
-絵が上手いのは?
-意外と足が遅いのは?
-バクスターといえば?
-スケート場は?
-愛知の軽トラは?" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="questions" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
 
     </blockquote>
@@ -163,7 +167,7 @@
       <ul>
         <li>IDとシード文字列を指定して登録ボタンを押すとEpisoPassデータが作成されます。</li>
         <li>IDは何でもかまいませんが、その名前で問題をEpisoPass.comに登録することができるので、
-	  ユニークなものを利用すると便利です。</ul>
+          ユニークなものを利用すると便利です。</ul>
       </ul>
       ID: <input type="text" id="id" style="font-size:1.2em;" />
       シード文字列: <input type="text" id="seed" style="font-size:1.2em;" />
@@ -178,8 +182,8 @@
 
     <blockquote>
       <ul>
-	<li><a href="http://episopass.com/masui@pitecan.com1/Twitter12345678">増井のTwitterパスワードを計算する問題</a>はこの方法で作成しています。</li>
-	<li>パスワードの作成や管理が困難な老人などでも、補助があればパスワード利用システムを使えるようになります。</li>
+        <li><a href="http://episopass.com/masui@pitecan.com1/Twitter12345678">増井のTwitterパスワードを計算する問題</a>はこの方法で作成しています。</li>
+        <li>パスワードの作成や管理が困難な老人などでも、補助があればパスワード利用システムを使えるようになります。</li>
       </ul>
     </blockquote>
       
