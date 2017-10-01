@@ -29,6 +29,34 @@ get '/:name.apk' do |name|
   apk(name)
 end
 
+#get '/EpisoDAS/:name.html' do |name|
+#  @name = name
+#  @json = readdata(name)
+#  @json = defaultdata.to_json if @json.nil?
+#  erb :episodas
+#end
+
+get '/DAS/' do |name|
+  redirect "/DAS"
+end
+
+get '/EpisoDAS/' do |name|
+  redirect "/DAS"
+end
+
+get '/EpisoDAS' do |name|
+  redirect "/DAS"
+end
+
+get '/DAS' do |name|
+  redirect "http://scrapbox.io/masui/EpisoDAS"
+end
+
+get '/DAS/:name' do |name|
+  @name = name
+  redirect "/EpisoDAS.html?#{name}"
+end
+
 get '/:name.html' do |name|
   @name = name
   @json = readdata(name)
