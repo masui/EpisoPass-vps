@@ -6,6 +6,7 @@ var width, height;
 
 var qas, answers;
 var name;
+var seed;
 
 var mousediv = null;
 var mousedown = false;
@@ -52,9 +53,15 @@ function shuffle(array){
 }
 
 function finish(){
-    $('body').children().remove();
+    //save = () ->
+    //data['seed'] = $('#seed').val()
+    //    $.ajax
+    //type: "POST"
+    //async: true
+    //url: "/#{name}/__write"
+    //data: "data=#{JSON.stringify(data)}"
 
-    // シャフルしたJSONを出力
+    // シャフルしたJSONを作成
     for(var i = 0; i < selected.length; i++){
 	var answers = data.qas[i].answers;
 	var rightanswer = answers[selections[i]];
@@ -70,8 +77,19 @@ function finish(){
 	    }
 	}
     }
-    
     jsonstr = JSON.stringify(data) ;
+
+    $.ajax({
+	    type: "POST",
+		async: true,
+		url: `/${name}/__write`,
+				   data: `data=${jsonstr}`
+									  });
+    alert('DASサイトを生成しました。移動します。');
+    location.href = `/DAS/${name}/${seed}`;
+    return;
+
+    $('body').children().remove();
 
     // Data URI scheme
     var datatext = "data:application/json;base64," +
@@ -123,6 +141,7 @@ function init(){
 	    arg[kv[0]] = kv[1];
 	});
     name = arg['name'];
+    seed = arg['seed'];
     selections = arg['selections'].split(',');
     
     // JSON読み出し
@@ -135,7 +154,8 @@ function init(){
 		data = json;
 	    }
 	});
-    
+
+    if(!seed) data['seed'] = seed;
     qas = data['qas'];
     page = 0;
     

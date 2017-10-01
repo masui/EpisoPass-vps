@@ -213,6 +213,9 @@ $(function() {
   $("#save").click(function() {
     return save();
   });
+  $("#das").click(function() {
+    return window.open().location.href = "http://EpisoPass.com/EpisoDASMaker.html?name=" + name + "&selections=" + (answer.join(',')) + "&seed=" + ($('#seed').val());
+  });
   $("#apk").click(function() {
     save();
     return location.href = "/" + name + ".apk";

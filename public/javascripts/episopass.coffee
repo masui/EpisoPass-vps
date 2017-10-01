@@ -187,6 +187,8 @@ $ ->
     calcseed()
   $("#save").click ->
     save()
+  $("#das").click ->
+    window.open().location.href="http://EpisoPass.com/EpisoDASMaker.html?name=#{name}&selections=#{answer.join(',')}&seed=#{$('#seed').val()}"
   $("#apk").click ->
     save()
     location.href = "/#{name}.apk"

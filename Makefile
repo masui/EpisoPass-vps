@@ -10,6 +10,11 @@ js:
 certbot:
 	/home/masui/Systems/certbot/certbot-auto renew --apache
 
+# Amazonのパスワードを計算するHTML
+# こういうのをセーブしておけば安全ということ
+Amazon:
+	ruby expandjs.rb Amazon_masui  > Amazon.html
+
 # public/images/episopass2.png
 
 

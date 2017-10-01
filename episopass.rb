@@ -9,6 +9,7 @@ require 'sinatra/cross_origin'
 require 'data'
 require 'defaultdata'
 require 'app'
+require 'expand'
 require 'config'
 
 enable :cross_origin
@@ -52,16 +53,31 @@ get '/DAS' do |name|
   redirect "http://scrapbox.io/masui/EpisoDAS"
 end
 
+get '/DAS/:name/:seed' do |name,seed|
+  @name = name
+  @seed = seed
+  redirect "/EpisoDAS.html?name=#{name}&seed=#{seed}"
+end
+
 get '/DAS/:name' do |name|
   @name = name
-  redirect "/EpisoDAS.html?#{name}"
+  redirect "/EpisoDAS.html?name=#{name}"
 end
 
 get '/:name.html' do |name|
   @name = name
   @json = readdata(name)
   @json = defaultdata.to_json if @json.nil?
-  erb :app
+  expand
+  # erb :app
+end
+
+get '/:name/:seed.html' do |name,seed|
+  @name = name
+  @seed = seed
+  @json = readdata(name)
+  @json = defaultdata.to_json if @json.nil?
+  expand
 end
 
 get '/:name.json' do |name|
