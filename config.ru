@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
   
-require 'episopass.rb'
+require './episopass.rb'
 
 run Sinatra::Application
