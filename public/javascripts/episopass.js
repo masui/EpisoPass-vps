@@ -196,7 +196,7 @@ save = function() {
   data['seed'] = $('#seed').val();
   return $.ajax({
     type: "POST",
-    async: true,
+    async: false,
     url: "/" + name + "/__write",
     data: "data=" + (JSON.stringify(data))
   });
@@ -214,6 +214,7 @@ $(function() {
     return save();
   });
   $("#das").click(function() {
+    save();
     return window.open().location.href = "http://EpisoPass.com/EpisoDASMaker.html?name=" + name + "&selections=" + (answer.join(',')) + "&seed=" + ($('#seed').val());
   });
   $("#apk").click(function() {

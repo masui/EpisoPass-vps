@@ -81,7 +81,7 @@ get '/:name/:seed.html' do |name,seed|
 end
 
 get '/:name.json' do |name|
-  cross_origin
+  # cross_origin
   json = readdata(name)
   json = defaultdata.to_json if json.nil?
   json

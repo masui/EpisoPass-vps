@@ -175,7 +175,7 @@ save = () ->
   data['seed'] = $('#seed').val()
   $.ajax
     type: "POST"
-    async: true
+    async: false
     url: "/#{name}/__write"
     data: "data=#{JSON.stringify(data)}"
 
@@ -188,6 +188,7 @@ $ ->
   $("#save").click ->
     save()
   $("#das").click ->
+    save()
     window.open().location.href="http://EpisoPass.com/EpisoDASMaker.html?name=#{name}&selections=#{answer.join(',')}&seed=#{$('#seed').val()}"
   $("#apk").click ->
     save()
