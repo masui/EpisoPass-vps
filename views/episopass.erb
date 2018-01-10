@@ -61,7 +61,7 @@
     </div>
 
     <script language="JavaScript">
-    var json = '<%= @json %>';
+    var json = "<%= URI.escape(@json) %>";
     var name = '<%= @name %>';
     var seed = '<%= @seed %>';
     </script>

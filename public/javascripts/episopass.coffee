@@ -9,7 +9,7 @@
 #  var seed = '<%= @seed %>';
 #
 
-data = JSON.parse json
+data = JSON.parse decodeURI(json)
 qas = data['qas']
 curq = 0
 cura = 0
