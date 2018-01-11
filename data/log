@@ -7302,3 +7302,11 @@ MasuiTwitter
 MasuiTwitter
 2018-01-11 20:49:00 +0900
 {"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:55:37 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","田中","鈴木"]},{"question":"スケート場は?","answers":["山田","田中","鈴木"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:55:39 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["田中","鈴木","山田"]},{"question":"足が遅いのは?","answers":["田中","鈴木","山田"]},{"question":"スケート場は?","answers":["田中","鈴木","山田"]}]}
