@@ -18,25 +18,17 @@
         $('#id').val('MasuiTwitter');
         $('#seed').val('Twitter12345678');
         $('#answers').val(
-	   "芳賀 西山 西崎 西水 覚前 野口 高田 日下部 海老沢 中島 横山 小林 鈴木\n" +
-           "皆川 井谷 南角 大津 桜井 浜中 狭間 三浦 中園 今田 仲西 勝谷 和田 津田\n" +
-           "堀井 塩田 大西 妹尾 岩田 岸野 川村 村上 板尾 櫛田 水田 河野 米山 結城\n");
+	   "山田\n鈴木\n田中"
+        );
         $('#questions').val(
-           "自費出版してたのは?\n" +
-           "バックハンドキャッチしたのは?\n" +
-           "耳の形が特徴的なのは?\n" +
-           "ソニーにいたのは?\n" +
-           "双子は?\n" +
            "絵が上手いのは?\n" +
-           "意外と足が遅いのは?\n" +
-           "バクスターといえば?\n" +
-           "スケート場は?\n" +
-           "愛知の軽トラは?\n");
+           "足が遅いのは?\n" +
+           "スケート場は?\n");
         $('#addnames').click(function(){
           shuffle(names,10);
-          namestr = names.slice(0,10).join(" ");
+          namestr = names.slice(0,10).join("\n");
           text = $('#answers').val();
-          if(text != "") text = text + " ";
+          if(text != "") text = text + "\n";
           $('#answers').val(text + namestr);
         });
         $('#register').click(function(){
@@ -52,14 +44,14 @@
           }
           data = {};
           data['seed'] = seed
-          answers = $.grep($('#answers').val().split(/\s+/), function(s,i){
+          answers = $.grep($('#answers').val().split(/\n+/), function(s,i){
             return s != "";
           })
           if(answers.length == 0){
             alert("複数の答を指定して下さい");
             return;
           }
-          questions = $.grep($('#questions').val().split(/\s+/), function(s,i){
+          questions = $.grep($('#questions').val().split(/\n+/), function(s,i){
             return s != "";
           })
           if(questions.length == 0){
@@ -106,19 +98,12 @@
     </div>
 
     <blockquote>
-      古い記憶を思い出してなぞなぞ問題と回答例を作るのは大変かもしれませんが、
-      昔の友人や知人に関連する記憶から問題を作るのは難しくないでしょう。
-      以下のような手順によって誰でも比較的簡単にEpisoPassの問題を作成できると思われます。
+      以下の手順で問題を作りましょう。
       
       <ol>
         <li><i><b>昔の友人や知人の名前をリストする</i></b></li>
         <li><i><b>その中の誰かを特定できる質問を作る</i></b></li>
       </ol>
-
-      たとえば昔の同級生の名前などをリストしておき、
-      その中のひとりがイジメっ子だったことを覚えていれば、
-      「イジメっ子は?」という質問を作ることができます。
-      こういう方法を使えば苦労せずにEpisoPassのなぞなぞ問題を作成できるでしょう。
 
     </blockquote>
 
@@ -130,10 +115,10 @@
 
     <blockquote>
       <ul>
-        <li>古い友人や知人の名前を空白か改行で区切って並べて下さい。</li>
+        <li>古い友人や知人の名前を改行で区切って並べて下さい。</li>
         <li>ランダムに生成される名前も混ぜておくとより効果的です。</li>
       </ul>
-      <br/>
+
       <textarea id="answers" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
       <input type="button" id="addnames" value="ランダムに名前を10個追加" style="font-size:1.5em;"/>
@@ -147,12 +132,11 @@
 
     <blockquote>
       <ul>
-        <li>1. のリストの中のひとりに関して覚えていることを書いて下さい。</li>
+        <li>1. のリストの誰かに関する記憶を書いて下さい。</li>
         <li>何人かについてこの作業を繰り返して下さい。</li>
-        <li>他人にあまり知られていない<b>事実</b>で、将来忘れることがないものを選んで下さい。</li>
-        <li>住んでたところ、共有した経験、顔や体の特徴、性格など、いろいろなものを問題にできます。</li>
+        <li>他人が知らない<b>事実</b>で、将来忘れることがないものを選んで下さい。</li>
       </ul>
-      <br/>
+
       <textarea id="questions" style="width:90%;height:100px;font-size:12pt;"></textarea>
       <br clear='all' />
 
@@ -160,29 +144,26 @@
     
     <div class="section">
       <div class="section2">
-         <span class="section">3. EpisoPassデータ登録</span>
+         <span class="section">3. データ登録</span>
       </div>
     </div>
 
     <blockquote>
       <ul>
-        <li>IDとシード文字列を指定して登録ボタンを押すとEpisoPassデータが作成されます。</li>
-	<li>シード文字列の文字を入れ換えることによりパスワード候補が計算されます。</li>
-        <li>IDは何でもかまいませんが、その名前で問題をEpisoPass.comに登録することができるので、
-          ユニークなものを利用すると便利です。</li>
+        <li>IDとシード文字列を指定して登録ボタンを押すと問題データが登録されます。</li>
+        <li>IDは何でもかまいませんが、URLとして使えるユニークな文字列を利用すると便利です。</li>
         <li>たとえば
 	  「<code>MasuiTwitter</code>」
-	  というID、
-	  「<code>Twitter12345678</code>」
-	  というシード文字列で問題を作成すると、
-	  <a href="http://episopass.com/MasuiTwitter/Twitter12345678">http://episopass.com/MasuiTwitter/Twitter12345678</a>
+	  というIDで問題を作成すると、
+	  <a href="http://episopass.com/MasuiTwitter">http://episopass.com/MasuiTwitter</a>
 	  というURLで問題にアクセスできます。
       </ul>
       ID: <input type="text" id="id" style="font-size:1.2em;" />
       シード文字列: <input type="text" id="seed" style="font-size:1.2em;" />
       &nbsp; <input type="button" id="register" value="登録" style="font-size:1.2em;" />
     </blockquote>
-    
+
+    <!--    
     <div class="section">
       <div class="section2">
          <span class="section">利用例</span>
@@ -196,6 +177,7 @@
 	  補助があればパスワード利用システムを使えるようになります。</li>
       </ul>
     </blockquote>
+    -->
       
   </body>
 </html>

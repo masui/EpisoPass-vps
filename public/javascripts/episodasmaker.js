@@ -85,8 +85,9 @@ function finish(){
 		url: `/${name}/__write`,
 				   data: `data=${jsonstr}`
 									  });
-    alert('DASサイトを生成しました。移動します。');
-    location.href = `/DAS/${name}/${seed}`;
+    alert('DASデータを生成しました。移動します。');
+    // location.href = `/DAS/${name}/${seed}`;
+    location.href = `/${name}/${seed}.html`;
     return;
 
     $('body').children().remove();

@@ -48,7 +48,7 @@ function finish(){
 
     var input = $('<input>');
     input.attr('type','button');
-    input.attr('value','もう一度');
+    input.attr('value','Again');
     input.css('font-size',width*0.05);
     input.css('border-radius',width*0.015);
     input.css('margin',width*0.01);
@@ -78,7 +78,7 @@ function initsize(){
         div.css('background-color','#ccc');
         div.css('width',width / 6.5);
         div.css('height',height / 9);
-        div.css('font-size',width * 0.04);
+        div.css('font-size',width * 0.03);
 
         // FlexBoxでセンタリング
         div.css('display','flex');
