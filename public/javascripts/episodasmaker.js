@@ -87,7 +87,8 @@ function finish(){
 									  });
     alert('DASデータを生成しました。移動します。');
     // location.href = `/DAS/${name}/${seed}`;
-    location.href = `/${name}/${seed}.html`;
+    // location.href = `/${name}/${seed}.html`;
+    location.href = `/${name}.html`;
     return;
 
     $('body').children().remove();

@@ -7262,3 +7262,43 @@ MasuiTwitter
 MasuiTwitter
 2018-01-11 20:30:42 +0900
 {"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","田中","鈴木"]},{"question":"足が遅いのは?","answers":["山田","田中","鈴木"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:31:56 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","田中","鈴木"]},{"question":"スケート場は?","answers":["山田","田中","鈴木"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:31:58 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["鈴木","山田","田中"]},{"question":"足が遅いのは?","answers":["鈴木","山田","田中"]},{"question":"スケート場は?","answers":["田中","山田","鈴木"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:39:40 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["鈴木","山田","田中"]},{"question":"足が遅いのは?","answers":["鈴木","山田","田中"]},{"question":"スケート場は?","answers":["田中","山田","鈴木"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:39:42 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["鈴木","山田","田中"]},{"question":"足が遅いのは?","answers":["鈴木","田中","山田"]},{"question":"スケート場は?","answers":["田中","山田","鈴木"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:40:24 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:40:28 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:40:30 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","田中","鈴木"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:40:39 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:40:41 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","田中","鈴木"]},{"question":"足が遅いのは?","answers":["山田","田中","鈴木"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
+----------
+MasuiTwitter
+2018-01-11 20:49:00 +0900
+{"seed":"Twitter12345678","qas":[{"question":"絵が上手いのは?","answers":["山田","鈴木","田中"]},{"question":"足が遅いのは?","answers":["山田","鈴木","田中"]},{"question":"スケート場は?","answers":["山田","鈴木","田中"]}]}
