@@ -1,6 +1,7 @@
 ■ Abstract
 
 強力なパスワードを安全で簡単な操作で生成する手法をビジュアルインタフェースを提案する。
+We introduce a simple and powerful visual interaction technique for managing many strong passwords.
 
 パスワードは覚えにくく忘れやすいうえにクラッキングが簡単なので代替手法が強く求められており、
 指紋認証や画像認証などの手法がポピュラーになりつつあるが
@@ -8,16 +9,42 @@
 高度な認識技術を必要としない
 DASという認証手法も提案されてきている。
 
+Passwords have been used for authentication for decades, but
+appropriate
+proper handling of password is difficult because
+people can easily forget passwords and passwords can be easily cracked.
+
+To make the authentication process easier,
+various visual interaction methods have been proposed,
+including the DAS (draw-a-secret) method, where
+users show their identity by drawing a secret pattern on the screen.
+
+玄関の鏡
+脱衣場のブラインドの話
+
+
 DASとは名前のとおり
 タブレットの上で秘密の絵を描くことによって認証を行なうものである。
+
+Using DAS-based authentication method, users can quickly log in to a service without typing a password.
+However,
+remembering complex secret patterns can be
+as difficult as remembering many passwords.
 
 利点
  パスワードと比べるとKBがいらない
  高速入力できる
-
 問題点
   数多くのサービスに同じパタンを利用すると危険であるが、
   覚えておくのが難しい
+
+We developed EpisoDAS, with which
+users can generate strong passwords
+based on their secret episodic memories
+using a simple DAS interface.
+
+users can use secret patterns for authentication,
+based on their secret episodic memories which they cannot easily forget.
 
 
 Episode記憶にもとづく秘密の記憶と関連した
@@ -33,10 +60,15 @@ Episode記憶にもとづく秘密の記憶と関連した
 代替手法も様々なものが提案されているが、
 それが一番良いという説もあってなかなか死滅はしないようである。
 
+パスワードの問題のひとつは「覚えるのが難しい」ことである。
+
 パスワードを覚えるのが不可能ならば、
 覚えておくためのパスワードマネージャがよく使われているが、
-パスワードマネージャは利用環境が制約があるし
+パスワードマネージャは利用環境が制約があるし、
 マスターパスワードが必要である。
+
+秘密を新しく覚えることは難しいが、
+すでに覚えている秘密記憶からパスワードを「作る」ことにすれば問題は解決する。
 
 パスワードマネージャを利用せずに
 忘れない複雑なパスワードを生成する方法として
@@ -44,22 +76,27 @@ EpisoPassが提案されている
 
 なぞなぞを用いて
 パスワードを生成するという方法が提案されている。[EpisoPass]
-EpisoPassはパスワードを絶対忘れないという利点があるが、
-問題に答えるのに時間がかかってしまう
+EpisoPassはパスワードを絶対忘れないという利点などがあるが、
+問題に答えるのに時間がかかってしまうのが問題である。
 
 パスワードと異なる認証手法として
 画像の一部をクリックする認証[][]や
-DASというものが提案されている。
+DASという
+ビジュアルな認証手法が提案されている。
 (AndroidのDAS)
 
 これらの認証手法は高速で便利なものだが、
-パタンを記憶しておく必要がある。
+いずれの場合も
+パタンや画像を記憶しておく必要がある。
 
 画像をクリックする場合やDASの場合
   パタンを覚える必要があるのが難しい
   忘れてしまいがちだし
   覚えやすいものはクラッキングされる可能性も高い
   簡単なパスワードを使う場合と同じである
+
+
+DASの利便性とEpisoPassの忘れない性を組み合わせると
 
 エピソード記憶によるパスワード生成と
 DASの手法を組み合わせると、
@@ -76,6 +113,8 @@ EpisoPass編集画面
 それをDAS風に並べ変えたものがEpisoDAS
 
 EpisoDAS拡張機能 @ Amazon
+
+■ 登録方法
 
 ■ Implementation
 
@@ -97,11 +136,6 @@ EpisoDAS拡張機能 @ Amazon
   ひとつぐらい忘れても大丈夫
 
 人がパスワードをどれぐらい忘れるか調査するのは難しいが
-
-
-
-
-
 
 
 
