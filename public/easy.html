@@ -1,195 +1,69 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>かんたん問題作成</title>
     <link rel="icon" type="image/png" href="/images/favicon.png">
-    <link rel="stylesheet" href="stylesheets/episopass.css" type="text/css">
+    <!-- <link rel="stylesheet" href="stylesheets/episopass.css" type="text/css"> -->
+    <link rel="stylesheet" href="stylesheets/easy.css" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="names.js"></script>
-    <script type="text/javascript">
-      function shuffle(array, n){
-        for(var i=0; i<n; i++){
-          var r = i + 1 + Math.floor(Math.random() * (array.length - i - 1));
-          var tmp = array[i];
-          array[i] = array[r];
-          array[r] = tmp;
-        }
-      }
-      $(function() {
-        $('#id').val('Masui_Twitter');
-        $('#seed').val('Twitter_12345678');
-        $('#answers').val(
-	   "山田\n鈴木\n田中"
-        );
-        $('#questions').val(
-           "絵が上手いのは?\n" +
-           "足が遅いのは?\n" +
-           "スケート場は?\n");
-        $('#addnames').click(function(){
-          shuffle(names,10);
-          namestr = names.slice(0,10).join("\n");
-          text = $('#answers').val();
-          if(text != "") text = text + "\n";
-          $('#answers').val(text + namestr);
-        });
-        $('#register').click(function(){
-          var id = $('#id').val();
-          if(id == ''){
-            alert("IDを指定して下さい");
-            return;
-          }
-          var seed = $('#seed').val();
-          if(seed == ''){
-            alert("シードを指定して下さい");
-            return;
-          }
-          data = {};
-          data['seed'] = seed
-          answers = $.grep($('#answers').val().split(/\n+/), function(s,i){
-            return s != "";
-          })
-          if(answers.length == 0){
-            alert("複数の答を指定して下さい");
-            return;
-          }
-          questions = $.grep($('#questions').val().split(/\n+/), function(s,i){
-            return s != "";
-          })
-          if(questions.length == 0){
-            alert("なぞなぞ問題を指定して下さい");
-            return;
-          }
-          qas = [];
-          for(var i=0;i<questions.length;i++){
-            qa = {};
-            qa['question'] = questions[i];
-            qa['answers'] = answers;
-            qas.push(qa);
-          }
-          data['qas'] = qas;
-          //
-          $.ajax({
-            type: "POST",
-            async: true,
-            url: `/${id}/__write`,
-            data: `data=${JSON.stringify(data)}`,
-            success: function(){
-              location.href = `http://EpisoPass.com/${id}/${seed}`;
-            }
-          });
-        });
-      });
-    </script>
-    <style type="text/css">
-    <!--
-    li.q {
-      font-size:12pt;
-      font-weight:bold;
-      color: #009;
-    }
-    -->
-    </style>
-    <title>かんたん問題作成</title>
+    <script src="questions.js"></script>
+    <script src="javascripts/easy.js"></script>
   </head>
   <body>
-    <div class="title">
-      <div class="title2">
-        <span class="title"><a href="index.html">EpisoPass</a> - かんたん問題作成</span>
-      </div>
-    </div>
+    <h1>EpisoPass らくらく問題作成</h1>
+
+    昔の知人の記憶を使って簡単にEpisoPass問題を作ることができます。
+
+    <h2>1. 名前リストを作成</h2>
+
+    <ul>
+      <li>古い友人や知人の名前を30行ぐらい並べて下さい。</li>
+      <li>適当な名前を混ぜてもかまいません。</li>
+    </ul>
 
     <blockquote>
-      以下の手順で簡単にEpisoPass問題を作れます。
-      
-      <ol>
-        <li><i><b>昔の知人の名前をリストする</i></b></li>
-        <li><i><b>その中の誰かを特定できる質問を作る</i></b></li>
-      </ol>
-    </blockquote>
-
-    <div class="section">
-      <div class="section2">
-         <span class="section">1. 名前リストを作成</span>
-      </div>
-    </div>
-
-    <blockquote>
-      <ul>
-        <li>古い知人の名前を30行ぐらい並べて下さい。</li>
-        <li>思い出せない場合は適当な名前を使って下さい。</li>
-      </ul>
-
-      <textarea id="answers" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea id="answers" class="textinput" style="width:80%;height:100px;"></textarea>
       <br clear='all' />
-      <input type="button" id="addnames" value="ランダムに名前を10個追加" style="font-size:1.5em;"/>
+      <input type="button" id="addnames" value="サンプル人名を生成" style="font-size:1.5em;"/>
     </blockquote>
     
-    <div class="section">
-      <div class="section2">
-         <span class="section">2. 問題リストを作成</span>
-      </div>
-    </div>
+    <h2>2. 質問リストを作成</h2>
+
+    <ul>
+      <li>上の人物のうち10人程度に関する記憶をリストして下さい。</li>
+      <li>他人が知らない秘密の<b>事実</b>で、将来忘れないような記憶を書いて下さい。</li>
+    </ul>
 
     <blockquote>
-      <ul>
-        <li>上で登録した知人のうち10人程度に関する記憶をリストして下さい。</li>
-        <li>他人が知らない秘密の<b>事実</b>で、将来忘れることがない記憶を書いて下さい。</li>
-      </ul>
-
-      <textarea id="questions" style="width:90%;height:100px;font-size:12pt;"></textarea>
+      <textarea class="textinput" id="questions" style="width:80%;height:100px;"></textarea>
       <br clear='all' />
-
+      <input type="button" id="addquestions" value="サンプル質問を生成" style="font-size:1.5em;"/>
     </blockquote>
     
-    <div class="section">
-      <div class="section2">
-         <span class="section">3. データ登録</span>
-      </div>
-    </div>
+    <h2>3. データ登録</h2>
 
-    <blockquote>
-      <ul>
-        <li>下のフォームで<b>ID</b>と<b>シード文字列</b>を指定して登録ボタンを押すとEpisoPassの問題データが登録されます。</li>
-        <li>IDはURLで使える半角文字列を指定して下さい。</li>
-        <li>たとえば
-	  「<code>Masui_Twitter</code>」
-	  というIDで問題を登録すると、
-	  <a href="http://episopass.com/Masui_Twitter">http://EpisoPass.com/Masui_Twitter</a>
-	  というURLでEpisoPassページにアクセスできます。
-      </ul>
-      <b>ID</b>: <input type="text" id="id" style="font-size:1.2em;" />
-      <b>シード文字列</b>: <input type="text" id="seed" style="font-size:1.2em;" />
-      &nbsp; <input type="button" id="register" value="登録" style="font-size:1.2em;" />
-    </blockquote>
-
-    <div class="section">
-      <div class="section2">
-         <span class="section">4. DASパタン登録 (オプション)</span>
-      </div>
-    </div>
-
-    <blockquote>
-      <ul>
-        <li>EpisoPassページで正答を選択してからの右上の「DAS」ボタンを押すとDASパタンを登録できます。</li>
-        <li>登録すると<a href="http://episopass.com/Masui_Twitter.html">http://EpisoPass.com/Masui_Twitter.html</a>のようなURLでDASを利用できるようになります。</li>
-	<li>このHTMLはローカルマシンに保存して利用することができます。</li>
-      </ul>
-    </blockquote>
-
-    <!--    
-    <div class="section">
-      <div class="section2">
-         <span class="section">利用例</span>
-      </div>
-    </div>
-
-    <blockquote>
-      <ul>
-        <li><a href="http://episopass.com/masui@pitecan.com1/Twitter12345678">増井のTwitterパスワードを計算する問題</a>はこの方法で作成しています。</li>
-        <li>認知的な障害があってパスワードの作成や管理が難しい人でも、
-	  補助があればパスワード利用システムを使えるようになります。</li>
-      </ul>
-    </blockquote>
-    -->
+    <ul>
+      <li><i>ID</i>と<i>シード文字列</i>を指定して <span class="button">登録</span> ボタンを押すとEpisoPass問題が登録されます。</li>
+      <blockquote>
+	<i>ID</i> : <input class="textinput" type="textarea" id="id"/> &nbsp;
+	<i>シード文字列</i> : <input class="textinput" type="textarea" id="seed"/> &nbsp;
+	<span class="button">登録</span>
+      </blockquote>
       
+      <li>IDとシード文字列は半角文字列を指定して下さい。</li>
+      <li>「Masui_Twitter」というIDで登録すると、
+	<a href="http://episopass.com/Masui_Twitter">http://EpisoPass.com/Masui_Twitter</a>
+	というEpisoPassページができます。
+    </ul>
+
+    <h2>4. DASパタン登録 (オプション)</h2>
+
+    <ul>
+      <li>EpisoPassページで正答を選択してからの右上の「DAS」ボタンを押すとDASパタンを登録できます。</li>
+      <li>登録すると<a href="http://episopass.com/Masui_Twitter.html">http://EpisoPass.com/Masui_Twitter.html</a>のようなURLでDASを利用できるようになります。</li>
+      <li>このHTMLはローカルマシンに保存して利用することができます。</li>
+    </ul>
+
   </body>
 </html>

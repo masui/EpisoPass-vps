@@ -1,0 +1,36 @@
+h1 {
+    color: #364e96; /*文字色*/
+    border: solid 7px #364e96; /*線色*/
+    padding: 0.5em; /*文字周りの余白*/
+    border-radius: 0.3em; /*角丸*/
+    background-color: #8ff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.23);
+}
+h2 {
+    color: #000; /*文字色*/
+    border: solid 2px #001122; /*線色*/
+    padding: 0.2em; /*文字周りの余白*/
+    border-radius: 0.3em; /*角丸*/
+    background-color: #eee;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.23);
+}
+body {
+    padding: 10pt;
+}
+
+.textinput {
+    font-size:12pt;
+}
+
+.button{
+    padding:3px;
+    border-radius: 0.2em; /*角丸*/
+    text-align:center;
+    border:2px solid;
+    border-color:#aaaaaa #444444 #444444 #aaaaaa;
+    background:#eee;
+}
+
+.button:hover{
+    background:#777777;
+}
