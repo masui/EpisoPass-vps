@@ -13,7 +13,7 @@
   <body>
     <h1>EpisoPass らくらく問題作成</h1>
 
-    昔の知人の記憶を使って簡単にEpisoPass問題を作ることができます。
+    <b>昔の知人の記憶を使って簡単にEpisoPass問題を作ることができます。</b>
 
     <h2>1. 名前リストを作成</h2>
 
@@ -31,7 +31,7 @@
     <h2>2. 質問リストを作成</h2>
 
     <ul>
-      <li>上の人物のうち10人程度に関する記憶をリストして下さい。</li>
+      <li>上の人物のうち10人程度に関する古い記憶を並べて下さい。</li>
       <li>他人が知らない秘密の<b>事実</b>で、将来忘れないような記憶を書いて下さい。</li>
     </ul>
 
@@ -41,17 +41,16 @@
       <input type="button" id="addquestions" value="サンプル質問を生成" style="font-size:1.5em;"/>
     </blockquote>
     
-    <h2>3. データ登録</h2>
+    <h2>3. EpisoPass登録</h2>
 
     <ul>
-      <li><i>ID</i>と<i>シード文字列</i>を指定して <span class="button">登録</span> ボタンを押すとEpisoPass問題が登録されます。</li>
+      <li><i>ID</i> と <i>シード文字列</i> を指定して <span class="button">登録</span> ボタンを押すとEpisoPass問題が登録されます。</li>
       <blockquote>
 	<i>ID</i> : <input class="textinput" type="textarea" id="id"/> &nbsp;
 	<i>シード文字列</i> : <input class="textinput" type="textarea" id="seed"/> &nbsp;
 	<span class="button">登録</span>
       </blockquote>
       
-      <li>IDとシード文字列は半角文字列を指定して下さい。</li>
       <li>「Masui_Twitter」というIDで登録すると、
 	<a href="http://episopass.com/Masui_Twitter">http://EpisoPass.com/Masui_Twitter</a>
 	というEpisoPassページができます。
@@ -60,9 +59,9 @@
     <h2>4. DASパタン登録 (オプション)</h2>
 
     <ul>
-      <li>EpisoPassページで正答を選択してからの右上の「DAS」ボタンを押すとDASパタンを登録できます。</li>
+      <li>EpisoPassの<a href="https://en.wikipedia.org/wiki/Draw_a_Secret">DAS(Draw-a-Secret)機能</a>を使うと解答選択が簡単になります。</li>
+      <li>登録されたEpisoPassページで正答を選択してから 右上の「DAS」ボタンを押すとDASパタンを登録できます。</li>
       <li>登録すると<a href="http://episopass.com/Masui_Twitter.html">http://EpisoPass.com/Masui_Twitter.html</a>のようなURLでDASを利用できるようになります。</li>
-      <li>このHTMLはローカルマシンに保存して利用することができます。</li>
     </ul>
 
   </body>

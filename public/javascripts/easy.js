@@ -26,13 +26,13 @@ $(function() {
     });
     $('.button').click(function(){
         var id = $('#id').val();
-        if(id == ''){
-            alert("IDを指定して下さい");
+        if(id == '' || !id.match(/^[a-zA-Z0-9_@-]+$/)){
+            alert("IDを半角文字列で指定して下さい");
             return;
         }
         var seed = $('#seed').val();
         if(seed == ''){
-            alert("シードを指定して下さい");
+            alert("半角のシード文字列を指定して下さい");
             return;
         }
         data = {};
