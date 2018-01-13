@@ -41,14 +41,14 @@ $(function() {
             return s != "";
         });
         if(answers.length == 0){
-            alert("名前リストを指定して下さい");
+            alert("名前リストを入力して下さい");
             return;
         }
         qs = $.grep($('#questions').val().split(/\n+/), function(s,i){
             return s != "";
         });
         if(qs.length == 0){
-            alert("質問リストを指定して下さい");
+            alert("質問リストを入力して下さい");
             return;
         }
         qas = [];

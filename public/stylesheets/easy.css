@@ -19,6 +19,9 @@ body {
     padding: 10pt;
     background-color: #ddd;
 }
+a {
+  text-decoration: none;
+}
 
 .textinput {
     font-size:12pt;
