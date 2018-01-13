@@ -60,8 +60,6 @@ $(function() {
         }
         data['qas'] = qas;
         //
-	alert(data);
-	/*
         $.ajax({
             type: "POST",
             async: true,
@@ -71,6 +69,5 @@ $(function() {
 		location.href = `http://EpisoPass.com/${id}/${seed}`;
             }
         });
-	 */
     });
 });
