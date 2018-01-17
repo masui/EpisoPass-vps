@@ -26,7 +26,7 @@ $(function() {
     });
     $('.button').click(function(){
         var id = $('#id').val();
-        if(id == '' || !id.match(/^[a-zA-Z0-9_@-]+$/)){
+        if(id == '' || !id.match(/^[a-zA-Z0-9_@\-\.]+$/)){
             alert("IDを半角文字列で指定して下さい");
             return;
         }

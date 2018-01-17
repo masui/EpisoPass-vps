@@ -54,7 +54,75 @@ Episode記憶にもとづく秘密の記憶と関連した
 いろいろなDASパタンを思い出して利用できる
 完全にパタンを忘れた場合でも大丈夫
 
-■ Introduction
+\section{Introduction}
+
+Passwords have been used as a means of authenticating to Web services
+and applications for a long time, and remain the most popular
+authentication method on the Internet.
+Since short passwords are easily guessable by attackers and using the
+same password for multiple services is unsafe, a different long
+password should be used for each service a person uses.  However,
+remembering numerous long passwords is almost impossible for ordinary
+humans.
+
+However, password-based authentication is still the most convenient
+and widely deployed method \cite{Bonneau:ReplacePasswords}, and is not
+expected to disappear any time soon \cite{Herley:2009:PSS:1601990.1602010}.
+
+To handle
+
+We have been proposing the EpisoPass password generator that can
+create strong passwords from user's episodic memories.
+
+We therefore propose \textit{EpisoPass}, a password manager that generates strong passwords
+based only on a user's secret and unforgettable episodic memories.
+
+For this reason, we believe that it is far better to ``generate''
+something for the authentication, based on a user's episodic
+memories. This has the benefit that unlike a password, a person is
+highly unlikely to forget such episodic memories.
+
+\begin{teaserfigure}
+  \includegraphics[width=\textwidth]{sampleteaser}
+  \caption{This is a teaser}
+  \label{fig:teaser}
+\end{teaserfigure}
+
+% Given we will have to continue to live with password-based
+% authentication systems for the foreseeable future, we have to devise
+% practical methods for handling many passwords, and various ``password
+% managers'' have been proposed
+% \cite{OnePassword,Dashlane,MilPass,LastPass,KeyPass,NortonIDSafe,IDManager}.
+% %
+% Password managers remember users' passwords and aim to directly enter
+% them into the login pages of the various services a user wants to
+% access.
+% %
+% The burden on the user is reduced by requiring just a single ``master
+% password'' to access the database of stored passwords.
+% %
+% Although password managers are widely used and a clear step forward
+% from having to remember multiple passwords, uses nonetheless have to
+% remember the master password or use a special hardware device for
+% safely handling the password database, and password managers usually
+% run on only a limited set of devices.
+
+Since passwords are difficult to handle,
+various different authentication
+methods have been proposed.  Especially, visual authentication methods
+like graphical passwords\cite{Biddle:2012:GPL:2333112.2333114,GraphicalPasswords}
+and Draw-a-Secret (DAS) \cite{DAS} are promising approaches, because
+people can remember visual patterns better than password strings.
+
+(Fig Graphical Passwords)
+(Fig DAS)
+
+We propose a new visual password generation system EpisoDAS,
+with which users can generate strong password based on their
+memory of visual patterns and episodic memories.
+Users can 
+
+
 
 認証手法はいまだにパスワードが主流である。
 代替手法も様々なものが提案されているが、
@@ -103,7 +171,7 @@ DASの手法を組み合わせると、
 エピソード記憶によるなぞなぞをDAS的に答えることにすれば、
 両者の利点を融合したEpisoDASができる。
 
-■ EpisoDAS
+\section{EpisoDAS}
 
 Demo
 
@@ -116,13 +184,13 @@ EpisoDAS拡張機能 @ Amazon
 
 ■ 登録方法
 
-■ Implementation
+\section{Implementation}
 
 設計画面
 問題のつくりかた
 パタンの指定方法
 
-■ Evaluation
+\section{Evaluation}
 
 問題の作り方
   固有名詞を使う
