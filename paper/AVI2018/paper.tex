@@ -2,6 +2,12 @@
 
 % \usepackage{booktabs} % For formal tables
 
+% \makeatletter
+% \def\@ACM@printacmref\false
+% \makeatother
+
+\settopmatter{printacmref=false} % アブストラクトの下のRef情報を表示しあい
+
 \usepackage{graphicx}
 \usepackage{here} % [H]とするとその場所に配置されるらしい
 
@@ -22,11 +28,13 @@
 % % ISBN
 % \acmISBN{123-4567-24-567/08/06}
 % 
-%Conference
+% Conference
 \acmConference[AVI2018]{International Conference on Advanced Visual Interfaces}{May 2018}
               {Resort Riva del Sole, Castiglione della Pescaia, Grosseto (Italy)}
 \acmYear{2018}
 \copyrightyear{2018}
+\acmISBN{}
+\acmDOI{}
 % 
 % 
 % \acmArticle{4}
@@ -38,25 +46,30 @@
 % \editor{Theo D'Hondt}
 % \editor{Wolfgang De Meuter}
 
-
 \begin{document}
 \title{EpisoDAS - DAS-based password generation \\
 using episodic memories}
 % \titlenote{Produces the permission block, and copyright information}
 
-\author{Toshiyuki Masui}
+\author{xxxxxx xxxx}
 % \authornote{Is this necessary?.}
 % \orcid{1234-5678-9012}
 \affiliation{%
-  \institution{Keio University}
-  \streetaddress{5322 Endo}
-  \city{Fujisawa}
-  \state{Kanagawa}
-  \postcode{252-8520}
+  % \institution{Keio University}
+  % \streetaddress{5322 Endo}
+  % \city{Fujisawa}
+  % \state{Kanagawa}
+  % \postcode{252-8520}
+  \institution{xxxxxx xxxxxx}
+  \streetaddress{xxxx xxxx}
+  \city{xxxxxxx}
+  \state{xxxxxxx}
+  \postcode{00000000}
 }
-\email{masui@masui.org}
+% \email{masui@masui.org}
+\email{xxxx@xxxxx.xxxx}
 
-\renewcommand{\shortauthors}{T. Masui}
+% \renewcommand{\shortauthors}{T. Masui}
 
 \begin{CCSXML}
   <ccs2012>
@@ -69,7 +82,7 @@ using episodic memories}
 \end{CCSXML}
 \ccsdesc[500]{Security and privacy~Graphical / visual passwords}
 
-\keywords{Passwords, Visual passwords, Authentication}
+\keywords{Passwords, visual passwords, user authentication, episodic memories, draw-a-secret}
 
 \begin{abstract}
 
@@ -116,7 +129,7 @@ expected to disappear any time soon \cite{Herley:2009:PSS:1601990.1602010}.
 To tackle this problem,
 we have been proposing the \textit{EpisoPass} password generator with which 
 users can generate strong passwords easily
-based only on a user's secret and unforgettable episodic memories.
+based only on a user's secret and unforgettable episodic memories \cite{Masui:EpisoPass}.
 
 % For this reason, we believe that it is far better to ``generate''
 % something for the authentication, based on a user's episodic
@@ -124,7 +137,7 @@ based only on a user's secret and unforgettable episodic memories.
 % highly unlikely to forget such episodic memories.
 
 \begin{figure}[H]
-  \centerline{\includegraphics[width=12cm,bb=-300 -100 1222 1014]{figures/episopass.png}}
+  \centerline{\includegraphics[width=13cm,bb=-250 -100 1272 1014]{figures/episopass.png}}
   \caption{EpisoPass}
   \label{EpisoPass}
 \end{figure}
@@ -170,7 +183,7 @@ For the people who don't like to use passwords for authentication,
 various types of authentication methods have been proposed.
 Especially, visual authentication methods
 like graphical passwords\cite{Biddle:2012:GPL:2333112.2333114,GraphicalPasswords}
-and Draw-a-Secret (DAS) \cite{DAS} are promising approaches, because
+and Draw-a-Secret (DAS) \cite{Jermyn:1999:DAG:1251421.1251422} are promising approaches, because
 people can remember visual patterns easier than passwords.
 
 % \begin{figure}[H]
@@ -201,7 +214,8 @@ EpisoDAS is a visual authentication interface
 based on the user's episodic memories.
 Like EpisoPass,
 EpisoDAS displays a list of questions to the user and
-ask the user to choose the most appropriate answers.
+asks the user to choose the most appropriate answers
+from the candidate answers.
 EpisoDAS then generates a password string based on the user's selections.
 %
 % with which users can generate strong password based on their
@@ -213,20 +227,19 @@ EpisoDAS then generates a password string based on the user's selections.
 % use it as an implementation of EpisoPass.
 %
 The candidate answers are shown to the user as a grid of buttons,
-and the user can select the most appropriate answer
+and the user can select the most appropriate answer to each question
 by clicking one of the buttons in the grid.
 
-If the series of correct answers form a special pattern
-that the user can remember,
-the user can select the series of correct answers quickly
-just like using other DAS systems.
+If the location of the series of correct answers form a special
+pattern that the user can remember, the user can select
+correct answers quickly just like using other DAS systems.
 
 % http://episopass.com/Amazon_john@example.com/Amazon123456
 % http://episopass.com/Amazon_john@example.com.html
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1398 1060]{figures/EpisoDAS1.jpg}
-  \caption{First question}
+  \caption{First question and answers shown on EpisoDAS.}
   \label{EpisoDAS1}
 \end{figure}
 
@@ -236,61 +249,70 @@ the initial screen of an EpisoDAS session.
 %
 If the user remembers that he had trouble at a MacDonald's in Boston in the past,
 he would click ``Boston'', and the next question (Figure \ref{EpisoDAS2}) is displayed.
-The contents and the order of the questions
-do not depend on the user's actions, and
-the user cannot tell whether he has selected a right answer.
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1396 1062]{figures/EpisoDAS2.jpg}
-  \caption{Second question}
+  \caption{Second question and answers.}
   \label{EpisoDAS2}
 \end{figure}
 
 If he remembers that he had a bad time at Los Angeles
 after reading the question in Figure \ref{EpisoDAS2},
 he would click ``Los Angeles'' and proceed to the third question.
-%
+
+The contents and the order of the questions
+do not depend on the user's actions, and
+the user cannot tell whether he has selected a right answer.
+
 After repeating the slection process ten times,
 the user can get his password
-calculated from his selections. (Figure \ref{Result})
+calculated from his selections (Figure \ref{Result}).
 
 \begin{figure}[H]
-  \includegraphics[width=12cm,bb=0 0 1160 468]{figures/result.png}
+  \includegraphics[width=10cm,bb=0 0 1160 468]{figures/result.png}
   \caption{Generated password}
-  \label{result}
+  \label{Result}
 \end{figure}
 
-If the series of right-answer buttons form a special DAS pattern,
+Users can select correct answers not only by clicking each button,
+but by draggin the pointing device on the buttons.
+%
+If the series of button locations form a special pattern,
 % If the series of buttons are aligned next to each others,
 the user can drag the pointing device like
-Figure \ref{draw} and quickly get the generated
-password without clicking buttons.
+Figure \ref{draw} instead of clicking ten buttons,
+and quickly generate a password.
 %
-The candidate answers change according to the drag or click of the
-pointing device, and the user can mix the dragging and clicking actions
+The order of candidate answers change according to the drag or click action,
+and the user can mix the dragging and clicking actions
 at any point.
+The user can either click ``Boston'' and ``Los Angeles'' one by one or
+click on ``Boston'' and move the pointing device downward to select
+``Los Angeles'' without releasing the mouse button or releasing the
+pen or finger from the surface of the tablet computer.
 
 \begin{figure}[H]
-  \includegraphics[width=12cm,bb=0 0 1130 1236]{figures/draw.png}
-  \caption{Drawing a secret pattern}
+  \includegraphics[width=12cm,bb=0 0 1356 1046]{figures/draw.png}
+  \caption{Drawing a secret pattern on EpisoDAS}
   \label{draw}
 \end{figure}
 
 The drawing action by the user is close to the actions
-used on conventional DAS systems.
+used on DAS systems.
 Users can quickly generate his password for authentication
-just by
-drawing a pattern on the EpisoDAS screen.
+just by drawing a pattern on the EpisoDAS screen.
 
 EpisoDAS can be used for generating passwords for any kind of systems and
-services, but it is most useful when used on a login window.
+services, but it is most useful when used to log in to a Web service
+on a Web browser.
 Figure \ref{Amazon} shows how a user can use EpisoDAS when
 he wants to log in to Amazon.com.
 If the EpisoDAS extension is installed on the browser,
 an EpisoDAS window appears when the user enters his
 email address and clicks the password field at Amazon.com.
-After selecting answers, a password is generated and pasted
-into the password field, making the user to log in without typing a password.
+After selecting answers by drawing a secret pattern on the EpisoDAS window,
+a password for Amazon is generated and pasted
+into the password field, making the user to log in without typing any password.
 
 % Figure \ref{Amazon} shows how a user can use EpisoDAS on a login page,
 % using a browser extension software.
@@ -307,14 +329,14 @@ into the password field, making the user to log in without typing a password.
 
 The data used in the above example is retrieved from the EpisoDAS database
 on the Web, using the name of the service (e.g. \texttt{Amazon})
-and the user id (e.g. \texttt{joe@example.com}).
+and the user id (e.g. \texttt{john@example.com}).
 
 \section{Registration}
 
 \subsection{Registering a DAS pattern}
 
-EpisoDAS is the predecessor of the EpisoPass system,
-and questions and answers should be registered on the EpisoPass system.
+EpisoDAS is based on the EpisoPass system,
+and questions and answers should be registered on the EpisoPass database.
 After registering questions and answer candidates,
 a user can register a DAS pattern so that
 answer candidates are easily selected on EpisoDAS.
@@ -326,13 +348,9 @@ answer candidates are easily selected on EpisoDAS.
 \end{figure}
 
 After selecting the correct answers
-(``Boston'', ``Los Angeles'', etc.) on the EpisoPass page,
+(``Boston'', ``Los Angeles'', etc.) on the EpisoPass editor page,
 the user can click the ``DAS'' button on the top-right portion of the
-EpisoPass page,
-%
-% After cliking the button,
-% a page for registering the DAS pattern id shown to ther user, and
-and the user can specify his DAS patten on the registration page.
+EpisoPass page to specify his DAS patten.
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1332 1118]{figures/DASRegister.png}
@@ -341,95 +359,131 @@ and the user can specify his DAS patten on the registration page.
 \end{figure}
 
 If the user wants to use a U-shape as the secret pattern,
-he can draw the shape shown in Figure \ref{draw}
+he can begin drawing the shape shown in Figure \ref{DASRegister}
 on the registration window.
 %
-After finishing the registration drawing, the candidate answers fo the EpisoPass is
-shuffled so that the correct answers represent the specified pattern.
+After registering the pattern, the candidate answers for the EpisoPass is
+shuffled so that the series of correct answers represent the specified pattern.
 
 \subsection{Registering questions and answers}
+\label{easyregister}
 
 Questions and answer candidates can be edited interactively on the
-EpisoPass page (Figure \ref{EpisoPass}).
-However, creating many questions and answer candidates is hard because
-people usually feel it hard to remember secret episodes.
+EpisoPass editor page (Figure \ref{EpisoPass}) and arbitrary
+strings can be specified as questions and answer candidates.
+However, creating many questions and answer candidates is not a
+trivial task, because
+people usually feel it difficult to recall secret episodes.
 %
-To help people easily create EpisoPass problems,
-we have provided a special page for easy problem creation
+To help people easily create EpisoPass questions and answers,
+we provide a special page for easy problem creation
 (Figure \ref{Easy}).
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1678 1728]{figures/Easy.png}
-  \caption{Easily creating problems}
+  \caption{Easily creating questions and answers}
   \label{Easy}
 \end{figure}
 
-First, users enter the names of their old friends and acquaintances.
-After creating a list of such names,
-the users are asked to enter special episodes of the people.
+First, a user provides a list of names of his old friends and acquaintances.
+After registering a list of such names,
+the user is asked to enter special episodes of the people.
 For example, if the user remembers that Tom was
 very good at drawing, he can add a question
 ``Good painter?'' to the list, assuming Tom is the correct answer.
 
-Recalling a special old episode is fairly hard for most people, but
-recalling an attribute of an old friends seems to be much easier.
+Recalling special old episodes is sounds hard for many people, but
+recalling an attribute of an old friends is much easier.
+The questions and answers shown in Figure \ref{EpisoPass} was
+created by this system,
+using place names instead of people's names.
 
 \section{Discussion}
 
 The authors have been using EpisoPass for more than 5 years, and
 using EpisoDAS for about an year.
 No formal evaluation has been performed so far, but
+some people around the authors are enthusiastically using
+EpisoDAS for their daily work, and
 important impressions have been observed during the period.
 
-\subsection{Authentication speed}
+\subsection{Authentication time}
 
-Using EpisoDAS, very small amount of time is required for
-the authentication process.
+Unlike EpisoPass,
+very small amount of time is required for
+the authentication process on EpisoDAS.
 For a skilled computer user,
-selecting answers based on the secret is a little bit slower than
+selecting answers based on the secret might be a little bit slower than
 typing a password on a computer with a hardware keyboard, but
-EpisoDAS is faster on smartphones and tablet computers.
+authentication with
+EpisoDAS is apparently faster on smartphones and tablet computers
+than entering passwords on such devices.
 
-% 拡張機能を利用すると
-% 記憶しているパスワード入力よりも高速なぐらいで入力できる
-
-\subsection{Forgetting passwords}
+\subsection{Forgetting factors}
 
 The biggest advantage of using EpisoPass is that users don't have to
 remember long password strings.
-
+%
 After the authors began using EpisoPass,
-we have been having no problem forgetting passwords of any kind.
-
+they have been having no problem forgetting passwords of any kind.
+%
 As long as a user have the seed string and question-answer data,
 he can easily generate passwords by running
 EpisoPass and answering the questions.
-
-The seed string and question-answer data can be put on a public place
-if they include enough amount of secrets.
-
-If a question is based on old unforgettable episodic memory,
+%
+If the questions are based on old unforgettable episodic memory,
 there is little chance of losing the password for a service
 as long as the seed string and questions are available.
-
+%
 If the user's memory is related to an episode that took place 20 years
 ago, say, and the user clearly still remembers the episode now, it is
 unlikely the episode will be forgotten in the future.
 
-\subsection{Universal}
+% The seed string and question-answer data can be put on a public place
+% if they include enough amount of secret information.
+
+\subsection{Running environment}
 
 EpisoDAS is implemented as a single HTML file that includes a JavaScript
 script for password calculation.
-We can put the HTML file on the Web or in a handy USB memory device
-and access it from any Web browser.
-If the questions are properly selected and nobody knows the correct answet to
-the questions,
-the data can be put on a public Web page or save it in a secure
+The HTML file can be put on the Web or saved in a handy USB memory device
+so that it can be accessed from a Web browser.
+%
+If the questions are based on the user's secret memories and
+a sufficient number of questions and fake answers are provided,
+the data can be put on a public Web page or saved in a secure
 repository like GitHub.
+%
 The data set of the authors are put on the Web, and it can be easily
-found using Web search engines.
-It means that the passwords used by the authors can be generated
-even when the data is not kept locally.
+found using Web search engines\footnote{
+  The EpisoDAS data of the authors can be found on major Web
+  search enginges using the name of the author and ``password''.
+}.
+It means that the passwords used by the authors can be retrieved
+even when the data is not available locally.
+
+\subsection{Universality}
+
+Using EpisoDAS, people can use password-based systems
+only by selecting answers based on their episodic memories,
+without remembering passwords or using password management systems.
+Using a browser extension,
+people can use services without noticing that passwords are
+required for the service.
+
+Creating a Q-A database is a one-time process,
+after which the system becomes straightforward to use.
+%
+With a proper help, creating a database is not difficult even for
+people who are not good at using computers.
+A helper can ask the client questions like
+``Do you remember an interesting friend in your childfood?''
+to get the list of old friends, and then ask questions like
+``What kind of child was he?'', ``Do you remember his house?''
+to create a question for locating him.
+With such information, the helper can use the technique shwon
+in Section \ref{easyregister} to create the EpisoDAS database
+for the client.
 
 \subsection{Security strength}
 
@@ -452,7 +506,7 @@ password, for which the entropy is 45.6 bits.
 This level is considered to be strong enough for Web services,
 where it's not possible to perform online brute-force attacks \cite{Florencio:2007:SWP:1361419.1361429}.
   
-\subsection{Creating questions}
+\subsection{Choosing questions}
 
 The quality of the questions is key to using EpisoDAS effectively.  If
 the episode is shared by someone else, this other person might easily
@@ -463,14 +517,15 @@ and the episode should be unforgettable.
 %
 Finding such episodes seems difficult at first,
 but using the method shown in the last section,
-it is not super-difficult to recall
+it is not extremely difficult to recall
 many trivial episodes which are unforgettable but
 nonetheless not important to other people.
 
 Questions such as ``Who did you like best?'' should be avoided,
 since friends or family might know the user's tastes, thereby allowing 
 others to select the correct answer.
-Also, memories related to taste is more fragile than memories of facts.
+Also, memories related to taste is more fragile than fact-based memories like
+``Where did you find a crystal?''.
 
 % \subsection{Question reuse}
 % 
@@ -480,33 +535,40 @@ Also, memories related to taste is more fragile than memories of facts.
 % ブルートフォースで答がわかってしまうから
 % 問題を使い回すことは好ましくない
 
-\subsection{Browser extension}
+\subsection{Developmenet of browser extensions}
 
 EpisoDAS browser extension is very useful, but creating the extension
 is cumbersome because there is no standard login form for
-different Web services.
+Web services.
 %
-The browser extension should first realize that the Web page is a login page
+The browser extension should first detect that the Web page is a login page
 of a Web service (e.g. Amazon),
 and then it should be able to get the ID of the user
 and know where the result of EpisoDAS calculation should be pasted.
+%
+Commercial password managers\cite{OnePassword,Dashlane,MilPass,LastPass,KeyPass,NortonIDSafe,IDManager}
+are usually well integrated with Web browsers,
+and EpisoDAS should also be evolved so that
+the browser extension works on many Web services.
 
-\subsection{Sholder surfing}
+\subsection{Battles against sholder surfing}
 
-Simple DAS authentication is known to be fragile for ``shoulder surfing''
+Simple DAS authentication is known to be vulnerable to ``shoulder surfing''
 attacks\cite{Aviv:2017:TBS:3134600.3134609}.
-If the secret pattern is simple enough and
+If the secret pattern is simple and
 the pattern can be easily observed over the user's shoulder,
-attackers can easily 再現する the login pattern.
+attackers can easily reproduce the login pattern.
 
 This problem is common to all the DAS-based authentication systems,
 and great care should be taken when drawing a secret in the public.
-EpisoDAS users can use complex DAS patterns
+EpisoDAS users can use more complex DAS patterns than
+conventional DAS systems,
 because there is no risk of forgetting the pattern,
-because the user can use EpisoDAS even when he does not remember the
-secret pattern.
+since the user can read the question at any time and
+remember the secret pattern which corresponds to the
+answers to the questions.
 
-\subsection{Forgetting pattern risks}
+\subsection{Risks of Forgetting DAS pattern}
 
 Using a conventional DAS system, users should be carefull about
 remembering the DAS pattern.
@@ -520,13 +582,25 @@ because the pattern can be retrieved by answering the questions.
 EpisoDAS is the combination of EpisoPass and DAS-based authentication methods.
 A user can generate a password using his episodic memories, or
 he can generate a password using the DAS pattern he remembers.
+
+\section{Conclusions}
+
+We introduced a password management system \textit{EpisoDAS}
+that generates a password from a seed string by
+quicly drawingn a secret pattern backed by the user's episodic memories.
+These memories are represented as a set of questions and answers
+which can be solved only by the user in order to generate a site-specific password.
 %
-EpisoDAS has the advantages of both of the systems: i.e.
-users never forget how to generate the password, and
-users can quickly generate his password.
+Using EpisoDAS, a user can log into Web services quickly without
+worrying about
+having to remember any secret information, other than the episodic memories
+that have been chosen specifically to be easy to recall.
+%
+We are hoping to make EpisoDAS available on all the environments
+where strong passwords are required, and
+relieve everyone's pain of password handling.
 
-\section{Conclusion}
-
+\large
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{paper}
 
