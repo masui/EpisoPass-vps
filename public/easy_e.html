@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Quick EpisoPass creation</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="stylesheets/easy.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="names.js"></script>
+    <script src="questions.js"></script>
+    <script src="javascripts/easy.js"></script>
+  </head>
+  <body>
+  <h1>Quickly creating <a href="/">EpisoPass</a> questions</h1>
+
+   <b>Create <a href="/">EpisoPass</a> Q/As from your old friends!</b>
+
+   <h2>1. List the names of your old friends</h2>
+
+    <ul>
+     <li>List 30 names of your old friends and acquaintances.</li>
+     <li>Arbitrary names can be mixed in the list.</li>
+    </ul>
+
+    <blockquote>
+      <textarea id="answers" class="textinput" style="width:80%;height:100px;"
+		placeholder="John
+Tom
+George"
+		></textarea>
+      <br clear='all' />
+    </blockquote>
+    
+   <h2>2. Create a list of questions.</h2>
+
+    <ul>
+      <li>List 10+ episodes related to the people.</li>
+      <li>Select secret and unforgettable episodes.</li>
+    </ul>
+
+    <blockquote>
+      <textarea class="textinput" id="questions" style="width:80%;height:100px;"
+ 		placeholder="Good painter?
+Slow runner?
+Skating rink?"
+		></textarea>
+      <br clear='all' />
+    </blockquote>
+    
+   <h2>3. Register to EpisoPass</h2>
+
+    <ul>
+      <li>Specify an <i>ID</i> and <i>seed string</i> and press the <span class="button">Register</span> button.</li>
+      <blockquote>
+	<i>ID</i> : <input class="textinput" type="textarea" id="id" value="Amazon_Joe"/> &nbsp;
+	<i>Seed</i> : <input class="textinput" type="textarea" id="seed" value="Amazon123456"/> &nbsp;
+	<span class="button">Register</span>
+      </blockquote>
+      
+    </ul>
+
+
+  </body>
+</html>

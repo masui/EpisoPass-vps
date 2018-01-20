@@ -7,15 +7,15 @@ function shuffle(array, n){
     }
 }
 $(function() {
-    $('#id').val('Masui_Twitter');
-    $('#seed').val('Twitter_12345678');
-    $('#answers').attr('placeholder',
-		       "山田\n鈴木\n田中"
-		      );
-    $('#questions').attr('placeholder',
-			 "絵が上手いのは?\n" +
-			 "足が遅いのは?\n" +
-			 "スケート場は?\n");
+    //$('#id').val('Masui_Twitter');
+    //$('#seed').val('Twitter_12345678');
+    //$('#answers').attr('placeholder',
+    //		       "山田\n鈴木\n田中"
+    //		      );
+    //$('#questions').attr('placeholder',
+    //			 "絵が上手いのは?\n" +
+    //			 "足が遅いのは?\n" +
+    //			 "スケート場は?\n");
     $('#addnames').click(function(){
         shuffle(names,30);
         $('#answers').val(names.slice(0,30).join("\n"));

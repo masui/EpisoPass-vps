@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>かんたん問題作成</title>
+   <title>かんたん問題作成</title>
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" href="stylesheets/easy.css" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -10,24 +10,28 @@
     <script src="javascripts/easy.js"></script>
   </head>
   <body>
-    <h1><a href="/">EpisoPass</a> らくらく問題作成</h1>
+   <h1><a href="/">EpisoPass</a> らくらく問題作成</h1>
 
-    <b>昔の知人の記憶を使って簡単に<a href="/">EpisoPass</a>問題を作ることができます。</b>
+   <b>昔の知人の記憶を使って簡単に<a href="/">EpisoPass</a>問題を作ることができます。</b>
 
-    <h2>1. 名前リストを作成</h2>
+   <h2>1. 名前リストを作成</h2>
 
     <ul>
-      <li>古い友人や知人の名前を30行ぐらい並べて下さい。</li>
-      <li>適当な名前を混ぜてもかまいません。</li>
+     <li>古い友人や知人の名前を30行ぐらい並べて下さい。</li>
+     <li>適当な名前を混ぜてもかまいません。</li>
     </ul>
 
     <blockquote>
-      <textarea id="answers" class="textinput" style="width:80%;height:100px;"></textarea>
+      <textarea id="answers" class="textinput" style="width:80%;height:100px;"
+		placeholder="山田
+鈴木
+田中"
+		></textarea>
       <br clear='all' />
-      <input type="button" id="addnames" value="サンプル人名リストを生成" style="font-size:1.5em;"/>
+     <input type="button" id="addnames" value="サンプル人名リストを生成" style="font-size:1.5em;"/>
     </blockquote>
     
-    <h2>2. 質問リストを作成</h2>
+   <h2>2. 質問リストを作成</h2>
 
     <ul>
       <li>上の人物のうち10人程度に関する古い記憶を並べて下さい。</li>
@@ -35,29 +39,31 @@
     </ul>
 
     <blockquote>
-      <textarea class="textinput" id="questions" style="width:80%;height:100px;"></textarea>
+      <textarea class="textinput" id="questions" style="width:80%;height:100px;"
+ 		placeholder="絵が上手いのは?
+足が遅いのは?
+スケート場は?"
+		></textarea>
       <br clear='all' />
-      <input type="button" id="addquestions" value="サンプル質問リストを生成" style="font-size:1.5em;"/>
+     <input type="button" id="addquestions" value="サンプル質問リストを生成" style="font-size:1.5em;"/>
     </blockquote>
     
-    <h2>3. EpisoPass登録</h2>
+   <h2>3. EpisoPass登録</h2>
 
     <ul>
       <li><i>ID</i> と <i>シード文字列</i> を指定して <span class="button">登録</span> ボタンを押すとEpisoPassページができます。</li>
       <blockquote>
-	<i>ID</i> : <input class="textinput" type="textarea" id="id"/> &nbsp;
-	<i>シード文字列</i> : <input class="textinput" type="textarea" id="seed"/> &nbsp;
+	<i>ID</i> : <input class="textinput" type="textarea" id="id" value="Masui_Twitter"/> &nbsp;
+	<i>シード文字列</i> : <input class="textinput" type="textarea" id="seed" value="Twitter123456"/> &nbsp;
 	<span class="button">登録</span>
       </blockquote>
       
-      <li>「Masui_Twitter」というIDの場合
-	<a href="https://episopass.com/Masui_Twitter">https://EpisoPass.com/Masui_Twitter</a>
-	というURLになります。
+     <li>「Masui_Twitter」というIDの場合<a href="https://episopass.com/Masui_Twitter">https://EpisoPass.com/Masui_Twitter</a>というURLになります。
     </ul>
 
     <h2>4. DASパタン登録 (オプション)</h2>
-
-    <ul>
+ 
+     <ul>
       <li>EpisoPassの<a href="https://en.wikipedia.org/wiki/Draw_a_Secret">DAS(Draw-a-Secret)機能</a>を使うと解答選択が簡単になります。</li>
       <li>EpisoPassページで正答を選択してから 右上の「DAS」ボタンを押すとDASパタンを登録できます。</li>
       <li>DASパタンを登録すると
