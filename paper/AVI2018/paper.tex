@@ -47,8 +47,8 @@
 % \editor{Wolfgang De Meuter}
 
 \begin{document}
-\title{EpisoDAS - DAS-based password generation \\
-using episodic memories}
+\title{EpisoDAS - DAS-based Password Generation \\
+using Episodic Memories}
 % \titlenote{Produces the permission block, and copyright information}
 
 \author{xxxxxx xxxx}
@@ -82,16 +82,17 @@ using episodic memories}
 \end{CCSXML}
 \ccsdesc[500]{Security and privacy~Graphical / visual passwords}
 
-\keywords{Passwords, visual passwords, user authentication, episodic memories, draw-a-secret}
+\keywords{Passwords; visual passwords; user authentication;
+  episodic memories; draw-a-secret.}
 
 \begin{abstract}
 
 We introduce a simple and powerful visual interaction technique for
 managing strong passwords.
 %
-Passwords have been used for qauthentication for decades, but
+Passwords have been used for authentication for decades, but
 appropriate handling of passwords is difficult because people can
-easily forget passwords and they can be easily cracked.
+easily forget passwords and they can be easily attacked.
 %
 To make the authentication process easier, various visual interaction
 methods have been proposed, including the DAS (draw-a-secret)
@@ -99,13 +100,14 @@ method. Using DAS, users can log into various services just by drawing
 a secret pattern on the screen.
 %
 Using a DAS-based authentication method, users can quickly log into a
-service without typing a password. However, remembering complex secret
-patterns can be as difficult as remembering passwords. We developed
-EpisoDAS, with which users can generate strong passwords based on
-their secret episodic memories with a simple DAS interface.
+service without typing a password, but remembering complex secret
+patterns is as difficult as remembering passwords.
+%
+We developed \textit{EpisoDAS}, with which users can generate strong passwords
+based on their secret episodic memories with a simple DAS interface.
 %
 users can use secret patterns for authentication, based on their
-secret episodic memories which they cannot easily forget.
+secret episodic memories that they cannot easily forget.
 
 \end{abstract}
 
@@ -127,18 +129,20 @@ and widely deployed method \cite{Bonneau:ReplacePasswords}, and is not
 expected to disappear any time soon \cite{Herley:2009:PSS:1601990.1602010}.
 %
 To tackle this problem,
-we have been proposing the \textit{EpisoPass} password generator with which 
-users can generate strong passwords easily
-based only on a user's secret and unforgettable episodic memories \cite{Masui:EpisoPass}.
+we have been proposing the \textit{EpisoPass} password generator \cite{Masui:EpisoPass}
+with which users can generate strong passwords easily
+based only on a user's secret and unforgettable episodic memories.
 
 % For this reason, we believe that it is far better to ``generate''
 % something for the authentication, based on a user's episodic
 % memories. This has the benefit that unlike a password, a person is
 % highly unlikely to forget such episodic memories.
 
-\begin{figure}[H]
-  \centerline{\includegraphics[width=13cm,bb=-250 -100 1272 1014]{figures/episopass.png}}
-  \caption{EpisoPass}
+\begin{figure}[t]
+  % \centerline{\includegraphics[width=13cm,bb=-250 -100 1272 1014]{figures/EpisoPass0.png}}
+  \centerline{\includegraphics[width=13cm,bb=-250 -100 1524 1286]{figures/EpisoPass1.png}}
+  \caption{An EpisoPass page for \textsf{John@example.com}. John can edit questions and answers, enter a seed string,
+  and a password is generated based on the selections.}
   \label{EpisoPass}
 \end{figure}
 
@@ -146,7 +150,7 @@ Password generation on EpisoPass is performed through the following steps:
 
 \begin{enumerate}
 \item A user registers multiple question texts related to their own personal
-secret unforgettable episodic memories. For each question they must provides
+secret unforgettable episodic memories. For each question they must provide
 a single correct answer and multiple additional incorrect answers.
 
 \item The user provides a long ``seed string'' for each service that requires
@@ -159,7 +163,7 @@ EpisoPass substitutes characters in the seed string and generates a
 strong password candidate string.
 After selecting all of the correct answers,
 the user copies the calculated string
-and registers it as the password for the service.
+and uses it as the password for the service.
 \end{enumerate}
 
 The biggest advantage of using EpisoPass is that
@@ -178,45 +182,37 @@ Answering to many questions takes much longer time than typing a
 remembered password, so people may prefer typing password
 rather than using EpisoPass if they have to log in to a service frequently.
 
-
 For the people who don't like to use passwords for authentication,
 various types of authentication methods have been proposed.
 Especially, visual authentication methods
-like graphical passwords\cite{Biddle:2012:GPL:2333112.2333114,GraphicalPasswords}
+like graphical passwords \cite{Biddle:2012:GPL:2333112.2333114}\cite{GraphicalPasswords}
 and Draw-a-Secret (DAS) \cite{Jermyn:1999:DAG:1251421.1251422} are promising approaches, because
 people can remember visual patterns easier than passwords.
-
-% \begin{figure}[H]
-%   \includegraphics[width=8cm,bb=0 0 448 351]{figures/Dejavu.png}
-%   \caption{D\'{e}j\`{a} Vu}
-%   \label{fig:sample}
-% \end{figure}
-
-\begin{figure}
-  % \includegraphics[width=8cm,bb=0 0 840 792]{figures/DAS.png}
-  % \includegraphics[width=8cm,bb=0 0 320 321]{figures/DASexample.jpg}
-  \includegraphics[width=12cm,bb=0 0 1000 667]{figures/AndroidLock.jpg}
-  \caption{Pattern lock for Android.}
-  \label{AndroidLock}
-\end{figure}
-
+%
 Visual authentication methods have better characteristics than
 password-based authentication, but
-they are either more fragile to attacks
-or remembering is difficult.
+they are sometimes fragile to attacks or memorization is difficult.
 
-We propose a new visual password generation system \textit{EpisoDAS},
-which have the advantages of both EpisoPass and DAS-based methods.
+We propose a new visual password generation system \textit{EpisoDAS}
+that posesses the advantages of both EpisoPass and DAS-based methods.
+
+\begin{figure}[t]
+  % \includegraphics[width=8cm,bb=0 0 840 792]{figures/DAS.png}
+  % \includegraphics[width=8cm,bb=0 0 320 321]{figures/DASexample.jpg}
+  % \includegraphics[width=10cm,bb=0 0 1000 667]{figures/AndroidLock.jpg}
+  \includegraphics[width=10cm,bb=-60 0 940 667]{figures/AndroidLock.jpg}
+  \caption{An example DAS system. (``Pattern lock'' for Android)}
+  \label{AndroidLock}
+\end{figure}
 
 \section{EpisoDAS}
 
 EpisoDAS is a visual authentication interface
 based on the user's episodic memories.
 Like EpisoPass,
-EpisoDAS displays a list of questions to the user and
-asks the user to choose the most appropriate answers
-from the candidate answers.
-EpisoDAS then generates a password string based on the user's selections.
+EpisoDAS displays a list of questions to the user,
+asks the user to choose the most appropriate answer from the candidate answers,
+and generates a password string based on the user's selections.
 %
 % with which users can generate strong password based on their
 % memory of visual patterns and episodic memories.
@@ -229,7 +225,7 @@ EpisoDAS then generates a password string based on the user's selections.
 The candidate answers are shown to the user as a grid of buttons,
 and the user can select the most appropriate answer to each question
 by clicking one of the buttons in the grid.
-
+%
 If the location of the series of correct answers form a special
 pattern that the user can remember, the user can select
 correct answers quickly just like using other DAS systems.
@@ -237,9 +233,9 @@ correct answers quickly just like using other DAS systems.
 % http://episopass.com/Amazon_john@example.com/Amazon123456
 % http://episopass.com/Amazon_john@example.com.html
 
-\begin{figure}[H]
-  \includegraphics[width=12cm,bb=0 0 1398 1060]{figures/EpisoDAS1.jpg}
-  \caption{First question and answers shown on EpisoDAS.}
+\begin{figure}[t]
+  \includegraphics[width=10cm,bb=-60 0 1338 1060]{figures/EpisoDAS1.jpg}
+  \caption{First question and candidate answers shown on EpisoDAS.}
   \label{EpisoDAS1}
 \end{figure}
 
@@ -250,27 +246,27 @@ the initial screen of an EpisoDAS session.
 If the user remembers that he had trouble at a MacDonald's in Boston in the past,
 he would click ``Boston'', and the next question (Figure \ref{EpisoDAS2}) is displayed.
 
-\begin{figure}[H]
-  \includegraphics[width=12cm,bb=0 0 1396 1062]{figures/EpisoDAS2.jpg}
+\begin{figure}[t]
+  \includegraphics[width=10cm,bb=-60 0 1336 1062]{figures/EpisoDAS2.jpg}
   \caption{Second question and answers.}
   \label{EpisoDAS2}
 \end{figure}
 
-If he remembers that he had a bad time at Los Angeles
-after reading the question in Figure \ref{EpisoDAS2},
+If he remembers that he had a bad time at Los Angeles,
+% after reading the question in Figure \ref{EpisoDAS2},
 he would click ``Los Angeles'' and proceed to the third question.
 
 The contents and the order of the questions
 do not depend on the user's actions, and
 the user cannot tell whether he has selected a right answer.
-
+%
 After repeating the slection process ten times,
 the user can get his password
 calculated from his selections (Figure \ref{Result}).
 
-\begin{figure}[H]
+\begin{figure}
   \includegraphics[width=10cm,bb=0 0 1160 468]{figures/result.png}
-  \caption{Generated password}
+  \caption{Generated password.}
   \label{Result}
 \end{figure}
 
@@ -283,36 +279,35 @@ the user can drag the pointing device like
 Figure \ref{draw} instead of clicking ten buttons,
 and quickly generate a password.
 %
-The order of candidate answers change according to the drag or click action,
-and the user can mix the dragging and clicking actions
-at any point.
+The order of the list of candidate answers change according to the
+drag or click action,
+and the user can mix the dragging and clicking actions at any point.
 The user can either click ``Boston'' and ``Los Angeles'' one by one or
-click on ``Boston'' and move the pointing device downward to select
+click on ``Boston'' and drag the pointing device downward to select
 ``Los Angeles'' without releasing the mouse button or releasing the
 pen or finger from the surface of the tablet computer.
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1356 1046]{figures/draw.png}
-  \caption{Drawing a secret pattern on EpisoDAS}
+  \caption{Drawing a secret pattern on EpisoDAS.}
   \label{draw}
 \end{figure}
 
 The drawing action by the user is close to the actions
-used on DAS systems.
+used on other DAS systems.
 Users can quickly generate his password for authentication
 just by drawing a pattern on the EpisoDAS screen.
 
 EpisoDAS can be used for generating passwords for any kind of systems and
-services, but it is most useful when used to log in to a Web service
-on a Web browser.
+services, but it is most useful when it is used to log into a Web service.
 Figure \ref{Amazon} shows how a user can use EpisoDAS when
 he wants to log in to Amazon.com.
 If the EpisoDAS extension is installed on the browser,
-an EpisoDAS window appears when the user enters his
-email address and clicks the password field at Amazon.com.
-After selecting answers by drawing a secret pattern on the EpisoDAS window,
+an EpisoDAS window appears when a user enters their
+email address and clicks the password field.
+After selecting answers by drawing a secret pattern on the EpisoDAS area,
 a password for Amazon is generated and pasted
-into the password field, making the user to log in without typing any password.
+into the password field, making the user to log in without typing a password.
 
 % Figure \ref{Amazon} shows how a user can use EpisoDAS on a login page,
 % using a browser extension software.
@@ -321,17 +316,23 @@ into the password field, making the user to log in without typing any password.
 % a password is generated from the input and pasted in to the
 % password text box.
 
-\begin{figure}[H]
+\begin{figure}[t]
   \includegraphics[width=12cm,bb=0 0 1092 1026]{figures/Amazon.png}
-  \caption{Login to Amazon.com}
+  \caption{Using EpisoDAS on Amazon.com login page.
+    When the user clicks the password field, EpisoDAS window automatically appears
+    and a password is generated and pasted to the field after drawing a
+    secret pattern.}
   \label{Amazon}
 \end{figure}
 
 The data used in the above example is retrieved from the EpisoDAS database
-on the Web, using the name of the service (e.g. \texttt{Amazon})
-and the user id (e.g. \texttt{john@example.com}).
+on the Web, using the name of the service (\texttt{Amazon})
+and the user id (\texttt{john@example.com}).
 
-\section{Registration}
+\section{Data Registration}
+
+A user has to register a DAS pattern and
+Q-A database before using EpisoDAS.
 
 \subsection{Registering a DAS pattern}
 
@@ -341,16 +342,16 @@ After registering questions and answer candidates,
 a user can register a DAS pattern so that
 answer candidates are easily selected on EpisoDAS.
 
-\begin{figure}[H]
-  \includegraphics[width=12cm,bb=0 0 1832 1180]{figures/JohnEpisodes.png}
-  \caption{EpisoPass window}
-  \label{JohnEpisodes}
-\end{figure}
+% \begin{figure}[H]
+%   \includegraphics[width=12cm,bb=0 0 1832 1180]{figures/JohnEpisodes.png}
+%   \caption{EpisoPass window}
+%   \label{JohnEpisodes}
+% \end{figure}
 
 After selecting the correct answers
-(``Boston'', ``Los Angeles'', etc.) on the EpisoPass editor page,
+(``Boston'', ``Los Angeles'', etc.) on the EpisoPass editor page (Figure \ref{EpisoPass}),
 the user can click the ``DAS'' button on the top-right portion of the
-EpisoPass page to specify his DAS patten.
+page to proceed to specify their DAS patten.
 
 \begin{figure}[H]
   \includegraphics[width=12cm,bb=0 0 1332 1118]{figures/DASRegister.png}
@@ -359,8 +360,8 @@ EpisoPass page to specify his DAS patten.
 \end{figure}
 
 If the user wants to use a U-shape as the secret pattern,
-he can begin drawing the shape shown in Figure \ref{DASRegister}
-on the registration window.
+he can draw the shape shown in Figure \ref{DASRegister}
+on the DAS registration window.
 %
 After registering the pattern, the candidate answers for the EpisoPass is
 shuffled so that the series of correct answers represent the specified pattern.
@@ -371,12 +372,12 @@ shuffled so that the series of correct answers represent the specified pattern.
 Questions and answer candidates can be edited interactively on the
 EpisoPass editor page (Figure \ref{EpisoPass}) and arbitrary
 strings can be specified as questions and answer candidates.
-However, creating many questions and answer candidates is not a
-trivial task, because
-people usually feel it difficult to recall secret episodes.
+However, creating many questions and answer candidates is
+time-consuming and hard task, because
+people usually feel it difficult to recall old secret episodes.
 %
 To help people easily create EpisoPass questions and answers,
-we provide a special page for easy problem creation
+a support page can be used for easy problem creation
 (Figure \ref{Easy}).
 
 \begin{figure}[H]
@@ -546,7 +547,7 @@ of a Web service (e.g. Amazon),
 and then it should be able to get the ID of the user
 and know where the result of EpisoDAS calculation should be pasted.
 %
-Commercial password managers\cite{OnePassword,Dashlane,MilPass,LastPass,KeyPass,NortonIDSafe,IDManager}
+Commercial password managers\cite{OnePassword,Dashlane,LastPass,KeyPass,NortonIDSafe,IDManager}
 are usually well integrated with Web browsers,
 and EpisoDAS should also be evolved so that
 the browser extension works on many Web services.
